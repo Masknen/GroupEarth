@@ -1,0 +1,84 @@
+[gd_scene load_steps=10 format=3 uid="uid://g41ik3260eek"]
+
+[ext_resource type="Script" path="res://TestStuff/Player.cs" id="1_vv4a5"]
+[ext_resource type="Script" path="res://TestStuff/BallSpawner.cs" id="2_bhdih"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cs068"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_etfkb"]
+points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0811a"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v4ysb"]
+albedo_color = Color(0.0823529, 0.909804, 0.101961, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vgwbr"]
+material = SubResource("StandardMaterial3D_v4ysb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fus2q"]
+albedo_color = Color(1, 0.929412, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_spg1m"]
+material = SubResource("StandardMaterial3D_fus2q")
+
+[node name="Test" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -1.05876, 0)
+mesh = SubResource("BoxMesh_cs068")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_etfkb")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 16.7146, 0)
+projection = 1
+fov = 99.042
+size = 16.3774
+
+[node name="Player" type="Node3D" parent="." node_paths=PackedStringArray("otherPlayer")]
+script = ExtResource("1_vv4a5")
+ID = 0
+speed = 5.0
+otherPlayer = NodePath("../Player2")
+
+[node name="Area3D" type="Area3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.688629)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Area3D"]
+transform = Transform3D(2.21, 0, 0, 0, 2.21, 0, 0, 0, 2.21, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_0811a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("BoxMesh_vgwbr")
+
+[node name="Player2" type="Node3D" parent="." node_paths=PackedStringArray("otherPlayer")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.96141, 0, 0)
+script = ExtResource("1_vv4a5")
+ID = 1
+speed = 5.0
+otherPlayer = NodePath("../Player")
+
+[node name="Area3D" type="Area3D" parent="Player2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.688629)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player2/Area3D"]
+transform = Transform3D(2.21, 0, 0, 0, 2.21, 0, 0, 0, 2.21, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_0811a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player2"]
+mesh = SubResource("BoxMesh_spg1m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.174164, -0.00781947, 0.984686, -0.984717, -0.001383, 0.174158, 0, -0.999969, -0.00794083, 0, -2.12718, 0)
+shadow_enabled = true
+
+[node name="BallSpawner" type="Node3D" parent="." node_paths=PackedStringArray("player", "spawn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.55)
+script = ExtResource("2_bhdih")
+player = NodePath("../Player")
+spawn = NodePath(".")
