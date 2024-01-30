@@ -5,8 +5,8 @@ public partial class BallSpawner : Node3D
 {
 	private PackedScene ball;
 	[Export] private Node3D player;
-    [Export] private Node3D spawn;
-    private float MaxTime = 2;
+	[Export] private Node3D spawn;
+	private float MaxTime = 2;
 	private float timeTick = 0;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -23,9 +23,9 @@ public partial class BallSpawner : Node3D
 
 			var instance = ball.Instantiate();
 			(instance as testBall).LookAtFromPosition(spawn.Position, player.Position);
-            AddChild(instance);
+			AddChild(instance);
 
-        }
+		}
 
 
 	}

@@ -35,7 +35,7 @@ mesh = SubResource("BoxMesh_cs068")
 shape = SubResource("ConvexPolygonShape3D_etfkb")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 16.7146, 0)
+transform = Transform3D(1, 0, 0, 0, 0.179626, 0.983735, 0, -0.983735, 0.179626, -1.63216, 16.7146, 4.46884)
 projection = 1
 fov = 99.042
 size = 16.3774
@@ -74,7 +74,7 @@ shape = SubResource("ConvexPolygonShape3D_0811a")
 mesh = SubResource("BoxMesh_spg1m")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.174164, -0.00781947, 0.984686, -0.984717, -0.001383, 0.174158, 0, -0.999969, -0.00794083, 0, -2.12718, 0)
+transform = Transform3D(-0.161483, -0.439517, -0.883599, -0.311388, -0.82692, 0.468232, -0.936462, 0.350754, -0.00332741, -19.8086, -61.4967, -31.9354)
 shadow_enabled = true
 
 [node name="BallSpawner" type="Node3D" parent="." node_paths=PackedStringArray("player", "spawn")]
