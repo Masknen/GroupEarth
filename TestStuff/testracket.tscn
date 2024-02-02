@@ -1,33 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://g41ik3260eek"]
+[gd_scene load_steps=5 format=3 uid="uid://g41ik3260eek"]
 
-[ext_resource type="Script" path="res://TestStuff/Player.cs" id="1_vv4a5"]
 [ext_resource type="Script" path="res://TestStuff/BallSpawner.cs" id="2_bhdih"]
-[ext_resource type="PackedScene" uid="uid://dqaisgicm4m4v" path="res://TestStuff/TestAssets/kaykit_dungeon_pack_1.0/Models/Characters/gltf/character_knight.gltf" id="2_rhsp7"]
+[ext_resource type="PackedScene" uid="uid://dmrr1n86pkwm5" path="res://Scenes/player.tscn" id="2_npc3a"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_cs068"]
+size = Vector3(100, 0, 100)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_etfkb"]
 points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0811a"]
-points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v4ysb"]
-albedo_color = Color(0.0823529, 0.909804, 0.101961, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_vgwbr"]
-material = SubResource("StandardMaterial3D_v4ysb")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fus2q"]
-albedo_color = Color(1, 0.929412, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_spg1m"]
-material = SubResource("StandardMaterial3D_fus2q")
-
 [node name="Test" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -1.05876, 0)
 mesh = SubResource("BoxMesh_cs068")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
@@ -36,54 +20,26 @@ mesh = SubResource("BoxMesh_cs068")
 shape = SubResource("ConvexPolygonShape3D_etfkb")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.179626, 0.983735, 0, -0.983735, 0.179626, -1.63216, 16.7146, 4.46884)
+transform = Transform3D(1, 0, 0, 0, 0.731401, 0.681948, 0, -0.681948, 0.731401, -0.828279, 19.5415, 17.2849)
 projection = 1
 fov = 99.042
 size = 16.3774
-
-[node name="Player" type="Node3D" parent="." node_paths=PackedStringArray("otherPlayer")]
-script = ExtResource("1_vv4a5")
-ID = 0
-speed = 5.0
-otherPlayer = NodePath("../Player2")
-
-[node name="Area3D" type="Area3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.688629)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/Area3D"]
-transform = Transform3D(2.21, 0, 0, 0, 2.21, 0, 0, 0, 2.21, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_0811a")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-mesh = SubResource("BoxMesh_vgwbr")
-
-[node name="Player2" type="Node3D" parent="." node_paths=PackedStringArray("otherPlayer")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.96141, 0, 0)
-script = ExtResource("1_vv4a5")
-ID = 1
-speed = 5.0
-otherPlayer = NodePath("../Player")
-
-[node name="Area3D" type="Area3D" parent="Player2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.688629)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player2/Area3D"]
-transform = Transform3D(2.21, 0, 0, 0, 2.21, 0, 0, 0, 2.21, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_0811a")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player2"]
-visible = false
-mesh = SubResource("BoxMesh_spg1m")
-
-[node name="character_knight" parent="Player2" instance=ExtResource("2_rhsp7")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.161483, -0.439517, -0.883599, -0.311388, -0.82692, 0.468232, -0.936462, 0.350754, -0.00332741, -19.8086, -61.4967, -31.9354)
 shadow_enabled = true
 
 [node name="BallSpawner" type="Node3D" parent="." node_paths=PackedStringArray("player", "spawn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.55)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -7.55)
 script = ExtResource("2_bhdih")
 player = NodePath("../Player")
 spawn = NodePath(".")
+
+[node name="Player" parent="." node_paths=PackedStringArray("otherPlayer") instance=ExtResource("2_npc3a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.88905, 0, 0)
+otherPlayer = NodePath("../Player2")
+
+[node name="Player2" parent="." node_paths=PackedStringArray("otherPlayer") instance=ExtResource("2_npc3a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.81614, 0, 0)
+ID = 1
+otherPlayer = NodePath("../Player")
