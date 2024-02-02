@@ -1,7 +1,9 @@
 using Godot;
 using System;
+using System.Diagnostics;
 using System.Security;
 
+[DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
 public partial class Player : Node3D
 {
 	[Export] private int ID = -1;
@@ -9,6 +11,8 @@ public partial class Player : Node3D
 	[Export] private Player otherPlayer;
 
 	private testBall currentTouching;
+
+	private float deadZone = 0.3f;
 
 	public override void _Ready() {
 		GetChild<Area3D>(0).AreaEntered += Player_AreaEntered;
@@ -38,20 +42,40 @@ public partial class Player : Node3D
 			if (currentTouching != null) {
 				currentTouching.LookAt(otherPlayer.GlobalPosition);
 
-				currentTouching.speed += 0.1f;
+			currentTouching.speed += 0.1f;
 			}
 
 		}
 	}
 
 	public override void _PhysicsProcess(double delta) {
-		Vector2 inputDirection = Vector2.Zero; 
-		inputDirection.X = Input.GetJoyAxis(ID, JoyAxis.LeftX);
-		inputDirection.Y = Input.GetJoyAxis(ID, JoyAxis.LeftY);
+		//Vector2 inputDirection = Vector2.Zero;
+		Vector2 inputDirection = Vector2.Zero;
 
-
+		if (Input.GetJoyAxis(ID, JoyAxis.LeftX) > deadZone || Input.GetJoyAxis(ID, JoyAxis.LeftX) < -deadZone || Input.GetJoyAxis(ID, JoyAxis.LeftY) > deadZone || Input.GetJoyAxis(ID, JoyAxis.LeftY) < -deadZone)
+		{
+			//GD.Print("jadu");
+			inputDirection.X = Input.GetJoyAxis(ID, JoyAxis.LeftX);
+			inputDirection.Y = Input.GetJoyAxis(ID, JoyAxis.LeftY);
+		}
 
 		Position += new Vector3(inputDirection.X, 0, inputDirection.Y) * (float)(delta * speed);
+		//GD.Print(inputDirection.X, " & ", inputDirection.Y);
+		
+		Vector2 inputRotation = new Vector2(inputDirection.X, inputDirection.Y);
+
+		if(Input.GetJoyAxis(ID, JoyAxis.RightX) > deadZone || Input.GetJoyAxis(ID, JoyAxis.RightX) < -deadZone || Input.GetJoyAxis(ID, JoyAxis.RightY) > deadZone || Input.GetJoyAxis(ID, JoyAxis.RightY) < -deadZone)
+		{
+			inputRotation.X = Input.GetJoyAxis(ID, JoyAxis.RightX);
+			inputRotation.Y = Input.GetJoyAxis(ID, JoyAxis.RightY);
+		}
+
+		this.LookAt(new Vector3(inputRotation.X, 0 , inputRotation.Y) * 100);
+		//GD.Print(inputRotation.X, inputRotation.Y);
 	}
 
+    private string GetDebuggerDisplay()
+    {
+        return ToString();
+    }
 }
