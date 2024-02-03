@@ -22,7 +22,7 @@ public partial class BallSpawner : Node3D
 			timeTick -= MaxTime;
 
 			var instance = ball.Instantiate();
-			(instance as testBall).LookAtFromPosition(spawn.Position, player.Position);
+			(instance as testBall).LookAtFromPosition(spawn.GlobalPosition, player.GlobalPosition);
 			AddChild(instance);
 
 		}

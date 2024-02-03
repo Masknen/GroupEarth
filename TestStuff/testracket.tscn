@@ -30,16 +30,16 @@ transform = Transform3D(-0.161483, -0.439517, -0.883599, -0.311388, -0.82692, 0.
 shadow_enabled = true
 
 [node name="BallSpawner" type="Node3D" parent="." node_paths=PackedStringArray("player", "spawn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -7.55)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -7.55)
 script = ExtResource("2_bhdih")
 player = NodePath("../Player")
 spawn = NodePath(".")
 
 [node name="Player" parent="." node_paths=PackedStringArray("otherPlayer") instance=ExtResource("2_npc3a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.88905, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.88905, 1, 0)
 otherPlayer = NodePath("../Player2")
 
 [node name="Player2" parent="." node_paths=PackedStringArray("otherPlayer") instance=ExtResource("2_npc3a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.81614, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.81614, 1, 0)
 ID = 1
 otherPlayer = NodePath("../Player")
