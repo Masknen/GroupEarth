@@ -19,7 +19,7 @@ public partial class Player : CharacterBody3D
 		GetChild<Area3D>(1).AreaEntered += Player_AreaEntered;
 		GetChild<Area3D>(1).AreaExited += Player_AreaExited;
 
-    }
+	}
 
 	private void Player_AreaExited(Area3D area) {
 		currentTouching = null;
@@ -64,18 +64,18 @@ public partial class Player : CharacterBody3D
 
 			// Sets the rotation to the transform
 			Transform3D transform = Transform;
-            transform.Basis = new Basis(quaternion);
+			transform.Basis = new Basis(quaternion);
 			Transform = transform;
 		}
 		MoveAndSlide();
 	}
 
 	private Vector2 GetInputVector(JoyAxis joyAxisX, JoyAxis joyAxisY, float deadZone) {
-        if (Input.GetJoyAxis(ID, joyAxisX) > deadZone || Input.GetJoyAxis(ID, joyAxisX) < -deadZone || Input.GetJoyAxis(ID, joyAxisY) > deadZone || Input.GetJoyAxis(ID, joyAxisY) < -deadZone) {
+		if (Input.GetJoyAxis(ID, joyAxisX) > deadZone || Input.GetJoyAxis(ID, joyAxisX) < -deadZone || Input.GetJoyAxis(ID, joyAxisY) > deadZone || Input.GetJoyAxis(ID, joyAxisY) < -deadZone) {
 			return new Vector2(Input.GetJoyAxis(ID, joyAxisX), Input.GetJoyAxis(ID, joyAxisY)).Normalized();
-        }
+		}
 		return Vector2.Zero;
-    }
+	}
 
 	private string GetDebuggerDisplay()
 	{
