@@ -38,12 +38,13 @@ public partial class PlayerManager : Node3D
             }
             if (Input.IsJoyButtonPressed(ID, JoyButton.Back)) {
                 playersToCreateID.Remove(ID);
+                GD.Print(playersToCreateID);
             }
             if (!Input.IsJoyButtonPressed(ID, JoyButton.Start) && !startJustPressed) {
                 startJustPressed = true;
             }
         }
-        if (playersToCreateID.Count > 2) {
+        if (playersToCreateID.Count >= 2) {
             playersToCreateID.Remove(0);
         }
         if(Input.IsActionJustPressed("spawnPlayers")) {
