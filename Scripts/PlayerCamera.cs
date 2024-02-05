@@ -15,6 +15,7 @@ public partial class PlayerCamera : Camera3D
 	public override void _Process(double delta)
 	{
 		playerList = PlayerManager.Instance().players;
+		GD.Print(PlayerManager.Instance().players);
 		// if (playerList.Count < 3){
 		//GD.Print(playerList);
 		// }
