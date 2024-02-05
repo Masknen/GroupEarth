@@ -6,7 +6,7 @@ using System.Security;
 [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
 public partial class Player : CharacterBody3D
 {
-	[Export] private int ID = -1;
+	public int ID = -1;
 	[Export] private float speed;
 	[Export] private Player otherPlayer;
 	private float rotationSpeed = 10.0f;

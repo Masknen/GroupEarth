@@ -12,7 +12,6 @@ radius = 1.65
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4ejrt")
-ID = 0
 speed = 5.0
 
 [node name="PlayerCollisionBox" type="CollisionShape3D" parent="."]
