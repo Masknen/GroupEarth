@@ -1,7 +1,9 @@
-[gd_scene format=3 uid="uid://c4q23o6ur6gof"]
+[gd_scene load_steps=2 format=3 uid="uid://c4q23o6ur6gof"]
+
+[ext_resource type="PackedScene" uid="uid://bxn0k1ajsl116" path="res://Assets/Enemies/Enemny1/character_mage.gltf" id="1_s6wrf"]
 
 [node name="Enemy1" type="CharacterBody3D"]
 
 [node name="Pivot" type="Node3D" parent="."]
 
-[node name="Character" type="Node3D" parent="Pivot"]
+[node name="character_mage" parent="Pivot" instance=ExtResource("1_s6wrf")]
