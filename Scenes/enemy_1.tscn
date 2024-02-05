@@ -9,8 +9,8 @@ size = Vector3(1.16946, 2.6582, 1)
 [node name="Enemy1" type="CharacterBody3D"]
 script = ExtResource("1_1rh0l")
 
+[node name="character_mage" parent="." instance=ExtResource("1_s6wrf")]
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0357819, 0.829102, 0)
 shape = SubResource("BoxShape3D_77jok")
-
-[node name="character_mage" parent="." instance=ExtResource("1_s6wrf")]
