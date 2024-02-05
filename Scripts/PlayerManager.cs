@@ -3,7 +3,14 @@ using System;
 
 public partial class PlayerManager : Node3D
 {
-    public PlayerManager Instance { get; private set; }
+    static private PlayerManager _instance;
+
+    static public PlayerManager Instance() {
+        if (_instance == null) {
+            _instance = new PlayerManager();
+        }
+        return _instance;
+    }
 
     public Godot.Collections.Array<Player> players {  get; private set; }
 
@@ -12,6 +19,7 @@ public partial class PlayerManager : Node3D
 	public override void _Ready()
 	{
         Input.JoyConnectionChanged += Input_JoyConnectionChanged;
+        
 	}
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
