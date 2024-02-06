@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c585r6kvdbq46"]
+[gd_scene load_steps=6 format=3 uid="uid://c585r6kvdbq46"]
 
 [ext_resource type="MeshLibrary" uid="uid://2e6jjinqvycg" path="res://tile.tres" id="1_agf50"]
 [ext_resource type="PackedScene" uid="uid://diyv2s67ti7lo" path="res://Scenes/player_manager.tscn" id="2_i3fqx"]
 [ext_resource type="PackedScene" uid="uid://cscgqepgkru63" path="res://Scenes/player_camera.tscn" id="3_cbfmh"]
+[ext_resource type="PackedScene" uid="uid://c4q23o6ur6gof" path="res://Scenes/enemy_1.tscn" id="4_lhjwd"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_nfw1l"]
 size = Vector3(100, 2, 100)
@@ -29,3 +30,5 @@ transform = Transform3D(1, 0, 0, 0, 0.228912, 0.973447, 0, -0.973447, 0.228912, 
 
 [node name="PlayerCamera" parent="." instance=ExtResource("3_cbfmh")]
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 17.5, 0)
+
+[node name="Enemy1" parent="." instance=ExtResource("4_lhjwd")]
