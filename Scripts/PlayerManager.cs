@@ -1,6 +1,12 @@
 using Godot;
 using System;
 
+
+/*
+ * Spawn players by adding your controller to the active list(playersToCreateID)
+ * then start debug with f3
+ * spawn players with f1
+ */
 public partial class PlayerManager : Node3D
 {
     static private PlayerManager _instance;
@@ -60,13 +66,6 @@ public partial class PlayerManager : Node3D
 	}
 
     public void SpawnPlayers() {
-        if (players.Count >= 2) {
-            foreach (var player in players) {
-                player.QueueFree();
-            }
-            players.Clear();
-        }
-
         int spawnOffsetX = 2;
         foreach (var ID in playersToCreateID) {
             GD.Print(ID);
@@ -77,6 +76,12 @@ public partial class PlayerManager : Node3D
             AddChild(newPlayer);
 
             spawnOffsetX -= spawnOffsetX * 2;
+        }
+        if (players.Count > 2) {
+            foreach (var player in players) {
+                player.QueueFree();
+            }
+            players.Clear();
         }
     }
 

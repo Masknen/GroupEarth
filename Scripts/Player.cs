@@ -7,7 +7,7 @@ using System.Security;
 public partial class Player : CharacterBody3D
 {
 	public int ID = -1;
-	[Export] private float speed;
+	[Export] private float movementSpeed;
 	[Export] private Player otherPlayer;
 	private float rotationSpeed = 10.0f;
 
@@ -15,7 +15,11 @@ public partial class Player : CharacterBody3D
 
 	private float deadZone = 0.3f;
 
+	private AnimationPlayer animationPlayer;
+
 	public override void _Ready() {
+		animationPlayer = GetChild<AnimationPlayer>(3);
+
 		GetChild<Area3D>(1).AreaEntered += Player_AreaEntered;
 		GetChild<Area3D>(1).AreaExited += Player_AreaExited;
 
@@ -47,7 +51,14 @@ public partial class Player : CharacterBody3D
 	public override void _PhysicsProcess(double delta) {
 		// Gets the input vector for left stick and applies it to position
 		Vector2 inputDirection = GetInputVector(JoyAxis.LeftX, JoyAxis.LeftY, deadZone);
-		Position += new Vector3(inputDirection.X, 0, inputDirection.Y) * (float)(delta * speed);
+		Velocity = new Vector3(inputDirection.X, 0, inputDirection.Y) * movementSpeed;
+		if(Velocity != Vector3.Zero) {
+			animationPlayer.Play("Walk");
+		} else {
+			animationPlayer.Stop();
+		}
+
+
 
 		// Gets the input vector for right stick, if zero use the inputDirection instead
 		Vector2 inputRotation = GetInputVector(JoyAxis.RightX, JoyAxis.RightY, deadZone) != Vector2.Zero ? GetInputVector(JoyAxis.RightX, JoyAxis.RightY, deadZone) : inputDirection;
