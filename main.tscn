@@ -28,3 +28,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 transform = Transform3D(1, 0, 0, 0, 0.228912, 0.973447, 0, -0.973447, 0.228912, 0, 0, 0)
 
 [node name="PlayerCamera" parent="." instance=ExtResource("3_cbfmh")]
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 17.5, 0)
