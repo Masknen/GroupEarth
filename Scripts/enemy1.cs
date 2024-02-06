@@ -6,7 +6,8 @@ using System.Security.Cryptography.X509Certificates;
 
 public partial class enemy1 : CharacterBody3D
 {
-	[Export] public int moveSpeed = 10;
+	[Export] public int moveSpeed {get; set;} = 1;
+
   
 	[Signal] public delegate void HitEventHandler();
   
@@ -17,37 +18,27 @@ public partial class enemy1 : CharacterBody3D
 	private CharacterBody3D player2;
 	private NavigationAgent3D nav;
 	private Vector3 direction;
-	private Vector3 enemyPosition;
-
-
-	public override void _Ready()
-	{
-		//set player1 and player2
-		player1 = PlayerManager.Instance().players[0];
-		player2 = PlayerManager.Instance().players[1];
-		enemyPosition = GlobalPosition;		
-	}
-
 	
-
 	public override void _Process(double delta)
 	{
-		//--calculate distance to players and set closest to target--
-		//update enemy position
-		
-		enemyPosition = GlobalPosition;
-		//decide target
-		if(player1.GlobalPosition.DistanceTo(enemyPosition)<
-		player2.GlobalPosition.DistanceTo(enemyPosition)){
+		player1 = PlayerManager.Instance().players[0];
+		player2 = PlayerManager.Instance().players[1];
+		if(player1.GlobalPosition.DistanceTo(Position)<
+		player2.GlobalPosition.DistanceTo(Position)){
 			target = player1;
 		}else { target = player2;}
+		//target = player1;
+		Velocity = Position.DirectionTo(target.Position) * moveSpeed;
+		LookAtFromPosition(Position, target.GlobalPosition);
+		MoveAndSlide();
 		
+		/* WILL BE USED LATER TO READ THE MAP AND DODGE WALLS ECT...
 		//--get target position and move in that dircetion--
 		Velocity = Vector3.Zero;
 		nav.TargetPosition = target.GlobalPosition;
 		direction = (nav.GetNextPathPosition() - target.GlobalPosition).Normalized();
 		Velocity = direction * moveSpeed;
-		MoveAndSlide(); 
+		MoveAndSlide(); */
 	}
 
 	//make method to shoot a object twoards the closest player...
