@@ -17,6 +17,7 @@ public partial class PlayerManager : Node3D
     private PackedScene player;
 
     private bool[] startJustPressed = { true, true};
+    public bool debugBoolean = false;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -46,14 +47,23 @@ public partial class PlayerManager : Node3D
         if (playersToCreateID.Count > 2) {
             playersToCreateID.RemoveAt(0);
         }
-        if(Input.IsActionJustPressed("spawnPlayers")) {
+        if(Input.IsActionJustPressed("spawnPlayers") && debugBoolean) {
             SpawnPlayers();
+        }
+        if (Input.IsActionJustPressed("EnableDebug")) {
+            debugBoolean = !debugBoolean;
         }
 	}
 
     public void SpawnPlayers() {
+        if (players.Count >= 2) {
+            foreach (var player in players) {
+                player.QueueFree();
+            }
+            players.Clear();
+        }
+
         int spawnOffsetX = 2;
-        GD.Print(" | " + playersToCreateID);
         foreach (var ID in playersToCreateID) {
             GD.Print(ID);
             var newPlayer = player.Instantiate();
@@ -64,7 +74,6 @@ public partial class PlayerManager : Node3D
 
             spawnOffsetX -= spawnOffsetX * 2;
         }
-        GD.Print(players);
     }
 
     private void Input_JoyConnectionChanged(long device, bool connected) {
