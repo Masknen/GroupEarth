@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 
 public partial class enemy1 : CharacterBody3D
 {
-	[Export] public int moveSpeed {get; set;} = 1;
+	[Export] public int speed {get; set;} = 1;
 
   
 	[Signal] public delegate void HitEventHandler();
@@ -18,17 +18,24 @@ public partial class enemy1 : CharacterBody3D
 	private CharacterBody3D player2;
 	private NavigationAgent3D nav;
 	private Vector3 direction;
-	
-	public override void _Process(double delta)
+
+    public override void _Ready()
+    {
+        
+    }
+
+    public override void _Process(double delta)
 	{
 		player1 = PlayerManager.Instance().players[0];
+		/*
 		player2 = PlayerManager.Instance().players[1];
 		if(player1.GlobalPosition.DistanceTo(Position)<
 		player2.GlobalPosition.DistanceTo(Position)){
 			target = player1;
 		}else { target = player2;}
-		//target = player1;
-		Velocity = Position.DirectionTo(target.Position) * moveSpeed;
+		*/
+		target = player1;
+		Velocity = Position.DirectionTo(target.Position) * speed;
 		LookAtFromPosition(Position, target.GlobalPosition);
 		MoveAndSlide();
 		

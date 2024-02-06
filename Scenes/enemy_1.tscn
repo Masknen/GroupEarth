@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4q23o6ur6gof"]
+[gd_scene load_steps=5 format=3 uid="uid://c4q23o6ur6gof"]
 
 [ext_resource type="Script" path="res://Scripts/enemy1.cs" id="1_1rh0l"]
 [ext_resource type="PackedScene" uid="uid://bxn0k1ajsl116" path="res://Assets/Enemies/Enemny1/character_mage.gltf" id="1_s6wrf"]
+[ext_resource type="Script" path="res://Scripts/FireBallSpawner.cs" id="3_hb8w4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_77jok"]
 size = Vector3(1.16946, 2.6582, 1)
@@ -9,6 +10,10 @@ size = Vector3(1.16946, 2.6582, 1)
 [node name="Enemy1" type="CharacterBody3D"]
 collision_layer = 2
 script = ExtResource("1_1rh0l")
+
+[node name="FireBallSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("3_hb8w4")
 
 [node name="character_mage" parent="." instance=ExtResource("1_s6wrf")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
