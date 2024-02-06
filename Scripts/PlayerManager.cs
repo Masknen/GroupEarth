@@ -48,10 +48,12 @@ public partial class PlayerManager : Node3D
             playersToCreateID.RemoveAt(0);
         }
         if(Input.IsActionJustPressed("spawnPlayers") && debugBoolean) {
+            GD.Print("Trying to spawn Players: " + playersToCreateID);
             SpawnPlayers();
         }
         if (Input.IsActionJustPressed("EnableDebug")) {
             debugBoolean = !debugBoolean;
+            GD.Print("Debug: " + debugBoolean);
         }
 	}
 
