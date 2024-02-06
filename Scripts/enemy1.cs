@@ -13,19 +13,19 @@ public partial class enemy1 : CharacterBody3D
 	private int hp = 1;
 
 	private Node3D target;
-	private Node3D player1;
-	private Node3D player2;
+	private CharacterBody3D player1;
+	private CharacterBody3D player2;
 	private NavigationAgent3D nav;
-
 	private Vector3 direction;
 	private Vector3 enemyPosition;
+
 
 	public override void _Ready()
 	{
 		//set player1 and player2
 		player1 = PlayerManager.Instance().players[0];
 		player2 = PlayerManager.Instance().players[1];
-		enemyPosition = GlobalPosition;
+		enemyPosition = GlobalPosition;		
 	}
 
 	
@@ -34,21 +34,20 @@ public partial class enemy1 : CharacterBody3D
 	{
 		//--calculate distance to players and set closest to target--
 		//update enemy position
+		
 		enemyPosition = GlobalPosition;
 		//decide target
-		if(player1.Position.DistanceTo(enemyPosition)<
-		player2.Position.DistanceTo(enemyPosition)){
+		if(player1.GlobalPosition.DistanceTo(enemyPosition)<
+		player2.GlobalPosition.DistanceTo(enemyPosition)){
 			target = player1;
-		}
-		else{
-			target = player2;
-		}
+		}else { target = player2;}
+		
 		//--get target position and move in that dircetion--
 		Velocity = Vector3.Zero;
 		nav.TargetPosition = target.GlobalPosition;
 		direction = (nav.GetNextPathPosition() - target.GlobalPosition).Normalized();
 		Velocity = direction * moveSpeed;
-		MoveAndSlide();  
+		MoveAndSlide(); 
 	}
 
 	//make method to shoot a object twoards the closest player...
