@@ -7,6 +7,7 @@
 size = Vector3(1.16946, 2.6582, 1)
 
 [node name="Enemy1" type="CharacterBody3D"]
+collision_layer = 2
 script = ExtResource("1_1rh0l")
 
 [node name="character_mage" parent="." instance=ExtResource("1_s6wrf")]
