@@ -37,10 +37,12 @@ public partial class PlayerManager : Node3D
             if (Input.IsJoyButtonPressed(ID, JoyButton.Start) && startJustPressed[i]) {
                 startJustPressed[i] = false;
                 playersToCreateID.Add(ID);
+                GD.Print("Added: " + ID);
             }
             if (Input.IsJoyButtonPressed(ID, JoyButton.Back) && !startJustPressed[i]) {
                 startJustPressed[i] = true;
                 playersToCreateID.Remove(ID);
+                GD.Print("Removed: " + ID);
             }
             ++i;
         }
