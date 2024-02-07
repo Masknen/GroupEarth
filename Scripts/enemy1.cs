@@ -24,37 +24,39 @@ public partial class enemy1 : CharacterBody3D
 
     public override void _Ready()
     {
-		fireBall = GD.Load<PackedScene>("res://Scenes/FireBall.tscn");
+		fireBall = GD.Load<PackedScene>("res://Scenes/fire_ball.tscn");
         
     }
 
     public override void _Process(double delta)
 	{
-		player1 = PlayerManager.Instance().players[0];
-		/*
-		player2 = PlayerManager.Instance().players[1];
-		if(player1.GlobalPosition.DistanceTo(Position)<
-		player2.GlobalPosition.DistanceTo(Position)){
+		if (PlayerManager.Instance().players.Count > 0) {
+			player1 = PlayerManager.Instance().players[0];
+			/*
+			player2 = PlayerManager.Instance().players[1];
+			if(player1.GlobalPosition.DistanceTo(Position)<
+			player2.GlobalPosition.DistanceTo(Position)){
+				target = player1;
+			}else { target = player2;}
+			*/
 			target = player1;
-		}else { target = player2;}
-		*/
-		target = player1;
-		Velocity = Position.DirectionTo(target.Position) * speed;
-		LookAtFromPosition(Position, target.GlobalPosition);
-		MoveAndSlide();
-		timeTick += (float)delta;
-		if (timeTick > MaxTime) {
-			timeTick -= MaxTime;
-			fireFireBall();
+			Velocity = Position.DirectionTo(target.Position) * speed;
+			LookAt(target.GlobalPosition);
+			MoveAndSlide();
+			timeTick += (float)delta;
+			if (timeTick > MaxTime) {
+				timeTick -= MaxTime;
+				fireFireBall();
+			}
+
+			/* WILL BE USED LATER TO READ THE MAP AND DODGE WALLS ECT...
+			//--get target position and move in that dircetion--
+			Velocity = Vector3.Zero;
+			nav.TargetPosition = target.GlobalPosition;
+			direction = (nav.GetNextPathPosition() - target.GlobalPosition).Normalized();
+			Velocity = direction * moveSpeed;
+			MoveAndSlide(); */
 		}
-		
-		/* WILL BE USED LATER TO READ THE MAP AND DODGE WALLS ECT...
-		//--get target position and move in that dircetion--
-		Velocity = Vector3.Zero;
-		nav.TargetPosition = target.GlobalPosition;
-		direction = (nav.GetNextPathPosition() - target.GlobalPosition).Normalized();
-		Velocity = direction * moveSpeed;
-		MoveAndSlide(); */
 	}
 	public void fireFireBall(){
 		var new_fireBall = fireBall.Instantiate();
