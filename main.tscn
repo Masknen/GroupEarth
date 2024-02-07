@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c585r6kvdbq46"]
 
-[ext_resource type="MeshLibrary" uid="uid://2e6jjinqvycg" path="res://tile.tres" id="1_agf50"]
+[ext_resource type="MeshLibrary" uid="uid://ctyixr8kg655u" path="res://tiles.tres" id="1_gxju7"]
 [ext_resource type="PackedScene" uid="uid://diyv2s67ti7lo" path="res://Scenes/player_manager.tscn" id="2_i3fqx"]
 [ext_resource type="PackedScene" uid="uid://cscgqepgkru63" path="res://Scenes/player_camera.tscn" id="3_cbfmh"]
 [ext_resource type="PackedScene" uid="uid://c4q23o6ur6gof" path="res://Scenes/enemy_1.tscn" id="4_w4hru"]
@@ -15,10 +15,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("BoxMesh_nfw1l")
 
 [node name="GridMap" type="GridMap" parent="."]
-mesh_library = ExtResource("1_agf50")
-cell_size = Vector3(4, 0.25, 4)
+mesh_library = ExtResource("1_gxju7")
+cell_size = Vector3(2, 0.05, 2)
 data = {
-"cells": PackedInt32Array(79, 65432, 1310873, 81, 65429, 1310873, 82, 65425, 1310873, 83, 65423, 1310873, 84, 65421, 1310873, 85, 65419, 1310873, 83, 65419, 1310873, 82, 65420, 1310873, 79, 65424, 1310873, 72, 65430, 1310873, 62, 65435, 1310873, 70, 65426, 1310873, 76, 65419, 1310873, 79, 65414, 1310873, 80, 65410, 1310873, 80, 65411, 1310873, 80, 65412, 1310873, 80, 65414, 1310873, 165, 65521, 1310873, 1, 65532, 3, 0, 65532, 5, 65535, 65532, 8, 65534, 65532, 10, 0, 65533, 2, 65535, 65533, 353)
+"cells": PackedInt32Array(79, 65432, 1310873, 81, 65429, 1310873, 82, 65425, 1310873, 83, 65423, 1310873, 84, 65421, 1310873, 85, 65419, 1310873, 83, 65419, 1310873, 82, 65420, 1310873, 79, 65424, 1310873, 72, 65430, 1310873, 62, 65435, 1310873, 70, 65426, 1310873, 76, 65419, 1310873, 79, 65414, 1310873, 80, 65410, 1310873, 80, 65411, 1310873, 80, 65412, 1310873, 80, 65414, 1310873, 165, 65521, 1310873)
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
