@@ -7,13 +7,15 @@ using System.Security;
 public partial class Player : CharacterBody3D
 {
 	public int ID = -1;
-	[Export] private float movementSpeed;
 	[Export] private Player otherPlayer;
+	private Node3D currentTouching;
+	private float deadZone = 0.3f;
+
+	[Export] private float movementSpeed;
+	private float dodgeStrength = 35.0f;
 	private float rotationSpeed = 10.0f;
 
-	private testBall currentTouching;
 
-	private float deadZone = 0.3f;
 
 	private AnimationPlayer animationPlayer;
 
@@ -30,53 +32,62 @@ public partial class Player : CharacterBody3D
 	}
 
 	private void Player_AreaEntered(Area3D area) {
-		currentTouching = area.GetParent() as testBall;
+		currentTouching = area.GetParent() as Node3D;
 	}
 
 	public override void _Process(double delta) {
-		if (InputManager.Instance().IsJustPressed(ID, JoyButton.RightShoulder)) {
+		if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder)) {
 			GD.Print(ID + " | Parry");
 			if (currentTouching != null) {
-				currentTouching.Rotation = Rotation; 
-				currentTouching.speed += 1.0f;
+				currentTouching.Rotation = Rotation;
 			}
 		}
-		if (InputManager.Instance().IsJustPressed(ID, JoyButton.LeftShoulder)) {
+		if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder)) {
             GD.Print(ID + " | Friend Parry");
             if (currentTouching != null) {
 				currentTouching.LookAt(otherPlayer.GlobalPosition);
-				currentTouching.speed += 0.1f;
 			}
 		}
 	}
 
 	public override void _PhysicsProcess(double delta) {
+		if (Velocity.Length() > 20) {
+			Velocity = Velocity * 0.75f;
+		} else {
+			Velocity = Velocity * 0.65f;
+		}
+
+
 		// Gets the input vector for left stick and applies it to position
 		Vector2 inputDirection = GetInputVector(JoyAxis.LeftX, JoyAxis.LeftY, deadZone);
-		Velocity = new Vector3(inputDirection.X, 0, inputDirection.Y) * movementSpeed;
-		if(Velocity != Vector3.Zero) {
-			animationPlayer.Play("Walk");
-		} else {
-			animationPlayer.Stop();
-		}
+		Velocity += new Vector3(inputDirection.X, 0, inputDirection.Y) * (float)(movementSpeed);
+
+        if (Velocity != Vector3.Zero) {
+			animationPlayer.AnimationSetNext(animationPlayer.CurrentAnimation, "Walk");
+        }
+        else {
+            animationPlayer.Stop();
+        }
+
+        if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerLeft)) {
+            GD.Print("Dodge!");
+			if (Velocity != Vector3.Zero) {
+                Velocity += new Vector3(inputDirection.X, 0, inputDirection.Y) * dodgeStrength;
+				RotateTo(inputDirection);
+            } else {
+				Velocity += -Transform.Basis.Z * dodgeStrength;
+			}
+            animationPlayer.Play("Dodge");
+        }
+
 
 		// Gets the input vector for right stick, if zero use the inputDirection instead
 		Vector2 inputRotation = GetInputVector(JoyAxis.RightX, JoyAxis.RightY, deadZone) != Vector2.Zero ? GetInputVector(JoyAxis.RightX, JoyAxis.RightY, deadZone) : inputDirection;
 
+
 		// Rotates player
-		if (inputRotation != Vector2.Zero) {
-			// Calculates angle to create quaternion
-			float angle = Vector2.Up.AngleTo(inputRotation);
-			Godot.Quaternion quaternionTargetDirection = new Quaternion(-Transform.Basis.Y, angle);
-			var quaternion = Transform.Basis.GetRotationQuaternion();
-
-			
-			quaternion = quaternion.Slerp(quaternionTargetDirection, (float)(rotationSpeed*delta));
-
-			// Sets the rotation to the transform
-			Transform3D transform = Transform;
-			transform.Basis = new Basis(quaternion);
-			Transform = transform;
+		if (inputRotation != Vector2.Zero && Velocity.Length() < movementSpeed*3) {
+			RotateToSlerp(inputRotation, delta);
 		}
 		MoveAndSlide();
 	}
@@ -88,7 +99,34 @@ public partial class Player : CharacterBody3D
 		return Vector2.Zero;
 	}
 
-	private string GetDebuggerDisplay()
+	private void RotateToSlerp(Vector2 inputRotation, double delta) {
+        // Calculates angle to create quaternion
+        float angle = Vector2.Up.AngleTo(inputRotation);
+        Godot.Quaternion quaternionTargetDirection = new Quaternion(-Transform.Basis.Y, angle);
+        var quaternion = Transform.Basis.GetRotationQuaternion();
+
+
+        quaternion = quaternion.Slerp(quaternionTargetDirection, (float)(rotationSpeed * delta));
+
+        // Sets the rotation to the transform
+        Transform3D transform = Transform;
+        transform.Basis = new Basis(quaternion);
+        Transform = transform;
+    }
+
+    private void RotateTo(Vector2 inputRotation) {
+        // Calculates angle to create quaternion
+        float angle = Vector2.Up.AngleTo(inputRotation);
+        Godot.Quaternion quaternionTargetDirection = new Quaternion(-Transform.Basis.Y, angle);
+        var quaternion = Transform.Basis.GetRotationQuaternion();
+
+        // Sets the rotation to the transform
+        Transform3D transform = Transform;
+        transform.Basis = new Basis(quaternionTargetDirection);
+        Transform = transform;
+    }
+
+    private string GetDebuggerDisplay()
 	{
 		return ToString();
 	}

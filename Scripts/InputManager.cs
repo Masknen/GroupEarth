@@ -15,13 +15,16 @@ public partial class InputManager : Node
 
 
 
-    private Array<Dictionary<JoyButton, int>> playersPressed = new Array<Dictionary<JoyButton, int>>();
+    private Array<Dictionary<JoyButton, int>> playersPressedButton = new Array<Dictionary<JoyButton, int>>();
+    private Array<Dictionary<JoyAxis, int>> playersPressedAxis = new Array<Dictionary<JoyAxis, int>>();
     //private Array<Dictionary<JoyButton, int>> playersReleased = new Array<Dictionary<JoyButton, int>>();
     public override void _Ready()
 	{
         _instance = this;
-        playersPressed.Add(new Dictionary<JoyButton, int>());
-        playersPressed.Add(new Dictionary<JoyButton, int>());
+        playersPressedButton.Add(new Dictionary<JoyButton, int>());
+        playersPressedButton.Add(new Dictionary<JoyButton, int>());
+        playersPressedAxis.Add(new Dictionary<JoyAxis, int>());
+        playersPressedAxis.Add(new Dictionary<JoyAxis, int>());
         //playersReleased.Add(new Dictionary<JoyButton, int>());
         //playersReleased.Add(new Dictionary<JoyButton, int>());
     }
@@ -32,17 +35,28 @@ public partial class InputManager : Node
         for (int ID = 0; ID < 2; ID++) {
             for (int i = 0; i < (int)JoyButton.SdlMax; i++) {
                 if (Input.IsJoyButtonPressed(ID, (JoyButton)i)) {
-                    playersPressed[ID][(JoyButton)i]++;
+                    playersPressedButton[ID][(JoyButton)i]++;
                 }
                 if (!Input.IsJoyButtonPressed(ID, (JoyButton)i)) {
-                    playersPressed[ID][(JoyButton)i] = 0;
+                    playersPressedButton[ID][(JoyButton)i] = 0;
+                }
+            }
+            for (int i = 0; i < (int)JoyAxis.SdlMax; i++) {
+                if (Input.GetJoyAxis(ID, (JoyAxis)i) >= 0.5) {
+                    playersPressedAxis[ID][(JoyAxis)i]++;
+                }
+                if (Input.GetJoyAxis(ID, (JoyAxis)i) < 0.5) {
+                    playersPressedAxis[ID][(JoyAxis)i] = 0;
                 }
             }
         }
 	}
 
-    public bool IsJustPressed(int ID, JoyButton joyButton) {
-        return playersPressed[ID][joyButton] == 1;
+    public bool IsJustPressedButton(int ID, JoyButton joyButton) {
+        return playersPressedButton[ID][joyButton] == 1;
+    }
+    public bool IsJustPressedAxis(int ID, JoyAxis joyAxis) {
+        return playersPressedAxis[ID][joyAxis] == 1;
     }
 
 }
