@@ -62,8 +62,8 @@ public partial class Player : CharacterBody3D
 		Vector2 inputDirection = GetInputVector(JoyAxis.LeftX, JoyAxis.LeftY, deadZone);
 		Velocity += new Vector3(inputDirection.X, 0, inputDirection.Y) * (float)(movementSpeed);
 
-        if (Velocity != Vector3.Zero) {
-			animationPlayer.AnimationSetNext(animationPlayer.CurrentAnimation, "Walk");
+        if (!Velocity.IsEqualApprox(Vector3.Zero)) {
+			animationPlayer.AnimationSetNext(animationPlayer.AssignedAnimation, "Walk");
         }
         else {
             animationPlayer.Stop();
@@ -71,7 +71,7 @@ public partial class Player : CharacterBody3D
 
         if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerLeft)) {
             GD.Print("Dodge!");
-			if (Velocity != Vector3.Zero) {
+			if (!new Vector3(inputDirection.X, 0, inputDirection.Y).IsEqualApprox(Vector3.Zero)) {
                 Velocity += new Vector3(inputDirection.X, 0, inputDirection.Y) * dodgeStrength;
 				RotateTo(inputDirection);
             } else {
@@ -98,7 +98,6 @@ public partial class Player : CharacterBody3D
 		}
 		return Vector2.Zero;
 	}
-
 	private void RotateToSlerp(Vector2 inputRotation, double delta) {
         // Calculates angle to create quaternion
         float angle = Vector2.Up.AngleTo(inputRotation);
@@ -113,7 +112,6 @@ public partial class Player : CharacterBody3D
         transform.Basis = new Basis(quaternion);
         Transform = transform;
     }
-
     private void RotateTo(Vector2 inputRotation) {
         // Calculates angle to create quaternion
         float angle = Vector2.Up.AngleTo(inputRotation);
@@ -125,7 +123,6 @@ public partial class Player : CharacterBody3D
         transform.Basis = new Basis(quaternionTargetDirection);
         Transform = transform;
     }
-
     private string GetDebuggerDisplay()
 	{
 		return ToString();
