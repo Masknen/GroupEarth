@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 
 public partial class FireBall : Node3D
 {
-	[Export] public float speed = 100;
+	[Export] public float speed = 10;
 
 	
 
