@@ -50,7 +50,6 @@ _data = {
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4ejrt")
-movementSpeed = 8.0
 
 [node name="PlayerCollisionBox" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_adq4d")
