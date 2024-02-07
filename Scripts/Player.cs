@@ -57,27 +57,20 @@ public partial class Player : CharacterBody3D
 			Velocity = Velocity * 0.65f;
 		}
 
-
 		// Gets the input vector for left stick and applies it to position
 		Vector2 inputDirection = GetInputVector(JoyAxis.LeftX, JoyAxis.LeftY, deadZone);
-		Velocity += new Vector3(inputDirection.X, 0, inputDirection.Y) * (float)(movementSpeed);
+		Vector3 inputdirectionV3 = new Vector3(inputDirection.X, 0, inputDirection.Y);
 
-        if (!Velocity.IsEqualApprox(Vector3.Zero)) {
-			animationPlayer.AnimationSetNext(animationPlayer.AssignedAnimation, "Walk");
-        }
-        else {
-            animationPlayer.Stop();
-        }
+        Velocity += inputdirectionV3 * (float)(movementSpeed);
 
         if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerLeft)) {
             GD.Print("Dodge!");
-			if (!new Vector3(inputDirection.X, 0, inputDirection.Y).IsEqualApprox(Vector3.Zero)) {
-                Velocity += new Vector3(inputDirection.X, 0, inputDirection.Y) * dodgeStrength;
+			if (!inputdirectionV3.IsEqualApprox(Vector3.Zero)) {
+                Velocity += inputdirectionV3 * dodgeStrength;
 				RotateTo(inputDirection);
             } else {
 				Velocity += -Transform.Basis.Z * dodgeStrength;
 			}
-            animationPlayer.Play("Dodge");
         }
 
 
