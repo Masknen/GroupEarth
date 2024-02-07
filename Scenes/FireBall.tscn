@@ -1,10 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfq66m8cis4b3"]
+[gd_scene load_steps=5 format=3 uid="uid://cfq66m8cis4b3"]
 
 [ext_resource type="Script" path="res://Scripts/fireball.cs" id="1_m2qii"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0byfs"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgjv7"]
+albedo_color = Color(0.960784, 0.0666667, 0.0823529, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_kbu3s"]
+material = SubResource("StandardMaterial3D_lgjv7")
 
 [node name="Area3D" type="Area3D"]
 script = ExtResource("1_m2qii")
