@@ -1,8 +1,8 @@
-[gd_scene load_steps=202 format=3 uid="uid://bpu7uvkgu6vua"]
+[gd_scene load_steps=391 format=3 uid="uid://bpu7uvkgu6vua"]
 
 [ext_resource type="PackedScene" uid="uid://cajffba3noapu" path="res://Assets/kaykit remastered dungeon/KayKit_DungeonRemastered_1.0_FREE/Assets/gltf/torch_lit.gltf.glb" id="1_kpcbq"]
 [ext_resource type="PackedScene" uid="uid://c6ffxjb6mf3bg" path="res://Assets/kaykit remastered dungeon/KayKit_DungeonRemastered_1.0_FREE/Assets/gltf/torch_mounted.gltf.glb" id="2_tckxr"]
-[ext_resource type="PackedScene" uid="uid://c3t2l5amf0226" path="res://Assets/kaykit remastered dungeon/KayKit_DungeonRemastered_1.0_FREE/Assets/gltf/trunk_large_A.gltf.glb" id="3_stkur"]
+[ext_resource type="Texture2D" uid="uid://cpfdkpd03y122" path="res://Assets/kaykit remastered dungeon/KayKit_DungeonRemastered_1.0_FREE/Assets/gltf/trunk_large_A_dungeon_texture.png" id="3_xw3us"]
 [ext_resource type="PackedScene" uid="uid://qknu3ybrvhrq" path="res://Assets/kaykit remastered dungeon/KayKit_DungeonRemastered_1.0_FREE/Assets/gltf/trunk_large_B.gltf.glb" id="4_r6hhi"]
 [ext_resource type="PackedScene" uid="uid://bbjnwknci3dem" path="res://Assets/kaykit remastered dungeon/KayKit_DungeonRemastered_1.0_FREE/Assets/gltf/trunk_large_C.gltf.glb" id="5_eph6e"]
 [ext_resource type="PackedScene" uid="uid://c3aphrp0k81t6" path="res://Assets/kaykit remastered dungeon/KayKit_DungeonRemastered_1.0_FREE/Assets/gltf/trunk_medium_A.gltf.glb" id="6_rvxwd"]
@@ -201,408 +201,1397 @@
 [ext_resource type="PackedScene" uid="uid://djwsdnj7xqr1i" path="res://Assets/kaykit remastered dungeon/KayKit_DungeonRemastered_1.0_FREE/Assets/gltf/table_small_decorated_A.gltf.glb" id="199_2cbe3"]
 [ext_resource type="PackedScene" uid="uid://801y8uq4b8ex" path="res://Assets/kaykit remastered dungeon/KayKit_DungeonRemastered_1.0_FREE/Assets/gltf/table_small_decorated_B.gltf.glb" id="200_un5cy"]
 [ext_resource type="PackedScene" uid="uid://bdx0ierospkeh" path="res://Assets/kaykit remastered dungeon/KayKit_DungeonRemastered_1.0_FREE/Assets/gltf/torch.gltf.glb" id="201_ixnav"]
+[ext_resource type="PackedScene" uid="uid://ban6t63bs1lb1" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/arrow.gltf.glb" id="202_lgkaf"]
+[ext_resource type="PackedScene" uid="uid://dv7plove3qwsl" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/artifact.gltf.glb" id="203_lfj0c"]
+[ext_resource type="PackedScene" uid="uid://ve2eslt8oprc" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/axeDouble_common.gltf.glb" id="204_bl0gr"]
+[ext_resource type="PackedScene" uid="uid://bmp2kry0jil0q" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/axeDouble_rare.gltf.glb" id="205_7mwlx"]
+[ext_resource type="PackedScene" uid="uid://dcyn2fonyweej" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/axeDouble_uncommon.gltf.glb" id="206_2ldgq"]
+[ext_resource type="PackedScene" uid="uid://d11d0n7wiyne1" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/axe_common.gltf.glb" id="207_n13lu"]
+[ext_resource type="PackedScene" uid="uid://dxoo0kl0ao1t7" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/axe_rare.gltf.glb" id="208_eb86t"]
+[ext_resource type="PackedScene" uid="uid://cldu0ahe6yom3" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/axe_uncommon.gltf.glb" id="209_pj8f8"]
+[ext_resource type="PackedScene" uid="uid://d1y73p0tw46qx" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/banner.gltf.glb" id="210_suum7"]
+[ext_resource type="PackedScene" uid="uid://dhn11u3ty0jf4" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/barrel.gltf.glb" id="211_u2jfg"]
+[ext_resource type="PackedScene" uid="uid://bblxj3efp5g8a" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/barrelDark.gltf.glb" id="212_cm5mn"]
+[ext_resource type="PackedScene" uid="uid://fjjh1jhb7yt0" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bench.gltf.glb" id="213_lhbxe"]
+[ext_resource type="PackedScene" uid="uid://cjx0o4d2w1c7s" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookA.gltf.glb" id="214_d314u"]
+[ext_resource type="PackedScene" uid="uid://daqd77j0om2ki" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookB.gltf.glb" id="215_8g8w5"]
+[ext_resource type="PackedScene" uid="uid://d4fuj5ibw70tg" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookC.gltf.glb" id="216_f72l1"]
+[ext_resource type="PackedScene" uid="uid://bfacu2miojtul" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookcase.gltf.glb" id="217_5ejvs"]
+[ext_resource type="PackedScene" uid="uid://swx6aecs467m" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookcaseFilled.gltf.glb" id="218_vu8m5"]
+[ext_resource type="PackedScene" uid="uid://cyeppyk10nycv" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookcaseFilled_broken.gltf.glb" id="219_8mrs7"]
+[ext_resource type="PackedScene" uid="uid://clqpyjp24gw8m" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookcaseWide.gltf.glb" id="220_c5cal"]
+[ext_resource type="PackedScene" uid="uid://svbdlmmssxy3" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookcaseWideFilled.gltf.glb" id="221_c0202"]
+[ext_resource type="PackedScene" uid="uid://dov14001jb6h8" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookcaseWideFilled_broken.gltf.glb" id="222_u2oda"]
+[ext_resource type="PackedScene" uid="uid://j3t4rl0q10aa" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookcaseWide_broken.gltf.glb" id="223_tcl8k"]
+[ext_resource type="PackedScene" uid="uid://8mk4i3b5wsoc" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookcase_broken.gltf.glb" id="224_3ch4p"]
+[ext_resource type="PackedScene" uid="uid://5n8k10ioew7y" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookD.gltf.glb" id="225_l6vn0"]
+[ext_resource type="PackedScene" uid="uid://biy0gv671akwt" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookE.gltf.glb" id="226_jdrip"]
+[ext_resource type="PackedScene" uid="uid://d3lf8a4v2vstk" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookF.gltf.glb" id="227_skrwq"]
+[ext_resource type="PackedScene" uid="uid://bv3l77to465fr" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookOpenA.gltf.glb" id="228_6u30s"]
+[ext_resource type="PackedScene" uid="uid://5favppb8u204" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bookOpenB.gltf.glb" id="229_kbcpm"]
+[ext_resource type="PackedScene" uid="uid://cfve805uia8w8" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bricks.gltf.glb" id="230_sr1iu"]
+[ext_resource type="PackedScene" uid="uid://crh16jfftodqg" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/bucket.gltf.glb" id="231_2vpbm"]
+[ext_resource type="PackedScene" uid="uid://b7jksdg6qjojd" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/chair.gltf.glb" id="232_a3mk1"]
+[ext_resource type="PackedScene" uid="uid://kekk3w2wdi66" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/chestTop_common.gltf.glb" id="233_4awtn"]
+[ext_resource type="PackedScene" uid="uid://bkm1f01nqbpd4" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/chestTop_common_empty.gltf.glb" id="234_a6s7w"]
+[ext_resource type="PackedScene" uid="uid://c3ljvrck8f2m4" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/chestTop_rare.gltf.glb" id="235_m07nd"]
+[ext_resource type="PackedScene" uid="uid://dv01qw7ct6uh6" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/chestTop_rare_mimic.gltf.glb" id="236_i5qp3"]
+[ext_resource type="PackedScene" uid="uid://dexyaqpa78lci" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/chestTop_uncommon.gltf.glb" id="237_dlrpb"]
+[ext_resource type="PackedScene" uid="uid://c6ctcpiwsoahe" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/chestTop_uncommon_mimic.gltf.glb" id="238_oaydw"]
+[ext_resource type="PackedScene" uid="uid://cmju7wg7481da" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/chest_common.gltf.glb" id="239_dgp0k"]
+[ext_resource type="PackedScene" uid="uid://dcquqyxtqhkcm" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/chest_common_empty.gltf.glb" id="240_pst0m"]
+[ext_resource type="PackedScene" uid="uid://dyeaeak2uwhr3" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/chest_rare.gltf.glb" id="241_m0lhh"]
+[ext_resource type="PackedScene" uid="uid://nqp8a8yrmq8w" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/chest_rare_mimic.gltf.glb" id="242_ewmxw"]
+[ext_resource type="PackedScene" uid="uid://dt8og45d2psqn" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/chest_uncommon.gltf.glb" id="243_1oodc"]
+[ext_resource type="PackedScene" uid="uid://bxjel28g0xwtu" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/chest_uncommon_mimic.gltf.glb" id="244_crk10"]
+[ext_resource type="PackedScene" uid="uid://dawteqwu4obhb" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/coin.gltf.glb" id="245_6og33"]
+[ext_resource type="PackedScene" uid="uid://s7ldrhe7wyv0" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/coinsLarge.gltf.glb" id="246_6bs24"]
+[ext_resource type="PackedScene" uid="uid://cp5pktc7qr560" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/coinsMedium.gltf.glb" id="247_me6bo"]
+[ext_resource type="PackedScene" uid="uid://dcy3x624qedyf" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/coinsSmall.gltf.glb" id="248_u7jen"]
+[ext_resource type="PackedScene" uid="uid://dewo5xcsb1ljl" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/crate.gltf.glb" id="249_wijfo"]
+[ext_resource type="PackedScene" uid="uid://du8tl5uvmdl33" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/crateDark.gltf.glb" id="250_1u2qa"]
+[ext_resource type="PackedScene" uid="uid://cb0n6s3hbxkc7" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/cratePlatform_large.gltf.glb" id="251_fxegj"]
+[ext_resource type="PackedScene" uid="uid://bu0icsplkltlh" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/cratePlatform_medium.gltf.glb" id="252_kxkjy"]
+[ext_resource type="PackedScene" uid="uid://da4vqvw2ssa2g" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/cratePlatform_small.gltf.glb" id="253_x51a7"]
+[ext_resource type="PackedScene" uid="uid://qiwgpuc7jnqp" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/crossbow_common.gltf.glb" id="254_1jd8r"]
+[ext_resource type="PackedScene" uid="uid://ddub3l2cewbnh" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/crossbow_rare.gltf.glb" id="255_ayhy3"]
+[ext_resource type="PackedScene" uid="uid://bavidi1w7pe5y" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/crossbow_uncommon.gltf.glb" id="256_dvpg1"]
+[ext_resource type="PackedScene" uid="uid://6enhian6prk4" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/dagger_common.gltf.glb" id="257_jk8hs"]
+[ext_resource type="PackedScene" uid="uid://1cp60ygufndl" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/dagger_rare.gltf.glb" id="258_ayatd"]
+[ext_resource type="PackedScene" uid="uid://cctmkrdejglyk" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/dagger_uncommon.gltf.glb" id="259_ik8wt"]
+[ext_resource type="PackedScene" uid="uid://0uubaxd5yg1l" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/door.gltf.glb" id="260_3nq41"]
+[ext_resource type="PackedScene" uid="uid://du24t5s3po87g" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/door_gate.gltf.glb" id="261_isk7u"]
+[ext_resource type="PackedScene" uid="uid://b4nrqrybu0l1c" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/floorDecoration_shatteredBricks.gltf.glb" id="262_rnbo7"]
+[ext_resource type="PackedScene" uid="uid://brl0silvwh354" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/floorDecoration_tilesLarge.gltf.glb" id="263_oyesx"]
+[ext_resource type="PackedScene" uid="uid://byrllegrp78b1" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/floorDecoration_tilesSmall.gltf.glb" id="264_ckj7w"]
+[ext_resource type="PackedScene" uid="uid://c6c2ches7xnn3" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/floorDecoration_wood.gltf.glb" id="265_4p8kv"]
+[ext_resource type="PackedScene" uid="uid://bkbv56uuyei8b" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/floorDecoration_woodLeft.gltf.glb" id="266_078d0"]
+[ext_resource type="PackedScene" uid="uid://ctjj46tqm3ag2" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/floorDecoration_woodRight.gltf.glb" id="267_wv1jn"]
+[ext_resource type="PackedScene" uid="uid://ci68op7d217ga" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/hammer_common.gltf.glb" id="268_2bj47"]
+[ext_resource type="PackedScene" uid="uid://bf3nocu381kcb" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/hammer_rare.gltf.glb" id="269_5dk8i"]
+[ext_resource type="PackedScene" uid="uid://cd8d7vlncqcnm" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/hammer_uncommon.gltf.glb" id="270_yqtet"]
+[ext_resource type="PackedScene" uid="uid://dwmebghvamkn3" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/lootSackA.gltf.glb" id="271_eruos"]
+[ext_resource type="PackedScene" uid="uid://csojjn05kno8u" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/lootSackB.gltf.glb" id="272_d6t3k"]
+[ext_resource type="PackedScene" uid="uid://cp45m3im874ct" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/mug.gltf.glb" id="273_xblrf"]
+[ext_resource type="PackedScene" uid="uid://c0cxebl25wrr1" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/pillar.gltf.glb" id="274_shaq4"]
+[ext_resource type="PackedScene" uid="uid://bn6kpasqukcin" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/pillar_broken.gltf.glb" id="275_1yknw"]
+[ext_resource type="PackedScene" uid="uid://kvhufxvmerw1" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/plate.gltf.glb" id="276_60j66"]
+[ext_resource type="PackedScene" uid="uid://q46x1hsnxkyx" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/plateFull.gltf.glb" id="277_hvxso"]
+[ext_resource type="PackedScene" uid="uid://buue5obq7uog" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/plateHalf.gltf.glb" id="278_xw4ml"]
+[ext_resource type="PackedScene" uid="uid://nkn1pb3bog60" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potA.gltf.glb" id="279_artlm"]
+[ext_resource type="PackedScene" uid="uid://bfafbg0xtsw7u" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potA_decorated.gltf.glb" id="280_t2fjn"]
+[ext_resource type="PackedScene" uid="uid://c1hpsef0ejtdy" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potB.gltf.glb" id="281_452td"]
+[ext_resource type="PackedScene" uid="uid://dnxistdl0ynkl" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potB_decorated.gltf.glb" id="282_odxrs"]
+[ext_resource type="PackedScene" uid="uid://dwsnku3q2aymt" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potC.gltf.glb" id="283_6dq3n"]
+[ext_resource type="PackedScene" uid="uid://fcsakmu1xyru" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potC_decorated.gltf.glb" id="284_x3ggh"]
+[ext_resource type="PackedScene" uid="uid://bptodqkdhtige" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potionLarge_blue.gltf.glb" id="285_n1l13"]
+[ext_resource type="PackedScene" uid="uid://ynnlms21sv5h" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potionLarge_green.gltf.glb" id="286_7cd7i"]
+[ext_resource type="PackedScene" uid="uid://ym75na0km176" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potionLarge_red.gltf.glb" id="287_4cw64"]
+[ext_resource type="PackedScene" uid="uid://c8edy82vse2lr" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potionMedium_blue.gltf.glb" id="288_4g6n0"]
+[ext_resource type="PackedScene" uid="uid://bfj3fkpuiajuv" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potionMedium_green.gltf.glb" id="289_845c8"]
+[ext_resource type="PackedScene" uid="uid://6vr11cav2alg" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potionMedium_red.gltf.glb" id="290_8ncrc"]
+[ext_resource type="PackedScene" uid="uid://cohlkqaml2p2k" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potionSmall_blue.gltf.glb" id="291_33pkc"]
+[ext_resource type="PackedScene" uid="uid://bcic4nw322avk" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potionSmall_green.gltf.glb" id="292_vm2ig"]
+[ext_resource type="PackedScene" uid="uid://c3t1aidtrfdks" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potionSmall_red.gltf.glb" id="293_qgac5"]
+[ext_resource type="PackedScene" uid="uid://cq2na0phksvhe" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/pots.gltf.glb" id="294_ik16r"]
+[ext_resource type="PackedScene" uid="uid://uekawr0hf86h" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/quiver_empty.gltf.glb" id="295_e041b"]
+[ext_resource type="PackedScene" uid="uid://dcfjh20m64v77" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/quiver_full.gltf.glb" id="296_21tqv"]
+[ext_resource type="PackedScene" uid="uid://ct6v83fqe0t11" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/quiver_half_full.gltf.glb" id="297_y3vy5"]
+[ext_resource type="PackedScene" uid="uid://r7paijg7j8ig" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_high.gltf.glb" id="298_kvpnr"]
+[ext_resource type="PackedScene" uid="uid://ki31yfm6j2u4" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_high_cornerBoth.gltf.glb" id="299_jsrgk"]
+[ext_resource type="PackedScene" uid="uid://c8ktm06505hcf" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_high_cornerLeft.gltf.glb" id="300_sjv6c"]
+[ext_resource type="PackedScene" uid="uid://gwd3ulg5p0ta" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_high_cornerRight.gltf.glb" id="301_68f5c"]
+[ext_resource type="PackedScene" uid="uid://ubu7dfd4iied" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_high_railing.gltf.glb" id="302_40lwe"]
+[ext_resource type="PackedScene" uid="uid://be3n0dv4rjf6h" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_low.gltf.glb" id="303_ou0pg"]
+[ext_resource type="PackedScene" uid="uid://odeg4dpjf1ds" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_low_cornerBoth.gltf.glb" id="304_n7827"]
+[ext_resource type="PackedScene" uid="uid://f240u1285vh3" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_low_cornerLeft.gltf.glb" id="305_jngiq"]
+[ext_resource type="PackedScene" uid="uid://56lbg6eqv01g" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_low_cornerRight.gltf.glb" id="306_eebx3"]
+[ext_resource type="PackedScene" uid="uid://coti7uqi8ojyk" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_low_railing.gltf.glb" id="307_vledd"]
+[ext_resource type="PackedScene" uid="uid://cajlg6mucesnq" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_medium.gltf.glb" id="308_w2ll2"]
+[ext_resource type="PackedScene" uid="uid://dph2xo1h1mlrv" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_medium_cornerBoth.gltf.glb" id="309_ce5bn"]
+[ext_resource type="PackedScene" uid="uid://cv2n2fboorhpw" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_medium_cornerLeft.gltf.glb" id="310_uv0pe"]
+[ext_resource type="PackedScene" uid="uid://wvcuknt0e4te" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_medium_cornerRight.gltf.glb" id="311_ri817"]
+[ext_resource type="PackedScene" uid="uid://dmm7flhies5rb" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_medium_railing.gltf.glb" id="312_gtf0g"]
+[ext_resource type="PackedScene" uid="uid://bqwfv13wc3lhp" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_high.gltf.glb" id="313_jk4bi"]
+[ext_resource type="PackedScene" uid="uid://6y3s843gwa72" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_high_cornerLeft.gltf.glb" id="314_v8j6k"]
+[ext_resource type="PackedScene" uid="uid://dh8xy2g47o6rm" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_high_cornerRight.gltf.glb" id="315_wg3ka"]
+[ext_resource type="PackedScene" uid="uid://b0fiefccrmwj5" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_high_long.gltf.glb" id="316_2drry"]
+[ext_resource type="PackedScene" uid="uid://cvdgnw6lpbg3t" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_high_railing.gltf.glb" id="317_s1nho"]
+[ext_resource type="PackedScene" uid="uid://borjg3bkc4wrp" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_high_railing_long.gltf.glb" id="318_w0gp4"]
+[ext_resource type="PackedScene" uid="uid://c033sowfb6o10" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_low.gltf.glb" id="319_0rk8x"]
+[ext_resource type="PackedScene" uid="uid://chft6xnt3hu8p" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_low_cornerLeft.gltf.glb" id="320_hmpy0"]
+[ext_resource type="PackedScene" uid="uid://c54loun2e2ytm" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_low_cornerRight.gltf.glb" id="321_oy17j"]
+[ext_resource type="PackedScene" uid="uid://b2xse5o3qu88j" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_low_long.gltf.glb" id="322_5p087"]
+[ext_resource type="PackedScene" uid="uid://c8umbch5h5lxq" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_low_railing.gltf.glb" id="323_220co"]
+[ext_resource type="PackedScene" uid="uid://dfmtd0lu7fh26" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_low_railing_long.gltf.glb" id="324_h52lr"]
+[ext_resource type="PackedScene" uid="uid://bhwdnu3mg28r6" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_medium.gltf.glb" id="325_jclth"]
+[ext_resource type="PackedScene" uid="uid://8rm4f1qdtiur" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_medium_cornerLeft.gltf.glb" id="326_chnmy"]
+[ext_resource type="PackedScene" uid="uid://b5wg228oa4xht" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_medium_cornerRight.gltf.glb" id="327_5hy75"]
+[ext_resource type="PackedScene" uid="uid://b8uebla58851p" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_medium_long.gltf.glb" id="328_fx3sf"]
+[ext_resource type="PackedScene" uid="uid://xpw6dg0d042h" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_medium_railing.gltf.glb" id="329_qat7r"]
+[ext_resource type="PackedScene" uid="uid://cf1u1ukyxi6gi" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_small_medium_railing_long.gltf.glb" id="330_ntfda"]
+[ext_resource type="PackedScene" uid="uid://2d48mtckjocx" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/scaffold_stairs.gltf.glb" id="331_8p3u4"]
+[ext_resource type="PackedScene" uid="uid://bymrnrleg2uh8" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/shield_common.gltf.glb" id="332_nbtlu"]
+[ext_resource type="PackedScene" uid="uid://bny4rjh1xckt2" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/shield_rare.gltf.glb" id="333_cedp5"]
+[ext_resource type="PackedScene" uid="uid://d2v6jucd6y2vq" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/shield_uncommon.gltf.glb" id="334_dy8we"]
+[ext_resource type="PackedScene" uid="uid://dcuug0f0v4x5" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/spellBook.gltf.glb" id="335_q50ti"]
+[ext_resource type="PackedScene" uid="uid://2iv8a7unba6c" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/staff_common.gltf.glb" id="336_you5m"]
+[ext_resource type="PackedScene" uid="uid://cn2u2x022kal6" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/staff_rare.gltf.glb" id="337_cs2vj"]
+[ext_resource type="PackedScene" uid="uid://cmlad7dkourhk" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/staff_uncommon.gltf.glb" id="338_qykrj"]
+[ext_resource type="PackedScene" uid="uid://b7vqy1k57i785" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/stairs.gltf.glb" id="339_4avjv"]
+[ext_resource type="PackedScene" uid="uid://coo6j2u5savg5" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/stairs_wide.gltf.glb" id="340_xopd8"]
+[ext_resource type="PackedScene" uid="uid://buygaw3l4hcxj" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/stool.gltf.glb" id="341_ohs6x"]
+[ext_resource type="PackedScene" uid="uid://d32yurghgmr03" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/sword_common.gltf.glb" id="342_ga0rw"]
+[ext_resource type="PackedScene" uid="uid://fde2kuxi4m14" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/sword_rare.gltf.glb" id="343_tyrgq"]
+[ext_resource type="PackedScene" uid="uid://y7yv5fekf76q" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/sword_uncommon.gltf.glb" id="344_xvfq3"]
+[ext_resource type="PackedScene" uid="uid://duybhlk20kerm" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/tableLarge.gltf.glb" id="345_7wkec"]
+[ext_resource type="PackedScene" uid="uid://dh4gyvof28t3w" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/tableMedium.gltf.glb" id="346_egjxb"]
+[ext_resource type="PackedScene" uid="uid://badcbuys2sce8" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/tableSmall.gltf.glb" id="347_sv6lh"]
+[ext_resource type="PackedScene" uid="uid://bsdyfqg3gvw0b" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/tileBrickA_large.gltf.glb" id="348_5j7ik"]
+[ext_resource type="PackedScene" uid="uid://cfdaioapynfi6" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/tileBrickA_medium.gltf.glb" id="349_mkml1"]
+[ext_resource type="PackedScene" uid="uid://bpdmsdeds4sob" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/tileBrickA_small.gltf.glb" id="350_rqusc"]
+[ext_resource type="PackedScene" uid="uid://clv68tgdvxa5" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/tileBrickB_large.gltf.glb" id="351_sbfsb"]
+[ext_resource type="PackedScene" uid="uid://c043qc3w37no3" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/tileBrickB_largeCrackedA.gltf.glb" id="352_sda6t"]
+[ext_resource type="PackedScene" uid="uid://cby8lo21gl025" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/tileBrickB_largeCrackedB.gltf.glb" id="353_cvqv1"]
+[ext_resource type="PackedScene" uid="uid://cxnlpn0ys2hq3" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/tileBrickB_medium.gltf.glb" id="354_r2pnv"]
+[ext_resource type="PackedScene" uid="uid://ds8mi33hwakey" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/tileBrickB_small.gltf.glb" id="355_gt8gx"]
+[ext_resource type="PackedScene" uid="uid://bjer4ytbt7wa4" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/tileSpikes.gltf.glb" id="356_8ytq0"]
+[ext_resource type="PackedScene" uid="uid://djsv7q4ibsmw6" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/tileSpikes_large.gltf.glb" id="357_1lf7i"]
+[ext_resource type="PackedScene" uid="uid://btye1yox73jf3" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/tileSpikes_shallow.gltf.glb" id="358_4xw3v"]
+[ext_resource type="PackedScene" uid="uid://dn4xr2rjubtul" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/torch.gltf.glb" id="359_hcavi"]
+[ext_resource type="PackedScene" uid="uid://c53qt57bbyhkl" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/torchWall.gltf.glb" id="360_q4emo"]
+[ext_resource type="PackedScene" uid="uid://d3tdy0wl0q3ob" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/trapdoor.gltf.glb" id="361_mkthm"]
+[ext_resource type="PackedScene" uid="uid://bw1f4n6xu2jkk" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wall.gltf.glb" id="362_5tsch"]
+[ext_resource type="PackedScene" uid="uid://3ukpqa4k11pa" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wallCorner.gltf.glb" id="363_aymn1"]
+[ext_resource type="PackedScene" uid="uid://bu4lksftmaxlb" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wallDecorationA.gltf.glb" id="364_1gke7"]
+[ext_resource type="PackedScene" uid="uid://dvu6efwhelxvv" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wallDecorationB.gltf.glb" id="365_mr0le"]
+[ext_resource type="PackedScene" uid="uid://dodv1rn46q5eh" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wallIntersection.gltf.glb" id="366_y1t8b"]
+[ext_resource type="PackedScene" uid="uid://k8japk2sfalb" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wallSingle.gltf.glb" id="367_kqo38"]
+[ext_resource type="PackedScene" uid="uid://8cwaql4p1ghk" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wallSingle_broken.gltf.glb" id="368_d2qrk"]
+[ext_resource type="PackedScene" uid="uid://cu8nfouh65o6o" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wallSingle_corner.gltf.glb" id="369_4nesk"]
+[ext_resource type="PackedScene" uid="uid://cgbml705yyhht" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wallSingle_decorationA.gltf.glb" id="370_da2w7"]
+[ext_resource type="PackedScene" uid="uid://di186kevipf64" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wallSingle_decorationB.gltf.glb" id="371_jp800"]
+[ext_resource type="PackedScene" uid="uid://bpwygjf82wny1" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wallSingle_door.gltf.glb" id="372_u8bln"]
+[ext_resource type="PackedScene" uid="uid://xr7i4mrbadw5" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wallSingle_split.gltf.glb" id="373_r14pp"]
+[ext_resource type="PackedScene" uid="uid://cg067jbr33pkh" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wallSingle_window.gltf.glb" id="374_v8hsx"]
+[ext_resource type="PackedScene" uid="uid://40h8yq726b7b" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wallSingle_windowGate.gltf.glb" id="375_wvpff"]
+[ext_resource type="PackedScene" uid="uid://c0rlel3u7sedd" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wallSplit.gltf.glb" id="376_fha7x"]
+[ext_resource type="PackedScene" uid="uid://fnby7eimlhk6" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wall_broken.gltf.glb" id="377_nkwpl"]
+[ext_resource type="PackedScene" uid="uid://bmej6osbwopc6" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wall_door.gltf.glb" id="378_e3084"]
+[ext_resource type="PackedScene" uid="uid://bfpvvayc4nans" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wall_end.gltf.glb" id="379_3qr5u"]
+[ext_resource type="PackedScene" uid="uid://cted0mdjjgssk" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wall_end_broken.gltf.glb" id="380_8gtu4"]
+[ext_resource type="PackedScene" uid="uid://crflsaiu7d17j" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wall_gate.gltf.glb" id="381_6m2yu"]
+[ext_resource type="PackedScene" uid="uid://cmv8nilqgd47v" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wall_gateCorner.gltf.glb" id="382_y8ewo"]
+[ext_resource type="PackedScene" uid="uid://6o3s40krdymc" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wall_gateDoor.gltf.glb" id="383_axikd"]
+[ext_resource type="PackedScene" uid="uid://tj82m6f3cdgd" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wall_window.gltf.glb" id="384_rdgh8"]
+[ext_resource type="PackedScene" uid="uid://dslm1bfau3oyi" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/wall_windowGate.gltf.glb" id="385_wrigo"]
+[ext_resource type="PackedScene" uid="uid://bpo7oky71kc7b" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/weaponRack.gltf.glb" id="386_2ogie"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uj460"]
+resource_name = "texture"
+albedo_texture = ExtResource("3_xw3us")
+roughness = 0.45
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2377k"]
+_surfaces = [{
+"aabb": AABB(-0.75, -2.02792e-07, -0.650001, 1.5, 1, 1.3),
+"format": 34896613377,
+"index_count": 612,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 3, 0, 0, 0, 1, 0, 4, 0, 6, 0, 5, 0, 7, 0, 4, 0, 5, 0, 8, 0, 10, 0, 9, 0, 11, 0, 13, 0, 12, 0, 14, 0, 11, 0, 12, 0, 9, 0, 6, 0, 4, 0, 15, 0, 17, 0, 16, 0, 0, 0, 18, 0, 2, 0, 19, 0, 20, 0, 0, 0, 19, 0, 0, 0, 21, 0, 5, 0, 6, 0, 9, 0, 5, 0, 9, 0, 10, 0, 12, 0, 13, 0, 20, 0, 12, 0, 20, 0, 22, 0, 0, 0, 3, 0, 21, 0, 13, 0, 11, 0, 20, 0, 19, 0, 22, 0, 20, 0, 23, 0, 25, 0, 24, 0, 23, 0, 24, 0, 26, 0, 25, 0, 15, 0, 24, 0, 8, 0, 9, 0, 15, 0, 8, 0, 15, 0, 16, 0, 27, 0, 29, 0, 28, 0, 27, 0, 28, 0, 30, 0, 31, 0, 28, 0, 29, 0, 31, 0, 29, 0, 32, 0, 20, 0, 11, 0, 18, 0, 0, 0, 20, 0, 18, 0, 33, 0, 31, 0, 32, 0, 33, 0, 32, 0, 34, 0, 18, 0, 11, 0, 28, 0, 18, 0, 28, 0, 31, 0, 4, 0, 24, 0, 15, 0, 4, 0, 15, 0, 9, 0, 1, 0, 2, 0, 18, 0, 1, 0, 18, 0, 35, 0, 32, 0, 29, 0, 24, 0, 32, 0, 24, 0, 4, 0, 36, 0, 34, 0, 32, 0, 37, 0, 35, 0, 18, 0, 7, 0, 38, 0, 4, 0, 39, 0, 26, 0, 24, 0, 40, 0, 30, 0, 28, 0, 39, 0, 24, 0, 29, 0, 39, 0, 29, 0, 41, 0, 40, 0, 28, 0, 11, 0, 40, 0, 11, 0, 42, 0, 11, 0, 14, 0, 42, 0, 33, 0, 43, 0, 31, 0, 27, 0, 41, 0, 29, 0, 44, 0, 12, 0, 22, 0, 44, 0, 22, 0, 45, 0, 46, 0, 48, 0, 47, 0, 46, 0, 47, 0, 49, 0, 12, 0, 50, 0, 42, 0, 12, 0, 42, 0, 14, 0, 47, 0, 52, 0, 51, 0, 47, 0, 51, 0, 49, 0, 53, 0, 55, 0, 54, 0, 53, 0, 54, 0, 56, 0, 57, 0, 59, 0, 58, 0, 57, 0, 58, 0, 60, 0, 61, 0, 63, 0, 62, 0, 61, 0, 62, 0, 64, 0, 65, 0, 67, 0, 66, 0, 65, 0, 66, 0, 68, 0, 69, 0, 71, 0, 70, 0, 72, 0, 69, 0, 70, 0, 38, 0, 74, 0, 73, 0, 75, 0, 38, 0, 73, 0, 76, 0, 77, 0, 48, 0, 46, 0, 76, 0, 48, 0, 51, 0, 23, 0, 78, 0, 51, 0, 78, 0, 79, 0, 30, 0, 40, 0, 41, 0, 30, 0, 41, 0, 27, 0, 3, 0, 1, 0, 58, 0, 59, 0, 3, 0, 58, 0, 80, 0, 43, 0, 36, 0, 80, 0, 36, 0, 63, 0, 81, 0, 75, 0, 73, 0, 81, 0, 73, 0, 82, 0, 42, 0, 50, 0, 54, 0, 55, 0, 42, 0, 54, 0, 61, 0, 65, 0, 68, 0, 61, 0, 68, 0, 83, 0, 84, 0, 75, 0, 81, 0, 85, 0, 84, 0, 81, 0, 79, 0, 78, 0, 39, 0, 79, 0, 39, 0, 86, 0, 83, 0, 80, 0, 63, 0, 83, 0, 63, 0, 61, 0, 87, 0, 88, 0, 57, 0, 87, 0, 57, 0, 60, 0, 76, 0, 5, 0, 10, 0, 76, 0, 10, 0, 77, 0, 17, 0, 23, 0, 51, 0, 52, 0, 17, 0, 51, 0, 82, 0, 46, 0, 49, 0, 82, 0, 49, 0, 89, 0, 68, 0, 66, 0, 90, 0, 68, 0, 90, 0, 91, 0, 50, 0, 12, 0, 44, 0, 54, 0, 50, 0, 44, 0, 67, 0, 41, 0, 40, 0, 67, 0, 40, 0, 66, 0, 92, 0, 94, 0, 93, 0, 92, 0, 93, 0, 95, 0, 43, 0, 33, 0, 34, 0, 43, 0, 34, 0, 36, 0, 96, 0, 1, 0, 35, 0, 96, 0, 35, 0, 37, 0, 7, 0, 5, 0, 74, 0, 38, 0, 7, 0, 74, 0, 39, 0, 78, 0, 23, 0, 26, 0, 39, 0, 23, 0, 58, 0, 1, 0, 96, 0, 58, 0, 96, 0, 69, 0, 74, 0, 5, 0, 76, 0, 73, 0, 74, 0, 76, 0, 49, 0, 51, 0, 79, 0, 49, 0, 79, 0, 89, 0, 97, 0, 86, 0, 94, 0, 97, 0, 94, 0, 92, 0, 63, 0, 36, 0, 62, 0, 98, 0, 55, 0, 53, 0, 99, 0, 98, 0, 53, 0, 55, 0, 98, 0, 42, 0, 43, 0, 80, 0, 100, 0, 93, 0, 67, 0, 65, 0, 95, 0, 93, 0, 65, 0, 54, 0, 44, 0, 87, 0, 56, 0, 54, 0, 87, 0, 90, 0, 40, 0, 42, 0, 90, 0, 42, 0, 98, 0, 94, 0, 39, 0, 41, 0, 94, 0, 41, 0, 93, 0, 85, 0, 92, 0, 95, 0, 85, 0, 95, 0, 64, 0, 99, 0, 53, 0, 70, 0, 99, 0, 70, 0, 101, 0, 102, 0, 37, 0, 43, 0, 102, 0, 43, 0, 100, 0, 62, 0, 36, 0, 38, 0, 62, 0, 38, 0, 84, 0, 60, 0, 58, 0, 69, 0, 60, 0, 69, 0, 72, 0, 103, 0, 91, 0, 99, 0, 103, 0, 99, 0, 101, 0, 40, 0, 90, 0, 66, 0, 73, 0, 76, 0, 46, 0, 82, 0, 73, 0, 46, 0, 67, 0, 93, 0, 41, 0, 86, 0, 39, 0, 94, 0, 37, 0, 102, 0, 71, 0, 70, 0, 71, 0, 102, 0, 70, 0, 102, 0, 101, 0, 75, 0, 84, 0, 38, 0, 79, 0, 86, 0, 97, 0, 89, 0, 79, 0, 97, 0, 69, 0, 96, 0, 37, 0, 69, 0, 37, 0, 71, 0, 70, 0, 53, 0, 56, 0, 72, 0, 70, 0, 56, 0, 103, 0, 83, 0, 68, 0, 103, 0, 68, 0, 91, 0, 45, 0, 22, 0, 3, 0, 45, 0, 3, 0, 59, 0, 77, 0, 10, 0, 17, 0, 77, 0, 17, 0, 52, 0, 15, 0, 25, 0, 23, 0, 17, 0, 15, 0, 23, 0, 36, 0, 32, 0, 4, 0, 36, 0, 4, 0, 38, 0, 37, 0, 18, 0, 31, 0, 37, 0, 31, 0, 43, 0, 95, 0, 65, 0, 61, 0, 95, 0, 61, 0, 64, 0, 91, 0, 90, 0, 98, 0, 91, 0, 98, 0, 99, 0, 62, 0, 84, 0, 85, 0, 64, 0, 62, 0, 85, 0, 56, 0, 87, 0, 60, 0, 56, 0, 60, 0, 72, 0, 100, 0, 80, 0, 83, 0, 103, 0, 100, 0, 83, 0, 97, 0, 81, 0, 82, 0, 89, 0, 97, 0, 82, 0, 102, 0, 100, 0, 103, 0, 101, 0, 102, 0, 103, 0, 44, 0, 45, 0, 88, 0, 87, 0, 44, 0, 88, 0, 88, 0, 45, 0, 59, 0, 88, 0, 59, 0, 57, 0, 48, 0, 77, 0, 52, 0, 48, 0, 52, 0, 47, 0, 3, 0, 22, 0, 19, 0, 3, 0, 19, 0, 21, 0, 16, 0, 17, 0, 10, 0, 8, 0, 16, 0, 10, 0, 85, 0, 81, 0, 97, 0, 85, 0, 97, 0, 92, 0),
+"name": "texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 104,
+"vertex_data": PackedByteArray(119, 248, 0, 0, 7, 207, 0, 0, 59, 252, 24, 87, 98, 226, 0, 0, 119, 248, 0, 0, 201, 226, 0, 0, 119, 248, 24, 87, 15, 207, 0, 0, 46, 47, 0, 0, 201, 226, 0, 0, 195, 3, 24, 87, 98, 226, 0, 0, 135, 7, 0, 0, 201, 226, 0, 0, 46, 47, 24, 87, 201, 226, 0, 0, 193, 20, 24, 87, 7, 207, 0, 0, 135, 7, 0, 0, 7, 207, 0, 0, 135, 7, 24, 87, 15, 207, 0, 0, 207, 208, 0, 0, 53, 29, 0, 0, 59, 252, 24, 87, 156, 29, 0, 0, 119, 248, 0, 0, 53, 29, 0, 0, 207, 208, 24, 87, 53, 29, 0, 0, 135, 7, 0, 0, 247, 48, 0, 0, 193, 20, 24, 87, 247, 48, 0, 0, 135, 7, 24, 87, 239, 48, 0, 0, 207, 208, 0, 0, 201, 226, 0, 0, 44, 218, 24, 87, 247, 48, 0, 0, 119, 248, 0, 0, 247, 48, 0, 0, 44, 218, 24, 87, 7, 207, 0, 0, 119, 248, 24, 87, 239, 48, 0, 0, 195, 3, 24, 87, 156, 29, 0, 0, 46, 47, 0, 0, 53, 29, 0, 0, 135, 7, 0, 0, 53, 29, 0, 0, 46, 47, 24, 87, 53, 29, 0, 0, 91, 92, 24, 87, 53, 29, 0, 0, 162, 163, 0, 0, 53, 29, 0, 0, 91, 92, 0, 0, 53, 29, 0, 0, 162, 163, 24, 87, 53, 29, 0, 0, 162, 163, 0, 0, 201, 226, 0, 0, 91, 92, 0, 0, 201, 226, 0, 0, 162, 163, 24, 87, 201, 226, 0, 0, 91, 92, 24, 87, 201, 226, 0, 0, 207, 208, 24, 87, 201, 226, 0, 0, 91, 92, 24, 87, 154, 241, 0, 0, 207, 208, 24, 87, 154, 241, 0, 0, 46, 47, 24, 87, 154, 241, 0, 0, 46, 47, 24, 87, 100, 14, 0, 0, 162, 163, 24, 87, 100, 14, 0, 0, 91, 92, 24, 87, 100, 14, 0, 0, 207, 208, 24, 87, 100, 14, 0, 0, 162, 163, 24, 87, 154, 241, 0, 0, 255, 255, 105, 166, 4, 30, 0, 0, 119, 248, 185, 163, 230, 48, 0, 0, 0, 0, 235, 217, 22, 180, 0, 0, 135, 7, 41, 201, 255, 81, 0, 0, 135, 7, 41, 201, 255, 173, 0, 0, 0, 0, 235, 217, 232, 75, 0, 0, 255, 255, 24, 87, 115, 9, 0, 0, 0, 0, 105, 166, 4, 30, 0, 0, 135, 7, 185, 163, 230, 48, 0, 0, 190, 208, 70, 232, 15, 70, 0, 0, 255, 255, 222, 169, 233, 11, 0, 0, 198, 208, 9, 168, 27, 15, 0, 0, 255, 255, 79, 236, 126, 68, 0, 0, 119, 248, 41, 201, 255, 173, 0, 0, 255, 255, 105, 166, 250, 225, 0, 0, 119, 248, 185, 163, 24, 207, 0, 0, 255, 255, 235, 217, 22, 180, 0, 0, 74, 92, 70, 232, 239, 185, 0, 0, 140, 85, 43, 175, 255, 255, 0, 0, 82, 92, 9, 168, 226, 240, 0, 0, 134, 85, 255, 255, 23, 199, 0, 0, 74, 92, 70, 232, 15, 70, 0, 0, 172, 163, 9, 168, 27, 15, 0, 0, 82, 92, 9, 168, 27, 15, 0, 0, 180, 163, 70, 232, 15, 70, 0, 0, 255, 255, 222, 169, 21, 244, 0, 0, 190, 208, 70, 232, 239, 185, 0, 0, 198, 208, 9, 168, 226, 240, 0, 0, 255, 255, 79, 236, 128, 187, 0, 0, 0, 0, 222, 169, 21, 244, 0, 0, 0, 0, 24, 87, 139, 246, 0, 0, 56, 47, 9, 168, 226, 240, 0, 0, 0, 0, 105, 166, 250, 225, 0, 0, 135, 7, 185, 163, 24, 207, 0, 0, 0, 0, 24, 87, 115, 9, 0, 0, 0, 0, 222, 169, 233, 11, 0, 0, 172, 163, 9, 168, 226, 240, 0, 0, 64, 47, 70, 232, 239, 185, 0, 0, 0, 0, 79, 236, 128, 187, 0, 0, 180, 163, 70, 232, 239, 185, 0, 0, 254, 53, 43, 175, 255, 255, 0, 0, 4, 54, 254, 255, 23, 199, 0, 0, 56, 47, 9, 168, 27, 15, 0, 0, 255, 255, 235, 217, 232, 75, 0, 0, 119, 248, 41, 201, 255, 81, 0, 0, 0, 0, 79, 236, 126, 68, 0, 0, 114, 170, 43, 175, 0, 0, 0, 0, 120, 170, 255, 255, 230, 56, 0, 0, 4, 54, 255, 255, 230, 56, 0, 0, 140, 85, 43, 175, 0, 0, 0, 0, 254, 53, 43, 175, 0, 0, 0, 0, 134, 85, 254, 255, 230, 56, 0, 0, 255, 255, 24, 87, 139, 246, 0, 0, 64, 47, 70, 232, 15, 70, 0, 0, 0, 202, 43, 175, 0, 0, 0, 0, 250, 201, 254, 255, 230, 56, 0, 0, 114, 170, 43, 175, 255, 255, 0, 0, 250, 201, 255, 255, 23, 199, 0, 0, 0, 202, 43, 175, 255, 255, 0, 0, 120, 170, 254, 255, 23, 199, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gvlt0"]
+resource_name = "trunk_large_A_gltf_Cube_16035"
+_surfaces = [{
+"aabb": AABB(-0.75, -2.02792e-07, -0.650001, 1.5, 1, 1.3),
+"attribute_data": PackedByteArray(29, 154, 225, 58, 29, 154, 204, 44, 29, 154, 225, 58, 29, 154, 204, 44, 149, 145, 225, 54, 230, 144, 204, 32, 230, 144, 225, 54, 149, 145, 204, 32, 230, 144, 204, 48, 143, 144, 225, 62, 143, 144, 204, 48, 23, 153, 225, 54, 197, 153, 204, 32, 197, 153, 225, 54, 23, 153, 204, 32, 230, 144, 225, 62, 149, 145, 225, 62, 143, 144, 225, 62, 230, 144, 225, 62, 230, 144, 204, 48, 143, 144, 204, 48, 29, 154, 225, 62, 197, 153, 225, 62, 23, 153, 225, 62, 197, 153, 204, 36, 197, 153, 225, 58, 197, 153, 225, 58, 197, 153, 204, 36, 143, 144, 204, 44, 143, 144, 225, 58, 143, 144, 225, 58, 143, 144, 204, 44, 29, 154, 204, 44, 29, 154, 225, 58, 29, 154, 225, 58, 29, 154, 204, 44, 197, 153, 225, 62, 197, 153, 204, 48, 29, 154, 204, 48, 29, 154, 225, 62, 197, 153, 225, 62, 23, 153, 225, 62, 197, 153, 204, 48, 29, 154, 225, 62, 29, 154, 204, 48, 230, 144, 204, 32, 149, 145, 225, 54, 230, 144, 225, 54, 149, 145, 204, 32, 230, 144, 225, 62, 149, 145, 225, 62, 143, 144, 225, 62, 230, 144, 204, 36, 230, 144, 225, 58, 230, 144, 225, 58, 230, 144, 204, 36, 161, 147, 204, 32, 11, 151, 225, 54, 161, 147, 225, 54, 11, 151, 204, 32, 11, 151, 225, 62, 161, 147, 225, 62, 11, 151, 225, 62, 161, 147, 225, 62, 197, 153, 225, 62, 11, 151, 204, 32, 161, 147, 225, 54, 11, 151, 225, 54, 161, 147, 204, 32, 23, 53, 225, 62, 11, 51, 225, 62, 23, 53, 225, 62, 11, 51, 225, 62, 230, 144, 225, 62, 197, 153, 204, 32, 23, 153, 225, 54, 197, 153, 225, 54, 23, 153, 204, 32, 162, 47, 225, 62, 149, 45, 225, 62, 162, 47, 225, 62, 149, 45, 225, 62, 57, 39, 87, 46, 57, 39, 134, 62, 57, 39, 101, 42, 76, 45, 87, 46, 76, 45, 134, 62, 76, 45, 101, 42, 223, 33, 101, 42, 223, 33, 134, 62, 223, 33, 87, 46, 223, 33, 87, 46, 223, 33, 134, 62, 223, 33, 101, 42, 242, 39, 87, 46, 242, 39, 134, 62, 242, 39, 101, 42, 172, 34, 99, 38, 57, 39, 111, 59, 223, 33, 111, 59, 107, 38, 99, 38, 192, 40, 99, 38, 76, 45, 111, 59, 242, 39, 111, 59, 127, 44, 99, 38, 76, 45, 134, 62, 76, 45, 87, 46, 76, 45, 101, 42, 242, 39, 101, 42, 242, 39, 134, 62, 242, 39, 87, 46, 57, 39, 101, 42, 57, 39, 134, 62, 57, 39, 87, 46, 188, 138, 220, 51, 83, 138, 199, 54, 188, 138, 67, 56, 83, 138, 23, 52, 46, 131, 251, 46, 151, 131, 151, 47, 151, 131, 151, 47, 46, 131, 251, 46, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 46, 131, 220, 51, 151, 131, 23, 52, 79, 137, 235, 32, 188, 138, 145, 51, 79, 137, 185, 51, 188, 138, 61, 35, 83, 138, 151, 47, 188, 138, 220, 51, 83, 138, 23, 52, 188, 138, 251, 46, 3, 51, 205, 42, 172, 50, 143, 46, 4, 51, 7, 47, 171, 50, 46, 39, 95, 134, 235, 32, 139, 135, 185, 51, 95, 134, 185, 51, 139, 135, 235, 32, 188, 138, 145, 43, 79, 137, 235, 32, 79, 137, 185, 51, 188, 138, 61, 27, 155, 132, 67, 48, 46, 131, 145, 43, 46, 131, 67, 48, 155, 132, 185, 35, 46, 131, 220, 51, 151, 131, 151, 47, 151, 131, 23, 52, 46, 131, 251, 46, 46, 131, 220, 47, 46, 131, 67, 52, 46, 131, 67, 52, 46, 131, 145, 47, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 83, 138, 199, 54, 188, 138, 67, 56, 139, 135, 185, 35, 96, 134, 67, 48, 139, 135, 67, 48, 95, 134, 185, 35, 155, 132, 235, 32, 46, 131, 145, 51, 155, 132, 185, 51, 46, 131, 61, 35, 80, 137, 67, 48, 188, 138, 145, 43, 188, 138, 67, 48, 79, 137, 185, 35, 95, 134, 235, 40, 139, 135, 235, 40, 95, 134, 235, 40, 139, 135, 235, 40, 133, 47, 143, 46, 46, 47, 205, 42, 45, 47, 7, 47, 134, 47, 46, 39, 46, 131, 145, 35, 155, 132, 67, 48, 46, 131, 67, 48, 155, 132, 185, 35, 139, 135, 235, 32, 95, 134, 185, 51, 139, 135, 185, 51, 95, 134, 235, 32, 188, 138, 251, 46, 83, 138, 151, 47, 151, 131, 199, 54, 46, 131, 67, 56, 151, 131, 199, 54, 46, 131, 67, 56, 46, 131, 232, 41, 46, 131, 251, 42, 46, 131, 251, 42, 46, 131, 232, 41, 145, 53, 205, 42, 233, 53, 143, 46, 144, 53, 7, 47, 234, 53, 46, 39, 188, 138, 67, 52, 188, 138, 220, 47, 188, 138, 67, 52, 188, 138, 145, 47, 95, 134, 185, 35, 139, 135, 67, 48, 96, 134, 67, 48, 139, 135, 185, 35, 134, 47, 210, 26, 172, 50, 51, 34, 133, 47, 51, 34, 171, 50, 210, 26, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 149, 135, 254, 52, 188, 138, 220, 47, 188, 138, 67, 52, 188, 138, 67, 52, 188, 138, 145, 47, 46, 131, 67, 52, 46, 131, 220, 47, 46, 131, 67, 52, 46, 131, 145, 47, 46, 47, 205, 42, 133, 47, 143, 46, 45, 47, 7, 47, 134, 47, 46, 39, 5, 51, 137, 50, 15, 57, 143, 46, 103, 57, 205, 42, 104, 57, 7, 47, 14, 57, 46, 39, 16, 57, 254, 48, 232, 53, 254, 48, 233, 53, 143, 46, 144, 53, 7, 47, 172, 50, 143, 46, 3, 51, 205, 42, 4, 51, 7, 47, 171, 50, 46, 39, 188, 138, 251, 42, 188, 138, 232, 41, 233, 53, 51, 34, 16, 57, 208, 42, 232, 53, 208, 42, 15, 57, 51, 34, 133, 47, 51, 34, 173, 50, 208, 42, 132, 47, 208, 42, 172, 50, 51, 34, 134, 47, 210, 26, 171, 50, 210, 26, 134, 47, 210, 26, 171, 50, 210, 26, 103, 57, 205, 42, 14, 57, 46, 39, 15, 57, 51, 34, 232, 53, 208, 42, 16, 57, 208, 42, 233, 53, 51, 34, 172, 50, 51, 34, 132, 47, 208, 42, 173, 50, 208, 42, 133, 47, 51, 34, 188, 138, 251, 42, 188, 138, 232, 41, 234, 53, 210, 26, 14, 57, 210, 26, 234, 53, 210, 26, 14, 57, 210, 26, 143, 53, 137, 50, 173, 50, 254, 48, 44, 47, 137, 50, 105, 57, 137, 50, 104, 57, 7, 47, 15, 57, 143, 46, 103, 57, 205, 42, 14, 57, 46, 39, 132, 47, 254, 48, 46, 131, 145, 43, 155, 132, 235, 32, 155, 132, 185, 51, 46, 131, 61, 27, 188, 138, 145, 35, 80, 137, 67, 48, 188, 138, 67, 48, 79, 137, 185, 35, 79, 137, 235, 40, 188, 138, 61, 43, 79, 137, 235, 40, 188, 138, 61, 35, 234, 53, 46, 39, 145, 53, 205, 42, 234, 53, 46, 39, 169, 144, 37, 45, 169, 144, 121, 50, 169, 144, 121, 50, 169, 144, 37, 45, 169, 144, 37, 45, 169, 144, 121, 50, 169, 144, 121, 50, 169, 144, 37, 45, 143, 144, 225, 58, 143, 144, 204, 44, 143, 144, 225, 58, 143, 144, 204, 44, 107, 38, 99, 38, 223, 33, 111, 59, 57, 39, 111, 59, 172, 34, 99, 38, 127, 44, 99, 38, 242, 39, 111, 59, 76, 45, 111, 59, 192, 40, 99, 38, 171, 50, 46, 39, 3, 51, 205, 42, 234, 53, 210, 26, 15, 57, 51, 34, 233, 53, 51, 34, 14, 57, 210, 26, 172, 50, 51, 34, 134, 47, 210, 26, 133, 47, 51, 34, 171, 50, 210, 26, 188, 138, 251, 42, 188, 138, 232, 41, 155, 132, 235, 40, 46, 131, 61, 43, 155, 132, 235, 40, 46, 131, 61, 35, 15, 57, 51, 34, 234, 53, 210, 26, 233, 53, 51, 34, 14, 57, 210, 26, 83, 138, 151, 47, 188, 138, 251, 46, 169, 144, 163, 36, 169, 144, 163, 36, 169, 144, 163, 36, 169, 144, 163, 36, 83, 138, 201, 57, 197, 153, 201, 57, 83, 138, 201, 57, 197, 153, 201, 57, 230, 144, 201, 57, 143, 144, 201, 57, 151, 131, 201, 57, 230, 144, 201, 57, 46, 47, 205, 42, 134, 47, 46, 39),
+"format": 34896613399,
+"index_count": 612,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 3, 0, 0, 0, 1, 0, 4, 0, 6, 0, 5, 0, 7, 0, 4, 0, 5, 0, 8, 0, 10, 0, 9, 0, 11, 0, 13, 0, 12, 0, 14, 0, 11, 0, 12, 0, 15, 0, 17, 0, 16, 0, 18, 0, 20, 0, 19, 0, 21, 0, 23, 0, 22, 0, 24, 0, 26, 0, 25, 0, 24, 0, 25, 0, 27, 0, 28, 0, 30, 0, 29, 0, 28, 0, 29, 0, 31, 0, 32, 0, 34, 0, 33, 0, 32, 0, 33, 0, 35, 0, 36, 0, 38, 0, 37, 0, 39, 0, 41, 0, 40, 0, 42, 0, 44, 0, 43, 0, 45, 0, 47, 0, 46, 0, 45, 0, 46, 0, 48, 0, 49, 0, 51, 0, 50, 0, 52, 0, 54, 0, 53, 0, 52, 0, 53, 0, 55, 0, 56, 0, 58, 0, 57, 0, 56, 0, 57, 0, 59, 0, 60, 0, 62, 0, 61, 0, 60, 0, 61, 0, 63, 0, 40, 0, 41, 0, 23, 0, 64, 0, 40, 0, 23, 0, 65, 0, 67, 0, 66, 0, 65, 0, 66, 0, 68, 0, 69, 0, 71, 0, 70, 0, 69, 0, 70, 0, 72, 0, 16, 0, 50, 0, 73, 0, 16, 0, 73, 0, 15, 0, 74, 0, 76, 0, 75, 0, 74, 0, 75, 0, 77, 0, 78, 0, 80, 0, 79, 0, 78, 0, 79, 0, 81, 0, 82, 0, 84, 0, 83, 0, 85, 0, 87, 0, 86, 0, 88, 0, 90, 0, 89, 0, 91, 0, 93, 0, 92, 0, 94, 0, 96, 0, 95, 0, 97, 0, 99, 0, 98, 0, 97, 0, 98, 0, 100, 0, 101, 0, 103, 0, 102, 0, 101, 0, 102, 0, 104, 0, 105, 0, 107, 0, 106, 0, 108, 0, 110, 0, 109, 0, 111, 0, 113, 0, 112, 0, 114, 0, 116, 0, 115, 0, 114, 0, 115, 0, 117, 0, 118, 0, 120, 0, 119, 0, 118, 0, 119, 0, 121, 0, 122, 0, 124, 0, 123, 0, 122, 0, 123, 0, 125, 0, 119, 0, 127, 0, 126, 0, 119, 0, 126, 0, 121, 0, 128, 0, 130, 0, 129, 0, 128, 0, 129, 0, 131, 0, 132, 0, 134, 0, 133, 0, 132, 0, 133, 0, 135, 0, 136, 0, 138, 0, 137, 0, 136, 0, 137, 0, 139, 0, 140, 0, 142, 0, 141, 0, 140, 0, 141, 0, 143, 0, 144, 0, 146, 0, 145, 0, 147, 0, 144, 0, 145, 0, 148, 0, 150, 0, 149, 0, 151, 0, 148, 0, 149, 0, 152, 0, 154, 0, 153, 0, 155, 0, 152, 0, 153, 0, 156, 0, 158, 0, 157, 0, 156, 0, 157, 0, 159, 0, 160, 0, 162, 0, 161, 0, 160, 0, 161, 0, 163, 0, 164, 0, 165, 0, 133, 0, 134, 0, 164, 0, 133, 0, 166, 0, 168, 0, 167, 0, 166, 0, 167, 0, 169, 0, 170, 0, 172, 0, 171, 0, 170, 0, 171, 0, 173, 0, 174, 0, 176, 0, 175, 0, 177, 0, 174, 0, 175, 0, 178, 0, 180, 0, 179, 0, 178, 0, 179, 0, 181, 0, 182, 0, 184, 0, 183, 0, 185, 0, 182, 0, 183, 0, 186, 0, 188, 0, 187, 0, 186, 0, 187, 0, 189, 0, 190, 0, 192, 0, 191, 0, 190, 0, 191, 0, 193, 0, 194, 0, 195, 0, 132, 0, 194, 0, 132, 0, 135, 0, 152, 0, 197, 0, 196, 0, 152, 0, 196, 0, 154, 0, 198, 0, 199, 0, 126, 0, 127, 0, 198, 0, 126, 0, 200, 0, 202, 0, 201, 0, 200, 0, 201, 0, 203, 0, 204, 0, 206, 0, 205, 0, 204, 0, 205, 0, 207, 0, 208, 0, 210, 0, 209, 0, 211, 0, 208, 0, 209, 0, 212, 0, 214, 0, 213, 0, 212, 0, 213, 0, 215, 0, 216, 0, 218, 0, 217, 0, 216, 0, 217, 0, 219, 0, 220, 0, 222, 0, 221, 0, 220, 0, 221, 0, 223, 0, 224, 0, 226, 0, 225, 0, 224, 0, 225, 0, 227, 0, 228, 0, 230, 0, 229, 0, 231, 0, 228, 0, 229, 0, 232, 0, 234, 0, 233, 0, 235, 0, 232, 0, 233, 0, 236, 0, 238, 0, 237, 0, 236, 0, 237, 0, 239, 0, 240, 0, 242, 0, 241, 0, 243, 0, 240, 0, 241, 0, 201, 0, 156, 0, 159, 0, 201, 0, 159, 0, 203, 0, 244, 0, 246, 0, 245, 0, 244, 0, 245, 0, 247, 0, 138, 0, 248, 0, 137, 0, 249, 0, 251, 0, 250, 0, 252, 0, 249, 0, 250, 0, 251, 0, 249, 0, 253, 0, 254, 0, 0, 1, 255, 0, 1, 1, 3, 1, 2, 1, 4, 1, 1, 1, 2, 1, 211, 0, 209, 0, 5, 1, 6, 1, 211, 0, 5, 1, 7, 1, 9, 1, 8, 1, 7, 1, 8, 1, 10, 1, 11, 1, 13, 1, 12, 1, 11, 1, 12, 1, 14, 1, 15, 1, 17, 1, 16, 1, 15, 1, 16, 1, 18, 1, 252, 0, 250, 0, 19, 1, 252, 0, 19, 1, 20, 1, 21, 1, 23, 1, 22, 1, 21, 1, 22, 1, 24, 1, 25, 1, 27, 1, 26, 1, 25, 1, 26, 1, 28, 1, 29, 1, 236, 0, 239, 0, 29, 1, 239, 0, 30, 1, 31, 1, 33, 1, 32, 1, 31, 1, 32, 1, 34, 1, 35, 1, 205, 0, 206, 0, 243, 0, 241, 0, 202, 0, 200, 0, 243, 0, 202, 0, 3, 1, 1, 1, 36, 1, 246, 0, 37, 1, 245, 0, 38, 1, 40, 1, 39, 1, 41, 1, 39, 1, 40, 1, 41, 1, 40, 1, 42, 1, 184, 0, 182, 0, 43, 1, 44, 1, 46, 1, 45, 1, 47, 1, 44, 1, 45, 1, 48, 1, 50, 1, 49, 1, 48, 1, 49, 1, 51, 1, 52, 1, 54, 1, 53, 1, 55, 1, 52, 1, 53, 1, 56, 1, 57, 1, 204, 0, 56, 1, 204, 0, 58, 1, 59, 1, 61, 1, 60, 1, 59, 1, 60, 1, 62, 1, 63, 1, 65, 1, 64, 1, 63, 1, 64, 1, 66, 1, 67, 1, 69, 1, 68, 1, 70, 1, 67, 1, 68, 1, 71, 1, 73, 1, 72, 1, 71, 1, 72, 1, 74, 1, 75, 1, 77, 1, 76, 1, 75, 1, 76, 1, 78, 1, 79, 1, 80, 1, 136, 0, 79, 1, 136, 0, 139, 0, 81, 1, 83, 1, 82, 1, 81, 1, 82, 1, 84, 1, 85, 1, 87, 1, 86, 1, 88, 1, 85, 1, 86, 1, 6, 1, 5, 1, 89, 1, 6, 1, 89, 1, 90, 1, 255, 0, 0, 1, 57, 1, 56, 1, 255, 0, 57, 1, 91, 1, 93, 1, 92, 1, 94, 1, 91, 1, 92, 1, 95, 1, 97, 1, 96, 1, 98, 1, 95, 1, 96, 1, 114, 0, 117, 0, 99, 1, 100, 1, 114, 0, 99, 1, 101, 1, 59, 1, 62, 1, 101, 1, 62, 1, 102, 1, 103, 1, 63, 1, 66, 1, 103, 1, 66, 1, 104, 1, 105, 1, 107, 1, 106, 1, 105, 1, 106, 1, 108, 1, 109, 1, 111, 1, 110, 1, 112, 1, 109, 1, 110, 1, 185, 0, 183, 0, 113, 1, 185, 0, 113, 1, 114, 1),
+"material": SubResource("StandardMaterial3D_uj460"),
+"name": "texture",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 371,
+"vertex_data": PackedByteArray(119, 248, 0, 0, 7, 207, 253, 214, 59, 252, 24, 87, 98, 226, 90, 218, 119, 248, 0, 0, 201, 226, 253, 214, 119, 248, 24, 87, 15, 207, 86, 218, 46, 47, 0, 0, 201, 226, 52, 128, 195, 3, 24, 87, 98, 226, 52, 128, 135, 7, 0, 0, 201, 226, 52, 128, 46, 47, 24, 87, 201, 226, 52, 128, 193, 20, 24, 87, 7, 207, 5, 0, 135, 7, 0, 0, 7, 207, 5, 0, 135, 7, 24, 87, 15, 207, 5, 0, 207, 208, 0, 0, 53, 29, 29, 0, 59, 252, 24, 87, 156, 29, 29, 0, 119, 248, 0, 0, 53, 29, 29, 0, 207, 208, 24, 87, 53, 29, 29, 0, 135, 7, 0, 0, 7, 207, 255, 191, 46, 47, 0, 0, 201, 226, 255, 191, 135, 7, 0, 0, 201, 226, 255, 191, 135, 7, 0, 0, 247, 48, 22, 128, 193, 20, 24, 87, 247, 48, 22, 128, 135, 7, 24, 87, 239, 48, 22, 128, 119, 248, 0, 0, 7, 207, 255, 191, 119, 248, 0, 0, 201, 226, 255, 191, 207, 208, 0, 0, 201, 226, 255, 191, 44, 218, 24, 87, 247, 48, 255, 191, 119, 248, 0, 0, 7, 207, 255, 191, 119, 248, 0, 0, 247, 48, 255, 191, 44, 218, 24, 87, 7, 207, 255, 191, 195, 3, 24, 87, 98, 226, 90, 218, 135, 7, 0, 0, 7, 207, 253, 214, 135, 7, 0, 0, 201, 226, 253, 214, 135, 7, 24, 87, 15, 207, 86, 218, 59, 252, 24, 87, 156, 29, 91, 90, 119, 248, 0, 0, 247, 48, 253, 86, 119, 248, 0, 0, 53, 29, 253, 86, 119, 248, 24, 87, 239, 48, 86, 90, 119, 248, 0, 0, 7, 207, 5, 0, 44, 218, 24, 87, 7, 207, 5, 0, 119, 248, 24, 87, 15, 207, 5, 0, 119, 248, 0, 0, 53, 29, 255, 191, 119, 248, 0, 0, 247, 48, 255, 191, 207, 208, 0, 0, 53, 29, 255, 191, 44, 218, 24, 87, 247, 48, 9, 128, 119, 248, 0, 0, 247, 48, 9, 128, 119, 248, 24, 87, 239, 48, 9, 128, 195, 3, 24, 87, 156, 29, 29, 0, 46, 47, 0, 0, 53, 29, 29, 0, 135, 7, 0, 0, 53, 29, 29, 0, 46, 47, 24, 87, 53, 29, 29, 0, 135, 7, 0, 0, 53, 29, 255, 191, 46, 47, 0, 0, 53, 29, 255, 191, 135, 7, 0, 0, 247, 48, 255, 191, 193, 20, 24, 87, 7, 207, 255, 191, 135, 7, 0, 0, 247, 48, 255, 191, 135, 7, 0, 0, 7, 207, 255, 191, 193, 20, 24, 87, 247, 48, 255, 191, 91, 92, 24, 87, 53, 29, 0, 0, 162, 163, 0, 0, 53, 29, 0, 0, 91, 92, 0, 0, 53, 29, 0, 0, 162, 163, 24, 87, 53, 29, 0, 0, 162, 163, 0, 0, 201, 226, 255, 191, 91, 92, 0, 0, 53, 29, 255, 191, 162, 163, 0, 0, 53, 29, 255, 191, 91, 92, 0, 0, 201, 226, 255, 191, 119, 248, 0, 0, 7, 207, 255, 191, 162, 163, 24, 87, 201, 226, 255, 127, 91, 92, 0, 0, 201, 226, 255, 127, 162, 163, 0, 0, 201, 226, 255, 127, 91, 92, 24, 87, 201, 226, 255, 127, 207, 208, 0, 0, 201, 226, 255, 191, 162, 163, 0, 0, 53, 29, 255, 191, 207, 208, 0, 0, 53, 29, 255, 191, 162, 163, 0, 0, 201, 226, 255, 191, 135, 7, 0, 0, 247, 48, 255, 191, 59, 252, 24, 87, 98, 226, 52, 128, 207, 208, 0, 0, 201, 226, 52, 128, 119, 248, 0, 0, 201, 226, 52, 128, 207, 208, 24, 87, 201, 226, 52, 128, 91, 92, 0, 0, 201, 226, 255, 191, 46, 47, 0, 0, 53, 29, 255, 191, 91, 92, 0, 0, 53, 29, 255, 191, 46, 47, 0, 0, 201, 226, 255, 191, 91, 92, 24, 87, 154, 241, 255, 191, 91, 92, 0, 0, 201, 226, 255, 191, 91, 92, 24, 87, 201, 226, 255, 191, 207, 208, 24, 87, 154, 241, 255, 191, 207, 208, 0, 0, 201, 226, 255, 191, 207, 208, 24, 87, 201, 226, 255, 191, 46, 47, 24, 87, 201, 226, 255, 191, 46, 47, 0, 0, 201, 226, 255, 191, 46, 47, 24, 87, 154, 241, 255, 191, 46, 47, 24, 87, 100, 14, 255, 191, 46, 47, 0, 0, 53, 29, 255, 191, 46, 47, 24, 87, 53, 29, 255, 191, 162, 163, 24, 87, 100, 14, 255, 191, 162, 163, 0, 0, 53, 29, 255, 191, 162, 163, 24, 87, 53, 29, 255, 191, 46, 47, 24, 87, 100, 14, 180, 8, 91, 92, 0, 0, 53, 29, 222, 8, 46, 47, 0, 0, 53, 29, 222, 8, 91, 92, 24, 87, 100, 14, 180, 8, 162, 163, 24, 87, 100, 14, 180, 8, 207, 208, 0, 0, 53, 29, 222, 8, 162, 163, 0, 0, 53, 29, 222, 8, 207, 208, 24, 87, 100, 14, 180, 8, 207, 208, 0, 0, 53, 29, 255, 191, 207, 208, 24, 87, 100, 14, 255, 191, 207, 208, 24, 87, 53, 29, 255, 191, 162, 163, 24, 87, 201, 226, 255, 191, 162, 163, 0, 0, 201, 226, 255, 191, 162, 163, 24, 87, 154, 241, 255, 191, 91, 92, 24, 87, 53, 29, 255, 191, 91, 92, 0, 0, 53, 29, 255, 191, 91, 92, 24, 87, 100, 14, 255, 191, 255, 255, 105, 166, 4, 30, 251, 177, 119, 248, 24, 87, 239, 48, 108, 187, 59, 252, 24, 87, 156, 29, 49, 190, 119, 248, 185, 163, 230, 48, 91, 178, 0, 0, 235, 217, 22, 180, 77, 203, 135, 7, 41, 201, 255, 81, 58, 185, 135, 7, 41, 201, 255, 173, 66, 202, 0, 0, 235, 217, 232, 75, 234, 184, 59, 252, 24, 87, 156, 29, 255, 191, 207, 208, 24, 87, 100, 14, 255, 191, 255, 255, 24, 87, 115, 9, 255, 191, 207, 208, 24, 87, 53, 29, 255, 191, 0, 0, 105, 166, 4, 30, 252, 177, 135, 7, 185, 163, 230, 48, 91, 178, 190, 208, 70, 232, 15, 70, 37, 49, 255, 255, 222, 169, 233, 11, 40, 34, 198, 208, 9, 168, 27, 15, 11, 34, 255, 255, 79, 236, 126, 68, 250, 48, 119, 248, 41, 201, 255, 173, 238, 29, 255, 255, 105, 166, 250, 225, 156, 8, 119, 248, 185, 163, 24, 207, 188, 7, 255, 255, 235, 217, 22, 180, 58, 31, 74, 92, 70, 232, 239, 185, 22, 190, 140, 85, 43, 175, 255, 255, 134, 177, 82, 92, 9, 168, 226, 240, 19, 177, 134, 85, 255, 255, 23, 199, 215, 188, 74, 92, 70, 232, 15, 70, 21, 49, 172, 163, 9, 168, 27, 15, 40, 34, 82, 92, 9, 168, 27, 15, 40, 34, 180, 163, 70, 232, 15, 70, 21, 49, 255, 255, 222, 169, 21, 244, 12, 167, 190, 208, 70, 232, 239, 185, 226, 179, 198, 208, 9, 168, 226, 240, 242, 167, 255, 255, 79, 236, 128, 187, 64, 179, 46, 47, 24, 87, 154, 241, 12, 140, 0, 0, 222, 169, 21, 244, 101, 142, 0, 0, 24, 87, 139, 246, 55, 131, 56, 47, 9, 168, 226, 240, 31, 154, 0, 0, 105, 166, 250, 225, 156, 8, 135, 7, 41, 201, 255, 173, 238, 29, 135, 7, 185, 163, 24, 207, 188, 7, 0, 0, 235, 217, 22, 180, 58, 31, 0, 0, 105, 166, 4, 30, 54, 85, 0, 0, 24, 87, 115, 9, 180, 86, 195, 3, 24, 87, 156, 29, 180, 86, 0, 0, 222, 169, 233, 11, 185, 85, 162, 163, 24, 87, 53, 29, 255, 191, 91, 92, 24, 87, 100, 14, 255, 191, 162, 163, 24, 87, 100, 14, 255, 191, 91, 92, 24, 87, 53, 29, 255, 191, 119, 248, 24, 87, 15, 207, 198, 16, 59, 252, 24, 87, 98, 226, 25, 21, 172, 163, 9, 168, 226, 240, 119, 128, 91, 92, 24, 87, 154, 241, 119, 128, 162, 163, 24, 87, 154, 241, 119, 128, 82, 92, 9, 168, 226, 240, 119, 128, 64, 47, 70, 232, 239, 185, 94, 177, 0, 0, 222, 169, 21, 244, 93, 162, 56, 47, 9, 168, 226, 240, 46, 162, 0, 0, 79, 236, 128, 187, 188, 177, 207, 208, 24, 87, 100, 14, 114, 1, 255, 255, 222, 169, 233, 11, 135, 1, 255, 255, 24, 87, 115, 9, 5, 1, 198, 208, 9, 168, 27, 15, 236, 1, 74, 92, 70, 232, 239, 185, 234, 78, 180, 163, 70, 232, 15, 70, 233, 206, 74, 92, 70, 232, 15, 70, 233, 206, 180, 163, 70, 232, 239, 185, 234, 78, 254, 53, 43, 175, 255, 255, 213, 178, 64, 47, 70, 232, 239, 185, 25, 189, 56, 47, 9, 168, 226, 240, 76, 178, 4, 54, 254, 255, 23, 199, 239, 187, 0, 0, 222, 169, 233, 11, 7, 1, 46, 47, 24, 87, 100, 14, 7, 1, 0, 0, 24, 87, 115, 9, 5, 1, 56, 47, 9, 168, 27, 15, 10, 1, 180, 163, 70, 232, 239, 185, 20, 177, 82, 92, 9, 168, 226, 240, 40, 162, 172, 163, 9, 168, 226, 240, 40, 162, 74, 92, 70, 232, 239, 185, 20, 177, 255, 255, 235, 217, 232, 75, 77, 75, 119, 248, 41, 201, 255, 81, 67, 74, 135, 7, 24, 87, 15, 207, 198, 16, 195, 3, 24, 87, 98, 226, 25, 21, 135, 7, 24, 87, 239, 48, 108, 187, 195, 3, 24, 87, 156, 29, 49, 190, 0, 0, 79, 236, 128, 187, 255, 191, 0, 0, 235, 217, 232, 75, 255, 191, 0, 0, 235, 217, 22, 180, 255, 191, 0, 0, 79, 236, 126, 68, 255, 191, 180, 163, 70, 232, 15, 70, 28, 198, 114, 170, 43, 175, 0, 0, 190, 2, 172, 163, 9, 168, 27, 15, 81, 3, 120, 170, 255, 255, 230, 56, 121, 3, 255, 255, 24, 87, 115, 9, 180, 86, 255, 255, 105, 166, 4, 30, 18, 190, 59, 252, 24, 87, 156, 29, 180, 86, 255, 255, 222, 169, 233, 11, 53, 189, 82, 92, 9, 168, 27, 15, 119, 0, 162, 163, 24, 87, 100, 14, 119, 0, 91, 92, 24, 87, 100, 14, 119, 0, 172, 163, 9, 168, 27, 15, 119, 0, 4, 54, 255, 255, 230, 56, 50, 30, 140, 85, 43, 175, 0, 0, 50, 30, 254, 53, 43, 175, 0, 0, 50, 30, 134, 85, 254, 255, 230, 56, 50, 30, 162, 163, 24, 87, 154, 241, 255, 191, 91, 92, 24, 87, 201, 226, 255, 191, 162, 163, 24, 87, 201, 226, 255, 191, 91, 92, 24, 87, 154, 241, 255, 191, 255, 255, 24, 87, 139, 246, 255, 191, 207, 208, 24, 87, 201, 226, 255, 191, 59, 252, 24, 87, 98, 226, 255, 191, 207, 208, 24, 87, 154, 241, 255, 191, 46, 47, 24, 87, 201, 226, 255, 191, 0, 0, 24, 87, 139, 246, 255, 191, 195, 3, 24, 87, 98, 226, 255, 191, 46, 47, 24, 87, 154, 241, 255, 191, 46, 47, 24, 87, 100, 14, 255, 191, 195, 3, 24, 87, 156, 29, 255, 191, 0, 0, 24, 87, 115, 9, 255, 191, 46, 47, 24, 87, 53, 29, 255, 191, 255, 255, 105, 166, 250, 225, 207, 0, 255, 255, 24, 87, 139, 246, 180, 214, 59, 252, 24, 87, 98, 226, 180, 214, 255, 255, 222, 169, 21, 244, 132, 2, 0, 0, 24, 87, 139, 246, 180, 214, 0, 0, 105, 166, 250, 225, 54, 213, 195, 3, 24, 87, 98, 226, 180, 214, 0, 0, 222, 169, 21, 244, 184, 213, 64, 47, 70, 232, 15, 70, 30, 5, 254, 53, 43, 175, 0, 0, 190, 2, 56, 47, 9, 168, 27, 15, 81, 3, 4, 54, 255, 255, 230, 56, 121, 3, 91, 92, 24, 87, 154, 241, 26, 173, 0, 202, 43, 175, 0, 0, 203, 0, 190, 208, 70, 232, 15, 70, 167, 7, 198, 208, 9, 168, 27, 15, 102, 0, 250, 201, 254, 255, 230, 56, 135, 5, 207, 208, 24, 87, 100, 14, 87, 10, 162, 163, 24, 87, 154, 241, 177, 176, 114, 170, 43, 175, 255, 255, 213, 178, 172, 163, 9, 168, 226, 240, 76, 178, 140, 85, 43, 175, 0, 0, 203, 0, 74, 92, 70, 232, 15, 70, 30, 5, 82, 92, 9, 168, 27, 15, 102, 0, 134, 85, 254, 255, 230, 56, 121, 3, 255, 255, 235, 217, 232, 75, 121, 192, 255, 255, 79, 236, 126, 68, 149, 192, 114, 170, 43, 175, 0, 0, 135, 8, 207, 208, 24, 87, 100, 14, 180, 8, 162, 163, 24, 87, 100, 14, 180, 8, 0, 202, 43, 175, 0, 0, 135, 8, 254, 53, 43, 175, 0, 0, 135, 8, 91, 92, 24, 87, 100, 14, 180, 8, 46, 47, 24, 87, 100, 14, 180, 8, 140, 85, 43, 175, 0, 0, 135, 8, 4, 54, 254, 255, 23, 199, 255, 191, 134, 85, 254, 255, 230, 56, 255, 191, 4, 54, 255, 255, 230, 56, 255, 191, 134, 85, 255, 255, 23, 199, 255, 191, 190, 208, 70, 232, 239, 185, 218, 10, 250, 201, 255, 255, 23, 199, 136, 76, 0, 202, 43, 175, 255, 255, 134, 136, 162, 163, 24, 87, 154, 241, 179, 136, 207, 208, 24, 87, 154, 241, 179, 136, 114, 170, 43, 175, 255, 255, 134, 136, 140, 85, 43, 175, 255, 255, 134, 136, 46, 47, 24, 87, 154, 241, 179, 136, 91, 92, 24, 87, 154, 241, 179, 136, 254, 53, 43, 175, 255, 255, 134, 136, 255, 255, 235, 217, 22, 180, 62, 6, 255, 255, 79, 236, 128, 187, 236, 6, 120, 170, 254, 255, 23, 199, 255, 191, 250, 201, 254, 255, 230, 56, 255, 191, 120, 170, 255, 255, 230, 56, 255, 191, 250, 201, 255, 255, 23, 199, 255, 191, 162, 163, 24, 87, 100, 14, 73, 3, 91, 92, 24, 87, 100, 14, 87, 10, 46, 47, 24, 87, 100, 14, 73, 3, 207, 208, 24, 87, 154, 241, 26, 173, 198, 208, 9, 168, 226, 240, 19, 177, 0, 202, 43, 175, 255, 255, 134, 177, 190, 208, 70, 232, 239, 185, 22, 190, 250, 201, 255, 255, 23, 199, 215, 188, 46, 47, 24, 87, 154, 241, 177, 176, 0, 0, 222, 169, 233, 11, 89, 32, 64, 47, 70, 232, 15, 70, 231, 46, 56, 47, 9, 168, 27, 15, 21, 32, 0, 0, 79, 236, 126, 68, 30, 47, 255, 255, 222, 169, 21, 244, 56, 131, 207, 208, 24, 87, 154, 241, 56, 131, 255, 255, 24, 87, 139, 246, 55, 131, 198, 208, 9, 168, 226, 240, 63, 131, 190, 208, 70, 232, 239, 185, 75, 65, 255, 255, 79, 236, 126, 68, 11, 42, 190, 208, 70, 232, 15, 70, 220, 206, 255, 255, 79, 236, 128, 187, 100, 65, 120, 170, 254, 255, 23, 199, 150, 188, 180, 163, 70, 232, 239, 185, 22, 190, 120, 170, 255, 255, 230, 56, 165, 199, 119, 248, 185, 163, 230, 48, 255, 191, 119, 248, 24, 87, 15, 207, 255, 191, 119, 248, 24, 87, 239, 48, 255, 191, 119, 248, 185, 163, 24, 207, 255, 191, 135, 7, 185, 163, 24, 207, 255, 191, 135, 7, 24, 87, 239, 48, 255, 191, 135, 7, 24, 87, 15, 207, 255, 191, 135, 7, 185, 163, 230, 48, 255, 191, 135, 7, 0, 0, 247, 48, 253, 86, 195, 3, 24, 87, 156, 29, 91, 90, 135, 7, 0, 0, 53, 29, 253, 86, 135, 7, 24, 87, 239, 48, 86, 90, 91, 92, 24, 87, 154, 241, 179, 136, 46, 47, 0, 0, 201, 226, 221, 136, 91, 92, 0, 0, 201, 226, 221, 136, 46, 47, 24, 87, 154, 241, 179, 136, 207, 208, 24, 87, 154, 241, 179, 136, 162, 163, 0, 0, 201, 226, 221, 136, 207, 208, 0, 0, 201, 226, 221, 136, 162, 163, 24, 87, 154, 241, 179, 136, 134, 85, 254, 255, 230, 56, 135, 204, 74, 92, 70, 232, 15, 70, 82, 201, 120, 170, 255, 255, 230, 56, 50, 30, 0, 202, 43, 175, 0, 0, 50, 30, 114, 170, 43, 175, 0, 0, 50, 30, 250, 201, 254, 255, 230, 56, 50, 30, 140, 85, 43, 175, 255, 255, 50, 158, 4, 54, 254, 255, 23, 199, 50, 158, 254, 53, 43, 175, 255, 255, 50, 158, 134, 85, 255, 255, 23, 199, 50, 158, 255, 255, 235, 217, 22, 180, 255, 191, 255, 255, 79, 236, 128, 187, 255, 191, 64, 47, 70, 232, 15, 70, 45, 212, 0, 0, 79, 236, 128, 187, 158, 187, 64, 47, 70, 232, 239, 185, 221, 78, 0, 0, 79, 236, 126, 68, 70, 212, 0, 202, 43, 175, 255, 255, 50, 158, 120, 170, 254, 255, 23, 199, 50, 158, 114, 170, 43, 175, 255, 255, 50, 158, 250, 201, 255, 255, 23, 199, 50, 158, 119, 248, 41, 201, 255, 81, 58, 185, 255, 255, 235, 217, 232, 75, 234, 184, 119, 248, 41, 201, 255, 81, 255, 191, 119, 248, 41, 201, 255, 173, 255, 191, 135, 7, 41, 201, 255, 173, 255, 191, 135, 7, 41, 201, 255, 81, 255, 191, 119, 248, 24, 87, 15, 207, 255, 191, 44, 218, 24, 87, 247, 48, 255, 191, 119, 248, 24, 87, 239, 48, 255, 191, 44, 218, 24, 87, 7, 207, 255, 191, 193, 20, 24, 87, 247, 48, 255, 191, 135, 7, 24, 87, 15, 207, 255, 191, 135, 7, 24, 87, 239, 48, 255, 191, 193, 20, 24, 87, 7, 207, 255, 191, 64, 47, 70, 232, 15, 70, 28, 198, 4, 54, 255, 255, 230, 56, 135, 204, 48, 97, 206, 30, 58, 107, 196, 20, 48, 97, 206, 30, 52, 107, 202, 20, 17, 180, 226, 203, 9, 180, 215, 203, 38, 180, 244, 203, 250, 179, 194, 203, 254, 255, 220, 127, 254, 255, 220, 127, 254, 255, 220, 127, 186, 255, 255, 127, 186, 255, 255, 127, 185, 255, 254, 127, 185, 255, 0, 128, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 205, 151, 36, 232, 205, 151, 36, 232, 205, 151, 36, 232, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 176, 207, 176, 79, 176, 207, 176, 79, 176, 207, 176, 79, 176, 207, 176, 79, 58, 107, 58, 235, 47, 97, 46, 225, 47, 97, 46, 225, 52, 107, 52, 235, 58, 107, 196, 20, 48, 97, 206, 30, 48, 97, 206, 30, 52, 107, 202, 20, 239, 255, 255, 127, 239, 255, 255, 127, 239, 255, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 139, 172, 130, 44, 139, 172, 130, 44, 139, 172, 130, 44, 254, 255, 186, 127, 254, 255, 68, 128, 254, 255, 68, 128, 253, 255, 186, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 49, 199, 204, 184, 49, 199, 204, 184, 49, 199, 204, 184, 49, 199, 204, 184, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 39, 180, 9, 52, 27, 180, 17, 52, 10, 180, 38, 52, 60, 180, 251, 51, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 17, 108, 13, 21, 222, 73, 136, 25, 40, 65, 60, 29, 178, 111, 198, 30, 31, 48, 31, 176, 101, 79, 83, 200, 175, 47, 175, 175, 234, 78, 193, 195, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 242, 106, 16, 236, 57, 97, 178, 239, 158, 248, 216, 135, 137, 250, 93, 135, 85, 255, 163, 122, 81, 240, 94, 140, 243, 4, 95, 72, 139, 0, 172, 180, 91, 7, 195, 184, 245, 7, 180, 71, 214, 163, 196, 8, 230, 150, 73, 6, 125, 149, 187, 7, 161, 163, 24, 6, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 182, 195, 105, 150, 253, 206, 37, 151, 228, 192, 32, 151, 228, 209, 12, 150, 167, 139, 219, 104, 179, 138, 60, 108, 100, 161, 181, 31, 57, 136, 0, 117, 173, 52, 115, 127, 159, 55, 243, 132, 196, 56, 164, 120, 75, 56, 245, 135, 219, 95, 218, 223, 50, 94, 49, 222, 50, 94, 49, 222, 74, 95, 74, 223, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 182, 18, 242, 60, 186, 23, 65, 58, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 238, 244, 85, 127, 150, 240, 3, 124, 242, 245, 137, 116, 118, 234, 138, 132, 106, 240, 114, 147, 147, 237, 37, 150, 233, 255, 75, 123, 13, 225, 17, 162, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 72, 126, 124, 227, 51, 141, 88, 220, 28, 127, 231, 229, 194, 137, 167, 220, 15, 251, 170, 127, 31, 251, 188, 127, 74, 251, 21, 128, 185, 250, 80, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 31, 48, 223, 79, 175, 47, 79, 80, 13, 67, 181, 146, 189, 69, 186, 151, 119, 102, 222, 201, 195, 98, 39, 193, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 54, 145, 140, 223, 66, 248, 85, 71, 162, 249, 102, 72, 85, 239, 59, 59, 50, 94, 205, 33, 47, 126, 3, 2, 50, 94, 205, 33, 191, 119, 108, 5, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 254, 255, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 25, 0, 136, 190, 50, 94, 205, 33, 50, 94, 205, 33, 113, 1, 124, 65, 50, 94, 49, 222, 219, 95, 218, 223, 50, 94, 49, 222, 74, 95, 74, 223, 68, 240, 186, 58, 66, 248, 85, 71, 162, 249, 102, 72, 85, 239, 59, 59, 71, 105, 44, 8, 186, 12, 2, 68, 138, 188, 48, 141, 187, 11, 214, 68, 187, 188, 141, 142, 166, 17, 126, 68, 209, 108, 138, 204, 72, 126, 124, 227, 28, 127, 231, 229, 186, 12, 2, 68, 185, 186, 185, 143, 187, 11, 214, 68, 58, 187, 169, 144, 28, 105, 113, 11, 19, 103, 117, 12, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 101, 183, 250, 137, 197, 200, 197, 72, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 155, 6, 177, 60, 75, 7, 89, 60, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 119, 52, 93, 134, 166, 17, 126, 68, 119, 52, 93, 134, 71, 105, 44, 8, 125, 149, 187, 7, 230, 150, 73, 6, 214, 163, 196, 8, 161, 163, 24, 6, 209, 108, 138, 204, 56, 220, 120, 150, 35, 218, 249, 147, 244, 217, 24, 152, 183, 220, 103, 146, 69, 165, 63, 225, 66, 164, 246, 224, 180, 159, 153, 222, 28, 170, 157, 226, 17, 229, 146, 56, 252, 222, 49, 69, 216, 251, 37, 132, 28, 229, 135, 56, 17, 135, 112, 220, 196, 136, 40, 220, 174, 144, 39, 225, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 47, 97, 46, 225, 58, 107, 58, 235, 47, 97, 46, 225, 52, 107, 52, 235, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 197, 200, 197, 72, 93, 202, 93, 74, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 254, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 254, 255, 255, 127, 255, 127, 0, 0, 255, 127, 0, 0, 54, 218, 90, 67, 116, 224, 25, 56, 216, 251, 217, 123, 51, 218, 105, 67, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 254, 255, 255, 127, 83, 72, 154, 48, 193, 67, 21, 49, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 255, 255, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 0, 0, 255, 127, 54, 145, 140, 223, 197, 200, 57, 183)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_2377k")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cpga4"]
+points = PackedVector3Array(-0.433731, 0.684221, -0.650001, -0.75, 0.340152, -0.602027, -0.75, 0.663469, -0.589556, -0.433584, 1, -0.36114, 0.433585, 0.684221, -0.650001, -0.705951, -2.02792e-07, -0.501753, -0.75, 0.340152, 0.601898, 0.75, 0.340152, -0.602027, -0.75, 0.923062, -0.302223, -0.75, 0.923062, 0.302094, -0.433584, 0.999902, 0.361011, -0.249021, 1, 0.361011, 0.248728, 1, -0.36114, 0.433438, 0.999902, -0.36114, 0.75, 0.663469, -0.589556, -0.705951, -2.02792e-07, 0.501624, 0.705805, -2.02792e-07, -0.501753, -0.433731, 0.684221, 0.649999, -0.75, 0.663469, 0.589428, 0.75, 0.340152, 0.601898, 0.433438, 1, 0.361011, 0.75, 0.923062, -0.302223, 0.705805, -2.02792e-07, 0.501624, 0.433585, 0.684221, 0.649999, 0.75, 0.663469, 0.589428, 0.75, 0.923062, 0.302094)
 
 [node name="Tiles" type="Node3D"]
 
 [node name="torch_gltf" parent="." instance=ExtResource("1_kpcbq")]
+visible = false
 
 [node name="torch_lit_gltf" parent="." instance=ExtResource("2_tckxr")]
+visible = false
 
-[node name="torch_mounted_gltf" parent="." instance=ExtResource("3_stkur")]
+[node name="torch_mounted_gltf" type="Node3D" parent="."]
+
+[node name="trunk_large_A" type="MeshInstance3D" parent="torch_mounted_gltf"]
+mesh = SubResource("ArrayMesh_gvlt0")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="torch_mounted_gltf"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="torch_mounted_gltf/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_cpga4")
 
 [node name="trunk_large_A_gltf" parent="." instance=ExtResource("4_r6hhi")]
+visible = false
 
 [node name="trunk_large_B_gltf" parent="." instance=ExtResource("5_eph6e")]
+visible = false
 
 [node name="trunk_large_C_gltf" parent="." instance=ExtResource("6_rvxwd")]
+visible = false
 
 [node name="trunk_medium_A_gltf" parent="." instance=ExtResource("7_4hypb")]
+visible = false
 
 [node name="trunk_medium_C_gltf" parent="." instance=ExtResource("8_f3b6i")]
+visible = false
 
 [node name="trunk_small_A_gltf" parent="." instance=ExtResource("9_k0ou3")]
+visible = false
 
 [node name="trunk_small_B_gltf" parent="." instance=ExtResource("10_xm7gn")]
+visible = false
 
 [node name="trunk_small_C_gltf" parent="." instance=ExtResource("11_yqyto")]
+visible = false
 
 [node name="wall_gltf" parent="." instance=ExtResource("12_ef8p7")]
+visible = false
 
 [node name="wall_arched_gltf" parent="." instance=ExtResource("13_5yxh1")]
+visible = false
 
 [node name="wall_archedwindow_gated_gltf" parent="." instance=ExtResource("14_dkpep")]
+visible = false
 
 [node name="wall_archedwindow_gated_scaffold_gltf" parent="." instance=ExtResource("15_h1qxh")]
+visible = false
 
 [node name="wall_archedwindow_open_gltf" parent="." instance=ExtResource("16_gtp4u")]
+visible = false
 
 [node name="wall_broken_gltf" parent="." instance=ExtResource("17_0s0vf")]
+visible = false
 
 [node name="wall_corner_gltf" parent="." instance=ExtResource("18_683nx")]
+visible = false
 
 [node name="wall_corner_gated_gltf" parent="." instance=ExtResource("19_p5k8g")]
+visible = false
 
 [node name="wall_corner_scaffold_gltf" parent="." instance=ExtResource("20_x66yx")]
+visible = false
 
 [node name="wall_corner_small_gltf" parent="." instance=ExtResource("21_sb4hl")]
+visible = false
 
 [node name="wall_cracked_gltf" parent="." instance=ExtResource("22_p4q4i")]
+visible = false
 
 [node name="wall_crossing_gltf" parent="." instance=ExtResource("23_5eaxj")]
+visible = false
 
 [node name="wall_doorway2" parent="." instance=ExtResource("24_irjdr")]
+visible = false
 
 [node name="wall_doorway_scaffold2" parent="." instance=ExtResource("25_2lel5")]
+visible = false
 
 [node name="wall_doorway_sides_gltf" parent="." instance=ExtResource("26_y1yx8")]
+visible = false
 
 [node name="wall_doorway_Tsplit_gltf" parent="." instance=ExtResource("27_o7yg3")]
+visible = false
 
 [node name="wall_endcap_gltf" parent="." instance=ExtResource("28_wmorq")]
+visible = false
 
 [node name="wall_gated_gltf" parent="." instance=ExtResource("29_i285f")]
+visible = false
 
 [node name="wall_half_gltf" parent="." instance=ExtResource("30_q5d7c")]
+visible = false
 
 [node name="wall_half_endcap_gltf" parent="." instance=ExtResource("31_2ecu2")]
+visible = false
 
 [node name="wall_half_endcap_sloped_gltf" parent="." instance=ExtResource("32_u2stf")]
+visible = false
 
 [node name="wall_open_scaffold_gltf" parent="." instance=ExtResource("33_kv5qi")]
+visible = false
 
 [node name="wall_pillar_gltf" parent="." instance=ExtResource("34_b3gap")]
+visible = false
 
 [node name="wall_scaffold_gltf" parent="." instance=ExtResource("35_ag4yc")]
+visible = false
 
 [node name="wall_shelves_gltf" parent="." instance=ExtResource("36_vpfbs")]
+visible = false
 
 [node name="wall_sloped_gltf" parent="." instance=ExtResource("37_3oxot")]
+visible = false
 
 [node name="wall_Tsplit_gltf" parent="." instance=ExtResource("38_vk5ro")]
+visible = false
 
 [node name="wall_Tsplit_sloped_gltf" parent="." instance=ExtResource("39_m7nka")]
+visible = false
 
 [node name="wall_window_closed_gltf" parent="." instance=ExtResource("40_7hrl1")]
+visible = false
 
 [node name="wall_window_closed_scaffold_gltf" parent="." instance=ExtResource("41_p3i3m")]
+visible = false
 
 [node name="wall_window_open_gltf" parent="." instance=ExtResource("42_gf7m7")]
+visible = false
 
 [node name="banner_blue_gltf" parent="." instance=ExtResource("43_edpch")]
+visible = false
 
 [node name="banner_brown_gltf" parent="." instance=ExtResource("44_tmj3m")]
+visible = false
 
 [node name="banner_green_gltf" parent="." instance=ExtResource("45_6aceo")]
+visible = false
 
 [node name="banner_patternA_blue_gltf" parent="." instance=ExtResource("46_v2ctl")]
+visible = false
 
 [node name="banner_patternA_brown_gltf" parent="." instance=ExtResource("47_jgvr8")]
+visible = false
 
 [node name="banner_patternA_green_gltf" parent="." instance=ExtResource("48_aeh4p")]
+visible = false
 
 [node name="banner_patternA_red_gltf" parent="." instance=ExtResource("49_mee1r")]
+visible = false
 
 [node name="banner_patternA_white_gltf" parent="." instance=ExtResource("50_pbtiw")]
+visible = false
 
 [node name="banner_patternA_yellow_gltf" parent="." instance=ExtResource("51_7jy26")]
+visible = false
 
 [node name="banner_patternB_blue_gltf" parent="." instance=ExtResource("52_y2j76")]
+visible = false
 
 [node name="banner_patternB_brown_gltf" parent="." instance=ExtResource("53_v0tgr")]
+visible = false
 
 [node name="banner_patternB_green_gltf" parent="." instance=ExtResource("54_wh8dm")]
+visible = false
 
 [node name="banner_patternB_red_gltf" parent="." instance=ExtResource("55_7n1j7")]
+visible = false
 
 [node name="banner_patternB_white_gltf" parent="." instance=ExtResource("56_qyx6g")]
+visible = false
 
 [node name="banner_patternB_yellow_gltf" parent="." instance=ExtResource("57_qb5ya")]
+visible = false
 
 [node name="banner_patternC_blue_gltf" parent="." instance=ExtResource("58_ltajs")]
+visible = false
 
 [node name="banner_patternC_brown_gltf" parent="." instance=ExtResource("59_ydp50")]
+visible = false
 
 [node name="banner_patternC_green_gltf" parent="." instance=ExtResource("60_djol6")]
+visible = false
 
 [node name="banner_patternC_red_gltf" parent="." instance=ExtResource("61_8jbb4")]
+visible = false
 
 [node name="banner_patternC_white_gltf" parent="." instance=ExtResource("62_ga085")]
+visible = false
 
 [node name="banner_patternC_yellow_gltf" parent="." instance=ExtResource("63_32gkw")]
+visible = false
 
 [node name="banner_red_gltf" parent="." instance=ExtResource("64_pkjx5")]
+visible = false
 
 [node name="banner_shield_blue_gltf" parent="." instance=ExtResource("65_je8oi")]
+visible = false
 
 [node name="banner_shield_brown_gltf" parent="." instance=ExtResource("66_phuyt")]
+visible = false
 
 [node name="banner_shield_green_gltf" parent="." instance=ExtResource("67_68qwe")]
+visible = false
 
 [node name="banner_shield_red_gltf" parent="." instance=ExtResource("68_np1rh")]
+visible = false
 
 [node name="banner_shield_white_gltf" parent="." instance=ExtResource("69_bt10x")]
+visible = false
 
 [node name="banner_shield_yellow_gltf" parent="." instance=ExtResource("70_2hym0")]
+visible = false
 
 [node name="banner_thin_blue_gltf" parent="." instance=ExtResource("71_g48tn")]
+visible = false
 
 [node name="banner_thin_brown_gltf" parent="." instance=ExtResource("72_b2x4j")]
+visible = false
 
 [node name="banner_thin_green_gltf" parent="." instance=ExtResource("73_68yof")]
+visible = false
 
 [node name="banner_thin_red_gltf" parent="." instance=ExtResource("74_t5xek")]
+visible = false
 
 [node name="banner_thin_white_gltf" parent="." instance=ExtResource("75_iv5wv")]
+visible = false
 
 [node name="banner_thin_yellow_gltf" parent="." instance=ExtResource("76_hhqyb")]
+visible = false
 
 [node name="banner_triple_blue_gltf" parent="." instance=ExtResource("77_u7xsy")]
+visible = false
 
 [node name="banner_triple_brown_gltf" parent="." instance=ExtResource("78_rgklf")]
+visible = false
 
 [node name="banner_triple_green_gltf" parent="." instance=ExtResource("79_at0vt")]
+visible = false
 
 [node name="banner_triple_red_gltf" parent="." instance=ExtResource("80_8r2mw")]
+visible = false
 
 [node name="banner_triple_white_gltf" parent="." instance=ExtResource("81_qfwl2")]
+visible = false
 
 [node name="banner_triple_yellow_gltf" parent="." instance=ExtResource("82_bkblg")]
+visible = false
 
 [node name="banner_white_gltf" parent="." instance=ExtResource("83_tnc53")]
+visible = false
 
 [node name="banner_yellow_gltf" parent="." instance=ExtResource("84_xtrun")]
+visible = false
 
 [node name="barrel_large_gltf" parent="." instance=ExtResource("85_mooa7")]
+visible = false
 
 [node name="barrel_large_decorated_gltf" parent="." instance=ExtResource("86_l4lnh")]
+visible = false
 
 [node name="barrel_small_gltf" parent="." instance=ExtResource("87_c10u8")]
+visible = false
 
 [node name="barrel_small_stack_gltf" parent="." instance=ExtResource("88_k0ttg")]
+visible = false
 
 [node name="barrier_gltf" parent="." instance=ExtResource("89_2u5qn")]
+visible = false
 
 [node name="barrier_column_gltf" parent="." instance=ExtResource("90_8xidu")]
+visible = false
 
 [node name="barrier_colum_half_gltf" parent="." instance=ExtResource("91_en7e1")]
+visible = false
 
 [node name="barrier_corner_gltf" parent="." instance=ExtResource("92_ujt4q")]
+visible = false
 
 [node name="barrier_half_gltf" parent="." instance=ExtResource("93_ylopj")]
+visible = false
 
 [node name="bed_decorated_gltf" parent="." instance=ExtResource("94_4mp0o")]
+visible = false
 
 [node name="bed_floor_gltf" parent="." instance=ExtResource("95_tsp0j")]
+visible = false
 
 [node name="bed_frame_gltf" parent="." instance=ExtResource("96_6e2fn")]
+visible = false
 
 [node name="bottle_A_brown_gltf" parent="." instance=ExtResource("97_bi654")]
+visible = false
 
 [node name="bottle_A_green_gltf" parent="." instance=ExtResource("98_87ys0")]
+visible = false
 
 [node name="bottle_A_labeled_brown_gltf" parent="." instance=ExtResource("99_jd3rt")]
+visible = false
 
 [node name="bottle_A_labeled_green_gltf" parent="." instance=ExtResource("100_0cfo4")]
+visible = false
 
 [node name="bottle_B_brown_gltf" parent="." instance=ExtResource("101_nxn37")]
+visible = false
 
 [node name="bottle_B_green_gltf" parent="." instance=ExtResource("102_24gxj")]
+visible = false
 
 [node name="bottle_C_brown_gltf" parent="." instance=ExtResource("103_s8w2e")]
+visible = false
 
 [node name="bottle_C_green_gltf" parent="." instance=ExtResource("104_ncund")]
+visible = false
 
 [node name="box_large_gltf" parent="." instance=ExtResource("105_n5gpj")]
+visible = false
 
 [node name="box_small_gltf" parent="." instance=ExtResource("106_uh5eu")]
+visible = false
 
 [node name="box_small_decorated_gltf" parent="." instance=ExtResource("107_q3u4b")]
+visible = false
 
 [node name="box_stacked_gltf" parent="." instance=ExtResource("108_dy804")]
+visible = false
 
 [node name="candle_gltf" parent="." instance=ExtResource("109_14u2s")]
+visible = false
 
 [node name="candle_lit_gltf" parent="." instance=ExtResource("110_wlq52")]
+visible = false
 
 [node name="candle_melted_gltf" parent="." instance=ExtResource("111_egec4")]
+visible = false
 
 [node name="candle_thin_gltf" parent="." instance=ExtResource("112_1x3uk")]
+visible = false
 
 [node name="candle_thin_lit_gltf" parent="." instance=ExtResource("113_uju1w")]
+visible = false
 
 [node name="candle_triple_gltf" parent="." instance=ExtResource("114_gicxk")]
+visible = false
 
 [node name="chair_gltf" parent="." instance=ExtResource("115_7gwp2")]
+visible = false
 
 [node name="chest2" parent="." instance=ExtResource("116_fdpjq")]
+visible = false
 
 [node name="chest_gold2" parent="." instance=ExtResource("117_llmu3")]
+visible = false
 
 [node name="coin_gltf" parent="." instance=ExtResource("118_si2q3")]
+visible = false
 
 [node name="coin_stack_large_gltf" parent="." instance=ExtResource("119_dop4u")]
+visible = false
 
 [node name="coin_stack_medium_gltf" parent="." instance=ExtResource("120_hlhn3")]
+visible = false
 
 [node name="coin_stack_small_gltf" parent="." instance=ExtResource("121_y2fis")]
+visible = false
 
 [node name="column_gltf" parent="." instance=ExtResource("122_rxlwp")]
+visible = false
 
 [node name="crates_stacked_gltf" parent="." instance=ExtResource("123_cw847")]
+visible = false
 
 [node name="floor_dirt_large_gltf" parent="." instance=ExtResource("124_nk3mj")]
+visible = false
 
 [node name="floor_dirt_large_rocky_gltf" parent="." instance=ExtResource("125_a1oag")]
+visible = false
 
 [node name="floor_dirt_small_A_gltf" parent="." instance=ExtResource("126_8l8ge")]
+visible = false
 
 [node name="floor_dirt_small_B_gltf" parent="." instance=ExtResource("127_al2em")]
+visible = false
 
 [node name="floor_dirt_small_C_gltf" parent="." instance=ExtResource("128_y3cky")]
+visible = false
 
 [node name="floor_dirt_small_corner_gltf" parent="." instance=ExtResource("129_o44yc")]
+visible = false
 
 [node name="floor_dirt_small_D_gltf" parent="." instance=ExtResource("130_ott71")]
+visible = false
 
 [node name="floor_dirt_small_weeds_gltf" parent="." instance=ExtResource("131_xy603")]
+visible = false
 
 [node name="floor_foundation_allsides_gltf" parent="." instance=ExtResource("132_s6wks")]
+visible = false
 
 [node name="floor_foundation_corner_gltf" parent="." instance=ExtResource("133_xj54o")]
+visible = false
 
 [node name="floor_foundation_diagonal_corner_gltf" parent="." instance=ExtResource("134_syfvf")]
+visible = false
 
 [node name="floor_foundation_front_gltf" parent="." instance=ExtResource("135_l538f")]
+visible = false
 
 [node name="floor_foundation_front_and_back_gltf" parent="." instance=ExtResource("136_edlyr")]
+visible = false
 
 [node name="floor_foundation_front_and_sides_gltf" parent="." instance=ExtResource("137_qxebr")]
+visible = false
 
 [node name="floor_tile_big_grate_gltf" parent="." instance=ExtResource("138_mwx33")]
+visible = false
 
 [node name="floor_tile_big_grate_open_gltf" parent="." instance=ExtResource("139_80jib")]
+visible = false
 
 [node name="floor_tile_big_spikes2" parent="." instance=ExtResource("140_358cp")]
+visible = false
 
 [node name="floor_tile_extralarge_grates_gltf" parent="." instance=ExtResource("141_mwe3p")]
+visible = false
 
 [node name="floor_tile_extralarge_grates_open_gltf" parent="." instance=ExtResource("142_m1sd0")]
+visible = false
 
 [node name="floor_tile_grate_gltf" parent="." instance=ExtResource("143_0ev0e")]
+visible = false
 
 [node name="floor_tile_grate_open_gltf" parent="." instance=ExtResource("144_pcjii")]
+visible = false
 
 [node name="floor_tile_large_gltf" parent="." instance=ExtResource("145_4cxlv")]
+visible = false
 
 [node name="floor_tile_large_rocks_gltf" parent="." instance=ExtResource("146_cukjw")]
+visible = false
 
 [node name="floor_tile_small_gltf" parent="." instance=ExtResource("147_6tudh")]
+visible = false
 
 [node name="floor_tile_small_broken_A_gltf" parent="." instance=ExtResource("148_brjls")]
+visible = false
 
 [node name="floor_tile_small_broken_B_gltf" parent="." instance=ExtResource("149_oshob")]
+visible = false
 
 [node name="floor_tile_small_corner_gltf" parent="." instance=ExtResource("150_tv4xo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.990419, 0, 0)
+visible = false
 
 [node name="floor_tile_small_decorated_gltf" parent="." instance=ExtResource("151_ogkid")]
+visible = false
 
 [node name="floor_tile_small_weeds_A_gltf" parent="." instance=ExtResource("152_nonah")]
+visible = false
 
 [node name="floor_tile_small_weeds_B_gltf" parent="." instance=ExtResource("153_gvv5j")]
+visible = false
 
 [node name="floor_wood_large_gltf" parent="." instance=ExtResource("154_a1t72")]
+visible = false
 
 [node name="floor_wood_large_dark_gltf" parent="." instance=ExtResource("155_y4qxm")]
+visible = false
 
 [node name="floor_wood_small_gltf" parent="." instance=ExtResource("156_4cejx")]
+visible = false
 
 [node name="floor_wood_small_dark_gltf" parent="." instance=ExtResource("157_o42p5")]
+visible = false
 
 [node name="keg_gltf" parent="." instance=ExtResource("158_c3gsv")]
+visible = false
 
 [node name="keg_decorated_gltf" parent="." instance=ExtResource("159_xy10t")]
+visible = false
 
 [node name="key_gltf" parent="." instance=ExtResource("160_sekkq")]
+visible = false
 
 [node name="keyring_gltf" parent="." instance=ExtResource("161_7i7y5")]
+visible = false
 
 [node name="keyring_hanging_gltf" parent="." instance=ExtResource("162_xmiwx")]
+visible = false
 
 [node name="pillar_gltf" parent="." instance=ExtResource("163_k10ko")]
+visible = false
 
 [node name="pillar_decorated_gltf" parent="." instance=ExtResource("164_ifpjj")]
+visible = false
 
 [node name="plate_gltf" parent="." instance=ExtResource("165_13dff")]
+visible = false
 
 [node name="plate_food_A_gltf" parent="." instance=ExtResource("166_vhou5")]
+visible = false
 
 [node name="plate_food_B_gltf" parent="." instance=ExtResource("167_r4mr3")]
+visible = false
 
 [node name="plate_small_gltf" parent="." instance=ExtResource("168_atovl")]
+visible = false
 
 [node name="plate_stack_gltf" parent="." instance=ExtResource("169_ndb2a")]
+visible = false
 
 [node name="rubble_half_gltf" parent="." instance=ExtResource("170_7ftqj")]
+visible = false
 
 [node name="rubble_large_gltf" parent="." instance=ExtResource("171_te224")]
+visible = false
 
 [node name="shelf_large_gltf" parent="." instance=ExtResource("172_haiqj")]
+visible = false
 
 [node name="shelf_small_gltf" parent="." instance=ExtResource("173_ss0v2")]
+visible = false
 
 [node name="shelf_small_candles_gltf" parent="." instance=ExtResource("174_wvjmy")]
+visible = false
 
 [node name="shelves_gltf" parent="." instance=ExtResource("175_c2rba")]
+visible = false
 
 [node name="stairs_gltf" parent="." instance=ExtResource("176_kl0dl")]
+visible = false
 
 [node name="stairs_narrow_gltf" parent="." instance=ExtResource("177_omq4o")]
+visible = false
 
 [node name="stairs_walled_gltf" parent="." instance=ExtResource("178_t1qf8")]
+visible = false
 
 [node name="stairs_wall_left_gltf" parent="." instance=ExtResource("179_380hc")]
+visible = false
 
 [node name="stairs_wall_right_gltf" parent="." instance=ExtResource("180_rir03")]
+visible = false
 
 [node name="stairs_wide_gltf" parent="." instance=ExtResource("181_aaaj7")]
+visible = false
 
 [node name="stairs_wood_gltf" parent="." instance=ExtResource("182_2d177")]
+visible = false
 
 [node name="stairs_wood_decorated_gltf" parent="." instance=ExtResource("183_t13gr")]
+visible = false
 
 [node name="stool_gltf" parent="." instance=ExtResource("184_6xnek")]
+visible = false
 
 [node name="sword_shield_gltf" parent="." instance=ExtResource("185_r1dff")]
+visible = false
 
 [node name="sword_shield_broken_gltf" parent="." instance=ExtResource("186_dd2g4")]
+visible = false
 
 [node name="sword_shield_gold_gltf" parent="." instance=ExtResource("187_w0100")]
+visible = false
 
 [node name="table_long_gltf" parent="." instance=ExtResource("188_8pf1t")]
+visible = false
 
 [node name="table_long_broken_gltf" parent="." instance=ExtResource("189_1v0gy")]
+visible = false
 
 [node name="table_long_decorated_A_gltf" parent="." instance=ExtResource("190_kda6x")]
+visible = false
 
 [node name="table_long_decorated_C_gltf" parent="." instance=ExtResource("191_1jgdn")]
+visible = false
 
 [node name="table_long_tablecloth_gltf" parent="." instance=ExtResource("192_macmh")]
+visible = false
 
 [node name="table_long_tablecloth_decorated_A_gltf" parent="." instance=ExtResource("193_fpei8")]
+visible = false
 
 [node name="table_medium_gltf" parent="." instance=ExtResource("194_u05bj")]
+visible = false
 
 [node name="table_medium_broken_gltf" parent="." instance=ExtResource("195_x1dal")]
+visible = false
 
 [node name="table_medium_decorated_A_gltf" parent="." instance=ExtResource("196_0refs")]
+visible = false
 
 [node name="table_medium_tablecloth_gltf" parent="." instance=ExtResource("197_ieaas")]
+visible = false
 
 [node name="table_medium_tablecloth_decorated_B_gltf" parent="." instance=ExtResource("198_pj7j8")]
+visible = false
 
 [node name="table_small_gltf" parent="." instance=ExtResource("199_2cbe3")]
+visible = false
 
 [node name="table_small_decorated_A_gltf" parent="." instance=ExtResource("200_un5cy")]
+visible = false
 
 [node name="table_small_decorated_B_gltf" parent="." instance=ExtResource("201_ixnav")]
+visible = false
+
+[node name="arrow_gltf" parent="." instance=ExtResource("202_lgkaf")]
+visible = false
+
+[node name="artifact_gltf" parent="." instance=ExtResource("203_lfj0c")]
+visible = false
+
+[node name="axeDouble_common_gltf" parent="." instance=ExtResource("204_bl0gr")]
+visible = false
+
+[node name="axeDouble_rare_gltf" parent="." instance=ExtResource("205_7mwlx")]
+visible = false
+
+[node name="axeDouble_uncommon_gltf" parent="." instance=ExtResource("206_2ldgq")]
+visible = false
+
+[node name="axe_common_gltf" parent="." instance=ExtResource("207_n13lu")]
+visible = false
+
+[node name="axe_rare_gltf" parent="." instance=ExtResource("208_eb86t")]
+visible = false
+
+[node name="axe_uncommon_gltf" parent="." instance=ExtResource("209_pj8f8")]
+visible = false
+
+[node name="banner_gltf" parent="." instance=ExtResource("210_suum7")]
+visible = false
+
+[node name="barrel_gltf" parent="." instance=ExtResource("211_u2jfg")]
+visible = false
+
+[node name="barrelDark_gltf" parent="." instance=ExtResource("212_cm5mn")]
+visible = false
+
+[node name="bench_gltf" parent="." instance=ExtResource("213_lhbxe")]
+visible = false
+
+[node name="bookA_gltf" parent="." instance=ExtResource("214_d314u")]
+visible = false
+
+[node name="bookB_gltf" parent="." instance=ExtResource("215_8g8w5")]
+visible = false
+
+[node name="bookC_gltf" parent="." instance=ExtResource("216_f72l1")]
+visible = false
+
+[node name="bookcase_gltf" parent="." instance=ExtResource("217_5ejvs")]
+visible = false
+
+[node name="bookcaseFilled_gltf" parent="." instance=ExtResource("218_vu8m5")]
+visible = false
+
+[node name="bookcaseFilled_broken_gltf" parent="." instance=ExtResource("219_8mrs7")]
+visible = false
+
+[node name="bookcaseWide_gltf" parent="." instance=ExtResource("220_c5cal")]
+visible = false
+
+[node name="bookcaseWideFilled_gltf" parent="." instance=ExtResource("221_c0202")]
+visible = false
+
+[node name="bookcaseWideFilled_broken_gltf" parent="." instance=ExtResource("222_u2oda")]
+visible = false
+
+[node name="bookcaseWide_broken_gltf" parent="." instance=ExtResource("223_tcl8k")]
+visible = false
+
+[node name="bookcase_broken_gltf" parent="." instance=ExtResource("224_3ch4p")]
+visible = false
+
+[node name="bookD_gltf" parent="." instance=ExtResource("225_l6vn0")]
+visible = false
+
+[node name="bookE_gltf" parent="." instance=ExtResource("226_jdrip")]
+visible = false
+
+[node name="bookF_gltf" parent="." instance=ExtResource("227_skrwq")]
+visible = false
+
+[node name="bookOpenA_gltf" parent="." instance=ExtResource("228_6u30s")]
+visible = false
+
+[node name="bookOpenB_gltf" parent="." instance=ExtResource("229_kbcpm")]
+visible = false
+
+[node name="bricks_gltf" parent="." instance=ExtResource("230_sr1iu")]
+visible = false
+
+[node name="bucket_gltf" parent="." instance=ExtResource("231_2vpbm")]
+visible = false
+
+[node name="chair_gltf2" parent="." instance=ExtResource("232_a3mk1")]
+visible = false
+
+[node name="chestTop_common_gltf" parent="." instance=ExtResource("233_4awtn")]
+visible = false
+
+[node name="chestTop_common_empty_gltf" parent="." instance=ExtResource("234_a6s7w")]
+visible = false
+
+[node name="chestTop_rare_gltf" parent="." instance=ExtResource("235_m07nd")]
+visible = false
+
+[node name="chestTop_rare_mimic_gltf" parent="." instance=ExtResource("236_i5qp3")]
+visible = false
+
+[node name="chestTop_uncommon_gltf" parent="." instance=ExtResource("237_dlrpb")]
+visible = false
+
+[node name="chestTop_uncommon_mimic_gltf" parent="." instance=ExtResource("238_oaydw")]
+visible = false
+
+[node name="chest_common_gltf" parent="." instance=ExtResource("239_dgp0k")]
+visible = false
+
+[node name="chest_common_empty_gltf" parent="." instance=ExtResource("240_pst0m")]
+visible = false
+
+[node name="chest_rare_gltf" parent="." instance=ExtResource("241_m0lhh")]
+visible = false
+
+[node name="chest_rare_mimic_gltf" parent="." instance=ExtResource("242_ewmxw")]
+visible = false
+
+[node name="chest_uncommon_gltf" parent="." instance=ExtResource("243_1oodc")]
+visible = false
+
+[node name="chest_uncommon_mimic_gltf" parent="." instance=ExtResource("244_crk10")]
+visible = false
+
+[node name="coin_gltf2" parent="." instance=ExtResource("245_6og33")]
+visible = false
+
+[node name="coinsLarge_gltf" parent="." instance=ExtResource("246_6bs24")]
+visible = false
+
+[node name="coinsMedium_gltf" parent="." instance=ExtResource("247_me6bo")]
+visible = false
+
+[node name="coinsSmall_gltf" parent="." instance=ExtResource("248_u7jen")]
+visible = false
+
+[node name="crate_gltf" parent="." instance=ExtResource("249_wijfo")]
+visible = false
+
+[node name="crateDark_gltf" parent="." instance=ExtResource("250_1u2qa")]
+visible = false
+
+[node name="cratePlatform_large_gltf" parent="." instance=ExtResource("251_fxegj")]
+visible = false
+
+[node name="cratePlatform_medium_gltf" parent="." instance=ExtResource("252_kxkjy")]
+visible = false
+
+[node name="cratePlatform_small_gltf" parent="." instance=ExtResource("253_x51a7")]
+visible = false
+
+[node name="crossbow_common_gltf" parent="." instance=ExtResource("254_1jd8r")]
+visible = false
+
+[node name="crossbow_rare_gltf" parent="." instance=ExtResource("255_ayhy3")]
+visible = false
+
+[node name="crossbow_uncommon_gltf" parent="." instance=ExtResource("256_dvpg1")]
+visible = false
+
+[node name="dagger_common_gltf" parent="." instance=ExtResource("257_jk8hs")]
+visible = false
+
+[node name="dagger_rare_gltf" parent="." instance=ExtResource("258_ayatd")]
+visible = false
+
+[node name="dagger_uncommon_gltf" parent="." instance=ExtResource("259_ik8wt")]
+visible = false
+
+[node name="door_gltf" parent="." instance=ExtResource("260_3nq41")]
+visible = false
+
+[node name="door_gate_gltf" parent="." instance=ExtResource("261_isk7u")]
+visible = false
+
+[node name="floorDecoration_shatteredBricks_gltf" parent="." instance=ExtResource("262_rnbo7")]
+visible = false
+
+[node name="floorDecoration_tilesLarge_gltf" parent="." instance=ExtResource("263_oyesx")]
+visible = false
+
+[node name="floorDecoration_tilesSmall_gltf" parent="." instance=ExtResource("264_ckj7w")]
+visible = false
+
+[node name="floorDecoration_wood_gltf" parent="." instance=ExtResource("265_4p8kv")]
+visible = false
+
+[node name="floorDecoration_woodLeft_gltf" parent="." instance=ExtResource("266_078d0")]
+visible = false
+
+[node name="floorDecoration_woodRight_gltf" parent="." instance=ExtResource("267_wv1jn")]
+visible = false
+
+[node name="hammer_common_gltf" parent="." instance=ExtResource("268_2bj47")]
+visible = false
+
+[node name="hammer_rare_gltf" parent="." instance=ExtResource("269_5dk8i")]
+visible = false
+
+[node name="hammer_uncommon_gltf" parent="." instance=ExtResource("270_yqtet")]
+visible = false
+
+[node name="lootSackA_gltf" parent="." instance=ExtResource("271_eruos")]
+visible = false
+
+[node name="lootSackB_gltf" parent="." instance=ExtResource("272_d6t3k")]
+visible = false
+
+[node name="mug_gltf" parent="." instance=ExtResource("273_xblrf")]
+visible = false
+
+[node name="pillar_gltf2" parent="." instance=ExtResource("274_shaq4")]
+visible = false
+
+[node name="pillar_broken_gltf" parent="." instance=ExtResource("275_1yknw")]
+visible = false
+
+[node name="plate_gltf2" parent="." instance=ExtResource("276_60j66")]
+visible = false
+
+[node name="plateFull_gltf" parent="." instance=ExtResource("277_hvxso")]
+visible = false
+
+[node name="plateHalf_gltf" parent="." instance=ExtResource("278_xw4ml")]
+visible = false
+
+[node name="potA_gltf" parent="." instance=ExtResource("279_artlm")]
+visible = false
+
+[node name="potA_decorated_gltf" parent="." instance=ExtResource("280_t2fjn")]
+visible = false
+
+[node name="potB_gltf" parent="." instance=ExtResource("281_452td")]
+visible = false
+
+[node name="potB_decorated_gltf" parent="." instance=ExtResource("282_odxrs")]
+visible = false
+
+[node name="potC_gltf" parent="." instance=ExtResource("283_6dq3n")]
+visible = false
+
+[node name="potC_decorated_gltf" parent="." instance=ExtResource("284_x3ggh")]
+visible = false
+
+[node name="potionLarge_blue_gltf" parent="." instance=ExtResource("285_n1l13")]
+visible = false
+
+[node name="potionLarge_green_gltf" parent="." instance=ExtResource("286_7cd7i")]
+visible = false
+
+[node name="potionLarge_red_gltf" parent="." instance=ExtResource("287_4cw64")]
+visible = false
+
+[node name="potionMedium_blue_gltf" parent="." instance=ExtResource("288_4g6n0")]
+visible = false
+
+[node name="potionMedium_green_gltf" parent="." instance=ExtResource("289_845c8")]
+visible = false
+
+[node name="potionMedium_red_gltf" parent="." instance=ExtResource("290_8ncrc")]
+visible = false
+
+[node name="potionSmall_blue_gltf" parent="." instance=ExtResource("291_33pkc")]
+visible = false
+
+[node name="potionSmall_green_gltf" parent="." instance=ExtResource("292_vm2ig")]
+visible = false
+
+[node name="potionSmall_red_gltf" parent="." instance=ExtResource("293_qgac5")]
+visible = false
+
+[node name="pots_gltf" parent="." instance=ExtResource("294_ik16r")]
+visible = false
+
+[node name="quiver_empty_gltf" parent="." instance=ExtResource("295_e041b")]
+visible = false
+
+[node name="quiver_full_gltf" parent="." instance=ExtResource("296_21tqv")]
+visible = false
+
+[node name="quiver_half_full_gltf" parent="." instance=ExtResource("297_y3vy5")]
+visible = false
+
+[node name="scaffold_high_gltf" parent="." instance=ExtResource("298_kvpnr")]
+visible = false
+
+[node name="scaffold_high_cornerBoth_gltf" parent="." instance=ExtResource("299_jsrgk")]
+visible = false
+
+[node name="scaffold_high_cornerLeft_gltf" parent="." instance=ExtResource("300_sjv6c")]
+visible = false
+
+[node name="scaffold_high_cornerRight_gltf" parent="." instance=ExtResource("301_68f5c")]
+visible = false
+
+[node name="scaffold_high_railing_gltf" parent="." instance=ExtResource("302_40lwe")]
+visible = false
+
+[node name="scaffold_low_gltf" parent="." instance=ExtResource("303_ou0pg")]
+visible = false
+
+[node name="scaffold_low_cornerBoth_gltf" parent="." instance=ExtResource("304_n7827")]
+visible = false
+
+[node name="scaffold_low_cornerLeft_gltf" parent="." instance=ExtResource("305_jngiq")]
+visible = false
+
+[node name="scaffold_low_cornerRight_gltf" parent="." instance=ExtResource("306_eebx3")]
+visible = false
+
+[node name="scaffold_low_railing_gltf" parent="." instance=ExtResource("307_vledd")]
+visible = false
+
+[node name="scaffold_medium_gltf" parent="." instance=ExtResource("308_w2ll2")]
+visible = false
+
+[node name="scaffold_medium_cornerBoth_gltf" parent="." instance=ExtResource("309_ce5bn")]
+visible = false
+
+[node name="scaffold_medium_cornerLeft_gltf" parent="." instance=ExtResource("310_uv0pe")]
+visible = false
+
+[node name="scaffold_medium_cornerRight_gltf" parent="." instance=ExtResource("311_ri817")]
+visible = false
+
+[node name="scaffold_medium_railing_gltf" parent="." instance=ExtResource("312_gtf0g")]
+visible = false
+
+[node name="scaffold_small_high_gltf" parent="." instance=ExtResource("313_jk4bi")]
+visible = false
+
+[node name="scaffold_small_high_cornerLeft_gltf" parent="." instance=ExtResource("314_v8j6k")]
+visible = false
+
+[node name="scaffold_small_high_cornerRight_gltf" parent="." instance=ExtResource("315_wg3ka")]
+visible = false
+
+[node name="scaffold_small_high_long_gltf" parent="." instance=ExtResource("316_2drry")]
+visible = false
+
+[node name="scaffold_small_high_railing_gltf" parent="." instance=ExtResource("317_s1nho")]
+visible = false
+
+[node name="scaffold_small_high_railing_long_gltf" parent="." instance=ExtResource("318_w0gp4")]
+visible = false
+
+[node name="scaffold_small_low_gltf" parent="." instance=ExtResource("319_0rk8x")]
+visible = false
+
+[node name="scaffold_small_low_cornerLeft_gltf" parent="." instance=ExtResource("320_hmpy0")]
+visible = false
+
+[node name="scaffold_small_low_cornerRight_gltf" parent="." instance=ExtResource("321_oy17j")]
+visible = false
+
+[node name="scaffold_small_low_long_gltf" parent="." instance=ExtResource("322_5p087")]
+visible = false
+
+[node name="scaffold_small_low_railing_gltf" parent="." instance=ExtResource("323_220co")]
+visible = false
+
+[node name="scaffold_small_low_railing_long_gltf" parent="." instance=ExtResource("324_h52lr")]
+visible = false
+
+[node name="scaffold_small_medium_gltf" parent="." instance=ExtResource("325_jclth")]
+visible = false
+
+[node name="scaffold_small_medium_cornerLeft_gltf" parent="." instance=ExtResource("326_chnmy")]
+visible = false
+
+[node name="scaffold_small_medium_cornerRight_gltf" parent="." instance=ExtResource("327_5hy75")]
+visible = false
+
+[node name="scaffold_small_medium_long_gltf" parent="." instance=ExtResource("328_fx3sf")]
+visible = false
+
+[node name="scaffold_small_medium_railing_gltf" parent="." instance=ExtResource("329_qat7r")]
+visible = false
+
+[node name="scaffold_small_medium_railing_long_gltf" parent="." instance=ExtResource("330_ntfda")]
+visible = false
+
+[node name="scaffold_stairs_gltf" parent="." instance=ExtResource("331_8p3u4")]
+visible = false
+
+[node name="shield_common_gltf" parent="." instance=ExtResource("332_nbtlu")]
+visible = false
+
+[node name="shield_rare_gltf" parent="." instance=ExtResource("333_cedp5")]
+visible = false
+
+[node name="shield_uncommon_gltf" parent="." instance=ExtResource("334_dy8we")]
+visible = false
+
+[node name="spellBook_gltf" parent="." instance=ExtResource("335_q50ti")]
+visible = false
+
+[node name="staff_common_gltf" parent="." instance=ExtResource("336_you5m")]
+visible = false
+
+[node name="staff_rare_gltf" parent="." instance=ExtResource("337_cs2vj")]
+visible = false
+
+[node name="staff_uncommon_gltf" parent="." instance=ExtResource("338_qykrj")]
+visible = false
+
+[node name="stairs_gltf2" parent="." instance=ExtResource("339_4avjv")]
+visible = false
+
+[node name="stairs_wide_gltf2" parent="." instance=ExtResource("340_xopd8")]
+visible = false
+
+[node name="stool_gltf2" parent="." instance=ExtResource("341_ohs6x")]
+visible = false
+
+[node name="sword_common_gltf" parent="." instance=ExtResource("342_ga0rw")]
+visible = false
+
+[node name="sword_rare_gltf" parent="." instance=ExtResource("343_tyrgq")]
+visible = false
+
+[node name="sword_uncommon_gltf" parent="." instance=ExtResource("344_xvfq3")]
+visible = false
+
+[node name="tableLarge_gltf" parent="." instance=ExtResource("345_7wkec")]
+visible = false
+
+[node name="tableMedium_gltf" parent="." instance=ExtResource("346_egjxb")]
+visible = false
+
+[node name="tableSmall_gltf" parent="." instance=ExtResource("347_sv6lh")]
+visible = false
+
+[node name="tileBrickA_large_gltf" parent="." instance=ExtResource("348_5j7ik")]
+visible = false
+
+[node name="tileBrickA_medium_gltf" parent="." instance=ExtResource("349_mkml1")]
+visible = false
+
+[node name="tileBrickA_small_gltf" parent="." instance=ExtResource("350_rqusc")]
+visible = false
+
+[node name="tileBrickB_large_gltf" parent="." instance=ExtResource("351_sbfsb")]
+visible = false
+
+[node name="tileBrickB_largeCrackedA_gltf" parent="." instance=ExtResource("352_sda6t")]
+visible = false
+
+[node name="tileBrickB_largeCrackedB_gltf" parent="." instance=ExtResource("353_cvqv1")]
+visible = false
+
+[node name="tileBrickB_medium_gltf" parent="." instance=ExtResource("354_r2pnv")]
+visible = false
+
+[node name="tileBrickB_small_gltf" parent="." instance=ExtResource("355_gt8gx")]
+visible = false
+
+[node name="tileSpikes_gltf" parent="." instance=ExtResource("356_8ytq0")]
+visible = false
+
+[node name="tileSpikes_large_gltf" parent="." instance=ExtResource("357_1lf7i")]
+visible = false
+
+[node name="tileSpikes_shallow_gltf" parent="." instance=ExtResource("358_4xw3v")]
+visible = false
+
+[node name="torch_gltf2" parent="." instance=ExtResource("359_hcavi")]
+visible = false
+
+[node name="torchWall_gltf" parent="." instance=ExtResource("360_q4emo")]
+visible = false
+
+[node name="trapdoor_gltf" parent="." instance=ExtResource("361_mkthm")]
+visible = false
+
+[node name="wall_gltf2" parent="." instance=ExtResource("362_5tsch")]
+visible = false
+
+[node name="wallCorner_gltf" parent="." instance=ExtResource("363_aymn1")]
+visible = false
+
+[node name="wallDecorationA_gltf" parent="." instance=ExtResource("364_1gke7")]
+visible = false
+
+[node name="wallDecorationB_gltf" parent="." instance=ExtResource("365_mr0le")]
+visible = false
+
+[node name="wallIntersection_gltf" parent="." instance=ExtResource("366_y1t8b")]
+visible = false
+
+[node name="wallSingle_gltf" parent="." instance=ExtResource("367_kqo38")]
+visible = false
+
+[node name="wallSingle_broken_gltf" parent="." instance=ExtResource("368_d2qrk")]
+visible = false
+
+[node name="wallSingle_corner_gltf" parent="." instance=ExtResource("369_4nesk")]
+visible = false
+
+[node name="wallSingle_decorationA_gltf" parent="." instance=ExtResource("370_da2w7")]
+visible = false
+
+[node name="wallSingle_decorationB_gltf" parent="." instance=ExtResource("371_jp800")]
+visible = false
+
+[node name="wallSingle_door_gltf" parent="." instance=ExtResource("372_u8bln")]
+visible = false
+
+[node name="wallSingle_split_gltf" parent="." instance=ExtResource("373_r14pp")]
+visible = false
+
+[node name="wallSingle_window_gltf" parent="." instance=ExtResource("374_v8hsx")]
+visible = false
+
+[node name="wallSingle_windowGate_gltf" parent="." instance=ExtResource("375_wvpff")]
+visible = false
+
+[node name="wallSplit_gltf" parent="." instance=ExtResource("376_fha7x")]
+visible = false
+
+[node name="wall_broken_gltf2" parent="." instance=ExtResource("377_nkwpl")]
+visible = false
+
+[node name="wall_door_gltf" parent="." instance=ExtResource("378_e3084")]
+visible = false
+
+[node name="wall_end_gltf" parent="." instance=ExtResource("379_3qr5u")]
+visible = false
+
+[node name="wall_end_broken_gltf" parent="." instance=ExtResource("380_8gtu4")]
+visible = false
+
+[node name="wall_gate_gltf" parent="." instance=ExtResource("381_6m2yu")]
+visible = false
+
+[node name="wall_gateCorner_gltf" parent="." instance=ExtResource("382_y8ewo")]
+visible = false
+
+[node name="wall_gateDoor_gltf" parent="." instance=ExtResource("383_axikd")]
+visible = false
+
+[node name="wall_window_gltf" parent="." instance=ExtResource("384_rdgh8")]
+visible = false
+
+[node name="wall_windowGate_gltf" parent="." instance=ExtResource("385_wrigo")]
+visible = false
+
+[node name="weaponRack_gltf" parent="." instance=ExtResource("386_2ogie")]
+visible = false
