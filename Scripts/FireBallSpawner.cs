@@ -5,8 +5,16 @@ using System.Runtime;
 public partial class FireBallSpawner : Node3D
 {
 	private PackedScene fireBall;
-	[Export] private Node3D target;
+	[Export] public int speed {get; set;} = 1;
+
+	private Node3D target;
+
+	private Node3D magePos;
 	
+	
+	private CharacterBody3D player1;
+
+    
 	
 	private float MaxTime = 2;
 	private float timeTick = 0;
@@ -14,17 +22,26 @@ public partial class FireBallSpawner : Node3D
 	public override void _Ready()
 	{
 		fireBall = GD.Load<PackedScene>("res://Scenes/fire_ball.tscn");
+		magePos = GetNode<Node3D>("enemy1/Evil_Mage/character_mage");
+		
+		GD.Print("spawnerLoaded");
+		
+		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{	
+		
 		//fix for closest target...
 		target = PlayerManager.Instance().players[0];
+		
+		
 		timeTick += (float)delta;
 		if (timeTick > MaxTime) {
 			timeTick -= MaxTime;
 			GD.Print("fireball!");
+			
 
 			var instance = fireBall.Instantiate();
 			(instance as FireBall).LookAtFromPosition(Position, target.GlobalPosition);
