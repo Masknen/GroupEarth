@@ -32,15 +32,14 @@ public partial class enemy1 : CharacterBody3D
 	{
 		if (PlayerManager.Instance().players.Count > 0) {
 			player1 = PlayerManager.Instance().players[0];
-			/*
 			player2 = PlayerManager.Instance().players[1];
-			if(player1.GlobalPosition.DistanceTo(Position)<
-			player2.GlobalPosition.DistanceTo(Position)){
+			if(player1.GlobalPosition.DistanceTo(GlobalPosition)<
+			player2.GlobalPosition.DistanceTo(GlobalPosition)){
 				target = player1;
 			}else { target = player2;}
-			*/
-			target = player1;
-			Velocity = Position.DirectionTo(target.Position) * speed;
+			
+			//target = player1;
+			Velocity = Position.DirectionTo(target.GlobalPosition) * speed;
 			LookAt(target.GlobalPosition);
 			MoveAndSlide();
 			timeTick += (float)delta;
