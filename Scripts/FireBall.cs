@@ -1,17 +1,12 @@
 using Godot;
-using System;
-using System.Runtime;
-using System.Runtime.CompilerServices;
-
-public partial class FireBall : Node3D
+using System; 
+public partial class fireball : Area3D
 {
-	[Export] public float speed = 10;
-
 	
-
-
+	public int speed = 10;
+	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
-	{
+	{	
 		
 	}
 
