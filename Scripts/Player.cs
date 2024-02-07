@@ -36,53 +36,57 @@ public partial class Player : CharacterBody3D
 	}
 
 	public override void _Process(double delta) {
-		if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder)) {
-			GD.Print(ID + " | Parry");
-			if (currentTouching != null) {
-				currentTouching.Rotation = Rotation;
+		if (ID != -1) {
+			if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder)) {
+				GD.Print(ID + " | Parry");
+				if (currentTouching != null) {
+					currentTouching.Rotation = Rotation;
+				}
 			}
-		}
-		if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder)) {
-            GD.Print(ID + " | Friend Parry");
-            if (currentTouching != null) {
-				currentTouching.LookAt(otherPlayer.GlobalPosition);
+			if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder)) {
+				GD.Print(ID + " | Friend Parry");
+				if (currentTouching != null) {
+					currentTouching.LookAt(otherPlayer.GlobalPosition);
+				}
 			}
 		}
 	}
 
 	public override void _PhysicsProcess(double delta) {
-		if (Velocity.Length() > 20) {
-			Velocity = Velocity * 0.75f;
-		} else {
-			Velocity = Velocity * 0.65f;
-		}
-
-		// Gets the input vector for left stick and applies it to position
-		Vector2 inputDirection = GetInputVector(JoyAxis.LeftX, JoyAxis.LeftY, deadZone);
-		Vector3 inputdirectionV3 = new Vector3(inputDirection.X, 0, inputDirection.Y);
-
-        Velocity += inputdirectionV3 * (float)(movementSpeed);
-
-        if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerLeft)) {
-            GD.Print("Dodge!");
-			if (!inputdirectionV3.IsEqualApprox(Vector3.Zero)) {
-                Velocity += inputdirectionV3 * dodgeStrength;
-				RotateTo(inputDirection);
-            } else {
-				Velocity += -Transform.Basis.Z * dodgeStrength;
+		if (ID != -1) {
+			if (Velocity.Length() > 20) {
+				Velocity = Velocity * 0.75f;
+			} else {
+				Velocity = Velocity * 0.65f;
 			}
-        }
+
+			// Gets the input vector for left stick and applies it to position
+			Vector2 inputDirection = GetInputVector(JoyAxis.LeftX, JoyAxis.LeftY, deadZone);
+			Vector3 inputdirectionV3 = new Vector3(inputDirection.X, 0, inputDirection.Y);
+
+			Velocity += inputdirectionV3 * (float)(movementSpeed);
+
+			if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerLeft)) {
+				GD.Print("Dodge!");
+				if (!inputdirectionV3.IsEqualApprox(Vector3.Zero)) {
+					Velocity += inputdirectionV3 * dodgeStrength;
+					RotateTo(inputDirection);
+				} else {
+					Velocity += -Transform.Basis.Z * dodgeStrength;
+				}
+			}
 
 
-		// Gets the input vector for right stick, if zero use the inputDirection instead
-		Vector2 inputRotation = GetInputVector(JoyAxis.RightX, JoyAxis.RightY, deadZone) != Vector2.Zero ? GetInputVector(JoyAxis.RightX, JoyAxis.RightY, deadZone) : inputDirection;
+			// Gets the input vector for right stick, if zero use the inputDirection instead
+			Vector2 inputRotation = GetInputVector(JoyAxis.RightX, JoyAxis.RightY, deadZone) != Vector2.Zero ? GetInputVector(JoyAxis.RightX, JoyAxis.RightY, deadZone) : inputDirection;
 
 
-		// Rotates player
-		if (inputRotation != Vector2.Zero && Velocity.Length() < movementSpeed*3) {
-			RotateToSlerp(inputRotation, delta);
+			// Rotates player
+			if (inputRotation != Vector2.Zero && Velocity.Length() < movementSpeed * 3) {
+				RotateToSlerp(inputRotation, delta);
+			}
+			MoveAndSlide();
 		}
-		MoveAndSlide();
 	}
 
 	private Vector2 GetInputVector(JoyAxis joyAxisX, JoyAxis joyAxisY, float deadZone) {

@@ -68,7 +68,6 @@ public partial class PlayerManager : Node3D
     public void SpawnPlayers() {
         int spawnOffsetX = 2;
         foreach (var ID in playersToCreateID) {
-            GD.Print(ID);
             var newPlayer = player.Instantiate();
             (newPlayer as Player).ID = ID;
             (newPlayer as Player).Position = new Vector3 (spawnOffsetX, 1, 0);
@@ -77,11 +76,20 @@ public partial class PlayerManager : Node3D
 
             spawnOffsetX -= spawnOffsetX * 2;
         }
+        if (players.Count == 1) {
+            var newPlayer = player.Instantiate();
+            (newPlayer as Player).ID = -1;
+            (newPlayer as Player).Position = new Vector3(spawnOffsetX, 1, 0);
+            players.Add(newPlayer as Player);
+            AddChild(newPlayer);
+        }
+
         if (players.Count > 2) {
             foreach (var player in players) {
                 player.QueueFree();
             }
             players.Clear();
+            SpawnPlayers();
         }
     }
 
