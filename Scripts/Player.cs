@@ -34,14 +34,16 @@ public partial class Player : CharacterBody3D
 	}
 
 	public override void _Process(double delta) {
-		if (Input.IsJoyButtonPressed(ID, JoyButton.RightShoulder)) {
+		if (InputManager.Instance().IsJustPressed(ID, JoyButton.RightShoulder)) {
+			GD.Print(ID + " | Parry");
 			if (currentTouching != null) {
 				currentTouching.Rotation = Rotation; 
 				currentTouching.speed += 1.0f;
 			}
 		}
-		if (Input.IsJoyButtonPressed(ID, JoyButton.LeftShoulder)) {
-			if (currentTouching != null) {
+		if (InputManager.Instance().IsJustPressed(ID, JoyButton.LeftShoulder)) {
+            GD.Print(ID + " | Friend Parry");
+            if (currentTouching != null) {
 				currentTouching.LookAt(otherPlayer.GlobalPosition);
 				currentTouching.speed += 0.1f;
 			}
@@ -57,8 +59,6 @@ public partial class Player : CharacterBody3D
 		} else {
 			animationPlayer.Stop();
 		}
-
-
 
 		// Gets the input vector for right stick, if zero use the inputDirection instead
 		Vector2 inputRotation = GetInputVector(JoyAxis.RightX, JoyAxis.RightY, deadZone) != Vector2.Zero ? GetInputVector(JoyAxis.RightX, JoyAxis.RightY, deadZone) : inputDirection;
@@ -82,7 +82,7 @@ public partial class Player : CharacterBody3D
 	}
 
 	private Vector2 GetInputVector(JoyAxis joyAxisX, JoyAxis joyAxisY, float deadZone) {
-		if (Input.GetJoyAxis(ID, joyAxisX) > deadZone || Input.GetJoyAxis(ID, joyAxisX) < -deadZone || Input.GetJoyAxis(ID, joyAxisY) > deadZone || Input.GetJoyAxis(ID, joyAxisY) < -deadZone) {
+        if (Input.GetJoyAxis(ID, joyAxisX) > deadZone || Input.GetJoyAxis(ID, joyAxisX) < -deadZone || Input.GetJoyAxis(ID, joyAxisY) > deadZone || Input.GetJoyAxis(ID, joyAxisY) < -deadZone) {
 			return new Vector2(Input.GetJoyAxis(ID, joyAxisX), Input.GetJoyAxis(ID, joyAxisY)).Normalized();
 		}
 		return Vector2.Zero;
