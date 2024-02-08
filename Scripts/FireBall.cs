@@ -17,11 +17,15 @@ public partial class fireball : Area3D, IDeflectable
     }
 
     public void Deflect(float yRotation) {
-        throw new NotImplementedException();
+        GD.Print("Hit");
+        Transform3D transform = new Transform3D(new Basis(Transform.Basis.Y, yRotation), Position);
+        Transform = transform;
     }
 
     public void FriendDeflect(float yRotation) {
-        throw new NotImplementedException();
+        GD.Print("Hit");
+        Transform3D transform = new Transform3D(new Basis(Transform.Basis.Y, yRotation), Position);
+        Transform = transform;
     }
 
     public void ArcDeflect(float yRotation) {

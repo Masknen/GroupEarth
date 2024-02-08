@@ -32,7 +32,7 @@ public partial class Player : CharacterBody3D
 	}
 
 	private void Player_AreaEntered(Area3D area) {
-		currentTouching = area.GetParent() as IDeflectable;
+		currentTouching = area as IDeflectable;
 	}
 
 	public override void _Process(double delta) {
@@ -46,7 +46,7 @@ public partial class Player : CharacterBody3D
 			if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder)) {
 				GD.Print(ID + " | Friend Parry");
 				if (currentTouching != null) {
-					currentTouching.FriendDeflect(Transform.Basis.GetEuler().Y);
+					currentTouching.FriendDeflect(-GlobalPosition.DirectionTo(otherPlayer.GlobalPosition).SignedAngleTo(Vector3.Forward, Transform.Basis.Y));
 				}
 			}
             if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight)) {
