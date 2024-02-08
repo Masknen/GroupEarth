@@ -38,18 +38,24 @@ public partial class Player : CharacterBody3D
 	public override void _Process(double delta) {
 		if (ID != -1) {
 			if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder)) {
-				GD.Print(ID + " | Parry");
+				GD.Print(ID + " | Parry |" + " Angle: " + Transform.Basis.GetEuler().Y);
 				if (currentTouching != null) {
-					currentTouching.Deflect();
+					currentTouching.Deflect(Transform.Basis.GetEuler().Y);
 				}
 			}
 			if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder)) {
 				GD.Print(ID + " | Friend Parry");
 				if (currentTouching != null) {
-					currentTouching.FriendDeflect();
+					currentTouching.FriendDeflect(Transform.Basis.GetEuler().Y);
 				}
 			}
-		}
+            if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight)) {
+                GD.Print(ID + " | Arc Parry");
+                if (currentTouching != null) {
+                    currentTouching.ArcDeflect(Transform.Basis.GetEuler().Y);
+                }
+            }
+        }
 	}
 
 	public override void _PhysicsProcess(double delta) {

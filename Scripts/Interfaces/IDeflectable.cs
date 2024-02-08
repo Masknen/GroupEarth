@@ -1,6 +1,8 @@
+using Godot;
+
 public interface IDeflectable
 {  
-    public void Deflect();
-    public void FriendDeflect();
-    public void ArcDeflect();
+    public void Deflect(float yRotation);
+    public void FriendDeflect(float yRotation);
+    public void ArcDeflect(float yRotation);
 }

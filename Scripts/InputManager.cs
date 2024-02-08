@@ -42,10 +42,10 @@ public partial class InputManager : Node
                 }
             }
             for (int i = 0; i < (int)JoyAxis.SdlMax; i++) {
-                if (Input.GetJoyAxis(ID, (JoyAxis)i) >= 0.5) {
+                if (Input.GetJoyAxis(ID, (JoyAxis)i) >= 0.2) {
                     playersPressedAxis[ID][(JoyAxis)i]++;
                 }
-                if (Input.GetJoyAxis(ID, (JoyAxis)i) < 0.5) {
+                if (Input.GetJoyAxis(ID, (JoyAxis)i) < 0.2) {
                     playersPressedAxis[ID][(JoyAxis)i] = 0;
                 }
             }
