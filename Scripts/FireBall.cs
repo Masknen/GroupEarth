@@ -1,6 +1,6 @@
 using Godot;
 using System; 
-public partial class fireball : Area3D
+public partial class fireball : Area3D, IDeflectable
 {
 
     public int speed = 10;
@@ -14,5 +14,17 @@ public partial class fireball : Area3D
     public override void _Process(double delta)
     {
         Position -= Transform.Basis.Z * (float)(speed * delta);
+    }
+
+    public void Deflect(float yRotation) {
+        throw new NotImplementedException();
+    }
+
+    public void FriendDeflect(float yRotation) {
+        throw new NotImplementedException();
+    }
+
+    public void ArcDeflect(float yRotation) {
+        throw new NotImplementedException();
     }
 }
