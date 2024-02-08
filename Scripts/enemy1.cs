@@ -62,7 +62,15 @@ public partial class enemy1 : CharacterBody3D
 		GD.Print("fireball!");
 		(new_fireBall as fireball).Position = Position;
 		//LookAt(target.GlobalPosition);
-		(new_fireBall as fireball).LookAtFromPosition(Position, target.GlobalPosition);
+
+		// Max Changes
+		float yRotation = -GlobalPosition.DirectionTo(target.GlobalPosition).SignedAngleTo(Vector3.Forward, Transform.Basis.Y);
+        Transform3D transform = new Transform3D(new Basis(Transform.Basis.Y, yRotation), Position);
+        (new_fireBall as fireball).Transform = transform;
+		// \Max Changes
+
+
+        //(new_fireBall as fireball).LookAtFromPosition(Position, target.GlobalPosition);
 		GetParent().AddChild(new_fireBall);
 	}
 
