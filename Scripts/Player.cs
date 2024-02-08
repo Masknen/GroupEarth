@@ -1,14 +1,14 @@
 using Godot;
 using System;
-using System.Diagnostics;
-using System.Security;
+//using System.Diagnostics;
+//using System.Security;
 
-[DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
+//[DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
 public partial class Player : CharacterBody3D
 {
 	public int ID = -1;
-	[Export] private Player otherPlayer;
-	private Node3D currentTouching;
+	public Player otherPlayer;
+	private IDeflectable currentTouching;
 	private float deadZone = 0.3f;
 
 	[Export] private float movementSpeed;
@@ -32,7 +32,7 @@ public partial class Player : CharacterBody3D
 	}
 
 	private void Player_AreaEntered(Area3D area) {
-		currentTouching = area.GetParent() as Node3D;
+		currentTouching = area.GetParent() as IDeflectable;
 	}
 
 	public override void _Process(double delta) {
@@ -40,13 +40,13 @@ public partial class Player : CharacterBody3D
 			if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder)) {
 				GD.Print(ID + " | Parry");
 				if (currentTouching != null) {
-					currentTouching.Rotation = Rotation;
+					currentTouching.Deflect();
 				}
 			}
 			if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder)) {
 				GD.Print(ID + " | Friend Parry");
 				if (currentTouching != null) {
-					currentTouching.LookAt(otherPlayer.GlobalPosition);
+					currentTouching.FriendDeflect();
 				}
 			}
 		}
@@ -120,8 +120,8 @@ public partial class Player : CharacterBody3D
         transform.Basis = new Basis(quaternionTargetDirection);
         Transform = transform;
     }
-    private string GetDebuggerDisplay()
-	{
-		return ToString();
-	}
+ //   private string GetDebuggerDisplay()
+	//{
+	//	return ToString();
+	//}
 }
