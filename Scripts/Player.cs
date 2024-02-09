@@ -20,11 +20,13 @@ public partial class Player : CharacterBody3D, IDamagable
 
 	private const float PARRY_DURATION = 0.2f;
 	private const float PARRY_COOLDOWN = 0.5f;
-	private const float DODGE_COOLDOWN = 0.0f;
+	private const float DODGE_COOLDOWN = 0.5f;
+    private const float INVINCIBILTY_DURATION = 0.3f;
 
 	private float parryDurationTick = 0;
 	private float parryCooldownTick = 0;
 	private float dodgeCooldownTick = 0;
+    private float invincibiltyTick = 0;
 	private bool[] isParrying = {false, false, false};
 	private bool doDodge = false;
 
@@ -120,6 +122,7 @@ public partial class Player : CharacterBody3D, IDamagable
         if (InputManager.Instance().IsJustReleasedButton(ID, JoyButton.RightShoulder)) {
             GD.Print(ID + " | Parry");
             parryCooldownTick = 0;
+            invincibiltyTick = INVINCIBILTY_DURATION;
             parryArea.Visible = false;
             isParrying[0] = false;
             foreach (var defleactable in currentTouching) {
@@ -157,10 +160,12 @@ public partial class Player : CharacterBody3D, IDamagable
 
         if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerLeft) && dodgeCooldownTick >= DODGE_COOLDOWN) {
             doDodge = true;
+            invincibiltyTick = INVINCIBILTY_DURATION;
         }
     }
     private void UpdateCooldownTicks(double delta) {
 		dodgeCooldownTick += (float)delta;
+        invincibiltyTick -= (float)delta;
 
         if (/*isParrying[0] ||*/ isParrying[1] || isParrying[2]) {
             parryDurationTick += (float)delta;
@@ -210,7 +215,12 @@ public partial class Player : CharacterBody3D, IDamagable
     }
 
     public void Hit(int damage) {
-        throw new NotImplementedException();
+        if (invincibiltyTick < 0) {
+            GD.Print("HIT FOR: " + damage);
+            if (PlayerManager.Instance().debugBoolean) {
+                Position = Vector3.Up;
+            }
+        }
     }
     //   private string GetDebuggerDisplay()
     //{

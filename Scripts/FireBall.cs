@@ -7,7 +7,14 @@ public partial class FireBall : Area3D, IDeflectable
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        BodyEntered += FireBall_BodyEntered;
+    }
 
+    private void FireBall_BodyEntered(Node3D body) {
+        GD.Print(body);
+        if (body as IDamagable != null) {
+            (body as IDamagable).Hit(10);
+        }
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

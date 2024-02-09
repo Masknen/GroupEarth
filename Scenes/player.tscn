@@ -120,12 +120,16 @@ rings = 1
 cap_bottom = false
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_4ejrt")
 
 [node name="PlayerCollisionBox" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_adq4d")
 
 [node name="DeflectArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeflectArea"]
 shape = SubResource("CylinderShape3D_mr25q")
