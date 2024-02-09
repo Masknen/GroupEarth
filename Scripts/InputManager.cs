@@ -17,7 +17,10 @@ public partial class InputManager : Node
 
     private Array<Dictionary<JoyButton, int>> playersPressedButton = new Array<Dictionary<JoyButton, int>>();
     private Array<Dictionary<JoyAxis, int>> playersPressedAxis = new Array<Dictionary<JoyAxis, int>>();
-    //private Array<Dictionary<JoyButton, int>> playersReleased = new Array<Dictionary<JoyButton, int>>();
+
+    private Array<Dictionary<JoyButton, int>> playersLastUpdatePressedButton = new Array<Dictionary<JoyButton, int>>();
+    private Array<Dictionary<JoyAxis, int>> playersLastUpdatePressedAxis = new Array<Dictionary<JoyAxis, int>>();
+
     public override void _Ready()
 	{
         _instance = this;
@@ -25,8 +28,20 @@ public partial class InputManager : Node
         playersPressedButton.Add(new Dictionary<JoyButton, int>());
         playersPressedAxis.Add(new Dictionary<JoyAxis, int>());
         playersPressedAxis.Add(new Dictionary<JoyAxis, int>());
-        //playersReleased.Add(new Dictionary<JoyButton, int>());
-        //playersReleased.Add(new Dictionary<JoyButton, int>());
+
+        playersLastUpdatePressedButton.Add(new Dictionary<JoyButton, int>());
+        playersLastUpdatePressedButton.Add(new Dictionary<JoyButton, int>());
+        playersLastUpdatePressedAxis.Add(new Dictionary<JoyAxis, int>());
+        playersLastUpdatePressedAxis.Add(new Dictionary<JoyAxis, int>());
+
+        for (int ID = 0; ID < 2; ID++) {
+            for (int i = 0; i < (int)JoyButton.SdlMax; i++) {
+                playersPressedButton[ID][(JoyButton)i] = 0;
+            }
+            for (int i = 0; i < (int)JoyAxis.SdlMax; i++) {
+                playersPressedAxis[ID][(JoyAxis)i] = 0;
+            }
+        }
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,10 +49,10 @@ public partial class InputManager : Node
 	{
         for (int ID = 0; ID < 2; ID++) {
             for (int i = 0; i < (int)JoyButton.SdlMax; i++) {
+                playersLastUpdatePressedButton[ID][(JoyButton)i] = playersPressedButton[ID][(JoyButton)i];
                 if (Input.IsJoyButtonPressed(ID, (JoyButton)i)) {
                     playersPressedButton[ID][(JoyButton)i]++;
-                }
-                if (!Input.IsJoyButtonPressed(ID, (JoyButton)i)) {
+                } else {
                     playersPressedButton[ID][(JoyButton)i] = 0;
                 }
             }
@@ -46,8 +61,7 @@ public partial class InputManager : Node
                     playersPressedAxis[ID][(JoyAxis)i]++;
                     if (playersPressedAxis[ID][(JoyAxis)i] < 5)
                         GD.Print(playersPressedAxis[ID][(JoyAxis)i]);
-                }
-                if (Input.GetJoyAxis(ID, (JoyAxis)i) < 0.15) {
+                } else {
                     playersPressedAxis[ID][(JoyAxis)i] = 0;
                 }
             }
@@ -59,6 +73,12 @@ public partial class InputManager : Node
     }
     public bool IsJustPressedAxis(int ID, JoyAxis joyAxis) {
         return playersPressedAxis[ID][joyAxis] == 1;
+    }
+    public bool IsJustReleasedButton(int ID, JoyButton joyButton) {
+        return playersPressedButton[ID][joyButton] == 0 && playersLastUpdatePressedButton[ID][joyButton] != 0;
+    }
+    public bool IsJustReleasedAxis(int ID, JoyAxis joyAxis) {
+        return playersPressedAxis[ID][joyAxis] == 0 && playersLastUpdatePressedAxis[ID][joyAxis] != 0;
     }
 
 }

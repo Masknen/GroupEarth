@@ -7,14 +7,14 @@ using System.Security;
 //using System.Security;
 
 //[DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
-public partial class Player : CharacterBody3D
+public partial class Player : CharacterBody3D, IDamagable
 {
 	public int ID = -1;
 	public Player otherPlayer;
 	private List<IDeflectable> currentTouching;
 	private float deadZone = 0.3f;
 
-	[Export] private float movementSpeed;
+    [Export] private const float movementSpeed = 4;
 	private float dodgeStrength = 35.0f;
 	private float rotationSpeed = 15.0f;
 
@@ -74,7 +74,12 @@ public partial class Player : CharacterBody3D
 			Vector2 inputDirection = GetInputVector(JoyAxis.LeftX, JoyAxis.LeftY, deadZone);
 			Vector3 inputdirectionV3 = new Vector3(inputDirection.X, 0, inputDirection.Y);
 
-			Velocity += inputdirectionV3 * (float)(movementSpeed);
+
+            if (!isParrying[0] && !isParrying[1] && !isParrying[2]) {
+                Velocity += inputdirectionV3 * (float)(movementSpeed);
+            } else {
+                Velocity = Vector3.Zero;
+            }
 
 			if (doDodge) {
 				GD.Print("Dodge!");
@@ -102,14 +107,35 @@ public partial class Player : CharacterBody3D
 	}
 
     private void HandleInput() {
-        if ((InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder) || isParrying[0]) && parryCooldownTick >= PARRY_COOLDOWN) {
-            GD.Print(ID + " | Parry");
+
+        //Hold working(with centred circular deflect area)
+		if (Input.IsJoyButtonPressed(ID, JoyButton.RightShoulder) && parryCooldownTick >= PARRY_COOLDOWN) {
+            parryArea.Visible = true;
             isParrying[0] = true;
+            foreach (var defleactable in currentTouching) {
+                defleactable.Hold();
+            }
+        }
+
+        if (InputManager.Instance().IsJustReleasedButton(ID, JoyButton.RightShoulder)) {
+            GD.Print(ID + " | Parry");
             parryCooldownTick = 0;
+            parryArea.Visible = false;
+            isParrying[0] = false;
             foreach (var defleactable in currentTouching) {
                 defleactable.Deflect(Transform.Basis.GetEuler().Y);
             }
         }
+
+        // Normal Working
+        //if ((InputManager.Instance().IsJustReleasedButton(ID, JoyButton.RightShoulder) || isParrying[0]) && parryCooldownTick >= PARRY_COOLDOWN) {
+        //    GD.Print(ID + " | Parry");
+        //    isParrying[0] = true;
+        //    parryCooldownTick = 0;
+        //    foreach (var defleactable in currentTouching) {
+        //        defleactable.Deflect(Transform.Basis.GetEuler().Y);
+        //    }
+        //}
 
         if ((InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder) || isParrying[1]) && parryCooldownTick >= PARRY_COOLDOWN) {
             GD.Print(ID + " | Friend Parry");
@@ -136,11 +162,11 @@ public partial class Player : CharacterBody3D
     private void UpdateCooldownTicks(double delta) {
 		dodgeCooldownTick += (float)delta;
 
-        if (isParrying[0] || isParrying[1] || isParrying[2]) {
+        if (/*isParrying[0] ||*/ isParrying[1] || isParrying[2]) {
             parryDurationTick += (float)delta;
             parryArea.Visible = true;
             if (parryDurationTick >= PARRY_DURATION) {
-                isParrying[0] = false;
+                //isParrying[0] = false;
                 isParrying[1] = false;
                 isParrying[2] = false;
                 parryDurationTick = 0;
@@ -182,8 +208,12 @@ public partial class Player : CharacterBody3D
         transform.Basis = new Basis(quaternionTargetDirection);
         Transform = transform;
     }
- //   private string GetDebuggerDisplay()
-	//{
-	//	return ToString();
-	//}
+
+    public void Hit(int damage) {
+        throw new NotImplementedException();
+    }
+    //   private string GetDebuggerDisplay()
+    //{
+    //	return ToString();
+    //}
 }

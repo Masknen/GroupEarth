@@ -17,6 +17,7 @@ public partial class FireBall : Area3D, IDeflectable
     }
 
     public void Deflect(float yRotation) {
+        speed = 10;
         GD.Print("Hit");
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
         Transform = transform;
@@ -30,5 +31,9 @@ public partial class FireBall : Area3D, IDeflectable
 
     public void ArcDeflect(float yRotation) {
         throw new NotImplementedException();
+    }
+
+    public void Hold() {
+        speed = 0;
     }
 }
