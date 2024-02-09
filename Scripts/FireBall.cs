@@ -1,6 +1,6 @@
 using Godot;
 using System; 
-public partial class fireball : Area3D, IDeflectable
+public partial class FireBall : Area3D, IDeflectable
 {
 
     public int speed = 10;

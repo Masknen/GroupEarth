@@ -60,13 +60,13 @@ public partial class enemy1 : CharacterBody3D
 	public void fireFireBall(){
 		var new_fireBall = fireBall.Instantiate();
 		GD.Print("fireball!");
-		(new_fireBall as fireball).Position = Position;
+		(new_fireBall as FireBall).Position = Position;
 		//LookAt(target.GlobalPosition);
 
 		// Max Changes
 		float yRotation = -GlobalPosition.DirectionTo(target.GlobalPosition).SignedAngleTo(Vector3.Forward, Transform.Basis.Y);
         Transform3D transform = new Transform3D(new Basis(Transform.Basis.Y, yRotation), Position);
-        (new_fireBall as fireball).Transform = transform;
+        (new_fireBall as FireBall).Transform = transform;
 		// \Max Changes
 
 
