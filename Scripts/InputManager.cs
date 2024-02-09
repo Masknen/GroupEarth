@@ -42,10 +42,12 @@ public partial class InputManager : Node
                 }
             }
             for (int i = 0; i < (int)JoyAxis.SdlMax; i++) {
-                if (Input.GetJoyAxis(ID, (JoyAxis)i) >= 0.2) {
+                if (Input.GetJoyAxis(ID, (JoyAxis)i) >= 0.15) {
                     playersPressedAxis[ID][(JoyAxis)i]++;
+                    if (playersPressedAxis[ID][(JoyAxis)i] < 5)
+                        GD.Print(playersPressedAxis[ID][(JoyAxis)i]);
                 }
-                if (Input.GetJoyAxis(ID, (JoyAxis)i) < 0.2) {
+                if (Input.GetJoyAxis(ID, (JoyAxis)i) < 0.15) {
                     playersPressedAxis[ID][(JoyAxis)i] = 0;
                 }
             }
