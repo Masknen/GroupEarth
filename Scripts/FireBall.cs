@@ -28,6 +28,10 @@ public partial class FireBall : Area3D, IDeflectable
         if(body is enemy1){
             (body as enemy1).hp += -damage;
             (body as enemy1).die();
+            if((body as enemy1).isDead){
+                QueueFree();
+            }
+
             GD.Print("works");
         }
     }

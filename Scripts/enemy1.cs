@@ -23,6 +23,8 @@ public partial class enemy1 : CharacterBody3D
 	private float timeTick = 0;
 	private float invincibiltyTick = 0;
 
+	public bool isDead = false;
+
     public override void _Ready()
     {
 		fireBall = GD.Load<PackedScene>("res://Scenes/fire_ball.tscn");
@@ -81,11 +83,10 @@ public partial class enemy1 : CharacterBody3D
 	//make method to shoot a object twoards the closest player...
 	public void die()
 	{
+		
 		if(hp <= 0){
+			isDead = true; 
 			QueueFree();
-		}
+ 		}
 	}
-
-	
-
 }
