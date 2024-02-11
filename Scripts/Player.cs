@@ -7,16 +7,13 @@ using System.Security;
 //using System.Security;
 
 //[DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
-public partial class Player : CharacterBody3D, IDamagable
-{
+public partial class Player : CharacterBody3D, IDamagable {
 	public int ID = -1;
 	public Player otherPlayer;
 	private List<IDeflectable> currentTouching;
 	private float deadZone = 0.3f;
 
-    [Export] private const float movementSpeed = 4;
-	private float dodgeStrength = 35.0f;
-	private float rotationSpeed = 15.0f;
+    public Stat stats = new Stat();
 
 	private const float PARRY_DURATION = 0.2f;
 	private const float PARRY_COOLDOWN = 0.5f;
@@ -44,6 +41,8 @@ public partial class Player : CharacterBody3D, IDamagable
 		GetChild<Area3D>(1).AreaExited += Player_AreaExited;
 
 		parryArea.Visible = false;
+
+        stats.AddStat(Stat.StatType.MaxHealth, 10).AddStat(Stat.StatType.MovementSpeed, 4).AddStat(Stat.StatType.DodgeStrength, 35).AddStat(Stat.StatType.RotationSpeed, 15);
 	}
 
 	private void Player_AreaExited(Area3D area) {
@@ -78,7 +77,7 @@ public partial class Player : CharacterBody3D, IDamagable
 
 
             if (!isParrying[0] && !isParrying[1] && !isParrying[2]) {
-                Velocity += inputdirectionV3 * (float)(movementSpeed);
+                Velocity += inputdirectionV3 * (float)(stats.GetStat(Stat.StatType.MovementSpeed));
             } else {
                 Velocity = Vector3.Zero;
             }
@@ -87,10 +86,10 @@ public partial class Player : CharacterBody3D, IDamagable
 				GD.Print("Dodge!");
 				dodgeCooldownTick = 0;
 				if (!inputdirectionV3.IsEqualApprox(Vector3.Zero)) {
-					Velocity += inputdirectionV3 * dodgeStrength;
+					Velocity += inputdirectionV3 * stats.GetStat(Stat.StatType.DodgeStrength);
 					RotateTo(inputDirection);
 				} else {
-					Velocity += -Transform.Basis.Z * dodgeStrength;
+					Velocity += -Transform.Basis.Z * stats.GetStat(Stat.StatType.DodgeStrength);
 				}
 				doDodge = false;
 			}
@@ -101,7 +100,7 @@ public partial class Player : CharacterBody3D, IDamagable
 
 
 			// Rotates player
-			if (inputRotation != Vector2.Zero && Velocity.Length() < movementSpeed * 3) {
+			if (inputRotation != Vector2.Zero && Velocity.Length() < stats.GetStat(Stat.StatType.MovementSpeed) * 3) {
 				RotateToSlerp(inputRotation, delta);
 			}
 			MoveAndSlide();
@@ -195,7 +194,7 @@ public partial class Player : CharacterBody3D, IDamagable
         var quaternion = Transform.Basis.GetRotationQuaternion();
 
 
-        quaternion = quaternion.Slerp(quaternionTargetDirection, (float)(rotationSpeed * delta));
+        quaternion = quaternion.Slerp(quaternionTargetDirection, (float)(stats.GetStat(Stat.StatType.RotationSpeed) * delta));
 
         // Sets the rotation to the transform
         Transform3D transform = Transform;
@@ -214,13 +213,15 @@ public partial class Player : CharacterBody3D, IDamagable
         Transform = transform;
     }
 
-    public void Hit(int damage) {
+    bool IDamagable.Hit(int damage) {
         if (invincibiltyTick < 0) {
             GD.Print("HIT FOR: " + damage);
             if (PlayerManager.Instance().debugBoolean) {
                 Position = Vector3.Up;
             }
+            return true;
         }
+        return false;
     }
     //   private string GetDebuggerDisplay()
     //{

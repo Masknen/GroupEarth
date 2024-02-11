@@ -3,5 +3,5 @@ using System;
 
 public interface IDamagable
 {
-    public void Hit(int damage);
+    public bool Hit(int damage);
 }

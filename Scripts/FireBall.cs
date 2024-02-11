@@ -23,10 +23,11 @@ public partial class FireBall : Area3D, IDeflectable
     }
 
     private void FireBall_BodyEntered(Node3D body) {
-        
         GD.Print(body);
         if (body as IDamagable != null) {
-            (body as IDamagable).Hit(10);
+            if ((body as IDamagable).Hit(10)) {
+                QueueFree();
+            }
         }
         if(body is enemy1){
             (body as enemy1).hp += -damage;
@@ -34,10 +35,10 @@ public partial class FireBall : Area3D, IDeflectable
            
 
             GD.Print("works");
-        }
-        if(damage > 0){
-            if((body as enemy1).isDead){
-                QueueFree();
+            if(damage > 0){
+                if((body as enemy1).isDead){
+                    QueueFree();
+                }
             }
         }
         
