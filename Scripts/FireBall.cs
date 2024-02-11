@@ -6,6 +6,7 @@ public partial class FireBall : Area3D, IDeflectable
 {
 
     public int speed = 10;
+    public int baseSpeed = 10;
     public int damage = 0;
     
 
@@ -15,12 +16,14 @@ public partial class FireBall : Area3D, IDeflectable
     public override void _Ready()
     {
         BodyEntered += FireBall_BodyEntered;
-        var mech = GetNode<MeshInstance3D>("MeshInstance3D");
+        //change color of the ball based on damage
+        
         
         
     }
 
     private void FireBall_BodyEntered(Node3D body) {
+        
         GD.Print(body);
         if (body as IDamagable != null) {
             (body as IDamagable).Hit(10);
@@ -28,12 +31,16 @@ public partial class FireBall : Area3D, IDeflectable
         if(body is enemy1){
             (body as enemy1).hp += -damage;
             (body as enemy1).die();
-            if((body as enemy1).isDead){
-                QueueFree();
-            }
+           
 
             GD.Print("works");
         }
+        if(damage > 0){
+            if((body as enemy1).isDead){
+                QueueFree();
+            }
+        }
+        
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,10 +55,19 @@ public partial class FireBall : Area3D, IDeflectable
         
     }
 
+
     public void Deflect(float yRotation) {
-        speed += 10;
         damage += 1;
+        speed = baseSpeed + (3 * damage);
         fireBallDuration = 20;
+
+        //change color
+        MeshInstance3D mesh = GetNode<MeshInstance3D>("MeshInstance3D");
+        StandardMaterial3D material = new StandardMaterial3D();  
+        material.AlbedoColor = new Color(1,0,01 * damage,0);
+        mesh.MaterialOverride = material;
+        //color changed
+
         GD.Print(damage);
         GD.Print("Hit");
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
@@ -60,9 +76,14 @@ public partial class FireBall : Area3D, IDeflectable
 
     public void FriendDeflect(float yRotation) {
         GD.Print("Hit");
-        speed += 10;
         damage += 1;
+        speed = baseSpeed + (3 * damage);
         fireBallDuration = 20;
+
+         //change color --
+        
+        //color changed --
+
         GD.Print(damage);
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
         Transform = transform;
@@ -73,6 +94,7 @@ public partial class FireBall : Area3D, IDeflectable
     }
 
     public void Hold() {
+        
         speed = 0;
     }
 }

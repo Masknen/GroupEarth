@@ -83,9 +83,8 @@ public partial class enemy1 : CharacterBody3D
 	//make method to shoot a object twoards the closest player...
 	public void die()
 	{
-		
+		isDead = true;
 		if(hp <= 0){
-			isDead = true; 
 			QueueFree();
  		}
 	}
