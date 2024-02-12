@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmrr1n86pkwm5"]
+[gd_scene load_steps=12 format=3 uid="uid://dmrr1n86pkwm5"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_4ejrt"]
 [ext_resource type="PackedScene" uid="uid://dqaisgicm4m4v" path="res://Assets/kaykit_dungeon_pack_1.0/Models/Characters/gltf/character_knight.gltf" id="2_c0gr7"]
@@ -7,8 +7,8 @@
 radius = 0.630995
 height = 2.18109
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_5mspn"]
-radius = 1.65
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mr25q"]
+radius = 3.0
 
 [sub_resource type="Animation" id="Animation_v4d5c"]
 resource_name = "Dodge"
@@ -106,18 +106,33 @@ _data = {
 "Walk": SubResource("Animation_1e0w5")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ys5os"]
+albedo_color = Color(0, 0.145098, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_80x54"]
+lightmap_size_hint = Vector2i(64, 24)
+material = SubResource("StandardMaterial3D_ys5os")
+top_radius = 3.0
+bottom_radius = 3.0
+height = 0.01
+radial_segments = 16
+rings = 1
+cap_bottom = false
+
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_4ejrt")
-movementSpeed = 4.0
 
 [node name="PlayerCollisionBox" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_adq4d")
 
 [node name="DeflectArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.441)
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeflectArea"]
-shape = SubResource("CylinderShape3D_5mspn")
+shape = SubResource("CylinderShape3D_mr25q")
 
 [node name="CharacterModel" parent="." instance=ExtResource("2_c0gr7")]
 transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, -1, 0)
@@ -126,3 +141,7 @@ transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, -1,
 libraries = {
 "": SubResource("AnimationLibrary_yhs0a")
 }
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("CylinderMesh_80x54")

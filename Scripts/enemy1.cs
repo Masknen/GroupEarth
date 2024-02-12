@@ -10,9 +10,9 @@ public partial class enemy1 : CharacterBody3D
 	[Export] public int speed {get; set;} = 1;
 
   
-	[Signal] public delegate void HitEventHandler();
+	
   
-	private int hp = 1;
+	public int hp = 3;
 	private PackedScene fireBall;
 	private Node3D target;
 	private CharacterBody3D player1;
@@ -21,10 +21,14 @@ public partial class enemy1 : CharacterBody3D
 	private Vector3 direction;
 	private float MaxTime = 2;
 	private float timeTick = 0;
+	private float invincibiltyTick = 0;
+
+	public bool isDead = false;
 
     public override void _Ready()
     {
 		fireBall = GD.Load<PackedScene>("res://Scenes/fire_ball.tscn");
+		
         
     }
 
@@ -47,6 +51,7 @@ public partial class enemy1 : CharacterBody3D
 				timeTick -= MaxTime;
 				fireFireBall();
 			}
+			
 
 			/* WILL BE USED LATER TO READ THE MAP AND DODGE WALLS ECT...
 			//--get target position and move in that dircetion--
@@ -57,6 +62,7 @@ public partial class enemy1 : CharacterBody3D
 			MoveAndSlide(); */
 		}
 	}
+	
 	public void fireFireBall(){
 		var new_fireBall = fireBall.Instantiate();
 		GD.Print("fireball!");
@@ -77,15 +83,9 @@ public partial class enemy1 : CharacterBody3D
 	//make method to shoot a object twoards the closest player...
 	public void die()
 	{
+		isDead = true;
 		if(hp <= 0){
 			QueueFree();
-		}
+ 		}
 	}
-	public void isHit()
-	{
-		EmitSignal(SignalName.Hit);
-		hp += -1;
-		die();  
-	}
-
 }
