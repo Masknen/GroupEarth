@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://4egnrarhnrlt"]
+
+[ext_resource type="Script" path="res://MiddleNode.cs" id="1_et5ke"]
+
+[node name="MiddleNode" type="Node3D"]
+script = ExtResource("1_et5ke")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 16, 8)
+projection = 1
+size = 25.0
