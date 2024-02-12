@@ -6,6 +6,6 @@
 script = ExtResource("1_et5ke")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 12, 8)
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 16, 8)
 projection = 1
-size = 30.0
+size = 25.0
