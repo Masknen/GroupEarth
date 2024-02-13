@@ -81,9 +81,12 @@ public partial class FireBall : Area3D, IDeflectable
         speed = baseSpeed + (3 * damage);
         fireBallDuration = 20;
 
-         //change color --
-        
-        //color changed --
+        //change color
+        MeshInstance3D mesh = GetNode<MeshInstance3D>("MeshInstance3D");
+        StandardMaterial3D material = new StandardMaterial3D();
+        material.AlbedoColor = new Color(1, 0, 01 * damage, 0);
+        mesh.MaterialOverride = material;
+        //color changed
 
         GD.Print(damage);
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
