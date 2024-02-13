@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://rvftoorrw30w"]
+[gd_scene load_steps=12 format=3 uid="uid://dmrr1n86pkwm5"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_4ejrt"]
 [ext_resource type="PackedScene" uid="uid://dqaisgicm4m4v" path="res://Assets/kaykit_dungeon_pack_1.0/Models/Characters/gltf/character_knight.gltf" id="2_c0gr7"]
