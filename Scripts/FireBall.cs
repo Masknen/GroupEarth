@@ -16,10 +16,15 @@ public partial class FireBall : Area3D, IDeflectable
     public override void _Ready()
     {
         BodyEntered += FireBall_BodyEntered;
+        BodyShapeEntered += FireBall_BodyShapeEntered;
         //change color of the ball based on damage
         
         
         
+    }
+
+    private void FireBall_BodyShapeEntered(Rid bodyRid, Node3D body, long bodyShapeIndex, long localShapeIndex) {
+        QueueFree();
     }
 
     private void FireBall_BodyEntered(Node3D body) {
