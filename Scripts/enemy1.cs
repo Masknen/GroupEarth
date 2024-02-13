@@ -25,14 +25,14 @@ public partial class enemy1 : CharacterBody3D
 
 	public bool isDead = false;
 
-    public override void _Ready()
-    {
+	public override void _Ready()
+	{
 		fireBall = GD.Load<PackedScene>("res://Scenes/fire_ball.tscn");
 		
-        
-    }
+		
+	}
 
-    public override void _Process(double delta)
+	public override void _Process(double delta)
 	{
 		if (PlayerManager.Instance().players.Count > 0) {
 			player1 = PlayerManager.Instance().players[0];
@@ -71,12 +71,12 @@ public partial class enemy1 : CharacterBody3D
 
 		// Max Changes
 		float yRotation = -GlobalPosition.DirectionTo(target.GlobalPosition).SignedAngleTo(Vector3.Forward, Transform.Basis.Y);
-        Transform3D transform = new Transform3D(new Basis(Transform.Basis.Y, yRotation), Position);
-        (new_fireBall as FireBall).Transform = transform;
+		Transform3D transform = new Transform3D(new Basis(Transform.Basis.Y, yRotation), Position);
+		(new_fireBall as FireBall).Transform = transform;
 		// \Max Changes
 
 
-        //(new_fireBall as fireball).LookAtFromPosition(Position, target.GlobalPosition);
+		//(new_fireBall as fireball).LookAtFromPosition(Position, target.GlobalPosition);
 		GetParent().AddChild(new_fireBall);
 	}
 
