@@ -73,7 +73,6 @@ public partial class InputManager : Node
                 }
             }
         }
-        GD.Print(playersPressedAxis[0][JoyAxis.TriggerRight] + " | " + playersLastUpdatePressedAxis[0][JoyAxis.TriggerRight]);
 	}
 
     public bool IsJustPressedButton(int ID, JoyButton joyButton) {
