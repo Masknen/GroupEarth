@@ -24,10 +24,8 @@ public partial class FireBall : Area3D, IDeflectable
     }
 
     private void FireBall_BodyEntered(Node3D body) {
-        GD.Print(body as StaticBody3D + "||");
         if (body as GridMap != null) QueueFree();
 
-        GD.Print(body);
         if (body as IDamagable != null) {
             if ((body as IDamagable).Hit(10)) {
                 QueueFree();
