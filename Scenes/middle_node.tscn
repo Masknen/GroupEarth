@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://4egnrarhnrlt"]
+[gd_scene load_steps=3 format=3 uid="uid://4egnrarhnrlt"]
 
-[ext_resource type="Script" path="res://MiddleNode.cs" id="1_et5ke"]
+[ext_resource type="Script" path="res://Scripts/MiddleNode.cs" id="1_et5ke"]
+[ext_resource type="Script" path="res://Scripts/ArcadeSpawner.cs" id="2_o82xd"]
 
 [node name="MiddleNode" type="Node3D"]
 script = ExtResource("1_et5ke")
@@ -9,3 +10,6 @@ script = ExtResource("1_et5ke")
 transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 16, 8)
 projection = 1
 size = 25.0
+
+[node name="ArcadeSpawner" type="Node3D" parent="."]
+script = ExtResource("2_o82xd")
