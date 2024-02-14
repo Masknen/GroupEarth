@@ -16,18 +16,17 @@ public partial class FireBall : Area3D, IDeflectable
     public override void _Ready()
     {
         BodyEntered += FireBall_BodyEntered;
-        BodyShapeEntered += FireBall_BodyShapeEntered;
+        
         //change color of the ball based on damage
         
         
         
     }
 
-    private void FireBall_BodyShapeEntered(Rid bodyRid, Node3D body, long bodyShapeIndex, long localShapeIndex) {
-        QueueFree();
-    }
-
     private void FireBall_BodyEntered(Node3D body) {
+        GD.Print(body as StaticBody3D + "||");
+        if (body as GridMap != null) QueueFree();
+
         GD.Print(body);
         if (body as IDamagable != null) {
             if ((body as IDamagable).Hit(10)) {
@@ -39,7 +38,6 @@ public partial class FireBall : Area3D, IDeflectable
             (body as enemy1).die();
            
 
-            GD.Print("works");
             if(damage > 0){
                 if((body as enemy1).isDead){
                     QueueFree();
