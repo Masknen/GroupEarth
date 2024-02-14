@@ -42,6 +42,14 @@ public partial class InputManager : Node
                 playersPressedAxis[ID][(JoyAxis)i] = 0;
             }
         }
+        for (int ID = 0; ID < 2; ID++) {
+            for (int i = 0; i < (int)JoyButton.SdlMax; i++) {
+                playersLastUpdatePressedButton[ID][(JoyButton)i] = 0;
+            }
+            for (int i = 0; i < (int)JoyAxis.SdlMax; i++) {
+                playersLastUpdatePressedAxis[ID][(JoyAxis)i] = 0;
+            }
+        }
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -57,6 +65,7 @@ public partial class InputManager : Node
                 }
             }
             for (int i = 0; i < (int)JoyAxis.SdlMax; i++) {
+                playersLastUpdatePressedAxis[ID][(JoyAxis)i] = playersPressedAxis[ID][(JoyAxis)i];
                 if (Input.GetJoyAxis(ID, (JoyAxis)i) >= 0.15) {
                     playersPressedAxis[ID][(JoyAxis)i]++;
                 } else {
@@ -64,6 +73,7 @@ public partial class InputManager : Node
                 }
             }
         }
+        GD.Print(playersPressedAxis[0][JoyAxis.TriggerRight] + " | " + playersLastUpdatePressedAxis[0][JoyAxis.TriggerRight]);
 	}
 
     public bool IsJustPressedButton(int ID, JoyButton joyButton) {
