@@ -23,20 +23,6 @@ public partial class FireBall : Area3D, IDeflectable
 		
 	}
 
-<<<<<<< Updated upstream
-    private void FireBall_BodyEntered(Node3D body) {
-        if (body as GridMap != null) QueueFree();
-
-        if (body as IDamagable != null) {
-            if ((body as IDamagable).Hit(10)) {
-                QueueFree();
-            }
-        }
-        if(body is enemy1){
-            (body as enemy1).hp += -damage;
-            (body as enemy1).die();
-           
-=======
 	private void FireBall_BodyEntered(Node3D body) {
 		GD.Print(body as StaticBody3D + "||");
 		if (body as GridMap != null) QueueFree();
@@ -47,20 +33,7 @@ public partial class FireBall : Area3D, IDeflectable
 				QueueFree();
 			}
 		}
-		/*
-		if(body is enemy1){
-			(body as enemy1).hp += -damage;
-			(body as enemy1).die();
-		   
->>>>>>> Stashed changes
-
-			if(damage > 0){
-				if((body as enemy1).isDead){
-					QueueFree();
-				}
-			}
-		}
-		*/
+		
 		
 	}
 
