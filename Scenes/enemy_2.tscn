@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://celf1ycm6og7e"]
 
 [ext_resource type="Script" path="res://Scripts/enemy2.cs" id="1_a5api"]
-[ext_resource type="PackedScene" uid="uid://ca6fsl8r81w72" path="res://Assets/Enemies/Enemny1/Skeleton_Minion.glb" id="1_vxd5h"]
+[ext_resource type="PackedScene" uid="uid://ca6fsl8r81w72" path="res://Assets/kaykit skeletons/KayKit_Skeletons_1.0_FREE/characters/gltf/Skeleton_Minion.glb" id="1_vxd5h"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ukx71"]
 size = Vector3(1, 2.12943, 1)

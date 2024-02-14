@@ -1,16 +1,14 @@
 using Godot;
 using GodotPlugins.Game;
 using System;
+using System.Data.Common;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
-public partial class enemy1 : CharacterBody3D
+public partial class enemy1 : CharacterBody3D, IDamagable
 {
 	[Export] public int speed {get; set;} = 1;
-
-  
-	
   
 	public int hp = 3;
 	private PackedScene fireBall;
@@ -24,6 +22,23 @@ public partial class enemy1 : CharacterBody3D
 	private float invincibiltyTick = 0;
 
 	public bool isDead = false;
+
+	bool IDamagable.Hit(int damage){
+		GD.Print("IM HIT!");
+		hp += -damage;
+		
+		if(hp <= 0){
+			QueueFree();
+			isDead = true;
+		}
+		if(damage > 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+		
+	}
 
 	public override void _Ready()
 	{
@@ -80,7 +95,7 @@ public partial class enemy1 : CharacterBody3D
 		GetParent().AddChild(new_fireBall);
 	}
 
-	//make method to shoot a object twoards the closest player...
+	/*
 	public void die()
 	{
 		isDead = true;
@@ -88,4 +103,5 @@ public partial class enemy1 : CharacterBody3D
 			QueueFree();
  		}
 	}
+	*/
 }
