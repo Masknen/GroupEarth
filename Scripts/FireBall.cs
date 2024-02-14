@@ -26,7 +26,7 @@ public partial class FireBall : Area3D, IDeflectable
         if (body as GridMap != null) QueueFree();
 
         if (body as IDamagable != null) {
-            if ((body as IDamagable).Hit(10)) {
+            if ((body as IDamagable).Hit(damage)) {
                 QueueFree();
             }
         }

@@ -24,22 +24,21 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 	public bool isDead = false;
 
 	bool IDamagable.Hit(int damage){
-		GD.Print("IM HIT!");
+		GD.Print(damage);
 		hp += -damage;
-		
 		if(hp <= 0){
 			QueueFree();
-			isDead = true;
-		}
-		if(damage > 0){
 			return true;
 		}
-		else{
+		if(damage <= 0){
 			return false;
-			//fungerar detta? 
 		}
-		
+		else{
+			return true;
+		} 
 	}
+		
+	
 
 	public override void _Ready()
 	{
