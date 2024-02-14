@@ -36,6 +36,7 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 		}
 		else{
 			return false;
+			//fungerar detta? 
 		}
 		
 	}
