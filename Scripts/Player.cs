@@ -111,9 +111,82 @@ public partial class Player : CharacterBody3D, IDamagable {
 	}
 
     private void HandleInput() {
+        NormalDeflect();
+        
 
+        if ((InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder) || isParrying[1]) && parryCooldownTick >= PARRY_COOLDOWN) {
+            GD.Print(ID + " | Friend Parry");
+            isParrying[1] = true;
+            invincibiltyTick = INVINCIBILTY_DURATION;
+            parryCooldownTick = 0;
+            foreach (var defleactable in currentTouching) {
+                defleactable.FriendDeflect(-GlobalPosition.DirectionTo(otherPlayer.GlobalPosition).SignedAngleTo(Vector3.Forward, Transform.Basis.Y));
+            }
+        }
+
+        //Charge parry
+        if (Input.GetJoyAxis(ID, JoyAxis.TriggerRight) >= 0.15) {
+            parryArea.Visible = true;
+            float chargeSpeed = 0.05f;
+            if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight)) {
+                parryArea.Scale = Vector3.Zero;
+            }
+            if (parryArea.Scale < Vector3.One) {
+                parryArea.Scale += new Vector3(chargeSpeed, chargeSpeed, chargeSpeed);
+            } else {
+                parryArea.Scale = Vector3.One;
+            }
+        }
+
+        if (InputManager.Instance().IsJustReleasedAxis(ID, JoyAxis.TriggerRight)) {
+            if (parryArea.Scale > new Vector3(0.95f, 0.95f, 0.95f)) {
+                invincibiltyTick = INVINCIBILTY_DURATION / 2.0f;
+                var new_fireBall = fireBall.Instantiate();
+                (new_fireBall as FireBall).Position = Position;
+                float yRotation = Transform.Basis.GetEuler().Y;
+                Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
+                (new_fireBall as FireBall).Transform = transform;
+                GetParent().AddChild(new_fireBall);
+            }
+            parryArea.Scale = Vector3.One;
+            parryArea.Visible = false;
+        }
+        //
+
+
+
+        //if ((InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight) || isParrying[2]) && parryCooldownTick >= PARRY_COOLDOWN) {
+        //    GD.Print(ID + " | Arc Parry");
+        //    invincibiltyTick = INVINCIBILTY_DURATION/2.0f;
+        //    var new_fireBall = fireBall.Instantiate();
+        //    GD.Print("fireball!");
+        //    (new_fireBall as FireBall).Position = Position;
+        //    float yRotation = Transform.Basis.GetEuler().Y;
+        //    Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
+        //    (new_fireBall as FireBall).Transform = transform;
+        //    GetParent().AddChild(new_fireBall);
+
+        //    //isParrying[2] = true;
+        //    //parryCooldownTick = 0;
+        //    //foreach (var defleactable in currentTouching) {
+        //    //    defleactable.ArcDeflect(Transform.Basis.GetEuler().Y);
+        //    //}
+        //}
+
+
+
+
+
+
+        if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerLeft) && dodgeCooldownTick >= DODGE_COOLDOWN) {
+            doDodge = true;
+            invincibiltyTick = INVINCIBILTY_DURATION;
+        }
+    }
+
+    private void NormalDeflect() {
         //Hold working(with centred circular deflect area)
-		if (Input.IsJoyButtonPressed(ID, JoyButton.RightShoulder) && parryCooldownTick >= PARRY_COOLDOWN && parryDurationTick < PARRY_DURATION) {
+        if (Input.IsJoyButtonPressed(ID, JoyButton.RightShoulder) && parryCooldownTick >= PARRY_COOLDOWN && parryDurationTick < PARRY_DURATION) {
             parryArea.Visible = true;
             isParrying[0] = true;
             parryDurationTick = 0;
@@ -142,40 +215,8 @@ public partial class Player : CharacterBody3D, IDamagable {
         //        defleactable.Deflect(Transform.Basis.GetEuler().Y);
         //    }
         //}
-
-        if ((InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder) || isParrying[1]) && parryCooldownTick >= PARRY_COOLDOWN) {
-            GD.Print(ID + " | Friend Parry");
-            isParrying[1] = true;
-            invincibiltyTick = INVINCIBILTY_DURATION;
-            parryCooldownTick = 0;
-            foreach (var defleactable in currentTouching) {
-                defleactable.FriendDeflect(-GlobalPosition.DirectionTo(otherPlayer.GlobalPosition).SignedAngleTo(Vector3.Forward, Transform.Basis.Y));
-            }
-        }
-
-        if ((InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight) || isParrying[2]) && parryCooldownTick >= PARRY_COOLDOWN) {
-            GD.Print(ID + " | Arc Parry");
-            invincibiltyTick = INVINCIBILTY_DURATION/2.0f;
-            var new_fireBall = fireBall.Instantiate();
-            GD.Print("fireball!");
-            (new_fireBall as FireBall).Position = Position;
-            float yRotation = Transform.Basis.GetEuler().Y;
-            Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
-            (new_fireBall as FireBall).Transform = transform;
-            GetParent().AddChild(new_fireBall);
-
-            //isParrying[2] = true;
-            //parryCooldownTick = 0;
-            //foreach (var defleactable in currentTouching) {
-            //    defleactable.ArcDeflect(Transform.Basis.GetEuler().Y);
-            //}
-        }
-
-        if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerLeft) && dodgeCooldownTick >= DODGE_COOLDOWN) {
-            doDodge = true;
-            invincibiltyTick = INVINCIBILTY_DURATION;
-        }
     }
+
     private void UpdateCooldownTicks(double delta) {
 		dodgeCooldownTick += (float)delta;
         invincibiltyTick -= (float)delta;
