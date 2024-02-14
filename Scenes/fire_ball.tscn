@@ -12,7 +12,7 @@ material = SubResource("StandardMaterial3D_lgjv7")
 
 [node name="fireball" type="Area3D"]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 3
 script = ExtResource("1_1kfvo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

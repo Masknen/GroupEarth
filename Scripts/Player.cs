@@ -16,9 +16,9 @@ public partial class Player : CharacterBody3D, IDamagable {
     public Stat stats = new Stat();
 
 	private const float PARRY_DURATION = 0.2f;
-	private const float PARRY_COOLDOWN = 0.5f;
-	private const float DODGE_COOLDOWN = 0.5f;
-    private const float INVINCIBILTY_DURATION = 0.3f;
+	private const float PARRY_COOLDOWN = 0.2f;
+	private const float DODGE_COOLDOWN = 0.3f;
+    private const float INVINCIBILTY_DURATION = 0.15f;
 
 	private float parryDurationTick = 0;
 	private float parryCooldownTick = 0;
@@ -31,7 +31,9 @@ public partial class Player : CharacterBody3D, IDamagable {
 	private AnimationPlayer animationPlayer;
 	private MeshInstance3D parryArea;
 
-	public override void _Ready() {
+    private PackedScene fireBall;
+
+    public override void _Ready() {
 		currentTouching = new List<IDeflectable>();
 
 		animationPlayer = GetChild<AnimationPlayer>(3);
@@ -42,6 +44,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 
 		parryArea.Visible = false;
 
+        fireBall = GD.Load<PackedScene>("res://Scenes/fire_ball.tscn");
         stats.AddStat(Stat.StatType.MaxHealth, 10).AddStat(Stat.StatType.MovementSpeed, 4).AddStat(Stat.StatType.DodgeStrength, 35).AddStat(Stat.StatType.RotationSpeed, 15);
 	}
 
@@ -110,9 +113,10 @@ public partial class Player : CharacterBody3D, IDamagable {
     private void HandleInput() {
 
         //Hold working(with centred circular deflect area)
-		if (Input.IsJoyButtonPressed(ID, JoyButton.RightShoulder) && parryCooldownTick >= PARRY_COOLDOWN) {
+		if (Input.IsJoyButtonPressed(ID, JoyButton.RightShoulder) && parryCooldownTick >= PARRY_COOLDOWN && parryDurationTick < PARRY_DURATION) {
             parryArea.Visible = true;
             isParrying[0] = true;
+            parryDurationTick = 0;
             foreach (var defleactable in currentTouching) {
                 defleactable.Hold();
             }
@@ -142,6 +146,7 @@ public partial class Player : CharacterBody3D, IDamagable {
         if ((InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder) || isParrying[1]) && parryCooldownTick >= PARRY_COOLDOWN) {
             GD.Print(ID + " | Friend Parry");
             isParrying[1] = true;
+            invincibiltyTick = INVINCIBILTY_DURATION;
             parryCooldownTick = 0;
             foreach (var defleactable in currentTouching) {
                 defleactable.FriendDeflect(-GlobalPosition.DirectionTo(otherPlayer.GlobalPosition).SignedAngleTo(Vector3.Forward, Transform.Basis.Y));
@@ -150,11 +155,20 @@ public partial class Player : CharacterBody3D, IDamagable {
 
         if ((InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight) || isParrying[2]) && parryCooldownTick >= PARRY_COOLDOWN) {
             GD.Print(ID + " | Arc Parry");
-            isParrying[2] = true;
-            parryCooldownTick = 0;
-            foreach (var defleactable in currentTouching) {
-                defleactable.ArcDeflect(Transform.Basis.GetEuler().Y);
-            }
+            invincibiltyTick = INVINCIBILTY_DURATION/2.0f;
+            var new_fireBall = fireBall.Instantiate();
+            GD.Print("fireball!");
+            (new_fireBall as FireBall).Position = Position;
+            float yRotation = Transform.Basis.GetEuler().Y;
+            Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
+            (new_fireBall as FireBall).Transform = transform;
+            GetParent().AddChild(new_fireBall);
+
+            //isParrying[2] = true;
+            //parryCooldownTick = 0;
+            //foreach (var defleactable in currentTouching) {
+            //    defleactable.ArcDeflect(Transform.Basis.GetEuler().Y);
+            //}
         }
 
         if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerLeft) && dodgeCooldownTick >= DODGE_COOLDOWN) {
