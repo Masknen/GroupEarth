@@ -16,9 +16,9 @@ public partial class Player : CharacterBody3D, IDamagable {
     public Stat stats = new Stat();
 
 	private const float PARRY_DURATION = 0.2f;
-	private const float PARRY_COOLDOWN = 0.5f;
-	private const float DODGE_COOLDOWN = 0.5f;
-    private const float INVINCIBILTY_DURATION = 0.3f;
+	private const float PARRY_COOLDOWN = 0.2f;
+	private const float DODGE_COOLDOWN = 0.3f;
+    private const float INVINCIBILTY_DURATION = 0.15f;
 
 	private float parryDurationTick = 0;
 	private float parryCooldownTick = 0;
@@ -113,9 +113,10 @@ public partial class Player : CharacterBody3D, IDamagable {
     private void HandleInput() {
 
         //Hold working(with centred circular deflect area)
-		if (Input.IsJoyButtonPressed(ID, JoyButton.RightShoulder) && parryCooldownTick >= PARRY_COOLDOWN) {
+		if (Input.IsJoyButtonPressed(ID, JoyButton.RightShoulder) && parryCooldownTick >= PARRY_COOLDOWN && parryDurationTick < PARRY_DURATION) {
             parryArea.Visible = true;
             isParrying[0] = true;
+            parryDurationTick = 0;
             foreach (var defleactable in currentTouching) {
                 defleactable.Hold();
             }
