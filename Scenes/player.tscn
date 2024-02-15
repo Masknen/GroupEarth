@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dmrr1n86pkwm5"]
+[gd_scene load_steps=13 format=3 uid="uid://dmrr1n86pkwm5"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_4ejrt"]
 [ext_resource type="PackedScene" uid="uid://dqaisgicm4m4v" path="res://Assets/kaykit_dungeon_pack_1.0/Models/Characters/gltf/character_knight.gltf" id="2_c0gr7"]
@@ -119,6 +119,12 @@ radial_segments = 16
 rings = 1
 cap_bottom = false
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_d4q0a"]
+top_radius = 0.6
+bottom_radius = 0.6
+height = 0.01
+cap_bottom = false
+
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 3
@@ -142,6 +148,10 @@ libraries = {
 "": SubResource("AnimationLibrary_yhs0a")
 }
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="DeflectArea2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("CylinderMesh_80x54")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.99, 0)
+mesh = SubResource("CylinderMesh_d4q0a")

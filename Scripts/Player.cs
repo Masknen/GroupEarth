@@ -30,6 +30,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 
 	private AnimationPlayer animationPlayer;
 	private MeshInstance3D parryArea;
+    private MeshInstance3D playerMarker;
 
     private PackedScene fireBall;
 
@@ -39,13 +40,14 @@ public partial class Player : CharacterBody3D, IDamagable {
 		animationPlayer = GetChild<AnimationPlayer>(3);
 		parryArea = GetChild<MeshInstance3D>(4);
 
-		GetChild<Area3D>(1).AreaEntered += Player_AreaEntered;
+        GetChild<Area3D>(1).AreaEntered += Player_AreaEntered;
 		GetChild<Area3D>(1).AreaExited += Player_AreaExited;
 
 		parryArea.Visible = false;
 
         fireBall = GD.Load<PackedScene>("res://Scenes/fire_ball.tscn");
         stats.AddStat(Stat.StatType.MaxHealth, 10).AddStat(Stat.StatType.MovementSpeed, 4).AddStat(Stat.StatType.DodgeStrength, 35).AddStat(Stat.StatType.RotationSpeed, 15);
+        stats.AddStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
 	}
 
 	private void Player_AreaExited(Area3D area) {
@@ -68,6 +70,10 @@ public partial class Player : CharacterBody3D, IDamagable {
 
     public override void _PhysicsProcess(double delta) {
 		if (ID != -1) {
+            if (!IsOnFloor()) {
+                Velocity -= new Vector3(0, 1, 0);
+            }
+
 			if (Velocity.Length() > 20) {
 				Velocity = Velocity * 0.75f;
 			} else {
@@ -268,9 +274,23 @@ public partial class Player : CharacterBody3D, IDamagable {
         Transform = transform;
     }
 
+    public void setID(int id) {
+        this.ID = id;
+        playerMarker = GetChild<MeshInstance3D>(5);
+        StandardMaterial3D material3D = new StandardMaterial3D();
+        switch (ID) {
+            case 0:
+                material3D.AlbedoColor = new Color(1.0f, 221.0f/255.0f, 0.0f, 1.0f);
+                playerMarker.MaterialOverride = material3D;
+                break; 
+            case 1:
+                material3D.AlbedoColor = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+                playerMarker.MaterialOverride = material3D;
+                break;
+        }
+    }
     bool IDamagable.Hit(int damage) {
         if (invincibiltyTick < 0) {
-            GD.Print("HIT FOR: " + damage);
             if (PlayerManager.Instance().debugBoolean) {
                 Position = Vector3.Up;
             }
