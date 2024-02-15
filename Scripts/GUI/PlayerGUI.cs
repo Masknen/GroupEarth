@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
-public partial class PlayerGUI : Node
+public partial class PlayerGUI : Control
 {
+
 }

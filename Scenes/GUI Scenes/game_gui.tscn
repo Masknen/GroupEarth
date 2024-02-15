@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://rqbdsl1fi3ft"]
+[gd_scene load_steps=8 format=3 uid="uid://rqbdsl1fi3ft"]
 
 [ext_resource type="Script" path="res://Scripts/GUI/PlayerGUI.cs" id="1_ujnt8"]
 
@@ -21,6 +21,16 @@ bg_color = Color(1, 0, 0, 1)
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_swo1s"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_right = 23
+corner_radius_bottom_right = 23
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vpepm"]
+bg_color = Color(0.129412, 0, 0.733333, 1)
+corner_radius_top_right = 23
+corner_radius_bottom_right = 23
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_awnnh"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 45
@@ -30,20 +40,15 @@ corner_radius_bottom_left = 45
 shadow_size = 1
 shadow_offset = Vector2(2, 2)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4xvg"]
-bg_color = Color(0.25098, 0.396078, 1, 1)
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-shadow_size = 1
-shadow_offset = Vector2(1, 1)
-
 [node name="GameGUI" type="Control"]
+layout_direction = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
 
 [node name="PlayerInfoGroup" type="Control" parent="."]
 anchors_preset = 0
@@ -59,7 +64,7 @@ offset_right = 115.0
 offset_bottom = 115.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6mn6m")
 
-[node name="ProgressBar" type="ProgressBar" parent="PlayerInfoGroup/PlayerInfoLeft"]
+[node name="HealthBar" type="ProgressBar" parent="PlayerInfoGroup/PlayerInfoLeft"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 1
@@ -72,6 +77,24 @@ grow_horizontal = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_ky4u5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_h0mvf")
 value = 61.43
+show_percentage = false
+
+[node name="ChargeBar" type="ProgressBar" parent="PlayerInfoGroup/PlayerInfoLeft"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -45.0
+offset_right = 110.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_swo1s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vpepm")
+value = 66.29
 show_percentage = false
 
 [node name="Avatar" type="Panel" parent="PlayerInfoGroup/PlayerInfoLeft"]
@@ -103,7 +126,35 @@ offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="PlayerInfoGroup/PlayerInfoLeft"]
+[node name="PlayerInfoLeft2" type="Panel" parent="PlayerInfoGroup"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1087.0
+offset_top = 25.0
+offset_right = 1177.0
+offset_bottom = 115.0
+grow_horizontal = 0
+scale = Vector2(-1, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_6mn6m")
+
+[node name="HealthBar" type="ProgressBar" parent="PlayerInfoGroup/PlayerInfoLeft2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_right = 160.0
+offset_bottom = 45.0
+grow_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_ky4u5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_h0mvf")
+value = 61.43
+show_percentage = false
+
+[node name="ChargeBar" type="ProgressBar" parent="PlayerInfoGroup/PlayerInfoLeft2"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 3
@@ -116,4 +167,36 @@ offset_top = -45.0
 offset_right = 110.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_s4xvg")
+theme_override_styles/background = SubResource("StyleBoxFlat_swo1s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vpepm")
+value = 66.29
+show_percentage = false
+
+[node name="Avatar" type="Panel" parent="PlayerInfoGroup/PlayerInfoLeft2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 34.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_awnnh")
+
+[node name="TextureRect" type="TextureRect" parent="PlayerInfoGroup/PlayerInfoLeft2/Avatar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -35.0
+offset_right = 35.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
