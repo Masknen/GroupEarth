@@ -284,7 +284,7 @@ public partial class Player : CharacterBody3D, IDamagable {
                 playerMarker.MaterialOverride = material3D;
                 break; 
             case 1:
-                material3D.AlbedoColor = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+                material3D.AlbedoColor = new Color(0.0f, 1.0f, 0.0f, 1.0f);
                 playerMarker.MaterialOverride = material3D;
                 break;
         }
@@ -293,6 +293,14 @@ public partial class Player : CharacterBody3D, IDamagable {
         if (invincibiltyTick < 0) {
             if (PlayerManager.Instance().debugBoolean) {
                 Position = Vector3.Up;
+            }
+            else {
+                stats.ModifyStat(Stat.StatType.CurrentHealth, -damage);
+                if (stats.GetStat(Stat.StatType.CurrentHealth) <= 0) {
+                    Position = Vector3.Up;
+                    stats.setStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
+                }
+                GD.Print(stats.GetStat(Stat.StatType.CurrentHealth) + " | damage:" + damage);
             }
             return true;
         }

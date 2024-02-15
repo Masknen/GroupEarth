@@ -35,9 +35,9 @@ public class Stat
         return this;
     }
 
-    public void ModifyStat(StatType statType, int newValue) {
+    public void ModifyStat(StatType statType, int addValue) {
         if (myStats.TryGetValue(statType, out int value)) {
-            myStats[statType] = newValue;
+            myStats[statType] += addValue;
         } else {
             GD.PushWarning("Stat not present");
         }
@@ -48,6 +48,15 @@ public class Stat
             GD.PushError("Stat does not exist");
         }
         return value;
+    }
+
+    public void setStat(StatType statType, int newValue) {
+        if (myStats.TryGetValue(statType, out int value)) {
+            myStats[statType] += newValue;
+        }
+        else {
+            GD.PushWarning("Stat not present");
+        }
     }
 
 }
