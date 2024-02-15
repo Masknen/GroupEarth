@@ -2,9 +2,11 @@ using Godot;
 using System;
 
 
-public partial class enemy2 : CharacterBody3D
+public partial class enemy2 : CharacterBody3D, IDamagable
 {
 	[Export] public int speed {get; set;} = 1;
+
+	public int hp = 1;
 	private Node3D target;
 	private CharacterBody3D player1;
 	private CharacterBody3D player2;
@@ -24,9 +26,25 @@ public partial class enemy2 : CharacterBody3D
 			}else { target = player2;}
 		
 		Velocity = Position.DirectionTo(target.GlobalPosition) * speed;
-		LookAt(target.GlobalPosition);
+		Vector3 targetAngle = new Vector3(target.Position.X, this.Position.Y,target.Position.Z);
+		LookAt(targetAngle);
 		MoveAndSlide();
 
 	}
 	}
+	bool IDamagable.Hit(int damage){
+		GD.Print(damage);
+		hp += -damage;
+		if(hp <= 0){
+			QueueFree();
+			return true;
+		}
+		if(damage <= 0){
+			return false;
+		}
+		else{
+			return true;
+		} 
+	}
+		
 }
