@@ -59,7 +59,10 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 			
 			//target = player1;
 			Velocity = Position.DirectionTo(target.GlobalPosition) * speed;
-			LookAt(target.GlobalPosition);
+			Vector3 targetAngle = new Vector3(target.Position.X, this.Position.Y,target.Position.Z);
+			LookAt(targetAngle);
+			
+			//Rotate(targetAngle, 1.0f);
 			MoveAndSlide();
 			timeTick += (float)delta;
 			if (timeTick > MaxTime) {
