@@ -85,7 +85,7 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 		//LookAt(target.GlobalPosition);
 
 		// Max Changes
-		float yRotation = -GlobalPosition.DirectionTo(target.GlobalPosition).SignedAngleTo(Vector3.Forward, Transform.Basis.Y);
+		float yRotation = -GlobalPosition.DirectionTo(target.GlobalPosition).SignedAngleTo(Vector3.Forward, Vector3.Up);
 		Transform3D transform = new Transform3D(new Basis(Transform.Basis.Y, yRotation), Position);
 		(new_fireBall as FireBall).Transform = transform;
 		// \Max Changes
