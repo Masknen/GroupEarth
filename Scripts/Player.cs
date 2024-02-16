@@ -149,12 +149,7 @@ public partial class Player : CharacterBody3D, IDamagable {
         if (InputManager.Instance().IsJustReleasedAxis(ID, JoyAxis.TriggerRight)) {
             if (parryArea.Scale > new Vector3(0.95f, 0.95f, 0.95f)) {
                 invincibiltyTick = INVINCIBILTY_DURATION / 2.0f;
-                var new_fireBall = fireBall.Instantiate();
-                (new_fireBall as FireBall).Position = Position;
-                float yRotation = Transform.Basis.GetEuler().Y;
-                Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
-                (new_fireBall as FireBall).Transform = transform;
-                GetParent().AddChild(new_fireBall);
+                FireBall.Fire(Position, Transform);
             }
             parryArea.Scale = Vector3.One;
             parryArea.Visible = false;

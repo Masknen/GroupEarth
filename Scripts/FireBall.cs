@@ -12,11 +12,31 @@ public partial class FireBall : Area3D, IDeflectable
 
     private float fireBallDuration = 20;
     private float timeTick = 0;
+
+    private bool fireAnimation = false;
     // Called when the node enters the scene tree for the first time.
+
+    public static void Fire(Vector3 shooterPos, Transform3D shooterTransform) {
+        var fireBall = GD.Load<PackedScene>("res://Scenes/fire_ball.tscn");
+        var new_fireBall = fireBall.Instantiate();
+
+        // TODO Change to projectile manager
+        PlayerManager.Instance().AddChild(new_fireBall);
+        //
+
+        float yRotation = shooterTransform.Basis.GetEuler().Y;
+        Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), shooterPos);
+        (new_fireBall as FireBall).Transform = transform;
+        (new_fireBall as FireBall).Position = shooterPos + Vector3.Forward.Rotated(Vector3.Up, yRotation)*2;
+        (new_fireBall as FireBall).Scale = Vector3.One * 0.001f;
+
+
+        (new_fireBall as FireBall).fireAnimation = true;
+    }
+
     public override void _Ready()
     {
         BodyEntered += FireBall_BodyEntered;
-        
         //change color of the ball based on damage
         
         
@@ -35,13 +55,16 @@ public partial class FireBall : Area3D, IDeflectable
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
-        
-        timeTick += (float)delta;
-        if(timeTick > fireBallDuration){
-            QueueFree();
+        if (fireAnimation) {
+            StartAnimation(delta);
+        } else {
+
+            timeTick += (float)delta;
+            if (timeTick > fireBallDuration) {
+                QueueFree();
+            }
+            Position -= Transform.Basis.Z * (float)(speed * delta);
         }
-        Position -= Transform.Basis.Z * (float)(speed * delta);
-        
     }
 
 
@@ -82,7 +105,14 @@ public partial class FireBall : Area3D, IDeflectable
     }
 
     public void Hold() {
-        
         speed = 0;
+    }
+
+    private void StartAnimation(double delta) {
+        Scale = Scale.Lerp(Vector3.One, (float)(delta * 30));
+        if (Scale.LengthSquared() >= 2.8f) {
+            Scale = Vector3.One;
+            fireAnimation = false;
+        }
     }
 }
