@@ -18,7 +18,12 @@ public partial class ArcadeSpawner : Node3D {
 
             var spawnedWitch = witch.Instantiate();
             GetTree().Root.AddChild(spawnedWitch);
-            //(spawnedWitch as enemy1).Position = new Vector3(0, 5, 0);
+            float dirAngle = GD.Randf() * (2 * MathF.PI);
+            Transform3D lookTransfrom = new Transform3D(new Basis(Transform.Basis.Y, dirAngle), new Vector3( 0, 2, 0 ));
+
+
+            (spawnedWitch as enemy1).Position += lookTransfrom.Basis.Y;
+            (spawnedWitch as enemy1).Position += -lookTransfrom.Basis.Z * 11;
             GD.Print("instantiate should have happened");
         }
     }
