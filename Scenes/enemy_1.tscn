@@ -1,19 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://c4q23o6ur6gof"]
 
 [ext_resource type="Script" path="res://Scripts/enemy1.cs" id="1_1rh0l"]
-[ext_resource type="PackedScene" uid="uid://bxn0k1ajsl116" path="res://Assets/Enemies/Enemny1/character_mage.gltf" id="1_s6wrf"]
+[ext_resource type="PackedScene" uid="uid://bxnsnilg27krc" path="res://Assets/kaykit skeletons/KayKit_Skeletons_1.0_FREE/characters/gltf/Skeleton_Rogue.glb" id="2_p1h3i"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_77jok"]
-size = Vector3(1.16946, 2.6582, 1)
+size = Vector3(1.16946, 2.31689, 1)
 
 [node name="Enemy1" type="CharacterBody3D"]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_1rh0l")
 
-[node name="character_mage" parent="." instance=ExtResource("1_s6wrf")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+[node name="Skeleton_Rogue" parent="." instance=ExtResource("2_p1h3i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0357819, 0.829102, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.036, 0.170653, 0)
 shape = SubResource("BoxShape3D_77jok")
