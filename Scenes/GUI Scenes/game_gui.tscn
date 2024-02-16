@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://rqbdsl1fi3ft"]
+[gd_scene load_steps=3 format=3 uid="uid://rqbdsl1fi3ft"]
 
 [ext_resource type="PackedScene" uid="uid://cvrk72w5a6y63" path="res://Scenes/GUI Scenes/player_info_group.tscn" id="1_liuaj"]
+[ext_resource type="Script" path="res://Scripts/GUI/DebugTexts.cs" id="2_2ghuh"]
 
 [node name="GameGUI" type="Control"]
 layout_direction = 2
@@ -14,3 +15,24 @@ size_flags_horizontal = 3
 
 [node name="PlayerInfoGroup" parent="." instance=ExtResource("1_liuaj")]
 layout_mode = 1
+
+[node name="DebugTexts" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+script = ExtResource("2_2ghuh")
+
+[node name="TextEdit" type="TextEdit" parent="DebugTexts"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 166.0
+offset_right = 470.0
+offset_bottom = -764.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Press F3 to exit Debug
+F1 : Spawnplayers/ResetPlayers
+"
