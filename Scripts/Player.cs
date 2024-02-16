@@ -8,8 +8,10 @@ using System.Security;
 
 //[DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
 public partial class Player : CharacterBody3D, IDamagable {
+
 	public int ID = -1;
 	public Player otherPlayer;
+
 	private List<IDeflectable> currentTouching;
 	private float deadZone = 0.3f;
 
@@ -112,8 +114,8 @@ public partial class Player : CharacterBody3D, IDamagable {
 			if (inputRotation != Vector2.Zero && Velocity.Length() < stats.GetStat(Stat.StatType.MovementSpeed) * 3) {
 				RotateToSlerp(inputRotation, delta);
 			}
-			MoveAndSlide();
 		}
+	    MoveAndSlide();
 	}
 
     private void HandleInput() {
@@ -291,16 +293,10 @@ public partial class Player : CharacterBody3D, IDamagable {
     }
     bool IDamagable.Hit(int damage) {
         if (invincibiltyTick < 0) {
-            if (PlayerManager.Instance().debugBoolean) {
+            stats.ModifyStat(Stat.StatType.CurrentHealth, -damage);
+            if (stats.GetStat(Stat.StatType.CurrentHealth) <= 0) {
                 Position = Vector3.Up;
-            }
-            else {
-                stats.ModifyStat(Stat.StatType.CurrentHealth, -damage);
-                if (stats.GetStat(Stat.StatType.CurrentHealth) <= 0) {
-                    Position = Vector3.Up;
-                    stats.setStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
-                }
-                GD.Print(stats.GetStat(Stat.StatType.CurrentHealth) + " | damage:" + damage);
+                stats.setStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
             }
             return true;
         }
