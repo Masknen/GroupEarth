@@ -12,7 +12,7 @@ public partial class ArcadeSpawner : Node3D {
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta) {
         spawnTimer += delta;
-        if (spawnTimer >= 1) {
+        if (spawnTimer >= 4) {
             GD.Print("Instantiate tried");
             spawnTimer = 0;
 

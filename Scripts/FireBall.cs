@@ -53,7 +53,7 @@ public partial class FireBall : Area3D, IDeflectable
         //change color
         MeshInstance3D mesh = GetNode<MeshInstance3D>("MeshInstance3D");
         StandardMaterial3D material = new StandardMaterial3D();  
-        material.AlbedoColor = new Color(1,0,01 * damage,0);
+        material.AlbedoColor = new Color(1,0.2f * damage,0);
         mesh.MaterialOverride = material;
         //color changed
 
