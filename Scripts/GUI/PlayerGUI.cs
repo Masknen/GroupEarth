@@ -13,7 +13,6 @@ public partial class PlayerGUI : Control
 
         foreach (var player in PlayerManager.Instance().players) {
             if (player.ID >= 0) {
-                GD.Print(player.stats.GetStat(Stat.StatType.CurrentHealth) / (float)(player.stats.GetStat(Stat.StatType.MaxHealth)) * 100.0f + " | " + player.ID);
                 targetValue[player.ID] = (player.stats.GetStat(Stat.StatType.CurrentHealth) / (float)(player.stats.GetStat(Stat.StatType.MaxHealth)) * 100.0f);
 
                 healthBar[player.ID].Value = Mathf.Lerp(healthBar[player.ID].Value, targetValue[player.ID], delta*10);
