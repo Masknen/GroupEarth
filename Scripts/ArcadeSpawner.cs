@@ -12,13 +12,21 @@ public partial class ArcadeSpawner : Node3D {
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta) {
         spawnTimer += delta;
-        if (spawnTimer >= 1) {
+        if (spawnTimer >= 5) {
             GD.Print("Instantiate tried");
             spawnTimer = 0;
 
-            var spawnedWitch = witch.Instantiate();
+            Node spawnedWitch = witch.Instantiate();
+
+            float dirAngle = GD.Randf() * (2 * MathF.PI); 
+            Transform3D lookTransfrom = new Transform3D(new Basis(Transform.Basis.Y, dirAngle), Position);
+            (spawnedWitch as enemy1).Position = -lookTransfrom.Basis.Z * 11;
+            //GD.Print(dirAngle);
+            //GD.Print(2 * MathF.PI);
+
             GetTree().Root.AddChild(spawnedWitch);
-            //(spawnedWitch as enemy1).Position = new Vector3(0, 5, 0);
+
+            
             GD.Print("instantiate should have happened");
         }
     }
