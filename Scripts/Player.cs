@@ -20,7 +20,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 	private const float PARRY_DURATION = 0.2f;
 	private const float PARRY_COOLDOWN = 0.2f;
 	private const float DODGE_COOLDOWN = 0.3f;
-    private const float INVINCIBILTY_DURATION = 0.15f;
+    private const float INVINCIBILTY_DURATION = 0.3f;
 
 	private float parryDurationTick = 0;
 	private float parryCooldownTick = 0;
@@ -94,7 +94,6 @@ public partial class Player : CharacterBody3D, IDamagable {
             }
 
 			if (doDodge) {
-				GD.Print("Dodge!");
 				dodgeCooldownTick = 0;
 				if (!inputdirectionV3.IsEqualApprox(Vector3.Zero)) {
 					Velocity += inputdirectionV3 * stats.GetStat(Stat.StatType.DodgeStrength);
@@ -123,7 +122,6 @@ public partial class Player : CharacterBody3D, IDamagable {
         
 
         if ((InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder) || isParrying[1]) && parryCooldownTick >= PARRY_COOLDOWN) {
-            GD.Print(ID + " | Friend Parry");
             isParrying[1] = true;
             invincibiltyTick = INVINCIBILTY_DURATION;
             parryCooldownTick = 0;
@@ -199,7 +197,6 @@ public partial class Player : CharacterBody3D, IDamagable {
         }
 
         if (InputManager.Instance().IsJustReleasedButton(ID, JoyButton.RightShoulder)) {
-            GD.Print(ID + " | Parry");
             parryCooldownTick = 0;
             invincibiltyTick = INVINCIBILTY_DURATION;
             parryArea.Visible = false;
