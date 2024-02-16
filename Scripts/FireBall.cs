@@ -57,14 +57,11 @@ public partial class FireBall : Area3D, IDeflectable
         mesh.MaterialOverride = material;
         //color changed
 
-        GD.Print(damage);
-        GD.Print("Hit");
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
         Transform = transform;
     }
 
     public void FriendDeflect(float yRotation) {
-        GD.Print("Hit");
         damage += 1;
         speed = baseSpeed + (3 * damage);
         fireBallDuration = 20;
@@ -76,7 +73,6 @@ public partial class FireBall : Area3D, IDeflectable
         mesh.MaterialOverride = material;
         //color changed
 
-        GD.Print(damage);
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
         Transform = transform;
     }

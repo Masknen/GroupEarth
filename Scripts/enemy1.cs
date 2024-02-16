@@ -24,7 +24,6 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 	public bool isDead = false;
 
 	bool IDamagable.Hit(int damage){
-		GD.Print(damage);
 		hp += -damage;
 		if(hp <= 0){
 			QueueFree();
@@ -83,7 +82,6 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 	
 	public void fireFireBall(){
 		var new_fireBall = fireBall.Instantiate();
-		GD.Print("fireball!");
 		(new_fireBall as FireBall).Position = Position;
 		//LookAt(target.GlobalPosition);
 

@@ -13,7 +13,6 @@ public partial class ArcadeSpawner : Node3D {
     public override void _Process(double delta) {
         spawnTimer += delta;
         if (spawnTimer >= 4) {
-            GD.Print("Instantiate tried");
             spawnTimer = 0;
 
             var spawnedWitch = witch.Instantiate();
@@ -24,7 +23,6 @@ public partial class ArcadeSpawner : Node3D {
 
             (spawnedWitch as enemy1).Position += lookTransfrom.Basis.Y;
             (spawnedWitch as enemy1).Position += -lookTransfrom.Basis.Z * 11;
-            GD.Print("instantiate should have happened");
         }
     }
 }
