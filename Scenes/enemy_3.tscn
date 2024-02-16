@@ -4,13 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://dv0bb7vja0jk6" path="res://Assets/Enemies/Enemny1/Skeleton_Mage.glb" id="2_1jy7a"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ti3x8"]
-size = Vector3(1, 1.72803, 1)
+size = Vector3(1, 1.87085, 1)
 
 [node name="Enemy_3" type="CharacterBody3D"]
 script = ExtResource("1_bmkv3")
 
 [node name="Skeleton_Mage" parent="." instance=ExtResource("2_1jy7a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.962257, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0714105, 0)
 shape = SubResource("BoxShape3D_ti3x8")

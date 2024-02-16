@@ -4,13 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://ca6fsl8r81w72" path="res://Assets/kaykit skeletons/KayKit_Skeletons_1.0_FREE/characters/gltf/Skeleton_Minion.glb" id="1_vxd5h"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ukx71"]
-size = Vector3(1, 2.12943, 1)
+size = Vector3(1, 2.09548, 1)
 
 [node name="Enemy_2" type="CharacterBody3D"]
 script = ExtResource("1_a5api")
 
 [node name="SkeletonMinion" parent="." instance=ExtResource("1_vxd5h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05162, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0169767, 0)
 shape = SubResource("BoxShape3D_ukx71")
