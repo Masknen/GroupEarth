@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cscgqepgkru63"]
-
-[ext_resource type="Script" path="res://Scripts/PlayerCamera.cs" id="1_h18ps"]
-
-[node name="PlayerCamera" type="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573577, 0, -0.573577, 0.819152, 0, 16, 0)
-projection = 1
-size = 30.23
-script = ExtResource("1_h18ps")
