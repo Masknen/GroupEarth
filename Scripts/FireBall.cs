@@ -7,7 +7,7 @@ public partial class FireBall : Area3D, IDeflectable
 
     public int speed = 10;
     public int baseSpeed = 10;
-    public int damage = 0;
+    public int damage = 3;
     
 
     private float fireBallDuration = 20;
@@ -27,7 +27,7 @@ public partial class FireBall : Area3D, IDeflectable
         float yRotation = shooterTransform.Basis.GetEuler().Y;
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), shooterPos);
         (new_fireBall as FireBall).Transform = transform;
-        (new_fireBall as FireBall).Position = shooterPos + Vector3.Forward.Rotated(Vector3.Up, yRotation)*2;
+        (new_fireBall as FireBall).Position = shooterPos + Vector3.Forward.Rotated(Vector3.Up, yRotation)*1.2f;
         (new_fireBall as FireBall).Scale = Vector3.One * 0.001f;
 
 
