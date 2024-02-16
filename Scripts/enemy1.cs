@@ -66,7 +66,7 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 			timeTick += (float)delta;
 			if (timeTick > MaxTime) {
 				timeTick -= MaxTime;
-				fireFireBall();
+				FireBall.Fire(Position, Transform);
 			}
 			
 
