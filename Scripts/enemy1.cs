@@ -60,6 +60,9 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 			Velocity = Position.DirectionTo(target.GlobalPosition) * speed;
 			Vector3 targetAngle = new Vector3(target.Position.X, this.Position.Y,target.Position.Z);
 			LookAt(targetAngle);
+			// walking animation
+			
+			((AnimationPlayer)GetNode("AnimationPlayer2")).Play("Walking_A");
 			
 			//Rotate(targetAngle, 1.0f);
 			MoveAndSlide();
@@ -81,6 +84,8 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 	}
 	
 	public void fireFireBall(){
+		//casting animation
+		
 		var new_fireBall = fireBall.Instantiate();
 		(new_fireBall as FireBall).Position = Position;
 		//LookAt(target.GlobalPosition);
