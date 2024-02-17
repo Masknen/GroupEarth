@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://dmrr1n86pkwm5"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_4ejrt"]
-[ext_resource type="PackedScene" uid="uid://dqaisgicm4m4v" path="res://Assets/kaykit_dungeon_pack_1.0/Models/Characters/gltf/character_knight.gltf" id="2_c0gr7"]
+[ext_resource type="PackedScene" uid="uid://bgtq4ce6m3t37" path="res://Assets/playerchars/Mage.glb" id="2_afo55"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_adq4d"]
 radius = 0.630995
@@ -13,90 +13,18 @@ radius = 3.6
 [sub_resource type="Animation" id="Animation_v4d5c"]
 resource_name = "Dodge"
 length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterModel:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.5),
-"transitions": PackedFloat32Array(0.297302, 0.297302, 1),
-"update": 0,
-"values": [Vector3(0, -3.14159, 0), Vector3(0.797179, -3.14159, 1.54596e-07), Vector3(0, -3.14159, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterModel:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(0.297302),
-"update": 0,
-"values": [Vector3(0, -1, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_6ouoa"]
 resource_name = "Idle"
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterModel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, -1, 0), Vector3(0, -0.911, 0), Vector3(0, -1, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_vlp7n"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterModel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterModel:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -3.14159, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_1e0w5"]
 resource_name = "Walk"
 length = 0.4
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterModel:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(2.07053, 2.07053, 2.07053),
-"update": 0,
-"values": [Vector3(0, -1, 0), Vector3(0, -0.5, 0), Vector3(0, -1, 0)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yhs0a"]
 _data = {
@@ -121,8 +49,8 @@ rings = 1
 cap_bottom = false
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_d4q0a"]
-top_radius = 0.6
-bottom_radius = 0.6
+top_radius = 1.0
+bottom_radius = 1.0
 height = 0.01
 cap_bottom = false
 
@@ -141,8 +69,8 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeflectArea"]
 shape = SubResource("CylinderShape3D_mr25q")
 
-[node name="CharacterModel" parent="." instance=ExtResource("2_c0gr7")]
-transform = Transform3D(-1, 0, -2.53518e-06, 0, 1, 0, 2.53518e-06, 0, -1, 0, -1, 0)
+[node name="Mage" parent="." instance=ExtResource("2_afo55")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
