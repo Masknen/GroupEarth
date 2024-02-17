@@ -5,9 +5,9 @@ using System.Linq.Expressions;
 public partial class FireBall : Area3D, IDeflectable
 {
 
-    public int speed = 10;
-    public int baseSpeed = 10;
-    public int damage = 3;
+    public int speed = 5;
+    public int baseSpeed = 5;
+    public int damage = 1;
     
 
     private float fireBallDuration = 20;
@@ -64,6 +64,8 @@ public partial class FireBall : Area3D, IDeflectable
                 QueueFree();
             }
             Position -= Transform.Basis.Z * (float)(speed * delta);
+            MeshInstance3D rotateFireball = GetNode<MeshInstance3D>("MeshInstance3D");
+            rotateFireball.RotateZ(2);
         }
     }
 
