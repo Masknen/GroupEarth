@@ -61,7 +61,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 			//UpdateCooldownTicks(delta);
 
 
-            if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder)) {
+            if (Input.IsJoyButtonPressed(ID, JoyButton.LeftShoulder)) {
                 for (int i = 0; i < 10; i++) {
                     FireBall.Fire(Position, Transform.Rotated(Vector3.Up, (float)(Math.PI/5 * i)));
                 }
@@ -260,7 +260,7 @@ public partial class Player : CharacterBody3D, IDamagable {
             var raycast = GetChild<RayCast3D>(6);
             Node3D target = null;
 
-            float scanAngle = (float)(Math.PI);
+            float scanAngle = (float)(Math.PI/4);
             raycast.Transform = new Transform3D(new Basis(Vector3.Up, -scanAngle), Vector3.Zero);
             for (float i = -scanAngle; i <= scanAngle; i += (float)scanAngle/40) {
                 raycast.ForceRaycastUpdate();
