@@ -7,8 +7,8 @@
 size = Vector3(1.16946, 2.31689, 1)
 
 [node name="Enemy1" type="CharacterBody3D"]
-collision_layer = 2
-collision_mask = 3
+collision_layer = 8
+collision_mask = 11
 script = ExtResource("1_1rh0l")
 
 [node name="Skeleton_Rogue" parent="." instance=ExtResource("2_p1h3i")]
