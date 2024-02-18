@@ -9,6 +9,7 @@ public partial class Player : CharacterBody3D, IDamagable {
         Deflect,
         Dodge,
         Hit,
+        Dead,
     }
     private State state = State.Idle;
 
@@ -35,7 +36,7 @@ public partial class Player : CharacterBody3D, IDamagable {
     private float invincibiltyTick        = 0;
     public float currentVisualCatchAlpha = VISUAL_CATCH_ALPHA_MIN;
 
-
+    private bool spawned      = true;
     private bool isDeflecting = false;
     private bool doDeflect    = false;
 	private bool doDodge      = false;
@@ -58,6 +59,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 
         GetChild<Area3D>(1).AreaEntered += ParryAreaEntered;
 		GetChild<Area3D>(1).AreaExited += ParryAreaExited;
+        animationPlayer.AnimationFinished += AnimationFinished;
 
         parryOverrideMaterial = new StandardMaterial3D();
         parryOverrideMaterial.Transparency = BaseMaterial3D.TransparencyEnum.Alpha;
@@ -67,10 +69,12 @@ public partial class Player : CharacterBody3D, IDamagable {
         
         stats.AddStat(Stat.StatType.MaxHealth, 10).AddStat(Stat.StatType.MovementSpeed, 4).AddStat(Stat.StatType.DodgeStrength, 35).AddStat(Stat.StatType.RotationSpeed, 15);
         stats.AddStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
+
+        animationPlayer.Play("Spawn_Air");
 	}
 
-	public override void _Process(double delta) {
-		if (ID != -1) {
+    public override void _Process(double delta) {
+		if (ID != -1 && !spawned) {
             UpdateCooldownTicks(delta); //Important be infront
 			HandleInput();
             StateMachine();
@@ -84,7 +88,7 @@ public partial class Player : CharacterBody3D, IDamagable {
         }
 	}
     public override void _PhysicsProcess(double delta) {
-		if (ID != -1) {
+		if (ID != -1 && !spawned) {
             UpdateDeflect(delta);
 
             if (!IsOnFloor()) {
@@ -167,7 +171,7 @@ public partial class Player : CharacterBody3D, IDamagable {
                 break;
             case State.Walking:
                 if (IsOkToPlayAnimation())
-                    animationPlayer.Play("Running_A", 0.75f);
+                    animationPlayer.Play("Running_C", 0.75f);
                 break;
             case State.IsDeflecting:
                 if (IsOkToPlayAnimation())
@@ -178,7 +182,7 @@ public partial class Player : CharacterBody3D, IDamagable {
                 break;
             case State.Dodge:
                 if (IsOkToPlayAnimation())
-                    animationPlayer.Play("Dodge_Forward", -1, 1.5f);
+                    animationPlayer.Play("Dodge_Forward", -0.5f, 1.5f);
                 break;
             case State.Hit:
                 animationPlayer.Play("Hit_B", -1, 1.7f);
@@ -196,7 +200,6 @@ public partial class Player : CharacterBody3D, IDamagable {
             state = State.Deflect;
         }
         if (doDodge) {
-            GD.Print("helo");
             state = State.Dodge;
         }
     }
@@ -219,6 +222,9 @@ public partial class Player : CharacterBody3D, IDamagable {
             }
 		}
 	}
+    private void AnimationFinished(StringName animName) {
+        if (animName == "Spawn_Air") spawned = false;
+    }
 
     private void HandleInput() {
         if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder) && currentVisualCatchAlpha > 0.05f) {
