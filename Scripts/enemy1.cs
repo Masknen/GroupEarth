@@ -2,6 +2,7 @@ using Godot;
 using GodotPlugins.Game;
 using System;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
@@ -22,64 +23,65 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 	private float invincibiltyTick = 0;
 
 	public bool isDead = false;
+	private bool spawned = true;
 
 	bool IDamagable.Hit(int damage){
 		hp += -damage;
 		if(hp <= 0){
 			QueueFree();
-			return true;
 		}
-		if(damage <= 0){
-			return false;
-		}
-		else{
-			return true;
-		} 
+		return true;
 	}
 		
 	
 
 	public override void _Ready()
 	{
-		fireBall = GD.Load<PackedScene>("res://Scenes/fire_ball.tscn");
-		
-		
-	}
+        ((AnimationPlayer)GetNode("AnimationPlayer2")).AnimationFinished += Enemy_AnimationFinished;
+        ((AnimationPlayer)GetNode("AnimationPlayer2")).Play("Spawn_Ground_Skeletons");
 
-	public override void _Process(double delta)
+    }
+
+    private void Enemy_AnimationFinished(StringName animName) {
+        if (animName == "Spawn_Ground_Skeletons") spawned = false;
+    }
+
+    public override void _Process(double delta)
 	{
-		if (PlayerManager.Instance().players.Count > 0) {
-			player1 = PlayerManager.Instance().players[0];
-			player2 = PlayerManager.Instance().players[1];
-			if(player1.GlobalPosition.DistanceTo(GlobalPosition)<
-			player2.GlobalPosition.DistanceTo(GlobalPosition)){
-				target = player1;
-			}else { target = player2;}
-			
-			//target = player1;
-			Velocity = Position.DirectionTo(target.GlobalPosition) * speed;
-			Vector3 targetAngle = new Vector3(target.Position.X, this.Position.Y,target.Position.Z);
-			LookAt(targetAngle);
-			// walking animation
-			
-			((AnimationPlayer)GetNode("AnimationPlayer2")).Play("Walking_D_Skeletons");
-			
-			//Rotate(targetAngle, 1.0f);
-			MoveAndSlide();
-			timeTick += (float)delta;
-			if (timeTick > MaxTime) {
-				timeTick -= MaxTime;
-				FireBall.Fire(Position, Transform);
-			}
-			
+		if (!spawned) {
+			if (PlayerManager.Instance().players.Count > 0) {
+				player1 = PlayerManager.Instance().players[0];
+				player2 = PlayerManager.Instance().players[1];
+				if (player1.GlobalPosition.DistanceTo(GlobalPosition) <
+				player2.GlobalPosition.DistanceTo(GlobalPosition)) {
+					target = player1;
+				} else { target = player2; }
 
-			/* WILL BE USED LATER TO READ THE MAP AND DODGE WALLS ECT...
-			//--get target position and move in that dircetion--
-			Velocity = Vector3.Zero;
-			nav.TargetPosition = target.GlobalPosition;
-			direction = (nav.GetNextPathPosition() - target.GlobalPosition).Normalized();
-			Velocity = direction * moveSpeed;
-			MoveAndSlide(); */
+				//target = player1;
+				Velocity = Position.DirectionTo(target.GlobalPosition) * speed;
+				Vector3 targetAngle = new Vector3(target.Position.X, this.Position.Y, target.Position.Z);
+				LookAt(targetAngle);
+				// walking animation
+
+				((AnimationPlayer)GetNode("AnimationPlayer2")).Play("Walking_D_Skeletons");
+
+				//Rotate(targetAngle, 1.0f);
+				MoveAndSlide();
+				timeTick += (float)delta;
+				if (timeTick > MaxTime) {
+					timeTick -= MaxTime;
+					FireBall.Fire(Position, Transform);
+				}
+
+
+				/* WILL BE USED LATER TO READ THE MAP AND DODGE WALLS ECT...
+				//--get target position and move in that dircetion--
+				Velocity = Vector3.Zero;
+				nav.TargetPosition = target.GlobalPosition;
+				direction = (nav.GetNextPathPosition() - target.GlobalPosition).Normalized();
+				Velocity = direction * moveSpeed;
+				MoveAndSlide(); */
+			}
 		}
 	}
 	
