@@ -149,7 +149,6 @@ public partial class Player : CharacterBody3D, IDamagable {
 	private void ParryAreaExited(Area3D area) {
 		currentTouching.Remove(area as IDeflectable);
 	}
-
 	private void ParryAreaEntered(Area3D area) {
 		if (area as IDeflectable != null) {
             if (!isParrying[0]) {
@@ -166,7 +165,6 @@ public partial class Player : CharacterBody3D, IDamagable {
 
             parryOverrideMaterial.AlbedoColor = new Color(0, 0, 1, 1);
             parryArea.MaterialOverride = parryOverrideMaterial;
-            //parryArea.Visible = true;
         }
         if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder)) {
             parryArea.Scale = Vector3.One * VisualCatchSize;
@@ -178,58 +176,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 
             parryOverrideMaterial.AlbedoColor = new Color(0, 0, 1, 0.1f);
             parryArea.MaterialOverride = parryOverrideMaterial;
-            //parryArea.Visible = false;
         }
-
-        //NormalDeflect();
-        //if ((InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder) || isParrying[1]) && parryCooldownTick >= PARRY_COOLDOWN) {
-        //    isParrying[1] = true;
-        //    invincibiltyTick = INVINCIBILTY_DURATION;
-        //    parryCooldownTick = 0;
-        //    foreach (var defleactable in currentTouching) {
-        //        defleactable.FriendDeflect(-GlobalPosition.DirectionTo(otherPlayer.GlobalPosition).SignedAngleTo(Vector3.Forward, Transform.Basis.Y));
-        //    }
-        //}
-
-        //Charge parry
-        //if (Input.GetJoyAxis(ID, JoyAxis.TriggerRight) >= 0.15) {
-        //    parryArea.Visible = true;
-        //    float chargeSpeed = 0.05f;
-        //    if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight)) {
-        //        parryArea.Scale = Vector3.Zero;
-        //    }
-        //    if (parryArea.Scale < Vector3.One) {
-        //        parryArea.Scale += new Vector3(chargeSpeed, chargeSpeed, chargeSpeed);
-        //    } else {
-        //        parryArea.Scale = Vector3.One;
-        //    }
-        //}
-
-        //if (InputManager.Instance().IsJustReleasedAxis(ID, JoyAxis.TriggerRight)) {
-        //    if (parryArea.Scale > new Vector3(0.95f, 0.95f, 0.95f)) {
-        //        invincibiltyTick = INVINCIBILTY_DURATION / 2.0f;
-        //        FireBall.Fire(Position, Transform);
-        //    }
-        //    parryArea.Scale = Vector3.One;
-        //    parryArea.Visible = false;
-        //}
-        //if ((InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight) || isParrying[2]) && parryCooldownTick >= PARRY_COOLDOWN) {
-        //    GD.Print(ID + " | Arc Parry");
-        //    invincibiltyTick = INVINCIBILTY_DURATION/2.0f;
-        //    var new_fireBall = fireBall.Instantiate();
-        //    GD.Print("fireball!");
-        //    (new_fireBall as FireBall).Position = Position;
-        //    float yRotation = Transform.Basis.GetEuler().Y;
-        //    Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
-        //    (new_fireBall as FireBall).Transform = transform;
-        //    GetParent().AddChild(new_fireBall);
-
-        //    //isParrying[2] = true;
-        //    //parryCooldownTick = 0;
-        //    //foreach (var defleactable in currentTouching) {
-        //    //    defleactable.ArcDeflect(Transform.Basis.GetEuler().Y);
-        //    //}
-        //}
         if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerLeft) && dodgeCooldownTick >= DODGE_COOLDOWN) {
             doDodge = true;
             invincibiltyTick = INVINCIBILTY_DURATION;
@@ -268,7 +215,6 @@ public partial class Player : CharacterBody3D, IDamagable {
                 target = target == null ? _object as Node3D : target;
 
                 if ((_object as Node3D) != null) {
-                    //GD.Print(_object + " | " + i + " | target" + target + " | " + Position.DirectionTo(target.Position).AngleTo(-Transform.Basis.Z));
                     var possibleTarget = _object as Node3D;
                     if (Position.DirectionTo(target.Position).AngleTo(-Transform.Basis.Z) > Math.Abs(i)) {
                         target = _object as Node3D;
@@ -276,7 +222,6 @@ public partial class Player : CharacterBody3D, IDamagable {
                 }
                 raycast.Transform = new Transform3D(new Basis(Vector3.Up, i), Vector3.Zero);
             }
-            //GD.Print("Finish" + target);
 
             foreach (var _item in currentTouching) {
                 var item = (_item as Node3D);
@@ -292,38 +237,6 @@ public partial class Player : CharacterBody3D, IDamagable {
                 }
             }
         }
-    }
-
-    private void NormalDeflect() {
-        //Hold working(with centred circular deflect area)
-        if (Godot.Input.IsJoyButtonPressed(ID, JoyButton.RightShoulder) && parryCooldownTick >= PARRY_COOLDOWN && parryDurationTick < PARRY_DURATION) {
-            parryArea.Visible = true;
-            isParrying[0] = true;
-            parryDurationTick = 0;
-            foreach (var defleactable in currentTouching) {
-                defleactable.Hold();
-            }
-        }
-
-        if (InputManager.Instance().IsJustReleasedButton(ID, JoyButton.RightShoulder)) {
-            parryCooldownTick = 0;
-            invincibiltyTick = INVINCIBILTY_DURATION;
-            parryArea.Visible = false;
-            isParrying[0] = false;
-            foreach (var defleactable in currentTouching) {
-                defleactable.Deflect(Transform.Basis.GetEuler().Y);
-            }
-        }
-
-        // Normal Working
-        //if ((InputManager.Instance().IsJustReleasedButton(ID, JoyButton.RightShoulder) || isParrying[0]) && parryCooldownTick >= PARRY_COOLDOWN) {
-        //    GD.Print(ID + " | Parry");
-        //    isParrying[0] = true;
-        //    parryCooldownTick = 0;
-        //    foreach (var defleactable in currentTouching) {
-        //        defleactable.Deflect(Transform.Basis.GetEuler().Y);
-        //    }
-        //}
     }
 
     private void UpdateCooldownTicks(double delta) {
