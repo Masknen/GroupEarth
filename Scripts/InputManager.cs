@@ -87,5 +87,12 @@ public partial class InputManager : Node
     public bool IsJustReleasedAxis(int ID, JoyAxis joyAxis) {
         return playersPressedAxis[ID][joyAxis] == 0 && playersLastUpdatePressedAxis[ID][joyAxis] != 0;
     }
+    public static Vector2 GetInputVector(int ID, JoyAxis joyAxisX, JoyAxis joyAxisY, float deadZone) {
+        if (Godot.Input.GetJoyAxis(ID, joyAxisX) > deadZone || Godot.Input.GetJoyAxis(ID, joyAxisX) < -deadZone || Godot.Input.GetJoyAxis(ID, joyAxisY) > deadZone || Godot.Input.GetJoyAxis(ID, joyAxisY) < -deadZone) {
+            return new Vector2(Godot.Input.GetJoyAxis(ID, joyAxisX), Godot.Input.GetJoyAxis(ID, joyAxisY)).Normalized();
+        }
+        return Vector2.Zero;
+    }
+
 
 }
