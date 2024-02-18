@@ -62,7 +62,7 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 			LookAt(targetAngle);
 			// walking animation
 			
-			((AnimationPlayer)GetNode("AnimationPlayer2")).Play("Walking_A");
+			((AnimationPlayer)GetNode("AnimationPlayer2")).Play("Walking_D_Skeletons");
 			
 			//Rotate(targetAngle, 1.0f);
 			MoveAndSlide();
