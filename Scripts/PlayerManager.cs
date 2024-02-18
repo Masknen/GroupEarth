@@ -92,8 +92,8 @@ public partial class PlayerManager : Node3D
             players.Clear();
             SpawnPlayers();
         }
-        players[0].otherPlayer = players[1];
-        players[1].otherPlayer = players[0];
+        //players[0].otherPlayer = players[1];
+        //players[1].otherPlayer = players[0];
     }
 
     private void Input_JoyConnectionChanged(long device, bool connected) {

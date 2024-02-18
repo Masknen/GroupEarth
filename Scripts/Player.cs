@@ -4,52 +4,51 @@ using System.Collections.Generic;
 public partial class Player : CharacterBody3D, IDamagable {
 
 	public int ID = -1;
-	public Player otherPlayer;
 
 	private List<IDeflectable> currentTouching;
-	private float deadZone = 0.3f;
 
     public Stat stats = new Stat();
 
-	private const float PARRY_DURATION        = 0.2f;
-	private const float PARRY_COOLDOWN        = 0.2f;
-	private const float DODGE_COOLDOWN        = 0.3f;
-    private const float INVINCIBILTY_DURATION = 0.3f;
+	private const float DEAD_ZONE               = 0.3f;
+	private const float PARRY_COOLDOWN          = 0.5f;
+	private const float DODGE_COOLDOWN          = 0.3f;
+    private const float INVINCIBILTY_DURATION   = 0.3f;
+    private const float VISUAL_CATCH_SCALE_MULT = 1.35f;
+    private const float VISUAL_CATCH_ALPHA_MIN  = 0.3f;
+    private const float VISUAL_CATCH_ALPHA_MAX  = 0.6f;
+    private const float AIM_HELP_ANGLE          = (float)(Math.PI / 4);
+    private Vector3 VISUAL_CATCH_SCALE          = Vector3.One * VISUAL_CATCH_SCALE_MULT;
 
-	private float parryDurationTick = 0;
-	private float parryCooldownTick = 0;
-	private float dodgeCooldownTick = 0;
-    private float invincibiltyTick  = 0;
-	private bool[] isParrying = {false, false, false};
-    private bool doDeflect = false;
-	private bool doDodge = false;
+	private float parryCooldownTick       = 0;
+	private float dodgeCooldownTick       = 0;
+    private float invincibiltyTick        = 0;
+    private float currentVisualCatchAlpha = VISUAL_CATCH_ALPHA_MIN;
 
 
-	private AnimationPlayer animationPlayer;
-	private MeshInstance3D parryArea;
-    private float VisualCatchSize = 1.35f;
-    private StandardMaterial3D parryOverrideMaterial;
+    private bool isParrying = false;
+    private bool doDeflect  = false;
+	private bool doDodge    = false;
+
+
     private MeshInstance3D playerMarker;
-
-    private PackedScene fireBall;
+	private MeshInstance3D parryArea;
+    private StandardMaterial3D parryOverrideMaterial;
+    private RayCast3D raycast;
 
     public override void _Ready() {
 		currentTouching = new List<IDeflectable>();
 
-		animationPlayer = GetChild<AnimationPlayer>(3);
-		parryArea = GetChild<MeshInstance3D>(4);
+		parryArea = GetChild<MeshInstance3D>(3);
+        raycast = GetChild<RayCast3D>(5);
 
         GetChild<Area3D>(1).AreaEntered += ParryAreaEntered;
 		GetChild<Area3D>(1).AreaExited += ParryAreaExited;
 
         parryOverrideMaterial = new StandardMaterial3D();
         parryOverrideMaterial.Transparency = BaseMaterial3D.TransparencyEnum.Alpha;
-        parryOverrideMaterial.AlbedoColor = new Color(0, 0, 1, 0.1f);
+        parryOverrideMaterial.AlbedoColor = new Color(0, 0, 1, VISUAL_CATCH_ALPHA_MIN);
         parryArea.MaterialOverride = parryOverrideMaterial;
-        parryArea.Scale = Vector3.One * VisualCatchSize;
-        //parryArea.Visible = false;
-
-        fireBall = GD.Load<PackedScene>("res://Scenes/fire_ball.tscn");
+        parryArea.Scale = VISUAL_CATCH_SCALE;
         
         stats.AddStat(Stat.StatType.MaxHealth, 10).AddStat(Stat.StatType.MovementSpeed, 4).AddStat(Stat.StatType.DodgeStrength, 35).AddStat(Stat.StatType.RotationSpeed, 15);
         stats.AddStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
@@ -57,18 +56,17 @@ public partial class Player : CharacterBody3D, IDamagable {
 
 	public override void _Process(double delta) {
 		if (ID != -1) {
+            UpdateCooldownTicks(delta); //Important be infront
 			HandleInput();
-			//UpdateCooldownTicks(delta);
 
-
-            if (Input.IsJoyButtonPressed(ID, JoyButton.LeftShoulder)) {
+            //Test Code/Debug
+            if (Input.IsJoyButtonPressed(ID, JoyButton.LeftShoulder) && PlayerManager.Instance().debugBoolean) {
                 for (int i = 0; i < 10; i++) {
                     FireBall.Fire(Position, Transform.Rotated(Vector3.Up, (float)(Math.PI/5 * i)));
                 }
             }
         }
 	}
-
 
     public override void _PhysicsProcess(double delta) {
 		if (ID != -1) {
@@ -85,11 +83,11 @@ public partial class Player : CharacterBody3D, IDamagable {
 			}
 
 			// Gets the input vector for left stick and applies it to position
-			Vector2 inputDirection = GetInputVector(JoyAxis.LeftX, JoyAxis.LeftY, deadZone);
+			Vector2 inputDirection = GetInputVector(JoyAxis.LeftX, JoyAxis.LeftY, DEAD_ZONE);
 			Vector3 inputdirectionV3 = new Vector3(inputDirection.X, 0, inputDirection.Y);
 
 
-            if (!isParrying[0] && !isParrying[1] && !isParrying[2]) {
+            if (!isParrying) {
                 Velocity += inputdirectionV3 * (float)(stats.GetStat(Stat.StatType.MovementSpeed));
             } else {
                 Velocity = Vector3.Zero;
@@ -108,7 +106,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 
 
 			// Gets the input vector for right stick, if zero use the inputDirection instead
-			Vector2 inputRotation = GetInputVector(JoyAxis.RightX, JoyAxis.RightY, deadZone);// != Vector2.Zero ? GetInputVector(JoyAxis.RightX, JoyAxis.RightY, deadZone) : inputDirection;
+			Vector2 inputRotation = GetInputVector(JoyAxis.RightX, JoyAxis.RightY, DEAD_ZONE);// != Vector2.Zero ? GetInputVector(JoyAxis.RightX, JoyAxis.RightY, deadZone) : inputDirection;
 
 
 			// Rotates player
@@ -121,7 +119,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 
     public void setID(int id) {
         this.ID = id;
-        playerMarker = GetChild<MeshInstance3D>(5);
+        playerMarker = GetChild<MeshInstance3D>(4);
         StandardMaterial3D material3D = new StandardMaterial3D();
         switch (ID) {
             case 0:
@@ -151,41 +149,39 @@ public partial class Player : CharacterBody3D, IDamagable {
 	}
 	private void ParryAreaEntered(Area3D area) {
 		if (area as IDeflectable != null) {
-            if (!isParrying[0]) {
+            if (!isParrying) {
                 currentTouching.Add(area as IDeflectable);
             } else {
                 area.QueueFree();
+                currentVisualCatchAlpha -= 0.15f;
+                SetVisualCatchAlpha(currentVisualCatchAlpha);
             }
 		}
 	}
 
     private void HandleInput() {
-        if (Godot.Input.IsJoyButtonPressed(ID, JoyButton.RightShoulder)) {
-            isParrying[0] = true;
-
-            parryOverrideMaterial.AlbedoColor = new Color(0, 0, 1, 1);
-            parryArea.MaterialOverride = parryOverrideMaterial;
+        //if (parryCooldownTick <= 0) {
+            if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder) && currentVisualCatchAlpha > VISUAL_CATCH_ALPHA_MIN) {
+                isParrying = true;
+                parryArea.Scale = VISUAL_CATCH_SCALE;
+            }
+            if ((InputManager.Instance().IsJustReleasedButton(ID, JoyButton.RightShoulder) || currentVisualCatchAlpha < VISUAL_CATCH_ALPHA_MIN) && isParrying) {
+                isParrying = false;
+                doDeflect = true;
+                parryArea.Scale = VISUAL_CATCH_SCALE;
+                invincibiltyTick = INVINCIBILTY_DURATION;
+                currentVisualCatchAlpha -= 0.25f;
+                SetVisualCatchAlpha(currentVisualCatchAlpha);
         }
-        if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder)) {
-            parryArea.Scale = Vector3.One * VisualCatchSize;
-        }
-        if (InputManager.Instance().IsJustReleasedButton(ID, JoyButton.RightShoulder)) {
-            isParrying[0] = false;
-            doDeflect = true;
-            parryArea.Scale = Vector3.One * VisualCatchSize;
-
-            parryOverrideMaterial.AlbedoColor = new Color(0, 0, 1, 0.1f);
-            parryArea.MaterialOverride = parryOverrideMaterial;
-        }
+        //}
         if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerLeft) && dodgeCooldownTick >= DODGE_COOLDOWN) {
             doDodge = true;
             invincibiltyTick = INVINCIBILTY_DURATION;
         }
     }
 
-
     private void UpdateDeflect(double delta) {
-        if (isParrying[0]) {
+        if (isParrying) {
             foreach (var _item in currentTouching) {
                 var item = (_item as Node3D);
                 if (item == null) continue;
@@ -203,13 +199,10 @@ public partial class Player : CharacterBody3D, IDamagable {
         }
         if (doDeflect) {
             doDeflect = false;
-
-            var raycast = GetChild<RayCast3D>(6);
             Node3D target = null;
 
-            float scanAngle = (float)(Math.PI/4);
-            raycast.Transform = new Transform3D(new Basis(Vector3.Up, -scanAngle), Vector3.Zero);
-            for (float i = -scanAngle; i <= scanAngle; i += (float)scanAngle/40) {
+            raycast.Transform = new Transform3D(new Basis(Vector3.Up, -AIM_HELP_ANGLE), Vector3.Zero);
+            for (float i = -AIM_HELP_ANGLE; i <= AIM_HELP_ANGLE; i += (float)AIM_HELP_ANGLE/40) {
                 raycast.ForceRaycastUpdate();
                 var _object = raycast.GetCollider();
                 target = target == null ? _object as Node3D : target;
@@ -226,10 +219,8 @@ public partial class Player : CharacterBody3D, IDamagable {
             foreach (var _item in currentTouching) {
                 var item = (_item as Node3D);
                 if (item == null) continue;
-
                 if (target != null) {
                     var direction = item.GlobalPosition.DirectionTo(target.GlobalPosition);
-                    GD.Print(direction);
                     float yRotation = -direction.SignedAngleTo(Vector3.Forward, Vector3.Up);
                     _item.Deflect(yRotation);
                 } else {
@@ -238,24 +229,18 @@ public partial class Player : CharacterBody3D, IDamagable {
             }
         }
     }
-
     private void UpdateCooldownTicks(double delta) {
 		dodgeCooldownTick += (float)delta;
         invincibiltyTick -= (float)delta;
-
-        if (/*isParrying[0] ||*/ isParrying[1] || isParrying[2]) {
-            parryDurationTick += (float)delta;
-            parryArea.Visible = true;
-            if (parryDurationTick >= PARRY_DURATION) {
-                //isParrying[0] = false;
-                isParrying[1] = false;
-                isParrying[2] = false;
-                parryDurationTick = 0;
-                parryArea.Visible = false;
-            }
-        } else {
-            parryCooldownTick += (float)delta;
+        if (currentVisualCatchAlpha < VISUAL_CATCH_ALPHA_MAX && !isParrying) {
+            currentVisualCatchAlpha += 0.001f;
+            SetVisualCatchAlpha(currentVisualCatchAlpha);
         }
+
+        if (doDeflect) {
+            parryCooldownTick = PARRY_COOLDOWN;
+        }
+
     }
 
 	private Vector2 GetInputVector(JoyAxis joyAxisX, JoyAxis joyAxisY, float deadZone) {
@@ -288,5 +273,10 @@ public partial class Player : CharacterBody3D, IDamagable {
         Transform3D transform = Transform;
         transform.Basis = new Basis(quaternionTargetDirection);
         Transform = transform;
+    }
+    private void SetVisualCatchAlpha(float visualCatchAlpha) {
+        parryOverrideMaterial.AlbedoColor = new Color(0, 0, 1, visualCatchAlpha);
+        currentVisualCatchAlpha = visualCatchAlpha;
+        parryArea.MaterialOverride = parryOverrideMaterial;
     }
 }
