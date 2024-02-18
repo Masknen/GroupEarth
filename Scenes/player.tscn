@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmrr1n86pkwm5"]
+[gd_scene load_steps=9 format=3 uid="uid://dmrr1n86pkwm5"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_4ejrt"]
 [ext_resource type="PackedScene" uid="uid://cj36dpxngsuwa" path="res://Assets/playerchars/mage.tscn" id="2_qxqm4"]
@@ -23,6 +23,12 @@ height = 0.01
 radial_segments = 16
 rings = 1
 cap_bottom = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_q0pqx"]
+radius = 3.0
+height = 6.0
+radial_segments = 16
+rings = 8
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_d4q0a"]
 top_radius = 1.0
@@ -52,8 +58,13 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("CylinderMesh_80x54")
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="DeflectArea2"]
+visible = false
+mesh = SubResource("SphereMesh_q0pqx")
+skeleton = NodePath("../..")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.99, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.884312, 0)
 mesh = SubResource("CylinderMesh_d4q0a")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]

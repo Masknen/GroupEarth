@@ -8,6 +8,7 @@ public partial class Player : CharacterBody3D, IDamagable {
         IsDeflecting,
         Deflect,
         Dodge,
+        Hit,
     }
     private State state = State.Idle;
 
@@ -36,19 +37,22 @@ public partial class Player : CharacterBody3D, IDamagable {
 
 
     private bool isDeflecting = false;
-    private bool doDeflect  = false;
-	private bool doDodge    = false;
+    private bool doDeflect    = false;
+	private bool doDodge      = false;
+    private bool isHit        = false;
 
     private AnimationPlayer animationPlayer;
     private MeshInstance3D playerMarker;
-	private MeshInstance3D parryArea;
+	private MeshInstance3D deflectArea;
+    private MeshInstance3D deflectSphere;
     private StandardMaterial3D parryOverrideMaterial;
     private RayCast3D raycast;
 
     public override void _Ready() {
 		currentTouching = new List<IDeflectable>();
 
-		parryArea = GetChild<MeshInstance3D>(3);
+		deflectArea = GetChild<MeshInstance3D>(3);
+        deflectSphere = GetChild<MeshInstance3D>(3).GetChild<MeshInstance3D>(0);
         raycast = GetChild<RayCast3D>(5);
         animationPlayer = GetChild(2).GetChild<AnimationPlayer>(1);
 
@@ -58,8 +62,8 @@ public partial class Player : CharacterBody3D, IDamagable {
         parryOverrideMaterial = new StandardMaterial3D();
         parryOverrideMaterial.Transparency = BaseMaterial3D.TransparencyEnum.Alpha;
         parryOverrideMaterial.AlbedoColor = new Color(0, 0, 1, VISUAL_CATCH_ALPHA_MIN);
-        parryArea.MaterialOverride = parryOverrideMaterial;
-        parryArea.Scale = VISUAL_CATCH_SCALE;
+        deflectArea.MaterialOverride = parryOverrideMaterial;
+        deflectArea.Scale = VISUAL_CATCH_SCALE;
         
         stats.AddStat(Stat.StatType.MaxHealth, 10).AddStat(Stat.StatType.MovementSpeed, 4).AddStat(Stat.StatType.DodgeStrength, 35).AddStat(Stat.StatType.RotationSpeed, 15);
         stats.AddStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
@@ -79,47 +83,6 @@ public partial class Player : CharacterBody3D, IDamagable {
             }
         }
 	}
-
-    private void StateMachine() {
-        if (InputManager.GetInputVector(ID, JoyAxis.LeftX, JoyAxis.LeftY, DEAD_ZONE).IsZeroApprox()) {
-            state = State.Idle;
-        } else {
-            state = State.Walking;
-        }
-        if (isDeflecting) {
-            state = State.IsDeflecting;
-        }
-        if (doDeflect) {
-            state = State.Deflect;
-        }
-        if (doDodge) {
-            GD.Print("helo");
-            state = State.Dodge;
-        }
-
-        switch (state) {
-            case State.Idle:
-                if (animationPlayer.CurrentAnimation != "Spellcast_Shoot" && animationPlayer.CurrentAnimation != "Dodge_Forward")
-                    animationPlayer.Play("Idle", 0.75f);
-                break;
-            case State.Walking:
-                if (animationPlayer.CurrentAnimation != "Spellcast_Shoot" && animationPlayer.CurrentAnimation != "Dodge_Forward")
-                    animationPlayer.Play("Running_A", 0.75f);
-                break;
-            case State.IsDeflecting:
-                if (animationPlayer.CurrentAnimation != "Spellcast_Shoot" && animationPlayer.CurrentAnimation != "Dodge_Forward")
-                    animationPlayer.Play("Spellcasting", 0.75f);
-                break;
-            case State.Deflect:
-                animationPlayer.Play("Spellcast_Shoot", -1, 1.5f);
-                break;
-            case State.Dodge:
-                if (animationPlayer.CurrentAnimation != "Spellcast_Shoot" && animationPlayer.CurrentAnimation != "Dodge_Forward")
-                    animationPlayer.Play("Dodge_Forward", -1 , 1.5f);
-                break;
-        }
-    }
-
     public override void _PhysicsProcess(double delta) {
 		if (ID != -1) {
             UpdateDeflect(delta);
@@ -138,7 +101,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 			Vector2 inputDirection = InputManager.GetInputVector(ID, JoyAxis.LeftX, JoyAxis.LeftY, DEAD_ZONE);
 			Vector3 inputdirectionV3 = new Vector3(inputDirection.X, 0, inputDirection.Y);
 
-            if (!isDeflecting) {
+            if (!isDeflecting && !isHit) {
                 Velocity += inputdirectionV3 * (float)(stats.GetStat(Stat.StatType.MovementSpeed));
             } else {
                 Velocity = Vector3.Zero;
@@ -159,7 +122,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 			Vector2 inputRotation = InputManager.GetInputVector(ID, JoyAxis.RightX, JoyAxis.RightY, DEAD_ZONE);
 
 			// Rotates player
-			if (inputDirection != Vector2.Zero) {
+			if (inputDirection != Vector2.Zero && !isHit) {
 				RotateToSlerp(inputDirection, delta);
 			}
 		}
@@ -184,6 +147,9 @@ public partial class Player : CharacterBody3D, IDamagable {
     bool IDamagable.Hit(int damage) {
         if (invincibiltyTick < 0) {
             stats.ModifyStat(Stat.StatType.CurrentHealth, -damage);
+            state = State.Hit;
+            invincibiltyTick = INVINCIBILTY_DURATION;
+            isHit = true;
             if (stats.GetStat(Stat.StatType.CurrentHealth) <= 0) {
                 Position = Vector3.Up;
                 stats.setStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
@@ -191,6 +157,52 @@ public partial class Player : CharacterBody3D, IDamagable {
             return true;
         }
         return false;
+    }
+
+    private void StateMachine() {
+        switch (state) {
+            case State.Idle:
+                if (IsOkToPlayAnimation())
+                    animationPlayer.Play("Idle", 0.75f);
+                break;
+            case State.Walking:
+                if (IsOkToPlayAnimation())
+                    animationPlayer.Play("Running_A", 0.75f);
+                break;
+            case State.IsDeflecting:
+                if (IsOkToPlayAnimation())
+                    animationPlayer.Play("Spellcasting", 0.75f);
+                break;
+            case State.Deflect:
+                animationPlayer.Play("Spellcast_Shoot", -1, 1.5f);
+                break;
+            case State.Dodge:
+                if (IsOkToPlayAnimation())
+                    animationPlayer.Play("Dodge_Forward", -1, 1.5f);
+                break;
+            case State.Hit:
+                animationPlayer.Play("Hit_B", -1, 1.7f);
+                break;
+        }
+        if (InputManager.GetInputVector(ID, JoyAxis.LeftX, JoyAxis.LeftY, DEAD_ZONE).IsZeroApprox()) {
+            state = State.Idle;
+        } else {
+            state = State.Walking;
+        }
+        if (isDeflecting) {
+            state = State.IsDeflecting;
+        }
+        if (doDeflect) {
+            state = State.Deflect;
+        }
+        if (doDodge) {
+            GD.Print("helo");
+            state = State.Dodge;
+        }
+    }
+    private bool IsOkToPlayAnimation() {
+        return animationPlayer.CurrentAnimation != "Spellcast_Shoot" && animationPlayer.CurrentAnimation != "Dodge_Forward"
+            && animationPlayer.CurrentAnimation != "Hit_B";
     }
 
 	private void ParryAreaExited(Area3D area) {
@@ -211,12 +223,14 @@ public partial class Player : CharacterBody3D, IDamagable {
     private void HandleInput() {
         if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder) && currentVisualCatchAlpha > 0.05f) {
             isDeflecting = true;
-            parryArea.Scale = VISUAL_CATCH_SCALE;
+            deflectArea.Scale = VISUAL_CATCH_SCALE;
+            deflectSphere.Visible = true;
         }
         if ((InputManager.Instance().IsJustReleasedButton(ID, JoyButton.RightShoulder) || currentVisualCatchAlpha < VISUAL_CATCH_ALPHA_MIN) && isDeflecting) {
             isDeflecting = false;
             doDeflect = true;
-            parryArea.Scale = VISUAL_CATCH_SCALE;
+            deflectArea.Scale = VISUAL_CATCH_SCALE;
+            deflectSphere.Visible = false;
             invincibiltyTick = INVINCIBILTY_DURATION;
             currentVisualCatchAlpha -= DEFLECT_COST;
             SetVisualCatchAlpha(currentVisualCatchAlpha);
@@ -240,8 +254,8 @@ public partial class Player : CharacterBody3D, IDamagable {
                 }
             }
 
-            if (!parryArea.Scale.IsEqualApprox(Vector3.One)) {
-                parryArea.Scale = parryArea.Scale.Lerp(Vector3.One, (float)(delta * 15));
+            if (!deflectArea.Scale.IsEqualApprox(Vector3.One)) {
+                deflectArea.Scale = deflectArea.Scale.Lerp(Vector3.One, (float)(delta * 15));
             }
         }
         if (doDeflect) {
@@ -283,6 +297,9 @@ public partial class Player : CharacterBody3D, IDamagable {
             currentVisualCatchAlpha += (float)(DEFLECT_REGENERATION*delta);
             SetVisualCatchAlpha(currentVisualCatchAlpha);
         }
+        if (invincibiltyTick < 0) {
+            isHit = false;
+        }
     }
 	private void RotateToSlerp(Vector2 inputRotation, double delta) {
         // Calculates angle to create quaternion
@@ -312,6 +329,7 @@ public partial class Player : CharacterBody3D, IDamagable {
     private void SetVisualCatchAlpha(float visualCatchAlpha) {
         parryOverrideMaterial.AlbedoColor = new Color(0, 0, 1, visualCatchAlpha);
         currentVisualCatchAlpha = visualCatchAlpha;
-        parryArea.MaterialOverride = parryOverrideMaterial;
+        deflectArea.MaterialOverride = parryOverrideMaterial;
+        deflectSphere.MaterialOverride = parryOverrideMaterial;
     }
 }
