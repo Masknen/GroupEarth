@@ -2,6 +2,14 @@ using Godot;
 using System;
 using System.Collections.Generic;
 public partial class Player : CharacterBody3D, IDamagable {
+    private enum State {
+        Idle,
+        Walking,
+        IsDeflecting,
+        Deflect,
+        Dodge,
+    }
+    private State state = State.Idle;
 
 	public int ID = -1;
 
@@ -31,7 +39,7 @@ public partial class Player : CharacterBody3D, IDamagable {
     private bool doDeflect  = false;
 	private bool doDodge    = false;
 
-
+    private AnimationPlayer animationPlayer;
     private MeshInstance3D playerMarker;
 	private MeshInstance3D parryArea;
     private StandardMaterial3D parryOverrideMaterial;
@@ -42,6 +50,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 
 		parryArea = GetChild<MeshInstance3D>(3);
         raycast = GetChild<RayCast3D>(5);
+        animationPlayer = GetChild(2).GetChild<AnimationPlayer>(1);
 
         GetChild<Area3D>(1).AreaEntered += ParryAreaEntered;
 		GetChild<Area3D>(1).AreaExited += ParryAreaExited;
@@ -60,15 +69,56 @@ public partial class Player : CharacterBody3D, IDamagable {
 		if (ID != -1) {
             UpdateCooldownTicks(delta); //Important be infront
 			HandleInput();
+            StateMachine();
 
             //Test Code/Debug
-            if (Input.IsJoyButtonPressed(ID, JoyButton.LeftShoulder) && PlayerManager.Instance().debugBoolean) {
+            if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight) && PlayerManager.Instance().debugBoolean) {
                 for (int i = 0; i < 10; i++) {
                     FireBall.Fire(Position, Transform.Rotated(Vector3.Up, (float)(Math.PI/5 * i)));
                 }
             }
         }
 	}
+
+    private void StateMachine() {
+        if (InputManager.GetInputVector(ID, JoyAxis.LeftX, JoyAxis.LeftY, DEAD_ZONE).IsZeroApprox()) {
+            state = State.Idle;
+        } else {
+            state = State.Walking;
+        }
+        if (isDeflecting) {
+            state = State.IsDeflecting;
+        }
+        if (doDeflect) {
+            state = State.Deflect;
+        }
+        if (doDodge) {
+            GD.Print("helo");
+            state = State.Dodge;
+        }
+
+        switch (state) {
+            case State.Idle:
+                if (animationPlayer.CurrentAnimation != "Spellcast_Shoot" && animationPlayer.CurrentAnimation != "Dodge_Forward")
+                    animationPlayer.Play("Idle", 0.75f);
+                break;
+            case State.Walking:
+                if (animationPlayer.CurrentAnimation != "Spellcast_Shoot" && animationPlayer.CurrentAnimation != "Dodge_Forward")
+                    animationPlayer.Play("Running_A", 0.75f);
+                break;
+            case State.IsDeflecting:
+                if (animationPlayer.CurrentAnimation != "Spellcast_Shoot" && animationPlayer.CurrentAnimation != "Dodge_Forward")
+                    animationPlayer.Play("Spellcasting", 0.75f);
+                break;
+            case State.Deflect:
+                animationPlayer.Play("Spellcast_Shoot", -1, 1.5f);
+                break;
+            case State.Dodge:
+                if (animationPlayer.CurrentAnimation != "Spellcast_Shoot" && animationPlayer.CurrentAnimation != "Dodge_Forward")
+                    animationPlayer.Play("Dodge_Forward", -1 , 1.5f);
+                break;
+        }
+    }
 
     public override void _PhysicsProcess(double delta) {
 		if (ID != -1) {
@@ -159,21 +209,19 @@ public partial class Player : CharacterBody3D, IDamagable {
 	}
 
     private void HandleInput() {
-        //if (parryCooldownTick <= 0) {
-            if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder) && currentVisualCatchAlpha > 0.05f) {
-                isDeflecting = true;
-                parryArea.Scale = VISUAL_CATCH_SCALE;
-            }
-            if ((InputManager.Instance().IsJustReleasedButton(ID, JoyButton.RightShoulder) || currentVisualCatchAlpha < VISUAL_CATCH_ALPHA_MIN) && isDeflecting) {
-                isDeflecting = false;
-                doDeflect = true;
-                parryArea.Scale = VISUAL_CATCH_SCALE;
-                invincibiltyTick = INVINCIBILTY_DURATION;
-                currentVisualCatchAlpha -= DEFLECT_COST;
-                SetVisualCatchAlpha(currentVisualCatchAlpha);
+        if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder) && currentVisualCatchAlpha > 0.05f) {
+            isDeflecting = true;
+            parryArea.Scale = VISUAL_CATCH_SCALE;
         }
-        //}
-        if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerLeft) && dodgeCooldownTick >= DODGE_COOLDOWN) {
+        if ((InputManager.Instance().IsJustReleasedButton(ID, JoyButton.RightShoulder) || currentVisualCatchAlpha < VISUAL_CATCH_ALPHA_MIN) && isDeflecting) {
+            isDeflecting = false;
+            doDeflect = true;
+            parryArea.Scale = VISUAL_CATCH_SCALE;
+            invincibiltyTick = INVINCIBILTY_DURATION;
+            currentVisualCatchAlpha -= DEFLECT_COST;
+            SetVisualCatchAlpha(currentVisualCatchAlpha);
+        }
+        if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder) && dodgeCooldownTick >= DODGE_COOLDOWN) {
             doDodge = true;
             invincibiltyTick = INVINCIBILTY_DURATION;
         }
@@ -236,7 +284,6 @@ public partial class Player : CharacterBody3D, IDamagable {
             SetVisualCatchAlpha(currentVisualCatchAlpha);
         }
     }
-
 	private void RotateToSlerp(Vector2 inputRotation, double delta) {
         // Calculates angle to create quaternion
         float angle = Vector2.Up.AngleTo(inputRotation);
