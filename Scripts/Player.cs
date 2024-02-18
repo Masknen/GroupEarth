@@ -10,7 +10,6 @@ public partial class Player : CharacterBody3D, IDamagable {
     public Stat stats = new Stat();
 
 	private const float DEAD_ZONE               = 0.3f;
-	private const float DEFLECT_COOLDOWN        = 0.5f;
 	private const float DODGE_COOLDOWN          = 0.3f;
     private const float INVINCIBILTY_DURATION   = 0.3f;
     private const float VISUAL_CATCH_SCALE_MULT = 1.35f;
@@ -23,7 +22,6 @@ public partial class Player : CharacterBody3D, IDamagable {
     private const float DEFLECT_REGENERATION = 0.15f;
     private const float DEFLECT_HIT_DECREASE = 0.15f;
 
-	private float deflectCooldownTick       = 0;
 	private float dodgeCooldownTick       = 0;
     private float invincibiltyTick        = 0;
     public float currentVisualCatchAlpha = VISUAL_CATCH_ALPHA_MIN;
@@ -87,7 +85,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 			}
 
 			// Gets the input vector for left stick and applies it to position
-			Vector2 inputDirection = GetInputVector(JoyAxis.LeftX, JoyAxis.LeftY, DEAD_ZONE);
+			Vector2 inputDirection = InputManager.GetInputVector(ID, JoyAxis.LeftX, JoyAxis.LeftY, DEAD_ZONE);
 			Vector3 inputdirectionV3 = new Vector3(inputDirection.X, 0, inputDirection.Y);
 
             if (!isDeflecting) {
@@ -108,7 +106,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 			}
 
 			// Gets the input vector for right stick, if zero use the inputDirection instead
-			Vector2 inputRotation = GetInputVector(JoyAxis.RightX, JoyAxis.RightY, DEAD_ZONE);
+			Vector2 inputRotation = InputManager.GetInputVector(ID, JoyAxis.RightX, JoyAxis.RightY, DEAD_ZONE);
 
 			// Rotates player
 			if (inputDirection != Vector2.Zero) {
@@ -237,19 +235,8 @@ public partial class Player : CharacterBody3D, IDamagable {
             currentVisualCatchAlpha += (float)(DEFLECT_REGENERATION*delta);
             SetVisualCatchAlpha(currentVisualCatchAlpha);
         }
-
-        if (doDeflect) {
-            deflectCooldownTick = DEFLECT_COOLDOWN;
-        }
-
     }
 
-	private Vector2 GetInputVector(JoyAxis joyAxisX, JoyAxis joyAxisY, float deadZone) {
-        if (Godot.Input.GetJoyAxis(ID, joyAxisX) > deadZone || Godot.Input.GetJoyAxis(ID, joyAxisX) < -deadZone || Godot.Input.GetJoyAxis(ID, joyAxisY) > deadZone || Godot.Input.GetJoyAxis(ID, joyAxisY) < -deadZone) {
-			return new Vector2(Godot.Input.GetJoyAxis(ID, joyAxisX), Godot.Input.GetJoyAxis(ID, joyAxisY)).Normalized();
-		}
-		return Vector2.Zero;
-	}
 	private void RotateToSlerp(Vector2 inputRotation, double delta) {
         // Calculates angle to create quaternion
         float angle = Vector2.Up.AngleTo(inputRotation);
