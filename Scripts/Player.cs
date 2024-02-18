@@ -10,22 +10,26 @@ public partial class Player : CharacterBody3D, IDamagable {
     public Stat stats = new Stat();
 
 	private const float DEAD_ZONE               = 0.3f;
-	private const float PARRY_COOLDOWN          = 0.5f;
+	private const float DEFLECT_COOLDOWN        = 0.5f;
 	private const float DODGE_COOLDOWN          = 0.3f;
     private const float INVINCIBILTY_DURATION   = 0.3f;
     private const float VISUAL_CATCH_SCALE_MULT = 1.35f;
     private const float VISUAL_CATCH_ALPHA_MIN  = 0.3f;
-    private const float VISUAL_CATCH_ALPHA_MAX  = 0.6f;
+    public const float VISUAL_CATCH_ALPHA_MAX   = 0.6f;
     private const float AIM_HELP_ANGLE          = (float)(Math.PI / 4);
     private Vector3 VISUAL_CATCH_SCALE          = Vector3.One * VISUAL_CATCH_SCALE_MULT;
 
-	private float parryCooldownTick       = 0;
+    private const float DEFLECT_COST = 0.25f;
+    private const float DEFLECT_REGENERATION = 0.15f;
+    private const float DEFLECT_HIT_DECREASE = 0.15f;
+
+	private float deflectCooldownTick       = 0;
 	private float dodgeCooldownTick       = 0;
     private float invincibiltyTick        = 0;
-    private float currentVisualCatchAlpha = VISUAL_CATCH_ALPHA_MIN;
+    public float currentVisualCatchAlpha = VISUAL_CATCH_ALPHA_MIN;
 
 
-    private bool isParrying = false;
+    private bool isDeflecting = false;
     private bool doDeflect  = false;
 	private bool doDodge    = false;
 
@@ -73,7 +77,7 @@ public partial class Player : CharacterBody3D, IDamagable {
             UpdateDeflect(delta);
 
             if (!IsOnFloor()) {
-                Velocity -= new Vector3(0, 1, 0);
+                Velocity += Vector3.Down;
             }
 
 			if (Velocity.Length() > 20) {
@@ -86,8 +90,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 			Vector2 inputDirection = GetInputVector(JoyAxis.LeftX, JoyAxis.LeftY, DEAD_ZONE);
 			Vector3 inputdirectionV3 = new Vector3(inputDirection.X, 0, inputDirection.Y);
 
-
-            if (!isParrying) {
+            if (!isDeflecting) {
                 Velocity += inputdirectionV3 * (float)(stats.GetStat(Stat.StatType.MovementSpeed));
             } else {
                 Velocity = Vector3.Zero;
@@ -104,14 +107,12 @@ public partial class Player : CharacterBody3D, IDamagable {
 				doDodge = false;
 			}
 
-
 			// Gets the input vector for right stick, if zero use the inputDirection instead
-			Vector2 inputRotation = GetInputVector(JoyAxis.RightX, JoyAxis.RightY, DEAD_ZONE);// != Vector2.Zero ? GetInputVector(JoyAxis.RightX, JoyAxis.RightY, deadZone) : inputDirection;
-
+			Vector2 inputRotation = GetInputVector(JoyAxis.RightX, JoyAxis.RightY, DEAD_ZONE);
 
 			// Rotates player
-			if (inputRotation != Vector2.Zero && Velocity.Length() < stats.GetStat(Stat.StatType.MovementSpeed) * 3) {
-				RotateToSlerp(inputRotation, delta);
+			if (inputDirection != Vector2.Zero) {
+				RotateToSlerp(inputDirection, delta);
 			}
 		}
 	    MoveAndSlide();
@@ -149,11 +150,11 @@ public partial class Player : CharacterBody3D, IDamagable {
 	}
 	private void ParryAreaEntered(Area3D area) {
 		if (area as IDeflectable != null) {
-            if (!isParrying) {
+            if (!isDeflecting) {
                 currentTouching.Add(area as IDeflectable);
             } else {
                 area.QueueFree();
-                currentVisualCatchAlpha -= 0.15f;
+                currentVisualCatchAlpha -= DEFLECT_HIT_DECREASE;
                 SetVisualCatchAlpha(currentVisualCatchAlpha);
             }
 		}
@@ -161,16 +162,16 @@ public partial class Player : CharacterBody3D, IDamagable {
 
     private void HandleInput() {
         //if (parryCooldownTick <= 0) {
-            if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder) && currentVisualCatchAlpha > VISUAL_CATCH_ALPHA_MIN) {
-                isParrying = true;
+            if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder) && currentVisualCatchAlpha > 0.05f) {
+                isDeflecting = true;
                 parryArea.Scale = VISUAL_CATCH_SCALE;
             }
-            if ((InputManager.Instance().IsJustReleasedButton(ID, JoyButton.RightShoulder) || currentVisualCatchAlpha < VISUAL_CATCH_ALPHA_MIN) && isParrying) {
-                isParrying = false;
+            if ((InputManager.Instance().IsJustReleasedButton(ID, JoyButton.RightShoulder) || currentVisualCatchAlpha < VISUAL_CATCH_ALPHA_MIN) && isDeflecting) {
+                isDeflecting = false;
                 doDeflect = true;
                 parryArea.Scale = VISUAL_CATCH_SCALE;
                 invincibiltyTick = INVINCIBILTY_DURATION;
-                currentVisualCatchAlpha -= 0.25f;
+                currentVisualCatchAlpha -= DEFLECT_COST;
                 SetVisualCatchAlpha(currentVisualCatchAlpha);
         }
         //}
@@ -181,7 +182,7 @@ public partial class Player : CharacterBody3D, IDamagable {
     }
 
     private void UpdateDeflect(double delta) {
-        if (isParrying) {
+        if (isDeflecting) {
             foreach (var _item in currentTouching) {
                 var item = (_item as Node3D);
                 if (item == null) continue;
@@ -232,13 +233,13 @@ public partial class Player : CharacterBody3D, IDamagable {
     private void UpdateCooldownTicks(double delta) {
 		dodgeCooldownTick += (float)delta;
         invincibiltyTick -= (float)delta;
-        if (currentVisualCatchAlpha < VISUAL_CATCH_ALPHA_MAX && !isParrying) {
-            currentVisualCatchAlpha += 0.001f;
+        if (currentVisualCatchAlpha < VISUAL_CATCH_ALPHA_MAX && !isDeflecting) {
+            currentVisualCatchAlpha += (float)(DEFLECT_REGENERATION*delta);
             SetVisualCatchAlpha(currentVisualCatchAlpha);
         }
 
         if (doDeflect) {
-            parryCooldownTick = PARRY_COOLDOWN;
+            deflectCooldownTick = DEFLECT_COOLDOWN;
         }
 
     }

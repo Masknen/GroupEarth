@@ -35,4 +35,7 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 30
 text = "Press F3 to exit Debug
 F1 : Spawnplayers/ResetPlayers
+LB : Spawnbullets around you
+
 "
+scroll_vertical = 2.0
