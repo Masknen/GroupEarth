@@ -8,6 +8,11 @@ public partial class FireBall : Area3D, IDeflectable
     public int speed = 5;
     public int baseSpeed = 5;
     public int damage = 1;
+
+    public int sizeOfBall = 0;
+    private int speedLimit = 20;
+
+
     
 
     private float fireBallDuration = 20;
@@ -47,7 +52,12 @@ public partial class FireBall : Area3D, IDeflectable
 
         if (body as IDamagable != null) {
             if ((body as IDamagable).Hit(damage)) {
-                QueueFree();
+                sizeDown();
+                sizeOfBall -= 1;
+                if(sizeOfBall <= 0){
+                   QueueFree(); 
+                }    
+                
             }
         }
     }
@@ -72,8 +82,11 @@ public partial class FireBall : Area3D, IDeflectable
 
     public void Deflect(float yRotation) {
         damage += 1;
+        if(speed < speedLimit){
         speed = baseSpeed + (3 * damage);
+        }
         fireBallDuration = 20;
+        sizeOfBall += 1;
 
         //change color
         MeshInstance3D mesh = GetNode<MeshInstance3D>("MeshInstance3D");
@@ -81,14 +94,51 @@ public partial class FireBall : Area3D, IDeflectable
         material.AlbedoColor = new Color(1,0.2f * damage, 0);
         mesh.MaterialOverride = material;
         //color changed
+        
+        //change size -- maybe tie this to a powerup bool? 
+        sizeUp();
 
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
         Transform = transform;
     }
 
+    public void sizeUp(){
+        MeshInstance3D mesh = GetNode<MeshInstance3D>("MeshInstance3D");
+        float newScale = 1 + (0.3f * damage);
+        Vector3 newSize = new Vector3(newScale,newScale,newScale);
+        mesh.Scale = newSize;
+        /*-- works but somehow overrides the deflect angle back at the enemy?? 
+        GetNode<MeshInstance3D>("Trail3D").Scale = Vector3.One;
+        GetNode<MeshInstance3D>("Trail3D2").Scale = Vector3.One;
+        GetNode<MeshInstance3D>("Trail3D").GlobalTransform = mesh.GlobalTransform;
+        GetNode<MeshInstance3D>("Trail3D2").GlobalTransform = mesh.GlobalTransform;
+
+        //GetNode<CollisionShape3D >("CollisionShape3D ").Scale = mesh.Scale;
+        //collisionShapeSize.Scale = newSize;
+        //change size
+        */
+
+    }
+    public void sizeDown(){
+         MeshInstance3D mesh = GetNode<MeshInstance3D>("MeshInstance3D");
+        float newScale = 1 + (0.3f * damage) - 0.3f;
+        Vector3 newSize = new Vector3(newScale,newScale,newScale);
+        mesh.Scale = newSize;
+        revertColor();
+    }
+    public void revertColor(){
+        MeshInstance3D mesh = GetNode<MeshInstance3D>("MeshInstance3D");
+        StandardMaterial3D material = new StandardMaterial3D();
+        material.AlbedoColor = new Color(1, 0.2f * damage -0.2f, 0);
+        mesh.MaterialOverride = material;
+
+    }
+
     public void FriendDeflect(float yRotation) {
         damage += 1;
+        if(speed < speedLimit){
         speed = baseSpeed + (3 * damage);
+        }
         fireBallDuration = 20;
 
         //change color

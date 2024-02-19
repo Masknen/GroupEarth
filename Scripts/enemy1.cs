@@ -5,13 +5,15 @@ using System.Data.Common;
 using System.Diagnostics;
 using System.Runtime;
 using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
 using System.Security.Cryptography.X509Certificates;
 
 public partial class enemy1 : CharacterBody3D, IDamagable
 {
 	[Export] public int speed {get; set;} = 1;
   
-	public int hp = 3;
+	public int hp = 1;
+	
 	private PackedScene fireBall;
 	private Node3D target;
 	private CharacterBody3D player1;
