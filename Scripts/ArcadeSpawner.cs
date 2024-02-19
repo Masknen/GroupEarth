@@ -2,27 +2,52 @@ using Godot;
 using System;
 
 public partial class ArcadeSpawner : Node3D {
+
     private double spawnTimer = 0; //Global timer sometime maybe
-    PackedScene witch;
-    // Called when the node enters the scene tree for the first time.
+    PackedScene enemy1;
+    PackedScene enemy2;
+    PackedScene enemy3;
+    int enemyCost = 1;
+    int currentTokens = 0;
+    int maxTokens = 7;
+
     public override void _Ready() {
-        witch = GD.Load<PackedScene>("res://Scenes/enemy_1.tscn");
+        enemy1 = GD.Load<PackedScene>("res://Scenes/enemy_1.tscn");
+        enemy2 = GD.Load<PackedScene>("res://Scenes/enemy_2.tscn");
+        enemy3 = GD.Load<PackedScene>("res://Scenes/enemy_3.tscn");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta) {
         spawnTimer += delta;
-        if (spawnTimer >= 4) {
-            spawnTimer = 0;
+        uint chosenEnemy = GD.Randi() % 3;
+        GD.Print(chosenEnemy);
 
-            var spawnedWitch = witch.Instantiate();
-            GetTree().Root.AddChild(spawnedWitch);
+        if (spawnTimer >= 4) {
+
+            var spawnedEnemy = enemy1.Instantiate(); //It needs a default
+            currentTokens += 1;
+
+            if (chosenEnemy == 1) {
+                spawnedEnemy = enemy2.Instantiate();
+                currentTokens += 2;
+            }
+            if (chosenEnemy == 2) {
+                spawnedEnemy = enemy3.Instantiate();
+                currentTokens += 4;
+            }
+
+            GetTree().Root.AddChild(spawnedEnemy);
             float dirAngle = GD.Randf() * (2 * MathF.PI);
             Transform3D lookTransfrom = new Transform3D(new Basis(Transform.Basis.Y, dirAngle), new Vector3( 0, 2, 0 ));
 
+            (spawnedEnemy as CharacterBody3D).Position += lookTransfrom.Basis.Y;
+            (spawnedEnemy as CharacterBody3D).Position += -lookTransfrom.Basis.Z * 17;
 
-            (spawnedWitch as enemy1).Position += lookTransfrom.Basis.Y;
-            (spawnedWitch as enemy1).Position += -lookTransfrom.Basis.Z * 11;
+            if (currentTokens >= maxTokens) {
+                spawnTimer = 0;
+                currentTokens = 0; 
+            }
         }
     }
 }

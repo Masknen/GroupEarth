@@ -11,5 +11,5 @@ transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 
 projection = 1
 size = 25.0
 
-[node name="ArcadeSpawner" type="Node3D" parent="."]
+[node name="w" type="Node3D" parent="."]
 script = ExtResource("2_o82xd")

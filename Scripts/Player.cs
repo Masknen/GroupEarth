@@ -25,7 +25,7 @@ public partial class Player : CharacterBody3D, IDamagable {
     private const float VISUAL_CATCH_SCALE_MULT = 1.35f;
     private const float VISUAL_CATCH_ALPHA_MIN  = 0.3f;
     public const float VISUAL_CATCH_ALPHA_MAX   = 0.6f;
-    private const float AIM_HELP_ANGLE          = (float)(Math.PI / 4);
+    private const float AIM_HELP_ANGLE          = (float)(Math.PI / 12);
     private Vector3 VISUAL_CATCH_SCALE          = Vector3.One * VISUAL_CATCH_SCALE_MULT;
 
     private const float DEFLECT_COST = 0.25f;
