@@ -11,10 +11,14 @@ public partial class ArcadeSpawner : Node3D {
     int currentTokens = 0;
     int maxTokens = 7;
 
+    private bool mobsShouldSpawn = false;
+
     public override void _Ready() {
         enemy1 = GD.Load<PackedScene>("res://Scenes/enemy_1.tscn");
         enemy2 = GD.Load<PackedScene>("res://Scenes/enemy_2.tscn");
         enemy3 = GD.Load<PackedScene>("res://Scenes/enemy_3.tscn");
+        
+        
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,7 +27,21 @@ public partial class ArcadeSpawner : Node3D {
         uint chosenEnemy = GD.Randi() % 3;
         GD.Print(chosenEnemy);
 
-        if (spawnTimer >= 4) {
+        //debug option F2----
+        var enemies = GetTree().GetNodesInGroup("enemies");
+        if (Input.IsActionJustPressed("DespawnMobs")){
+            mobsShouldSpawn = false;
+            foreach(var enemy in enemies){
+                ((CharacterBody3D)enemy).QueueFree();
+
+            }
+        }
+        if(Input.IsActionJustPressed("SpawnMobs")){
+            mobsShouldSpawn = true;
+        }
+        
+        if(mobsShouldSpawn){
+            if (spawnTimer >= 4) {
 
             var spawnedEnemy = enemy1.Instantiate(); //It needs a default
             currentTokens += 1;
@@ -49,5 +67,8 @@ public partial class ArcadeSpawner : Node3D {
                 currentTokens = 0; 
             }
         }
+        
     }
+    }
+    
 }
