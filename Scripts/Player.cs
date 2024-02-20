@@ -23,7 +23,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 	private const float DODGE_COOLDOWN          = 0.3f;
     private const float INVINCIBILTY_DURATION   = 0.3f;
     private const float VISUAL_CATCH_SCALE_MULT = 1.35f;
-    private const float VISUAL_CATCH_ALPHA_MIN  = 0.3f;
+    private const float VISUAL_CATCH_ALPHA_MIN  = 0.05f;
     public const float VISUAL_CATCH_ALPHA_MAX   = 0.6f;
     private const float AIM_HELP_ANGLE          = (float)(Math.PI / 12);
     private Vector3 VISUAL_CATCH_SCALE          = Vector3.One * VISUAL_CATCH_SCALE_MULT;
@@ -227,7 +227,7 @@ public partial class Player : CharacterBody3D, IDamagable {
     }
 
     private void HandleInput() {
-        if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder) && currentVisualCatchAlpha > 0.05f) {
+        if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder) && currentVisualCatchAlpha > VISUAL_CATCH_ALPHA_MIN) {
             isDeflecting = true;
             deflectArea.Scale = VISUAL_CATCH_SCALE;
             deflectSphere.Visible = true;
