@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class ArcadeSpawner : Node3D {
 
@@ -13,12 +14,11 @@ public partial class ArcadeSpawner : Node3D {
 
     private bool mobsShouldSpawn = false;
 
+
     public override void _Ready() {
         enemy1 = GD.Load<PackedScene>("res://Scenes/enemy_1.tscn");
         enemy2 = GD.Load<PackedScene>("res://Scenes/enemy_2.tscn");
-        enemy3 = GD.Load<PackedScene>("res://Scenes/enemy_3.tscn");
-        
-        
+        enemy3 = GD.Load<PackedScene>("res://Scenes/enemy_3.tscn");    
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,16 +27,17 @@ public partial class ArcadeSpawner : Node3D {
         uint chosenEnemy = GD.Randi() % 3;
         GD.Print(chosenEnemy);
 
-        //debug option F2----
+        //debug option F4----
         var enemies = GetTree().GetNodesInGroup("enemies");
-        if (Input.IsActionJustPressed("DespawnMobs")){
+        if (Input.IsActionJustPressed("DespawnMobs") && PlayerManager.Instance().debugBoolean){
             mobsShouldSpawn = false;
             foreach(var enemy in enemies){
                 ((CharacterBody3D)enemy).QueueFree();
 
             }
         }
-        if(Input.IsActionJustPressed("SpawnMobs")){
+        //debug option F2
+        if(Input.IsActionJustPressed("SpawnMobs") && PlayerManager.Instance().debugBoolean){
             mobsShouldSpawn = true;
         }
         
