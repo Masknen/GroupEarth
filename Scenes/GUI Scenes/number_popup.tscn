@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0oonhkuy1e5q"]
+
+[ext_resource type="Script" path="res://Scripts/NumberPopup.cs" id="1_ukffr"]
+
+[node name="NumberPopup" type="Label3D"]
+billboard = 1
+modulate = Color(0.666667, 0, 0.0705882, 1)
+text = "30"
+font_size = 200
+outline_size = 22
+script = ExtResource("1_ukffr")
