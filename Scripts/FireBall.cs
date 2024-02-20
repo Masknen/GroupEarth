@@ -51,7 +51,7 @@ public partial class FireBall : Area3D, IDeflectable
 
         if (body as IDamagable != null) {
             if ((body as IDamagable).Hit(damage)) {
-                NumberPopup.Create(damage, Position, this);
+                NumberPopup.Create(damage, body.GlobalPosition, body);
                 sizeDown();
                 sizeOfBall -= 1;
                 if(sizeOfBall <= 0){
