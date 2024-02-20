@@ -3,12 +3,15 @@ using System;
 
 public partial class MiddleNode : Node3D
 {
+	public static MiddleNode Instance { get; private set; }
 	private Godot.Collections.Array<Player> playerList = new Godot.Collections.Array<Player>();
-
+	public Camera3D camera { get; private set; }
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Instance = this;
+		camera = GetChild<Camera3D>(0);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
