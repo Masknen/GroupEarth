@@ -36,5 +36,8 @@ theme_override_font_sizes/font_size = 30
 text = "Press F3 to exit Debug
 F1 : Spawnplayers/ResetPlayers
 RT : Spawnbullets around you
+F2: Start mob spawner
+F4: Despawn mobs
 
 "
+scroll_vertical = 4.0
