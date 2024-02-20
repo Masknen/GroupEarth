@@ -10,6 +10,8 @@ public partial class FireBall : Area3D, IDeflectable
     public int damage = 1;
      public int sizeOfBall = 0;
     private int speedLimit = 20;
+
+    private bool isFirstHit = true;
     
 
     private float fireBallDuration = 20;
@@ -91,10 +93,12 @@ public partial class FireBall : Area3D, IDeflectable
         material.AlbedoColor = new Color(1,0.2f * damage, 0);
         mesh.MaterialOverride = material;
         //color changed
-        sizeUp();
-
+        if(!isFirstHit){
+            sizeUp();
+        }
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
         Transform = transform;
+        isFirstHit = false;
     }
 
     public void FriendDeflect(float yRotation) {
