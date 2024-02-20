@@ -8,6 +8,7 @@ size = Vector3(1, 2.09548, 1)
 
 [node name="Enemy_2" type="CharacterBody3D"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+collision_layer = 8
 script = ExtResource("1_a5api")
 
 [node name="SkeletonMinion" parent="." instance=ExtResource("1_vxd5h")]
