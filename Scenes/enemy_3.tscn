@@ -7,12 +7,11 @@
 size = Vector3(1, 1.87085, 1)
 
 [node name="Enemy_3" type="CharacterBody3D"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 collision_layer = 8
 script = ExtResource("1_bmkv3")
 
 [node name="Skeleton_Mage" parent="." instance=ExtResource("2_1jy7a")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, -1, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0714105, 0)
