@@ -22,7 +22,19 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 	private float timeTick = 0;
 	private float invincibiltyTick = 0;
 
+	private bool isShooting = false;
+
+	//for animations
+	private string animationMode;
+	private string animation;
+	private float animationSpeed = 1.0f;
+	//---------------------
+
+
+
+
 	public bool isDead = false;
+
 	private bool spawned = true;
 
 	bool IDamagable.Hit(int damage){
@@ -44,33 +56,55 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 
     private void Enemy_AnimationFinished(StringName animName) {
         if (animName == "Spawn_Ground_Skeletons") spawned = false;
+		if (animName == "Throw") isShooting = false;
+		if (animName == "Walking_D_Skeletons"){isShooting = true; animation = "Throw"; animationSpeed = 1.5f;}
     }
+	
+
+	private void AnimationLoop(){
+		//animation = animationMode + "," + animationSpeed;
+		((AnimationPlayer)GetNode("AnimationPlayer2")).Play(animation,-1,animationSpeed);
+
+	}
+
+	private void searchForClosestPlayer(){
+		player1 = PlayerManager.Instance().players[0];
+		player2 = PlayerManager.Instance().players[1];
+		if (player1.GlobalPosition.DistanceTo(GlobalPosition) <
+		player2.GlobalPosition.DistanceTo(GlobalPosition)) {
+			target = player1;
+		} else { target = player2; }
+		Velocity = Position.DirectionTo(target.GlobalPosition) * speed;
+		Vector3 targetAngle = new Vector3(target.Position.X, this.Position.Y, target.Position.Z);
+		LookAt(targetAngle);
+				
+	}
 
     public override void _Process(double delta)
 	{
 		if (!spawned) {
+			AnimationLoop();
 			if (PlayerManager.Instance().players.Count > 0) {
-				player1 = PlayerManager.Instance().players[0];
-				player2 = PlayerManager.Instance().players[1];
-				if (player1.GlobalPosition.DistanceTo(GlobalPosition) <
-				player2.GlobalPosition.DistanceTo(GlobalPosition)) {
-					target = player1;
-				} else { target = player2; }
+				//AnimationLoop();
+				searchForClosestPlayer();
+				if(!isShooting){
+					animation = "Walking_D_Skeletons";
+				}
 
-				//target = player1;
-				Velocity = Position.DirectionTo(target.GlobalPosition) * speed;
-				Vector3 targetAngle = new Vector3(target.Position.X, this.Position.Y, target.Position.Z);
-				LookAt(targetAngle);
 				// walking animation
+				//((AnimationPlayer)GetNode("AnimationPlayer2")).Play("Walking_D_Skeletons");
 
-				((AnimationPlayer)GetNode("AnimationPlayer2")).Play("Walking_D_Skeletons");
-
-				//Rotate(targetAngle, 1.0f);
 				MoveAndSlide();
 				timeTick += (float)delta;
 				if (timeTick > MaxTime) {
 					timeTick -= MaxTime;
+					((AnimationPlayer)GetNode("AnimationPlayer2")).AnimationFinished += Enemy_AnimationFinished;
+					//shoot fireball
 					FireBall.Fire(Position, Transform);
+					((AnimationPlayer)GetNode("AnimationPlayer2")).AnimationFinished += Enemy_AnimationFinished;
+
+					
+					
 				}
 
 
@@ -81,6 +115,10 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 				direction = (nav.GetNextPathPosition() - target.GlobalPosition).Normalized();
 				Velocity = direction * moveSpeed;
 				MoveAndSlide(); */
+			}
+			else{
+				animation = "Idle_B";
+				//AnimationLoop();
 			}
 		}
 	}
@@ -101,7 +139,12 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 
 		//(new_fireBall as fireball).LookAtFromPosition(Position, target.GlobalPosition);
 		GetParent().AddChild(new_fireBall);
+		
+		
+		
 	}
+
+
 
 	/*
 	public void die()
