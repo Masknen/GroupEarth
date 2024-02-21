@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/GUI/Menu.cs" id="1_tiu2q"]
 
-[node name="Menu" type="Control"]
+[node name="StartMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
