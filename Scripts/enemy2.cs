@@ -2,49 +2,53 @@ using Godot;
 using System;
 
 
-public partial class enemy2 : CharacterBody3D, IDamagable
-{
-	[Export] public int speed {get; set;} = 1;
+public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
 
-	public int hp = 1;
+
+	private Stat stat;
+
 	private Node3D target;
-	private CharacterBody3D player1;
-	private CharacterBody3D player2;
+	private AnimationPlayer animationPlayer;
 
-	private Vector3 direction;
+    private bool spawned = true;
 
-   
+    public override void _Ready() {
+        animationPlayer = GetChild<AnimationPlayer>(2);
+        animationPlayer.AnimationFinished += AnimationFinished;
 
-	public override void _Process(double delta){
 
-		if (PlayerManager.Instance().players.Count > 0) {
-			player1 = PlayerManager.Instance().players[0];
-			player2 = PlayerManager.Instance().players[1];
-			if(player1.GlobalPosition.DistanceTo(GlobalPosition)<
-			player2.GlobalPosition.DistanceTo(GlobalPosition)){
-				target = player1;
-			}else { target = player2;}
-		
-		Velocity = Position.DirectionTo(target.GlobalPosition) * speed;
-		Vector3 targetAngle = new Vector3(target.Position.X, this.Position.Y,target.Position.Z);
-		LookAt(targetAngle);
-		MoveAndSlide();
+        animationPlayer.Play("Spawn_Ground_Skeletons");
+    }
+
+    private void AnimationFinished(StringName animName) {
+        if (animName == "Spawn_Ground_Skeletons") spawned = false;
+    }
+
+    public override void _Process(double delta) {
 
 	}
-	}
-	bool IDamagable.Hit(int damage){
-		GD.Print(damage);
-		hp += -damage;
-		if(hp <= 0){
-			QueueFree();
-			return true;
-		}
-		if(damage <= 0){
-			return false;
-		}
-		else{
-			return true;
-		} 
-	}
-		
+
+    public override void _PhysicsProcess(double delta) {
+        
+    }
+
+    public bool Hit(int damage) {
+        throw new NotImplementedException();
+    }
+
+    public void Deflect(float yRotation) {
+        throw new NotImplementedException();
+    }
+
+    public void FriendDeflect(float yRotation) {
+        throw new NotImplementedException();
+    }
+
+    public void ArcDeflect(float yRotation) {
+        throw new NotImplementedException();
+    }
+
+    public void Hold() {
+        throw new NotImplementedException();
+    }
 }
