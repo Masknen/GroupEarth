@@ -15,7 +15,7 @@ public partial class Menu : Control
 	public override void _Ready()
 	{
 		startButton = 	GetChild(0).GetChild(0).GetChild<BaseButton>(0);
-		quitButtonButton = 	GetChild(0).GetChild(0).GetChild<BaseButton>(2);
+		quitButton = 	GetChild(0).GetChild(0).GetChild<BaseButton>(2);
 		startButton.Pressed += StartPressed; 
 		quitButton.Pressed += QuitPressed; 
 
