@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/FireBall.cs" id="1_1kfvo"]
 [ext_resource type="Script" path="res://Trail3D.gd" id="2_p0eoi"]
+[ext_resource type="Shader" path="res://Assets/fireball assets/fireball_shell.gdshader" id="3_i8t0y"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0byfs"]
 
@@ -10,25 +11,6 @@ albedo_color = Color(100, 0, 0.082, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_kbu3s"]
 material = SubResource("StandardMaterial3D_lgjv7")
-
-[sub_resource type="Curve" id="Curve_pqvia"]
-_data = [Vector2(0.313187, 0.989011), 0.0, 0.0, 0, 0, Vector2(1, 0.10989), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7r2jd"]
-shading_mode = 0
-diffuse_mode = 2
-albedo_color = Color(18.343, 0.643, 0, 1)
-refraction_scale = -0.9
-grow_amount = 0.352
-distance_fade_mode = 1
-distance_fade_max_distance = 450.11
-
-[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_ulohf"]
-material = SubResource("StandardMaterial3D_7r2jd")
-size = 0.8
-section_length = 0.6
-curve = SubResource("Curve_pqvia")
 
 [sub_resource type="Gradient" id="Gradient_7gds4"]
 colors = PackedColorArray(100, 0.045, 0.025, 1, 28.9922, 0.894118, 0, 0.482353)
@@ -43,6 +25,15 @@ shading_mode = 0
 albedo_color = Color(100, 1.183, 1, 1)
 albedo_texture = SubResource("GradientTexture2D_st8ic")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1gv87"]
+render_priority = 0
+shader = ExtResource("3_i8t0y")
+shader_parameter/def_x = 0.0
+shader_parameter/def_z = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_5d6ft"]
+material = SubResource("ShaderMaterial_1gv87")
+
 [node name="fireball" type="Area3D"]
 collision_layer = 4
 collision_mask = 11
@@ -54,18 +45,6 @@ shape = SubResource("SphereShape3D_0byfs")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transparency = 0.26
 mesh = SubResource("SphereMesh_kbu3s")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, -0.0723852, 0.997377, 0, -0.997377, -0.0723852, -0.00297898, 0, 1.9225)
-visible = false
-transparency = 0.63
-cast_shadow = 0
-visibility_range_end_margin = 351.09
-mesh = SubResource("RibbonTrailMesh_ulohf")
-skeleton = NodePath("../..")
-
-[node name="motiontrail" type="MeshInstance3D" parent="MeshInstance3D"]
-visible = false
 
 [node name="Trail3D" type="MeshInstance3D" parent="MeshInstance3D"]
 material_override = SubResource("StandardMaterial3D_wtqq4")
@@ -80,5 +59,9 @@ script = ExtResource("2_p0eoi")
 lifespan = 0.7
 startColor = Color(100, 1, 1, 1)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
+transparency = 0.75
+mesh = SubResource("SphereMesh_5d6ft")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D"]
 light_color = Color(0.784314, 0, 0, 1)
