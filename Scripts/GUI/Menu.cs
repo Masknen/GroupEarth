@@ -6,8 +6,8 @@ public partial class Menu : Control
 	private BaseButton startButton; 
 	private BaseButton quitButton; 
 
-	public EventHandler StartPressedEvent; 
-	public EventHandler QuitPressedEvent; 
+	public event EventHandler StartPressedEvent; 
+	public event EventHandler QuitPressedEvent; 
 
 
 
