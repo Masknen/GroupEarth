@@ -25,7 +25,7 @@ public partial class ArcadeSpawner : Node3D {
     public override void _Process(double delta) {
         spawnTimer += delta;
         uint chosenEnemy = GD.Randi() % 3;
-        GD.Print(chosenEnemy);
+        //GD.Print(chosenEnemy);
 
         //debug option F4----
         var enemies = GetTree().GetNodesInGroup("enemies");
