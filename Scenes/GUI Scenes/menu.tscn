@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://n2unjss7lt2k"]
+[gd_scene load_steps=6 format=3 uid="uid://n2unjss7lt2k"]
 
-[ext_resource type="Script" path="res://Scripts/GUI/Menu.cs" id="1_tiu2q"]
+[ext_resource type="Script" path="res://Scripts/GUI/StartMenu.cs" id="1_tiu2q"]
+[ext_resource type="Texture2D" uid="uid://c11vwcy3pp1v5" path="res://Assets/kaykit_dungeon_pack_1.0/Models/Characters/gltf/extra heads/weathered_planks_diff_4k.jpg" id="2_qgxyd"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_i670u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_igjgh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wyd4q"]
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -12,22 +19,47 @@ grow_vertical = 2
 script = ExtResource("1_tiu2q")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 28.0
+offset_top = -179.0
+offset_right = 368.0
+offset_bottom = 179.0
+grow_vertical = 2
+
+[node name="WeatheredPlanksDiff4k" type="Sprite2D" parent="MarginContainer"]
+position = Vector2(1184, 358)
+scale = Vector2(0.596985, 0.357864)
+texture = ExtResource("2_qgxyd")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer"]
+self_modulate = Color(0.262745, 0.6, 1, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 120
+size_flags_horizontal = 0
+theme_override_constants/outline_size = 2
+theme_override_constants/h_separation = 11
+theme_override_constants/icon_max_width = 12
+theme_override_font_sizes/font_size = 100
 text = "Start"
+icon = SubResource("ViewportTexture_i670u")
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 14
+theme_override_styles/separator = SubResource("StyleBoxEmpty_igjgh")
 
 [node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+self_modulate = Color(0.262745, 0.6, 1, 1)
+material = SubResource("ShaderMaterial_wyd4q")
 layout_mode = 2
-theme_override_font_sizes/font_size = 120
+theme_override_constants/outline_size = 2
+theme_override_constants/h_separation = 11
+theme_override_constants/icon_max_width = 12
+theme_override_font_sizes/font_size = 100
 text = "Quit"
