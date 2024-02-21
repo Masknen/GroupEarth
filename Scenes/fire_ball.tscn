@@ -79,3 +79,6 @@ material_override = SubResource("StandardMaterial3D_wtqq4")
 script = ExtResource("2_p0eoi")
 lifespan = 0.7
 startColor = Color(100, 1, 1, 1)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.784314, 0, 0, 1)
