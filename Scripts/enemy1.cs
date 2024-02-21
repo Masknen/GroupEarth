@@ -39,8 +39,10 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 
 	bool IDamagable.Hit(int damage){
 		hp += -damage;
+		animation = "Hit_B";
 		if(hp <= 0){
-			QueueFree();
+			isDead = true;
+			animation = "Death_A";
 		}
 		return true;
 	}
@@ -57,7 +59,9 @@ public partial class enemy1 : CharacterBody3D, IDamagable
     private void Enemy_AnimationFinished(StringName animName) {
         if (animName == "Spawn_Ground_Skeletons") spawned = false;
 		if (animName == "Throw") isShooting = false;
+		if (animName == "Hit_B") isShooting = false;
 		if (animName == "Walking_D_Skeletons"){isShooting = true; animation = "Throw"; animationSpeed = 1.5f;}
+		if (animName == "Death_A") animation  = "Death_A_Pose";
     }
 	
 
@@ -86,22 +90,33 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 			AnimationLoop();
 			if (PlayerManager.Instance().players.Count > 0) {
 				//AnimationLoop();
-				searchForClosestPlayer();
-				if(!isShooting){
+				
+				if(!isDead){
+					searchForClosestPlayer();
+					MoveAndSlide();
+				}
+				else{
+					Position = GlobalPosition;
+				}
+				
+				if(!isShooting && !isDead){
+					
 					animation = "Walking_D_Skeletons";
 				}
 
 				// walking animation
 				//((AnimationPlayer)GetNode("AnimationPlayer2")).Play("Walking_D_Skeletons");
 
-				MoveAndSlide();
+				
 				timeTick += (float)delta;
 				if (timeTick > MaxTime) {
 					timeTick -= MaxTime;
-					((AnimationPlayer)GetNode("AnimationPlayer2")).AnimationFinished += Enemy_AnimationFinished;
+					if(isDead){
+						QueueFree();
+					}
 					//shoot fireball
 					FireBall.Fire(Position, Transform);
-					//((AnimationPlayer)GetNode("AnimationPlayer2")).AnimationFinished += Enemy_AnimationFinished;
+					
 
 					
 					
