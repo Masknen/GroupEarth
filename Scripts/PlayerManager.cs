@@ -10,7 +10,6 @@ using System;
 public partial class PlayerManager : Node3D
 {
     static private PlayerManager _instance;
-
     static public PlayerManager Instance() {
         if (_instance == null) {
             _instance = new PlayerManager();
@@ -31,7 +30,6 @@ public partial class PlayerManager : Node3D
         _instance = this;
         Input.JoyConnectionChanged += Input_JoyConnectionChanged;
         player = GD.Load<PackedScene>("res://Scenes/player.tscn");
-
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

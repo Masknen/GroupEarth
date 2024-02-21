@@ -30,7 +30,7 @@ anchors_preset = 9
 anchor_bottom = 1.0
 offset_top = 166.0
 offset_right = 470.0
-offset_bottom = -764.0
+offset_bottom = -581.0
 grow_vertical = 2
 theme_override_font_sizes/font_size = 30
 text = "Press F3 to exit Debug
@@ -40,4 +40,3 @@ F2: Start mob spawner
 F4: Despawn mobs
 
 "
-scroll_vertical = 4.0
