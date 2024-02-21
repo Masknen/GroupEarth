@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class MiddleNode : Node3D
 {
@@ -10,8 +11,8 @@ public partial class MiddleNode : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Instance = this;
-		camera = GetChild<Camera3D>(0);
+        Stopwatch sw = new Stopwatch();
+        Instance = this;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
