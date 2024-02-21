@@ -5,29 +5,36 @@ using System.Diagnostics;
 public partial class GameManager : Node {
     public static GameManager Instance { get; private set; }
 
-    private PackedScene Menu;
-    private PackedScene World;
+    private PackedScene startMenu;
+    private PackedScene world;
     private PackedScene middleNode;
     private PackedScene playerManager;
     private PackedScene gameGUI;
     private PackedScene inputManager;
+
+    private Node startMenuInstance;
+    private Node worldInstance;
+    private Node middleNodeInstance;
+    private Node playerManagerInstance;
+    private Node gameGUIInstance;
+    private Node inputManagerInstance;
 
     Stopwatch sw = new Stopwatch();
 
     public override void _Ready() {
         Instance = this;
 
-        Menu = GD.Load<PackedScene>("res://Scenes/GUI Scenes/menu.tscn");
-        World = GD.Load<PackedScene>("res://map_0_2.tscn");
+        startMenu = GD.Load<PackedScene>("res://Scenes/GUI Scenes/menu.tscn");
+        world = GD.Load<PackedScene>("res://map_0_2.tscn");
         middleNode = GD.Load<PackedScene>("res://Scenes/middle_node.tscn");
         gameGUI = GD.Load<PackedScene>("res://Scenes/GUI Scenes/game_gui.tscn");
         playerManager = GD.Load<PackedScene>("res://Scenes/player_manager.tscn");
         inputManager = GD.Load<PackedScene>("res://Scenes/input_manager.tscn");
 
 
+        //Instantiate Start Menu
         CreateInputManager();
         CreateStartMenu();
-        //Instantiate Start Menu
     }
 
     public override void _Process(double delta) {
@@ -39,13 +46,9 @@ public partial class GameManager : Node {
 
     public void StartGame() {
         GD.Print(GetTreeStringPretty());
-        foreach(var child in GetChildren()) {
-            child.QueueFree();
-        }
+        (startMenuInstance as Control).Visible = false;
 
-        CreateInputManager();
         sw.Start();
-
         CreateWorld();
         GD.Print(sw.ElapsedMilliseconds + " | World");
         sw.Restart();
@@ -63,33 +66,29 @@ public partial class GameManager : Node {
         sw.Stop();
     }
     public void CreatePlayerManager() {
-        var playerManagerInstance = playerManager.Instantiate();
+        playerManagerInstance = playerManager.Instantiate();
         AddChild(playerManagerInstance);
     }
-
     public void CreateGameGUI() {
-        var gameGUIInstance = gameGUI.Instantiate();
+        gameGUIInstance = gameGUI.Instantiate();
         AddChild(gameGUIInstance);
     }
-
     public void CreateMiddleNode() {
-        var middleNodeInstance = middleNode.Instantiate();
+        middleNodeInstance = middleNode.Instantiate();
         AddChild(middleNodeInstance);
     }
-
     public void CreateWorld() {
-        var worldInstance = World.Instantiate();
+        worldInstance = world.Instantiate();
         AddChild(worldInstance);
     }
-
     public void CreateInputManager() {
-        var inputManagerInstance = inputManager.Instantiate();
+        inputManagerInstance = inputManager.Instantiate();
         AddChild(inputManagerInstance);
     }
     public void CreateStartMenu() {
-        var startMenuInstance = Menu.Instantiate();
+        startMenuInstance = startMenu.Instantiate();
         AddChild(startMenuInstance);
-        (startMenuInstance as Menu).StartPressedEvent += StartButtonPressed;
+        (startMenuInstance as StartMenu).StartPressedEvent += StartButtonPressed;
     }
 
     private void StartButtonPressed(object sender, EventArgs e) {
