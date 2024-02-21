@@ -101,7 +101,7 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 					((AnimationPlayer)GetNode("AnimationPlayer2")).AnimationFinished += Enemy_AnimationFinished;
 					//shoot fireball
 					FireBall.Fire(Position, Transform);
-					((AnimationPlayer)GetNode("AnimationPlayer2")).AnimationFinished += Enemy_AnimationFinished;
+					//((AnimationPlayer)GetNode("AnimationPlayer2")).AnimationFinished += Enemy_AnimationFinished;
 
 					
 					
