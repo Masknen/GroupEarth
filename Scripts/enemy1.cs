@@ -98,10 +98,10 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 				timeTick += (float)delta;
 				if (timeTick > MaxTime) {
 					timeTick -= MaxTime;
-					((AnimationPlayer)GetNode("AnimationPlayer2")).AnimationFinished += Enemy_AnimationFinished;
+					
 					//shoot fireball
 					FireBall.Fire(Position, Transform);
-					//((AnimationPlayer)GetNode("AnimationPlayer2")).AnimationFinished += Enemy_AnimationFinished;
+					
 
 					
 					
