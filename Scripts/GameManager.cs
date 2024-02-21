@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 
 public partial class GameManager : Node {
+    public double TimeSinceStart {  get; private set; }
     public static GameManager Instance { get; private set; }
 
     private PackedScene startMenu;
@@ -38,10 +39,7 @@ public partial class GameManager : Node {
     }
 
     public override void _Process(double delta) {
-        if (InputManager.Instance().IsJustPressedButton(0, JoyButton.A)) {
-            GD.Print("start");
-            StartGame();
-        }
+        TimeSinceStart += delta;
     }
 
     public void StartGame() {

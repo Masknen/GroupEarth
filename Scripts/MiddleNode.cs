@@ -13,6 +13,9 @@ public partial class MiddleNode : Node3D
 	{
         Stopwatch sw = new Stopwatch();
         Instance = this;
+
+		//Max Need this
+		camera = GetChild<Camera3D>(0);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
