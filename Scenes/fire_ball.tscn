@@ -62,6 +62,3 @@ startColor = Color(100, 1, 1, 1)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
 transparency = 0.75
 mesh = SubResource("SphereMesh_5d6ft")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D"]
-light_color = Color(0.784314, 0, 0, 1)
