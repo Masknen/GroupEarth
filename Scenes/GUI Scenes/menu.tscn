@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://n2unjss7lt2k"]
+[gd_scene load_steps=5 format=3 uid="uid://n2unjss7lt2k"]
 
 [ext_resource type="Script" path="res://Scripts/GUI/StartMenu.cs" id="1_tiu2q"]
 [ext_resource type="Texture2D" uid="uid://c11vwcy3pp1v5" path="res://Assets/kaykit_dungeon_pack_1.0/Models/Characters/gltf/extra heads/weathered_planks_diff_4k.jpg" id="2_qgxyd"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_i670u"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_igjgh"]
 
@@ -47,7 +45,6 @@ theme_override_constants/h_separation = 11
 theme_override_constants/icon_max_width = 12
 theme_override_font_sizes/font_size = 100
 text = "Start"
-icon = SubResource("ViewportTexture_i670u")
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
