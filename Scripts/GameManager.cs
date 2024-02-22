@@ -41,7 +41,7 @@ public partial class GameManager : Node {
 
     public override void _Process(double delta) {
         LastPositionUpdate += (float)delta;
-        if (LastPositionUpdate >= 1) {
+        if (LastPositionUpdate >= 0.5f) {
             LastPositionUpdate = 0;
         }
         TimeSinceStart += delta;
