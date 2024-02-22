@@ -117,6 +117,7 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("1_lf25i")
 
 [node name="sparks" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_ycsti")
 amount = 20
 lifetime = 0.6
@@ -126,6 +127,7 @@ process_material = SubResource("ParticleProcessMaterial_nvyhy")
 draw_pass_1 = SubResource("QuadMesh_a5w6j")
 
 [node name="middleExplotion" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 material_override = ExtResource("3_ydtvk")
 amount = 1
 lifetime = 0.1
@@ -135,6 +137,7 @@ process_material = SubResource("ParticleProcessMaterial_stsyf")
 draw_pass_1 = SubResource("QuadMesh_ke2a2")
 
 [node name="fire" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 material_override = ExtResource("3_ydtvk")
 amount = 13
 lifetime = 0.55
@@ -144,6 +147,7 @@ process_material = SubResource("ParticleProcessMaterial_axacn")
 draw_pass_1 = SubResource("QuadMesh_epm7e")
 
 [node name="smoke" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 material_override = ExtResource("3_ydtvk")
 amount = 10
 lifetime = 0.8
