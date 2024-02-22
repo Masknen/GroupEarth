@@ -137,29 +137,6 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 			}
 		}
 	}
-	
-	public void fireFireBall(){
-		//casting animation
-		
-		var new_fireBall = fireBall.Instantiate();
-		(new_fireBall as FireBall).Position = Position;
-		//LookAt(target.GlobalPosition);
-
-		// Max Changes
-		float yRotation = -GlobalPosition.DirectionTo(target.GlobalPosition).SignedAngleTo(Vector3.Forward, Vector3.Up);
-		Transform3D transform = new Transform3D(new Basis(Transform.Basis.Y, yRotation), Position);
-		(new_fireBall as FireBall).Transform = transform;
-		// \Max Changes
-
-
-		//(new_fireBall as fireball).LookAtFromPosition(Position, target.GlobalPosition);
-		GetParent().AddChild(new_fireBall);
-		
-		
-		
-	}
-
-
 
 	/*
 	public void die()
