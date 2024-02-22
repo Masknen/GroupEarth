@@ -53,7 +53,8 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 	{
         ((AnimationPlayer)GetNode("AnimationPlayer2")).AnimationFinished += Enemy_AnimationFinished;
         ((AnimationPlayer)GetNode("AnimationPlayer2")).Play("Spawn_Ground_Skeletons");
-
+		ArcadeSpawner.Instance.enemyArray.Add(this);
+		//GD.Print(ArcadeSpawner.Instance.enemyArray.Count);
     }
 
     private void Enemy_AnimationFinished(StringName animName) {
@@ -112,6 +113,8 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 				if (timeTick > MaxTime) {
 					timeTick -= MaxTime;
 					if(isDead){
+						ArcadeSpawner.Instance.enemyArray.Remove(this);
+						//GD.Print(ArcadeSpawner.Instance.enemyArray.Count);
 						QueueFree();
 					}
 					//shoot fireball

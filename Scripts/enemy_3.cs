@@ -19,6 +19,8 @@ public partial class enemy_3 : CharacterBody3D, IDamagable
     public override void _Ready()
     {
         skeleton = GD.Load<PackedScene>("res://Scenes/enemy_2.tscn");
+        ArcadeSpawner.Instance.enemyArray.Add(this);
+        //GD.Print(ArcadeSpawner.Instance.enemyArray.Count);
     }
 
 
@@ -59,7 +61,9 @@ public partial class enemy_3 : CharacterBody3D, IDamagable
 		//GD.Print(damage);
 		hp += -damage;
 		if(hp <= 0){
-			QueueFree();
+            ArcadeSpawner.Instance.enemyArray.Remove(this);
+            //GD.Print(ArcadeSpawner.Instance.enemyArray.Count);
+            QueueFree();
 			return true;
 		}
 		if(damage <= 0){
