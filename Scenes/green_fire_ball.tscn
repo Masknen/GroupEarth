@@ -1,23 +1,25 @@
-[gd_scene load_steps=17 format=3 uid="uid://cfq66m8cis4b3"]
+[gd_scene load_steps=21 format=3 uid="uid://bl8vnnfwv73oy"]
 
-[ext_resource type="Script" path="res://Scripts/FireBall.cs" id="1_1kfvo"]
-[ext_resource type="Script" path="res://Trail3D.gd" id="2_p0eoi"]
-[ext_resource type="Shader" path="res://Assets/fireball assets/fireball_shell.gdshader" id="3_i8t0y"]
-[ext_resource type="Material" uid="uid://dw183qcnwjiyn" path="res://Assets/fireball assets/Flare_00.tres" id="4_l13ui"]
+[ext_resource type="Script" path="res://Scripts/GreenFireBall.cs" id="1_0g5vm"]
+[ext_resource type="Script" path="res://Trail3D.gd" id="2_x3k4l"]
+[ext_resource type="Shader" path="res://Assets/fireball assets/fireball_shell.gdshader" id="3_3w0o3"]
+[ext_resource type="Material" uid="uid://dw183qcnwjiyn" path="res://Assets/fireball assets/Flare_00.tres" id="4_uubif"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_0byfs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgjv7"]
-albedo_color = Color(100, 0, 0.082, 1)
+albedo_color = Color(0, 5, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_kbu3s"]
 material = SubResource("StandardMaterial3D_lgjv7")
 
 [sub_resource type="Gradient" id="Gradient_7gds4"]
-colors = PackedColorArray(100, 0.045, 0.025, 1, 28.9922, 0.894118, 0, 0.482353)
+offsets = PackedFloat32Array(0, 0.526559)
+colors = PackedColorArray(0.247278, 0.99797, 0.224057, 1, 0, 1.183, 0, 0.482)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_st8ic"]
 gradient = SubResource("Gradient_7gds4")
+fill_from = Vector2(0.111111, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wtqq4"]
 transparency = 1
@@ -28,21 +30,42 @@ albedo_texture = SubResource("GradientTexture2D_st8ic")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1gv87"]
 render_priority = 0
-shader = ExtResource("3_i8t0y")
+shader = ExtResource("3_3w0o3")
 shader_parameter/def_x = 0.0
 shader_parameter/def_z = 0.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_5d6ft"]
 material = SubResource("ShaderMaterial_1gv87")
 
-[sub_resource type="Gradient" id="Gradient_rlw6l"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nhqms"]
+render_priority = 0
+shader = ExtResource("3_3w0o3")
+shader_parameter/def_x = 0.0
+shader_parameter/def_z = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r2iwj"]
+next_pass = SubResource("ShaderMaterial_nhqms")
+shading_mode = 0
+albedo_color = Color(0.792545, 0.24962, 0.0295023, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_an5pk"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+color = Color(5, 2, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wu8gh"]
+
+[sub_resource type="Gradient" id="Gradient_bsxcl"]
 offsets = PackedFloat32Array(0.320665, 1)
 colors = PackedColorArray(0.870612, 0.0925935, 0.0587942, 1, 0.991342, 0.407279, 0.222633, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ma6rb"]
-gradient = SubResource("Gradient_rlw6l")
+gradient = SubResource("Gradient_bsxcl")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rk56e"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vvgj6"]
 emission_shape = 1
 emission_sphere_radius = 1.0
 spread = 180.0
@@ -53,15 +76,15 @@ damping_min = 1.0
 damping_max = 1.0
 scale_min = 0.2
 scale_max = 0.3
-color = Color(5, 2, 1, 1)
+color = Color(0, 5, 1, 1)
 color_ramp = SubResource("GradientTexture1D_ma6rb")
 
-[sub_resource type="QuadMesh" id="QuadMesh_ih6rj"]
+[sub_resource type="QuadMesh" id="QuadMesh_5yqcr"]
 
-[node name="fireball" type="Area3D"]
+[node name="greenfireball" type="Area3D"]
 collision_layer = 4
 collision_mask = 11
-script = ExtResource("1_1kfvo")
+script = ExtResource("1_0g5vm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_0byfs")
@@ -72,14 +95,14 @@ mesh = SubResource("SphereMesh_kbu3s")
 
 [node name="Trail3D" type="MeshInstance3D" parent="MeshInstance3D"]
 material_override = SubResource("StandardMaterial3D_wtqq4")
-script = ExtResource("2_p0eoi")
+script = ExtResource("2_x3k4l")
 lifespan = 0.7
 startColor = Color(100, 1, 1, 1)
 
 [node name="Trail3D2" type="MeshInstance3D" parent="MeshInstance3D"]
 transform = Transform3D(-0.882529, -0.470257, 0, 0.470257, -0.882529, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_wtqq4")
-script = ExtResource("2_p0eoi")
+script = ExtResource("2_x3k4l")
 lifespan = 0.7
 startColor = Color(100, 1, 1, 1)
 
@@ -89,11 +112,20 @@ transparency = 0.75
 mesh = SubResource("SphereMesh_5d6ft")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="MeshInstance3D"]
-material_override = ExtResource("4_l13ui")
+visible = false
+material_override = SubResource("StandardMaterial3D_r2iwj")
+amount = 20
+lifetime = 0.01
+speed_scale = 0.0
+process_material = SubResource("ParticleProcessMaterial_an5pk")
+draw_pass_1 = SubResource("SphereMesh_wu8gh")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="MeshInstance3D"]
+material_override = ExtResource("4_uubif")
 amount = 20
 lifetime = 0.3
 interp_to_end = 1.0
 speed_scale = 0.3
 fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_rk56e")
-draw_pass_1 = SubResource("QuadMesh_ih6rj")
+process_material = SubResource("ParticleProcessMaterial_vvgj6")
+draw_pass_1 = SubResource("QuadMesh_5yqcr")
