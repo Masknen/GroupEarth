@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 public partial class GameManager : Node {
     public double TimeSinceStart {  get; private set; }
+    public float LastPositionUpdate { get; private set; }
     public static GameManager Instance { get; private set; }
 
     private PackedScene startMenu;
@@ -39,6 +40,10 @@ public partial class GameManager : Node {
     }
 
     public override void _Process(double delta) {
+        LastPositionUpdate += (float)delta;
+        if (LastPositionUpdate >= 1) {
+            LastPositionUpdate = 0;
+        }
         TimeSinceStart += delta;
     }
 
