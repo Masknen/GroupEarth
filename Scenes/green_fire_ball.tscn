@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bl8vnnfwv73oy"]
+[gd_scene load_steps=17 format=3 uid="uid://bl8vnnfwv73oy"]
 
 [ext_resource type="Script" path="res://Scripts/GreenFireBall.cs" id="1_0g5vm"]
 [ext_resource type="Script" path="res://Trail3D.gd" id="2_x3k4l"]
@@ -36,27 +36,6 @@ shader_parameter/def_z = 0.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_5d6ft"]
 material = SubResource("ShaderMaterial_1gv87")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nhqms"]
-render_priority = 0
-shader = ExtResource("3_3w0o3")
-shader_parameter/def_x = 0.0
-shader_parameter/def_z = 0.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r2iwj"]
-next_pass = SubResource("ShaderMaterial_nhqms")
-shading_mode = 0
-albedo_color = Color(0.792545, 0.24962, 0.0295023, 1)
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_an5pk"]
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 1.0
-emission_ring_radius = 1.0
-emission_ring_inner_radius = 0.0
-color = Color(5, 2, 1, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_wu8gh"]
 
 [sub_resource type="Gradient" id="Gradient_bsxcl"]
 offsets = PackedFloat32Array(0.320665, 1)
@@ -107,20 +86,10 @@ lifespan = 0.7
 startColor = Color(100, 1, 1, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D"]
-visible = false
-transparency = 0.75
+transparency = 0.9
 mesh = SubResource("SphereMesh_5d6ft")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="MeshInstance3D"]
-visible = false
-material_override = SubResource("StandardMaterial3D_r2iwj")
-amount = 20
-lifetime = 0.01
-speed_scale = 0.0
-process_material = SubResource("ParticleProcessMaterial_an5pk")
-draw_pass_1 = SubResource("SphereMesh_wu8gh")
-
-[node name="GPUParticles3D2" type="GPUParticles3D" parent="MeshInstance3D"]
 material_override = ExtResource("4_uubif")
 amount = 20
 lifetime = 0.3

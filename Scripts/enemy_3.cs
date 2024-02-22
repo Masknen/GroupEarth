@@ -43,6 +43,7 @@ public partial class enemy_3 : CharacterBody3D, IDamagable
 			if (timeTick > MaxTime) {
 				timeTick -= MaxTime;
 				//summonSkeleton();
+				GreenFireBall.Fire(Position,Transform);
 			}
         
 
