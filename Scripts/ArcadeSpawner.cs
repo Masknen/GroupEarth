@@ -12,9 +12,10 @@ public partial class ArcadeSpawner : Node3D {
     int currentTokens = 0;
     int maxTokens = 7;
 
-    private bool mobsShouldSpawn = false;
+    private bool mobsShouldSpawn = true;
 
-
+    // Max vill ha en stat class for varje enemy sa att man inte behover skapa nya baseStats for varje ny instans det enda som behover vara privat i
+    // en fiende ar deras egna nuvarande liv
     public override void _Ready() {
         enemy1 = GD.Load<PackedScene>("res://Scenes/enemy_1.tscn");
         enemy2 = GD.Load<PackedScene>("res://Scenes/enemy_2.tscn");
@@ -30,7 +31,6 @@ public partial class ArcadeSpawner : Node3D {
         //debug option F4----
         var enemies = GetTree().GetNodesInGroup("enemies");
         if (Input.IsActionJustPressed("DespawnMobs") && PlayerManager.Instance().debugBoolean) {
-            mobsShouldSpawn = false;
             foreach (var enemy in enemies) {
                 ((CharacterBody3D)enemy).QueueFree();
 
@@ -38,7 +38,7 @@ public partial class ArcadeSpawner : Node3D {
         }
         //debug option F2
         if (Input.IsActionJustPressed("SpawnMobs") && PlayerManager.Instance().debugBoolean) {
-            mobsShouldSpawn = true;
+            mobsShouldSpawn = !mobsShouldSpawn;
         }
 
         if (mobsShouldSpawn) {
