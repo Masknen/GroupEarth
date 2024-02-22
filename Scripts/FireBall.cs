@@ -4,11 +4,12 @@ using System.Linq.Expressions;
 
 public partial class FireBall : Area3D, IDeflectable
 {
+    private MeshInstance3D rotateFireball;
 
     public int speed = 5;
     public int baseSpeed = 5;
     public int damage = 1;
-     public int sizeOfBall = 0;
+    public int sizeOfBall = 0;
     private int speedLimit = 20;
 
     private bool isFirstHit = true;
@@ -40,11 +41,9 @@ public partial class FireBall : Area3D, IDeflectable
 
     public override void _Ready()
     {
+        rotateFireball = GetNode<MeshInstance3D>("MeshInstance3D");
         BodyEntered += FireBall_BodyEntered;
         //change color of the ball based on damage
-        
-        
-        
     }
     private void FireBall_BodyEntered(Node3D body) {
         if (body as GridMap != null) QueueFree();
@@ -73,7 +72,6 @@ public partial class FireBall : Area3D, IDeflectable
                 QueueFree();
             }
             Position -= Transform.Basis.Z * (float)(speed * delta);
-            MeshInstance3D rotateFireball = GetNode<MeshInstance3D>("MeshInstance3D");
             rotateFireball.RotateZ(2);
         }
     }
@@ -89,10 +87,9 @@ public partial class FireBall : Area3D, IDeflectable
         
 
         //change color
-        MeshInstance3D mesh = GetNode<MeshInstance3D>("MeshInstance3D");
         StandardMaterial3D material = new StandardMaterial3D();  
         material.AlbedoColor = new Color(1,0.2f * damage, 0);
-        mesh.MaterialOverride = material;
+        rotateFireball.MaterialOverride = material;
         //color changed
         if(!isFirstHit){
             sizeUp();
@@ -108,10 +105,9 @@ public partial class FireBall : Area3D, IDeflectable
         fireBallDuration = 20;
 
         //change color
-        MeshInstance3D mesh = GetNode<MeshInstance3D>("MeshInstance3D");
         StandardMaterial3D material = new StandardMaterial3D();
         material.AlbedoColor = new Color(1, 0.2f * damage, 0);
-        mesh.MaterialOverride = material;
+        rotateFireball.MaterialOverride = material;
         //color changed
 
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
@@ -126,10 +122,9 @@ public partial class FireBall : Area3D, IDeflectable
         speed = 0;
     }
      public void sizeUp(){
-        MeshInstance3D mesh = GetNode<MeshInstance3D>("MeshInstance3D");
         float newScale = 1 + (0.3f * damage);
         Vector3 newSize = new Vector3(newScale,newScale,newScale);
-        mesh.Scale = newSize;
+        rotateFireball.Scale = newSize;
         /*-- works but somehow overrides the deflect angle back at the enemy?? 
         GetNode<MeshInstance3D>("Trail3D").Scale = Vector3.One;
         GetNode<MeshInstance3D>("Trail3D2").Scale = Vector3.One;
@@ -143,17 +138,15 @@ public partial class FireBall : Area3D, IDeflectable
 
     }
     public void sizeDown(){
-        MeshInstance3D mesh = GetNode<MeshInstance3D>("MeshInstance3D");
         float newScale = 1 + (0.3f * damage) - 0.3f;
         Vector3 newSize = new Vector3(newScale,newScale,newScale);
-        mesh.Scale = newSize;
+        rotateFireball.Scale = newSize;
         revertColor();
     }
     public void revertColor(){
-        MeshInstance3D mesh = GetNode<MeshInstance3D>("MeshInstance3D");
         StandardMaterial3D material = new StandardMaterial3D();
         material.AlbedoColor = new Color(1, 0.2f * damage -0.2f, 0);
-        mesh.MaterialOverride = material;
+        rotateFireball.MaterialOverride = material;
 
     }
 
