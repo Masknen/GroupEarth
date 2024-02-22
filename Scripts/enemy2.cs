@@ -3,13 +3,20 @@ using System;
 
 
 public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
+    private enum State {
+        Spawning,
+        Idle,
+        Walking,
+        SpellCasting,
+        Hit,
+        Die,
+    }
+    private State state = State.Spawning;
 
 	private AnimationPlayer animationPlayer;
     private NavigationAgent3D navAgent;
     private Player target;
     private uint targetOffset;
-
-    private bool spawned = true;
 
 
     // Until have centrebrain stats
@@ -17,8 +24,11 @@ public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
     private const float ROT_SPEED = 4;
     private const float DISTANCE_TO_TARGET = 7;
     private const float SHOOT_COOLDOWN = 2.0f;
+    private const float SHOOT_OFFSET_SECONDS = 0.7f;
 
-    private float shootTick = 0;
+    private int currentHealth = 3;
+    private float shootCooldownTick = 0;
+    private float animationTiming = 0;
 
     public override void _Ready() {
 
@@ -26,74 +36,104 @@ public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
         navAgent = GetChild<NavigationAgent3D>(3);
         animationPlayer.AnimationFinished += AnimationFinished;
 
-        //navAgent.DebugEnabled = true;
         targetOffset = GD.Randi();
 
         animationPlayer.Play("Spawn_Ground_Skeletons");
-
     }
 
     private void AnimationFinished(StringName animName) {
-        if (animName == "Spawn_Ground_Skeletons") spawned = false;
+        if (animName == "Spawn_Ground_Skeletons") state = State.Walking;
+        if (animName == "Dualwield_Melee_Attack_Slice") state = State.Walking;
+        if (animName == "Hit_A") state = State.Walking;
+        if (animName == "Death_C_Skeletons") QueueFree();
     }
 
     public override void _Process(double delta) {
+        StateMachine();
         if (target == null && PlayerManager.Instance().players.Count >= 1) {
             target = PlayerManager.Instance().players[0];
         }
 
-        if (target != null && !spawned) {
-            if (GlobalPosition.DistanceTo(target.GlobalPosition) <= DISTANCE_TO_TARGET * 1.5f) {
+        if (target != null && state != State.Spawning && state != State.Hit) {
+            if (GlobalPosition.DistanceTo(target.GlobalPosition) <= DISTANCE_TO_TARGET * 1.5f || state == State.SpellCasting) {
                 var direction = GlobalPosition.DirectionTo(target.GlobalPosition);
                 RotateToSlerp(new Vector2(direction.X, direction.Z), delta);
 
-                if (shootTick <= 0) {
-                    FireBall.Fire(Position, Transform.Rotated(Vector3.Up, (float)(Math.PI / 12f)));
-                    FireBall.Fire(GlobalPosition, Transform.Rotated(Vector3.Up, -(float)(Math.PI / 12f)));
-                    shootTick = SHOOT_COOLDOWN;
+                shootCooldownTick -= (float)delta;
+                if (shootCooldownTick <= 0) {
+                    ChangeState(State.SpellCasting);
+                    animationTiming -= (float)delta;
+                    if(animationTiming <= -SHOOT_OFFSET_SECONDS) {
+                        animationTiming = 0;
+                        shootCooldownTick = SHOOT_COOLDOWN;
+                        FireBall.Fire(Position, Transform.Rotated(Vector3.Up, (float)(Math.PI / 12f)));
+                        FireBall.Fire(GlobalPosition, Transform.Rotated(Vector3.Up, -(float)(Math.PI / 12f)));
+                        state = State.Idle;
+                    }
                 }
             }
             else {
                 RotateToSlerp(new Vector2(Velocity.X, Velocity.Z), delta);
             }
-
-            if (shootTick > 0) {
-                shootTick -= (float)delta;
-            }
         }
     }
 
     public override void _PhysicsProcess(double delta) {
-        if (!spawned) {
+        if (state == State.Walking) {
             MoveToTarget();
-
             MoveAndSlide();
         }
         if (!IsOnFloor()) {
             Velocity += Vector3.Down;
         }
+        if (Velocity.IsZeroApprox()) {
+            ChangeState(State.Idle);
+        } else {
+            ChangeState(State.Walking);
+        }
     }
-
 
     public bool Hit(int damage) {
-        QueueFree();
+        if (state == State.Die) return false;
+        currentHealth -= damage;
+        if (currentHealth <= 0) {
+            ChangeState(State.Die);
+            //(GetNode("CollisionShape3D") as CollisionShape3D).QueueFree();
+            return true;
+        }
+        ChangeState(State.Hit);
         return true;
     }
-
     public void Deflect(float yRotation) {
         throw new NotImplementedException();
     }
-
     public void FriendDeflect(float yRotation) {
         throw new NotImplementedException();
     }
-
     public void ArcDeflect(float yRotation) {
         throw new NotImplementedException();
     }
-
     public void Hold() {
         throw new NotImplementedException();
+    }
+    private void StateMachine() {
+        switch (state) {
+            case State.Idle:
+                animationPlayer.Play("Idle_Combat", 0.1f);
+                break;
+            case State.Walking:
+                animationPlayer.Play("Walking_D_Skeletons", 0.1f);
+                break;
+            case State.SpellCasting:
+                animationPlayer.Play("Dualwield_Melee_Attack_Slice", 0.1f);
+                break;
+            case State.Hit:
+                animationPlayer.Play("Hit_A");
+                break;
+            case State.Die:
+                animationPlayer.Play("Death_C_Skeletons", 0.1f);
+                break;
+        }
     }
     private void MoveToTarget() {
         foreach (var player in PlayerManager.Instance().players) {
@@ -122,5 +162,10 @@ public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
         Transform3D transform = Transform;
         transform.Basis = new Basis(quaternion);
         Transform = transform;
+    }
+    private void ChangeState(State newState) {
+        if (state == State.Idle || state == State.Walking || newState == State.Hit || newState == State.Die) {
+            state = newState;
+        }
     }
 }
