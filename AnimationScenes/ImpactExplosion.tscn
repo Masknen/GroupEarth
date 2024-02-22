@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://AnimationScenes/AnimationScripts/ImpactExplotion.cs" id="1_lf25i"]
 [ext_resource type="Texture2D" uid="uid://bdn7v15qbyc2b" path="res://Assets/fireball assets/Flare00.PNG" id="2_g4pcf"]
-[ext_resource type="Material" uid="uid://bx3njkbbepiyt" path="res://Assets/fireball assets/Flare_00.tres" id="3_ydtvk"]
+[ext_resource type="Material" uid="uid://dw183qcnwjiyn" path="res://Assets/fireball assets/Flare_00.tres" id="3_ydtvk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ycsti"]
 transparency = 1

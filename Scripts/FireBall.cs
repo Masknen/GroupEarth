@@ -40,7 +40,7 @@ public partial class FireBall : Area3D, IDeflectable
         (new_fireBall as FireBall).fireAnimation = true;
     }
 
-    private void hitExplotion(){
+    private void hitExplosion(){
         fireBallExplotion = GD.Load<PackedScene>("res://AnimationScenes/ImpactExplosion.tscn");
         var new_fireBallExploation = fireBallExplotion.Instantiate();
         (new_fireBallExploation as ImpactExplotion).Position = Position;
@@ -59,7 +59,7 @@ public partial class FireBall : Area3D, IDeflectable
 
         if (body as IDamagable != null) {
             if ((body as IDamagable).Hit(damage)) {
-                hitExplotion();
+                hitExplosion();
                 NumberPopup.Create(damage, body.GlobalPosition, body);
                 sizeDown();
                 sizeOfBall -= 1;
