@@ -54,7 +54,7 @@ public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
             target = PlayerManager.Instance().players[0];
         }
 
-        if (target != null && state != State.Spawning && state != State.Hit) {
+        if (target != null && state == State.Walking || state == State.SpellCasting) {
             if (GlobalPosition.DistanceTo(target.GlobalPosition) <= DISTANCE_TO_TARGET * 1.5f || state == State.SpellCasting) {
                 var direction = GlobalPosition.DirectionTo(target.GlobalPosition);
                 RotateToSlerp(new Vector2(direction.X, direction.Z), delta);
