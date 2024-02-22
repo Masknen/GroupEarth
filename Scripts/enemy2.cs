@@ -26,7 +26,7 @@ public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
         navAgent = GetChild<NavigationAgent3D>(3);
         animationPlayer.AnimationFinished += AnimationFinished;
 
-        navAgent.DebugEnabled = true;
+        //navAgent.DebugEnabled = true;
         targetOffset = GD.Randi();
 
         animationPlayer.Play("Spawn_Ground_Skeletons");
