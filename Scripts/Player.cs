@@ -275,7 +275,6 @@ public partial class Player : CharacterBody3D, IDamagable {
                 target = target == null ? _object as Node3D : target;
 
                 if ((_object as Node3D) != null) {
-                    var possibleTarget = _object as Node3D;
                     if (Position.DirectionTo(target.Position).AngleTo(-Transform.Basis.Z) > Math.Abs(i)) {
                         target = _object as Node3D;
                     }
