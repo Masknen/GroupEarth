@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 
 public partial class FireBall : Area3D, IDeflectable
 {
+
     private MeshInstance3D rotateFireball;
     private PackedScene fireBallExplotion;
 
@@ -33,29 +34,28 @@ public partial class FireBall : Area3D, IDeflectable
         float yRotation = shooterTransform.Basis.GetEuler().Y;
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), shooterPos);
         (new_fireBall as FireBall).Transform = transform;
-        (new_fireBall as FireBall).Position = shooterPos + Vector3.Forward.Rotated(Vector3.Up, yRotation)*2.0f;
+        (new_fireBall as FireBall).Position = shooterPos + Vector3.Forward.Rotated(Vector3.Up, yRotation)*1.5f;
         (new_fireBall as FireBall).Scale = Vector3.One * 0.001f;
 
 
         (new_fireBall as FireBall).fireAnimation = true;
     }
 
-    private void hitExplosion(){
-        fireBallExplotion = GD.Load<PackedScene>("res://AnimationScenes/ImpactExplosion.tscn");
+    private void hitExplosion() {
         var new_fireBallExploation = fireBallExplotion.Instantiate();
         (new_fireBallExploation as ImpactExplotion).Position = Position;
         GetParent().AddChild(new_fireBallExploation);
     }
 
-    public override void _Ready()
-    {
+    public override void _Ready() {
+        fireBallExplotion = GD.Load<PackedScene>("res://AnimationScenes/ImpactExplosion.tscn");
         rotateFireball = GetNode<MeshInstance3D>("MeshInstance3D");
         
         BodyEntered += FireBall_BodyEntered;
         //change color of the ball based on damage
     }
     private void FireBall_BodyEntered(Node3D body) {
-        if (body as GridMap != null) QueueFree();
+        if (body as GridMap != null) { QueueFree(); hitExplosion(); }
 
         if (body as IDamagable != null) {
             if ((body as IDamagable).Hit(damage)) {
@@ -82,7 +82,7 @@ public partial class FireBall : Area3D, IDeflectable
                 QueueFree();
             }
             Position -= Transform.Basis.Z * (float)(speed * delta);
-            rotateFireball.RotateZ(2);
+            rotateFireball.RotateZ(0.2f);
         }
     }
 
