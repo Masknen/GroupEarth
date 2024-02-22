@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 public partial class FireBall : Area3D, IDeflectable
 {
     private MeshInstance3D rotateFireball;
+    private PackedScene fireBallExplotion;
 
     public int speed = 5;
     public int baseSpeed = 5;
@@ -39,9 +40,17 @@ public partial class FireBall : Area3D, IDeflectable
         (new_fireBall as FireBall).fireAnimation = true;
     }
 
+    private void hitExplotion(){
+        fireBallExplotion = GD.Load<PackedScene>("res://AnimationScenes/ImpactExplosion.tscn");
+        var new_fireBallExploation = fireBallExplotion.Instantiate();
+        (new_fireBallExploation as ImpactExplotion).Position = Position;
+        GetParent().AddChild(new_fireBallExploation);
+    }
+
     public override void _Ready()
     {
         rotateFireball = GetNode<MeshInstance3D>("MeshInstance3D");
+        
         BodyEntered += FireBall_BodyEntered;
         //change color of the ball based on damage
     }
@@ -50,6 +59,7 @@ public partial class FireBall : Area3D, IDeflectable
 
         if (body as IDamagable != null) {
             if ((body as IDamagable).Hit(damage)) {
+                hitExplotion();
                 NumberPopup.Create(damage, body.GlobalPosition, body);
                 sizeDown();
                 sizeOfBall -= 1;
