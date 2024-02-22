@@ -56,7 +56,7 @@ public partial class enemy_3 : CharacterBody3D, IDamagable
     }
 	*/
     bool IDamagable.Hit(int damage){
-		GD.Print(damage);
+		//GD.Print(damage);
 		hp += -damage;
 		if(hp <= 0){
 			QueueFree();

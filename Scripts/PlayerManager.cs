@@ -41,12 +41,12 @@ public partial class PlayerManager : Node3D
             if (Input.IsJoyButtonPressed(ID, JoyButton.Start) && startJustPressed[i]) {
                 startJustPressed[i] = false;
                 playersToCreateID.Add(ID);
-                GD.Print("Added: " + ID);
+                //GD.Print("Added: " + ID);
             }
             if (Input.IsJoyButtonPressed(ID, JoyButton.Back) && !startJustPressed[i]) {
                 startJustPressed[i] = true;
                 playersToCreateID.Remove(ID);
-                GD.Print("Removed: " + ID);
+                //GD.Print("Removed: " + ID);
             }
             ++i;
         }
@@ -54,12 +54,12 @@ public partial class PlayerManager : Node3D
             playersToCreateID.RemoveAt(0);
         }
         if(Input.IsActionJustPressed("spawnPlayers") && debugBoolean) {
-            GD.Print("Trying to spawn Players: " + playersToCreateID);
+            //GD.Print("Trying to spawn Players: " + playersToCreateID);
             SpawnPlayers();
         }
         if (Input.IsActionJustPressed("EnableDebug")) {
             debugBoolean = !debugBoolean;
-            GD.Print("Debug: " + debugBoolean);
+            //GD.Print("Debug: " + debugBoolean);
         }
 	}
 
