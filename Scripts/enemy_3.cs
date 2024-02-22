@@ -40,19 +40,21 @@ public partial class enemy_3 : CharacterBody3D, IDamagable
         timeTick += (float)delta;
 			if (timeTick > MaxTime) {
 				timeTick -= MaxTime;
-				summonSkeleton();
+				//summonSkeleton();
 			}
         
 
 	}
     }
 
+	/*
     private void summonSkeleton(){
         var new_skeleton = skeleton.Instantiate();
 		GD.Print("summoning skeleton!");
 		(new_skeleton as enemy2).Position = Position;
         GetParent().AddChild(new_skeleton);
     }
+	*/
     bool IDamagable.Hit(int damage){
 		GD.Print(damage);
 		hp += -damage;
