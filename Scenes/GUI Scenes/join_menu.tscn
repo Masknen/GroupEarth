@@ -1,42 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dy8v2uppnluc1"]
+[gd_scene load_steps=2 format=3 uid="uid://dy8v2uppnluc1"]
 
 [ext_resource type="Texture2D" uid="uid://bgdiapbhjjpai" path="res://Scenes/GUI Scenes/weathered_planks_diff_4k.jpg" id="1_e2y8l"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ivv6c"]
-
-[sub_resource type="FontVariation" id="FontVariation_n18ld"]
-
-[sub_resource type="Theme" id="Theme_jvd4x"]
-default_font = SubResource("FontVariation_n18ld")
-default_font_size = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lo0ir"]
-bg_color = Color(0.235294, 0.0705882, 0.12549, 1)
-
-[sub_resource type="FontFile" id="FontFile_h3tip"]
-cache/0/50/0/ascent = 0.0
-cache/0/50/0/descent = 0.0
-cache/0/50/0/underline_position = 0.0
-cache/0/50/0/underline_thickness = 0.0
-cache/0/50/0/scale = 1.0
-cache/0/50/0/kerning_overrides/50/0 = Vector2(0, 0)
-cache/0/50/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/50/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-
-[sub_resource type="LabelSettings" id="LabelSettings_jc30o"]
-line_spacing = 20.0
-font = SubResource("FontFile_h3tip")
-font_size = 50
-font_color = Color(0.262745, 0.6, 1, 1)
-outline_size = 6
-shadow_size = 18
-shadow_color = Color(0.556863, 0.2, 0.266667, 0)
 
 [node name="JoinMenu" type="Control"]
 layout_mode = 3
@@ -60,7 +24,7 @@ offset_right = 1793.28
 offset_bottom = 1040.04
 
 [node name="WeatheredPlanksDiff4k" type="Sprite2D" parent="MarginContainer"]
-position = Vector2(955, 580)
+position = Vector2(956, 568)
 scale = Vector2(0.487122, 0.286377)
 texture = ExtResource("1_e2y8l")
 
@@ -75,57 +39,48 @@ self_modulate = Color(0.262745, 0.6, 1, 1)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme_override_constants/outline_size = 4
-theme_override_constants/h_separation = 24
-theme_override_constants/icon_max_width = 21
+theme_override_colors/font_color = Color(0.435294, 0.447059, 0.121569, 1)
+theme_override_colors/font_pressed_color = Color(0.670588, 0.803922, 0.72549, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.47451, 0.819608, 1)
+theme_override_colors/icon_normal_color = Color(0.568627, 0.596078, 0.572549, 1)
+theme_override_colors/icon_pressed_color = Color(0.541176, 0.443137, 0.223529, 1)
+theme_override_colors/icon_hover_color = Color(0.85098, 0.866667, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_constants/h_separation = 32
+theme_override_constants/icon_max_width = 20
 theme_override_font_sizes/font_size = 100
 text = "Play"
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Press Start" type="Label" parent="MarginContainer/VBoxContainer2"]
-process_priority = 4
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2"]
 self_modulate = Color(0.262745, 0.6, 1, 1)
-material = SubResource("CanvasItemMaterial_ivv6c")
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 8
-theme = SubResource("Theme_jvd4x")
-theme_override_colors/font_color = Color(0, 0.756863, 0.85098, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0.572549, 0, 1)
-theme_override_constants/shadow_offset_x = 17
-theme_override_constants/shadow_offset_y = 6
-theme_override_constants/outline_size = 20
-theme_override_constants/shadow_outline_size = 11
-theme_override_constants/line_spacing = 6
-theme_override_font_sizes/font_size = 200
-theme_override_styles/normal = SubResource("StyleBoxFlat_lo0ir")
-text = "Press Start"
-label_settings = SubResource("LabelSettings_jc30o")
-max_lines_visible = 6
-visible_characters = 0
-visible_ratio = 0.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer2"]
-layout_mode = 2
-text = "press Start "
-tab_size = 21
+theme_override_font_sizes/font_size = 120
+text = "Press: START"
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="BackButton4" type="Button" parent="MarginContainer/VBoxContainer3"]
+[node name="BackButton2" type="Button" parent="MarginContainer/VBoxContainer3"]
 modulate = Color(0.996078, 0.976471, 0.968627, 1)
 self_modulate = Color(0.262745, 0.6, 1, 1)
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/outline_size = 4
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.435294, 0.447059, 0.121569, 1)
+theme_override_colors/font_pressed_color = Color(0.670588, 0.803922, 0.72549, 1)
+theme_override_colors/font_hover_color = Color(0.376471, 0.47451, 0.819608, 1)
+theme_override_colors/icon_normal_color = Color(0.568627, 0.596078, 0.572549, 1)
+theme_override_colors/icon_pressed_color = Color(0.541176, 0.443137, 0.223529, 1)
+theme_override_colors/icon_hover_color = Color(0.85098, 0.866667, 0, 1)
+theme_override_constants/outline_size = 9
 theme_override_constants/h_separation = 24
 theme_override_constants/icon_max_width = 21
 theme_override_font_sizes/font_size = 100
