@@ -27,7 +27,7 @@ public partial class GameManager : Node {
         Instance = this;
 
         startMenu = GD.Load<PackedScene>("res://Scenes/GUI Scenes/menu.tscn");
-        world = GD.Load<PackedScene>("res://map_0_2.tscn");
+        world = GD.Load<PackedScene>("res://Scenes/full_session_map.tscn");
         middleNode = GD.Load<PackedScene>("res://Scenes/middle_node.tscn");
         gameGUI = GD.Load<PackedScene>("res://Scenes/GUI Scenes/game_gui.tscn");
         playerManager = GD.Load<PackedScene>("res://Scenes/player_manager.tscn");
