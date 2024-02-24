@@ -77,13 +77,13 @@ public partial class PlayerManager : Node3D
 
             spawnOffsetX -= spawnOffsetX * 2;
         }
-        if (players.Count == 1) {
-            var newPlayer = GameManager.Instance.player.Instantiate();
-            (newPlayer as Player).ID = -1;
-            (newPlayer as Player).Position = new Vector3(spawnOffsetX, 1, 0);
-            players.Add(newPlayer as Player);
-            AddChild(newPlayer);
-        }
+        //if (players.Count == 1) {
+        //    var newPlayer = GameManager.Instance.player.Instantiate();
+        //    (newPlayer as Player).ID = -1;
+        //    (newPlayer as Player).Position = new Vector3(spawnOffsetX, 1, 0);
+        //    players.Add(newPlayer as Player);
+        //    AddChild(newPlayer);
+        //}
 
 
         if (players.Count > 2) {
