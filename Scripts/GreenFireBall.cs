@@ -44,19 +44,11 @@ public partial class GreenFireBall : Area3D, IDeflectable
         PlayerManager.Instance().AddChild(new_fireBall);
         greenball.startPos = shooterPos;
         greenball.fireAnimation = true;
-        
-        
-        // TODO Change to projectile manager
-        
-        //
-        
         float yRotation = shooterTransform.Basis.GetEuler().Y;
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), shooterPos);
         greenball.Transform = transform;
         greenball.Scale = Vector3.One * 0.001f;
         greenball.Position = shooterPos + Vector3.Forward.Rotated(Vector3.Up, yRotation)*1.5f;
-        
-        
         greenball.fireAnimation = true;
         
     }
@@ -67,12 +59,6 @@ public partial class GreenFireBall : Area3D, IDeflectable
 		player2.GlobalPosition.DistanceTo(GlobalPosition)) {
 			target = player1;
 		} else { target = player2; }
-    }
-    private void homingMissle(double delta, Vector3 targetPosition){
-        
-        
-        Position = Position.MoveToward(targetPosition, speed * (float)delta);
-        
     }
 
     private void hitExplosion() {
@@ -85,7 +71,6 @@ public partial class GreenFireBall : Area3D, IDeflectable
         fireBallExplotion = GD.Load<PackedScene>("res://AnimationScenes/ImpactExplosion.tscn");
         rotateFireball = GetNode<MeshInstance3D>("MeshInstance3D");
         BodyEntered += FireBall_BodyEntered;
-        //change color of the ball based on damage
     }
     private void FireBall_BodyEntered(Node3D body) {
         if (body as GridMap != null) { QueueFree(); hitExplosion(); }
@@ -123,9 +108,6 @@ public partial class GreenFireBall : Area3D, IDeflectable
         if (fireAnimation) {
             StartAnimation(delta);
         } else {
-
-           //homingMissle(delta, target.GlobalPosition);
-
             timeTick += (float)delta;
             if (timeTick > fireBallDuration) {
                 QueueFree();
@@ -160,15 +142,6 @@ public partial class GreenFireBall : Area3D, IDeflectable
         }
         fireBallDuration = 20;
         
-        
-        /*
-        //change color
-        StandardMaterial3D material = new StandardMaterial3D();  
-        material.AlbedoColor = new Color(1,0.2f * damage, 0);
-        rotateFireball.MaterialOverride = material;
-        //color changed
-        */
-        
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
         Transform = transform;
         isHolding = false;
@@ -196,10 +169,10 @@ public partial class GreenFireBall : Area3D, IDeflectable
 
     }
     public void sizeDown(){
-        float newScale = 1 + (0.3f * damage); //- 0.3f;
+        float newScale = 1 + (0.3f * damage);
         Vector3 newSize = new Vector3(newScale,newScale,newScale);
         rotateFireball.Scale = newSize;
-        //revertColor();
+
     }
    
     public void revertColor(){

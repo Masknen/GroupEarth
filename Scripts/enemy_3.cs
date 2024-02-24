@@ -15,7 +15,7 @@ public partial class enemy_3 : CharacterBody3D, IDamagable
 	private CharacterBody3D player2;
 
 	private Vector3 direction;
-	private bool isCasting = false;
+	private bool isCasting;
 
     public override void _Ready()
     {
@@ -42,6 +42,7 @@ public partial class enemy_3 : CharacterBody3D, IDamagable
 		MoveAndSlide();
         timeTick += (float)delta;
 			if (timeTick > MaxTime) {
+				isCasting = true;
 				timeTick -= MaxTime;
 				//summonSkeleton();
 
@@ -62,7 +63,11 @@ public partial class enemy_3 : CharacterBody3D, IDamagable
 	*/
     bool IDamagable.Hit(int damage){
 		//GD.Print(damage);
+		if (!isCasting){
 		hp += -damage;
+		
+		}
+		isCasting = false;	
 		if(hp <= 0){
             ArcadeSpawner.Instance.enemyArray.Remove(this);
             //GD.Print(ArcadeSpawner.Instance.enemyArray.Count);
@@ -74,6 +79,8 @@ public partial class enemy_3 : CharacterBody3D, IDamagable
 		}
 		else{
 			return true;
-		} 
+		}
+	
 	}
+	 
 }
