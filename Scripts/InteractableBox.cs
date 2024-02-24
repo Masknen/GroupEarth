@@ -20,7 +20,7 @@ public partial class InteractableBox : RigidBody3D, IDeflectable, IDamagable
 
     }
 
-    public void Deflect(float yRotation)
+    public void Deflect(float yRotation, Node3D target)
     {
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
         Transform = transform;

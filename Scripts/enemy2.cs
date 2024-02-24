@@ -108,7 +108,7 @@ public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
         ChangeState(State.Hit);
         return true;
     }
-    public void Deflect(float yRotation) {
+    public void Deflect(float yRotation, Node3D target) {
         throw new NotImplementedException();
     }
     public void FriendDeflect(float yRotation) {

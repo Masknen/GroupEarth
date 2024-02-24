@@ -135,8 +135,8 @@ public partial class GreenFireBall : Area3D, IDeflectable
 				}
 
     }
-    public void Deflect(float yRotation) {
         isNotDeflected = false;
+    public void Deflect(float yRotation, Node3D target) {
         if(speed < speedLimit){
         speed = baseSpeed + (3 * damage);
         }
