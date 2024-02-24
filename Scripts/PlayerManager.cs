@@ -19,7 +19,6 @@ public partial class PlayerManager : Node3D
 
     public Godot.Collections.Array<Player> players = new Godot.Collections.Array<Player>();
     private Godot.Collections.Array<int> playersToCreateID = new Godot.Collections.Array<int>();
-    private PackedScene player;
 
     private bool[] startJustPressed = { true, true};
     public bool debugBoolean = false;
@@ -29,7 +28,13 @@ public partial class PlayerManager : Node3D
 	{
         _instance = this;
         Input.JoyConnectionChanged += Input_JoyConnectionChanged;
-        player = GD.Load<PackedScene>("res://Scenes/player.tscn");
+
+
+        playersToCreateID = Input.GetConnectedJoypads();
+        while (playersToCreateID.Count > 2) {
+            playersToCreateID.RemoveAt(0);
+        }
+        SpawnPlayers();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -38,13 +43,11 @@ public partial class PlayerManager : Node3D
         var ConnectedJoyPadIDs = Input.GetConnectedJoypads();
         int i = 0;
         foreach (var ID  in ConnectedJoyPadIDs) {
-            if (Input.IsJoyButtonPressed(ID, JoyButton.Start) && startJustPressed[i]) {
-                startJustPressed[i] = false;
+            if (Input.IsJoyButtonPressed(ID, JoyButton.Start) && !playersToCreateID.Contains(ID)) {
                 playersToCreateID.Add(ID);
                 //GD.Print("Added: " + ID);
             }
-            if (Input.IsJoyButtonPressed(ID, JoyButton.Back) && !startJustPressed[i]) {
-                startJustPressed[i] = true;
+            if (Input.IsJoyButtonPressed(ID, JoyButton.Back) && playersToCreateID.Contains(ID)) {
                 playersToCreateID.Remove(ID);
                 //GD.Print("Removed: " + ID);
             }
@@ -66,7 +69,7 @@ public partial class PlayerManager : Node3D
     public void SpawnPlayers() {
         int spawnOffsetX = 2;
         foreach (var ID in playersToCreateID) {
-            var newPlayer = player.Instantiate();
+            var newPlayer = GameManager.Instance.player.Instantiate();
             (newPlayer as Player).setID(ID);
             (newPlayer as Player).Position = new Vector3 (spawnOffsetX, 1, 0);
             players.Add(newPlayer as Player);
@@ -75,7 +78,7 @@ public partial class PlayerManager : Node3D
             spawnOffsetX -= spawnOffsetX * 2;
         }
         if (players.Count == 1) {
-            var newPlayer = player.Instantiate();
+            var newPlayer = GameManager.Instance.player.Instantiate();
             (newPlayer as Player).ID = -1;
             (newPlayer as Player).Position = new Vector3(spawnOffsetX, 1, 0);
             players.Add(newPlayer as Player);

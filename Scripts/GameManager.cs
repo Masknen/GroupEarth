@@ -7,6 +7,10 @@ public partial class GameManager : Node {
     public float LastPositionUpdate { get; private set; }
     public static GameManager Instance { get; private set; }
 
+    //Preload scenes(player,fireball,etc)
+    public PackedScene player { get; private set; }
+
+    // Scenes
     private PackedScene startMenu;
     private PackedScene world;
     private PackedScene middleNode;
@@ -25,6 +29,7 @@ public partial class GameManager : Node {
 
     public override void _Ready() {
         Instance = this;
+        player = GD.Load<PackedScene>("res://Scenes/player.tscn");
 
         startMenu = GD.Load<PackedScene>("res://Scenes/GUI Scenes/menu.tscn");
         world = GD.Load<PackedScene>("res://Scenes/full_session_map.tscn");
