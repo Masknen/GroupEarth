@@ -43,7 +43,9 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 		if(hp <= 0){
 			isDead = true;
 			animation = "Death_A";
-		}
+            ArcadeSpawner.Instance.enemyArray.Remove(this);
+			return false;
+        }
 		return true;
 	}
 		
@@ -113,7 +115,7 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 				if (timeTick > MaxTime) {
 					timeTick -= MaxTime;
 					if(isDead){
-						ArcadeSpawner.Instance.enemyArray.Remove(this);
+						
 						//GD.Print(ArcadeSpawner.Instance.enemyArray.Count);
 						QueueFree();
 					}
