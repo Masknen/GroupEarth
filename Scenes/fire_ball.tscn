@@ -97,3 +97,8 @@ speed_scale = 0.3
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_rk56e")
 draw_pass_1 = SubResource("QuadMesh_ih6rj")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762965, 0)
+light_color = Color(0.997862, 0.634991, 0.52538, 1)
+omni_range = 4.68085

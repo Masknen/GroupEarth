@@ -62,7 +62,6 @@ public partial class enemy_3 : CharacterBody3D, IDamagable
     }
 	*/
     bool IDamagable.Hit(int damage){
-		//GD.Print(damage);
 		if (!isCasting){
 		hp += -damage;
 		
