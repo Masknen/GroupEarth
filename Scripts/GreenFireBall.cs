@@ -10,9 +10,6 @@ public partial class GreenFireBall : Area3D, IDeflectable
     private MeshInstance3D rotateFireball;
     private PackedScene fireBallExplotion;
 
-    private CharacterBody3D player1;
-	private CharacterBody3D player2;
-
     public float speed = 5;
     public int baseSpeed = 5;
     public int damage = 1;
@@ -23,7 +20,7 @@ public partial class GreenFireBall : Area3D, IDeflectable
 
     private int maxSize = 0;
 
-    private Node3D target;
+    private CharacterBody3D target;
 
     private bool isFirstHit = true;
     private bool isHolding = false;
@@ -41,24 +38,48 @@ public partial class GreenFireBall : Area3D, IDeflectable
         var fireBall = GD.Load<PackedScene>("res://Scenes/green_fire_ball.tscn");
         var new_fireBall = fireBall.Instantiate();
         var greenball = (new_fireBall as GreenFireBall);
+
         PlayerManager.Instance().AddChild(new_fireBall);
-        greenball.startPos = shooterPos;
-        greenball.fireAnimation = true;
+        //greenball.startPos = shooterPos;
+
         float yRotation = shooterTransform.Basis.GetEuler().Y;
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), shooterPos);
         greenball.Transform = transform;
         greenball.Scale = Vector3.One * 0.001f;
         greenball.Position = shooterPos + Vector3.Forward.Rotated(Vector3.Up, yRotation)*1.5f;
+
         greenball.fireAnimation = true;
         
     }
-    private void closestTarget(){
-        player1 = PlayerManager.Instance().players[0];
-		player2 = PlayerManager.Instance().players[1];
-		if (player1.GlobalPosition.DistanceTo(GlobalPosition) <
-		player2.GlobalPosition.DistanceTo(GlobalPosition)) {
-			target = player1;
-		} else { target = player2; }
+    private void closestPlayer(){
+        target = PlayerManager.Instance().players[0];
+        foreach (var player in PlayerManager.Instance().players) {
+            if (player.GlobalPosition.DistanceTo(GlobalPosition) < target.GlobalPosition.DistanceTo(GlobalPosition)) {
+                target = player;
+            }
+        }
+    }
+    private void closestEnemy(Node3D hitBody) {
+        CharacterBody3D newTarget = null;
+        foreach (var enemy in ArcadeSpawner.Instance.enemyArray) {
+            newTarget ??= enemy;
+            if (enemy.GlobalPosition.DistanceTo(GlobalPosition) < newTarget.GlobalPosition.DistanceTo(GlobalPosition) && !enemy.GlobalPosition.IsEqualApprox(hitBody.GlobalPosition)) {
+                newTarget = enemy;
+            }
+        }
+        target = newTarget;
+        GD.Print(target + " | normal");
+    }
+    private void closestEnemyErrorFix() {
+        CharacterBody3D newTarget = null;
+        foreach (var enemy in ArcadeSpawner.Instance.enemyArray) {
+            newTarget ??= enemy;
+            if (enemy.GlobalPosition.DistanceTo(GlobalPosition) < newTarget.GlobalPosition.DistanceTo(GlobalPosition)) {
+                newTarget = enemy;
+            }
+        }
+        target = newTarget;
+        GD.Print(target + " | error");
     }
 
     private void hitExplosion() {
@@ -71,22 +92,24 @@ public partial class GreenFireBall : Area3D, IDeflectable
         fireBallExplotion = GD.Load<PackedScene>("res://AnimationScenes/ImpactExplosion.tscn");
         rotateFireball = GetNode<MeshInstance3D>("MeshInstance3D");
         BodyEntered += FireBall_BodyEntered;
+        closestPlayer();
     }
     private void FireBall_BodyEntered(Node3D body) {
         if (body as GridMap != null) { QueueFree(); hitExplosion(); }
 
         if (body as IDamagable != null) {
-            
-            if ((body as IDamagable).Hit(damage) && !isFirstHit) {
+
+            if ((body as IDamagable).Hit(damage)) {
                 hitExplosion();
                 NumberPopup.Create(damage, body.GlobalPosition, body);
                 damage -= 1;
                 sizeDown();
                 sizeOfBall -= 1;
-                if(sizeOfBall <= 0){
-                   QueueFree(); 
-                    } 
-            }  
+                if (sizeOfBall <= 0) {
+                    QueueFree();
+                }
+                closestEnemy(body);
+            }
             
         }
         isFirstHit = false;
@@ -97,13 +120,15 @@ public partial class GreenFireBall : Area3D, IDeflectable
     {
 
         if(runOnce){
-            Position = startPos;
-            closestTarget();
+            //Position = startPos;
+            //closestTarget();
             runOnce = false;
         }
-        if(isNotDeflected){
-        LookAt(target.GlobalPosition);
-        Position = Position.MoveToward(target.GlobalPosition, speed * (float)delta);
+        if(!isNotDeflected){
+            //LookAt(target.GlobalPosition);
+            if (!ArcadeSpawner.Instance.enemyArray.Contains(target) && target != null) {
+                closestEnemyErrorFix();
+            }
         }
         if (fireAnimation) {
             StartAnimation(delta);
@@ -112,8 +137,20 @@ public partial class GreenFireBall : Area3D, IDeflectable
             if (timeTick > fireBallDuration) {
                 QueueFree();
             }
-            Position -= Transform.Basis.Z * (float)(speed * delta);
+            //Position -= Transform.Basis.Z * (float)(speed * delta);
             rotateFireball.RotateZ(0.2f);
+
+            Vector3 directionV3 = Vector3.Zero;
+            Vector2 direction = Vector2.Zero;
+            if (target != null) {
+                try {
+                    directionV3 = GlobalPosition.DirectionTo(target.GlobalPosition);
+                    direction = new Vector2(directionV3.X, directionV3.Z);
+                } catch (Exception) { closestEnemyErrorFix(); }
+
+                RotateToSlerp(direction, delta);
+            }
+            Position -= Transform.Basis.Z * (float)(speed * delta);
         }
         if(isHolding){
             continuousSizeUp(delta);
@@ -136,6 +173,7 @@ public partial class GreenFireBall : Area3D, IDeflectable
 
     }
     public void Deflect(float yRotation, Node3D target) {
+        this.target = (CharacterBody3D)target;
         if(speed < speedLimit){
         speed = baseSpeed + (3 * damage);
         }
@@ -144,7 +182,7 @@ public partial class GreenFireBall : Area3D, IDeflectable
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
         Transform = transform;
         isHolding = false;
-        
+        isNotDeflected = false;
     }
 
     public void FriendDeflect(float yRotation) {
@@ -188,6 +226,22 @@ public partial class GreenFireBall : Area3D, IDeflectable
             Scale = Vector3.One;
             fireAnimation = false;
         }
+    }
+
+    private void RotateToSlerp(Vector2 inputRotation, double delta) {
+        // Calculates angle to create quaternion
+        float angle = Vector2.Up.AngleTo(inputRotation);
+        Godot.Quaternion quaternionTargetDirection = new Quaternion(-Transform.Basis.Y, angle);
+        var quaternion = Transform.Basis.GetRotationQuaternion();
+
+        float turnSpeed = 35.0f / (speed+1);//Seeking amount
+
+        quaternion = quaternion.Slerp(quaternionTargetDirection, (turnSpeed) * (float)delta);
+
+        // Sets the rotation to the transform
+        Transform3D transform = Transform;
+        transform.Basis = new Basis(quaternion);
+        Transform = transform;
     }
 }
 
