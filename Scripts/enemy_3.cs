@@ -5,16 +5,17 @@ public partial class enemy_3 : CharacterBody3D, IDamagable
 {
     [Export] public float speed {get; set;} = 0.1f;
 
-	public float hp = 1;
+	public float hp = 2;
     private float MaxTime = 6;
 	private float timeTick = 0;
 
     private PackedScene skeleton;
-	private Node3D target;
+	public Node3D target;
 	private CharacterBody3D player1;
 	private CharacterBody3D player2;
 
 	private Vector3 direction;
+	private bool isCasting = false;
 
     public override void _Ready()
     {
@@ -43,6 +44,7 @@ public partial class enemy_3 : CharacterBody3D, IDamagable
 			if (timeTick > MaxTime) {
 				timeTick -= MaxTime;
 				//summonSkeleton();
+
 				GreenFireBall.Fire(Position,Transform);
 			}
         

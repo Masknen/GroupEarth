@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.ComponentModel;
 
 
 
@@ -9,18 +10,25 @@ public partial class GreenFireBall : Area3D, IDeflectable
     private MeshInstance3D rotateFireball;
     private PackedScene fireBallExplotion;
 
-    public int speed = 5;
+    private CharacterBody3D player1;
+	private CharacterBody3D player2;
+
+    public float speed = 5;
     public int baseSpeed = 5;
     public int damage = 1;
     public int sizeOfBall = 0;
     private int speedLimit = 20;
 
+    private Vector3 startPos;
+
     private int maxSize = 0;
 
-    
+    private Node3D target;
 
     private bool isFirstHit = true;
     private bool isHolding = false;
+    private bool isNotDeflected = true;
+    private bool runOnce = true;
     
 
     private float fireBallDuration = 20;
@@ -32,19 +40,39 @@ public partial class GreenFireBall : Area3D, IDeflectable
     public static void Fire(Vector3 shooterPos, Transform3D shooterTransform) {
         var fireBall = GD.Load<PackedScene>("res://Scenes/green_fire_ball.tscn");
         var new_fireBall = fireBall.Instantiate();
-
-        // TODO Change to projectile manager
+        var greenball = (new_fireBall as GreenFireBall);
         PlayerManager.Instance().AddChild(new_fireBall);
+        greenball.startPos = shooterPos;
+        greenball.fireAnimation = true;
+        
+        
+        // TODO Change to projectile manager
+        
         //
-
+        
         float yRotation = shooterTransform.Basis.GetEuler().Y;
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), shooterPos);
-        (new_fireBall as GreenFireBall).Transform = transform;
-        (new_fireBall as GreenFireBall).Position = shooterPos + Vector3.Forward.Rotated(Vector3.Up, yRotation)*1.5f;
-        (new_fireBall as GreenFireBall).Scale = Vector3.One * 0.001f;
-
-
-        (new_fireBall as GreenFireBall).fireAnimation = true;
+        greenball.Transform = transform;
+        greenball.Scale = Vector3.One * 0.001f;
+        greenball.Position = shooterPos + Vector3.Forward.Rotated(Vector3.Up, yRotation)*1.5f;
+        
+        
+        greenball.fireAnimation = true;
+        
+    }
+    private void closestTarget(){
+        player1 = PlayerManager.Instance().players[0];
+		player2 = PlayerManager.Instance().players[1];
+		if (player1.GlobalPosition.DistanceTo(GlobalPosition) <
+		player2.GlobalPosition.DistanceTo(GlobalPosition)) {
+			target = player1;
+		} else { target = player2; }
+    }
+    private void homingMissle(double delta, Vector3 targetPosition){
+        
+        
+        Position = Position.MoveToward(targetPosition, speed * (float)delta);
+        
     }
 
     private void hitExplosion() {
@@ -56,7 +84,6 @@ public partial class GreenFireBall : Area3D, IDeflectable
     public override void _Ready() {
         fireBallExplotion = GD.Load<PackedScene>("res://AnimationScenes/ImpactExplosion.tscn");
         rotateFireball = GetNode<MeshInstance3D>("MeshInstance3D");
-        
         BodyEntered += FireBall_BodyEntered;
         //change color of the ball based on damage
     }
@@ -64,7 +91,8 @@ public partial class GreenFireBall : Area3D, IDeflectable
         if (body as GridMap != null) { QueueFree(); hitExplosion(); }
 
         if (body as IDamagable != null) {
-            if ((body as IDamagable).Hit(damage)) {
+            
+            if ((body as IDamagable).Hit(damage) && !isFirstHit) {
                 hitExplosion();
                 NumberPopup.Create(damage, body.GlobalPosition, body);
                 damage -= 1;
@@ -72,17 +100,31 @@ public partial class GreenFireBall : Area3D, IDeflectable
                 sizeOfBall -= 1;
                 if(sizeOfBall <= 0){
                    QueueFree(); 
-                }   
-            }
+                    } 
+            }  
+            
         }
+        isFirstHit = false;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
+
+        if(runOnce){
+            Position = startPos;
+            closestTarget();
+            runOnce = false;
+        }
+        if(isNotDeflected){
+        LookAt(target.GlobalPosition);
+        Position = Position.MoveToward(target.GlobalPosition, speed * (float)delta);
+        }
         if (fireAnimation) {
             StartAnimation(delta);
         } else {
+
+           //homingMissle(delta, target.GlobalPosition);
 
             timeTick += (float)delta;
             if (timeTick > fireBallDuration) {
@@ -112,6 +154,7 @@ public partial class GreenFireBall : Area3D, IDeflectable
 
     }
     public void Deflect(float yRotation) {
+        isNotDeflected = false;
         if(speed < speedLimit){
         speed = baseSpeed + (3 * damage);
         }
@@ -129,24 +172,11 @@ public partial class GreenFireBall : Area3D, IDeflectable
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
         Transform = transform;
         isHolding = false;
-        maxSize = 0;
+        
     }
 
     public void FriendDeflect(float yRotation) {
-        damage += 1;
-        speed = baseSpeed + (3 * damage);
-        fireBallDuration = 20;
-        /*
-        //change color
-        StandardMaterial3D material = new StandardMaterial3D();
-        material.AlbedoColor = new Color(0, 1, 0.2f * damage);
-        rotateFireball.MaterialOverride = material;
-        //color changed
-        */
-        
-
-        Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
-        Transform = transform;
+        //not in use
     }
 
     public void ArcDeflect(float yRotation) {
@@ -162,18 +192,7 @@ public partial class GreenFireBall : Area3D, IDeflectable
         float newScale = 1 + (0.3f * maxSize);
         Vector3 newSize = new Vector3(newScale,newScale,newScale);
         rotateFireball.Scale = newSize;
-        /*-- works but somehow overrides the deflect angle back at the enemy?? 
-        GetNode<MeshInstance3D>("Trail3D").Scale = Vector3.One;
-        GetNode<MeshInstance3D>("Trail3D2").Scale = Vector3.One;
-        GetNode<MeshInstance3D>("Trail3D").GlobalTransform = mesh.GlobalTransform;
-        GetNode<MeshInstance3D>("Trail3D2").GlobalTransform = mesh.GlobalTransform;
-
-        //GetNode<CollisionShape3D >("CollisionShape3D ").Scale = mesh.Scale;
-        //collisionShapeSize.Scale = newSize;
-        //change size
-        */
-
-        
+  
 
     }
     public void sizeDown(){
