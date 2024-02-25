@@ -288,9 +288,9 @@ public partial class Player : CharacterBody3D, IDamagable {
                 if (target != null) {
                     var direction = item.GlobalPosition.DirectionTo(target.GlobalPosition);
                     float yRotation = -direction.SignedAngleTo(Vector3.Forward, Vector3.Up);
-                    _item.Deflect(yRotation);
+                    _item.Deflect(yRotation, target);
                 } else {
-                    _item.Deflect(Transform.Basis.GetEuler().Y);
+                    _item.Deflect(Transform.Basis.GetEuler().Y, target);
                 }
             }
         }

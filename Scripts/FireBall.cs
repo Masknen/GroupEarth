@@ -32,8 +32,8 @@ public partial class FireBall : Area3D, IDeflectable
         //
 
         float yRotation = shooterTransform.Basis.GetEuler().Y;
-        Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), shooterPos);
-        (new_fireBall as FireBall).Transform = transform;
+        //Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), shooterPos);
+        (new_fireBall as FireBall).Transform = shooterTransform;
         (new_fireBall as FireBall).Position = shooterPos + Vector3.Forward.Rotated(Vector3.Up, yRotation)*1.5f;
         (new_fireBall as FireBall).Scale = Vector3.One * 0.001f;
 
@@ -87,7 +87,7 @@ public partial class FireBall : Area3D, IDeflectable
     }
 
 
-    public void Deflect(float yRotation) {
+    public void Deflect(float yRotation, Node3D target) {
         damage += 1;
         if(speed < speedLimit){
         speed = baseSpeed + (3 * damage);

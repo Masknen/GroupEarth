@@ -22,29 +22,15 @@ public partial class MiddleNode : Node3D
 	public override void _Process(double delta)
 	{
 		playerList = PlayerManager.Instance().players;
-		// if (playerList.Count < 3){
-		//GD.Print(playerList);
-		// }
-		// else{
-		// 	GD.Print("Players not found by Camera Check PlayerCameras.cs");
-		// }
+		float nodePosX = 0;
+		float nodePosZ = 0;
+		for (int i = 0; i < playerList.Count; i++) {
+			nodePosX += playerList[i].Position.X;
+            nodePosZ += playerList[i].Position.Z;
+        }
+		nodePosX /= playerList.Count;
+		nodePosZ /= playerList.Count;
 
-
-		if (playerList.Count == 2)
-		{
-			var nodePosX = (playerList[0].Position.X + playerList[1].Position.X) / 2;
-			var nodePosZ = (playerList[0].Position.Z + playerList[1].Position.Z) / 2;
-
-			this.Position = new Vector3(nodePosX, Position.Y, nodePosZ);
-		}
-		//var cameraposY = playerList[0].Position.DistanceTo(playerList[1].Position);
-
-
-		// if (Input.IsActionJustPressed("spawnPlayers"))
-		// {
-		// 	PlayerManager.Instance().SpawnPlayers();
-
-		// }
-
+		this.Position = new Vector3(nodePosX, Position.Y, nodePosZ);
 	}
 }
