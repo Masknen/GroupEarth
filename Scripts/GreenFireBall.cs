@@ -110,9 +110,11 @@ public partial class GreenFireBall : Area3D, IDeflectable
                 if (sizeOfBall <= 0) {
                     QueueFree();
                 }
-                if(isFullyCharged){
+                
                 closestEnemy(body);
-                }
+                
+                
+                
             }
             
         }
@@ -129,7 +131,9 @@ public partial class GreenFireBall : Area3D, IDeflectable
             runOnce = false;
         }
         if(!isNotDeflected){
-            //LookAt(target.GlobalPosition);
+            
+            if(isFullyCharged){
+            LookAt(target.GlobalPosition);}
             if (!ArcadeSpawner.Instance.enemyArray.Contains(target) && target != null) {
                 closestEnemyErrorFix();
             }
@@ -141,7 +145,8 @@ public partial class GreenFireBall : Area3D, IDeflectable
             if (timeTick > fireBallDuration) {
                 QueueFree();
             }
-            //Position -= Transform.Basis.Z * (float)(speed * delta);
+            LookAt(target.GlobalPosition);
+            Position -= Transform.Basis.Z * (float)(speed * delta);
             rotateFireball.RotateZ(0.2f);
 
             Vector3 directionV3 = Vector3.Zero;
@@ -151,11 +156,11 @@ public partial class GreenFireBall : Area3D, IDeflectable
                     directionV3 = GlobalPosition.DirectionTo(target.GlobalPosition);
                     direction = new Vector2(directionV3.X, directionV3.Z);
                 } catch (Exception) { closestEnemyErrorFix(); }
-                if(isFullyCharged){
+                {
                 RotateToSlerp(direction, delta);
                 }
             }
-            Position -= Transform.Basis.Z * (float)(speed * delta);
+            
         }
         if(isHolding){
             continuousSizeUp(delta);
@@ -166,18 +171,18 @@ public partial class GreenFireBall : Area3D, IDeflectable
 
     private void continuousSizeUp(double delta){
         float timeTick2 = 0;
-            float MaxTime = 0.5f;
-            timeTick2 += (float)delta;
-				if (timeTick > MaxTime && maxSize < 6) {
-					timeTick -= MaxTime;
-					sizeUp();
-                    maxSize += 1;
-                    damage += 1; 
-                    sizeOfBall += 1;
-                    if(maxSize == 5){
-                        isFullyCharged = true;
-                    }
-				}
+        float MaxTime = 1f;
+        timeTick2 += (float)delta;
+			if (timeTick > MaxTime && maxSize < 6) {
+				timeTick -= MaxTime;
+				sizeUp();
+                maxSize += 1;
+                damage += 1; 
+                sizeOfBall += 1;
+                if(maxSize == 5){
+                    isFullyCharged = true;
+                }
+			}
 
     }
     public void Deflect(float yRotation, Node3D target) {
