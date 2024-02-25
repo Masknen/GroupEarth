@@ -26,6 +26,8 @@ public partial class GreenFireBall : Area3D, IDeflectable
     private bool isHolding = false;
     private bool isNotDeflected = true;
     private bool runOnce = true;
+
+    private bool isFullyCharged = false;
     
 
     private float fireBallDuration = 20;
@@ -108,7 +110,9 @@ public partial class GreenFireBall : Area3D, IDeflectable
                 if (sizeOfBall <= 0) {
                     QueueFree();
                 }
+                if(isFullyCharged){
                 closestEnemy(body);
+                }
             }
             
         }
@@ -147,8 +151,9 @@ public partial class GreenFireBall : Area3D, IDeflectable
                     directionV3 = GlobalPosition.DirectionTo(target.GlobalPosition);
                     direction = new Vector2(directionV3.X, directionV3.Z);
                 } catch (Exception) { closestEnemyErrorFix(); }
-
+                if(isFullyCharged){
                 RotateToSlerp(direction, delta);
+                }
             }
             Position -= Transform.Basis.Z * (float)(speed * delta);
         }
@@ -169,6 +174,9 @@ public partial class GreenFireBall : Area3D, IDeflectable
                     maxSize += 1;
                     damage += 1; 
                     sizeOfBall += 1;
+                    if(maxSize == 5){
+                        isFullyCharged = true;
+                    }
 				}
 
     }
