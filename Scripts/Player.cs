@@ -22,23 +22,26 @@ public partial class Player : CharacterBody3D, IDamagable {
 
 	private const float DEAD_ZONE               = 0.3f;
 	private const float DODGE_COOLDOWN          = 0.3f;
-    private const float INVINCIBILTY_DURATION   = 0.3f;
+    private const float DEFLECT_COOLDOWN        = 0.8f;
+    private const float INVINCIBILITY_DURATION  = 0.3f;
     private const float VISUAL_CATCH_SCALE_MULT = 1.35f;
     private const float VISUAL_CATCH_ALPHA_MIN  = 0.05f;
-    public const float VISUAL_CATCH_ALPHA_MAX   = 0.6f;
-    private const float AIM_HELP_ANGLE          = (float)(Math.PI / 6);
+    public  const float VISUAL_CATCH_ALPHA_MAX  = 0.6f;
     private Vector3 VISUAL_CATCH_SCALE          = Vector3.One * VISUAL_CATCH_SCALE_MULT;
+    private const float AIM_HELP_ANGLE          = (float)(Math.PI / 6);
+    private const float TIME_TO_RESSURECT       = 30.0f;
 
-    private const float DEFLECT_COST = 0.25f;
+    private const float DEFLECT_COST = 0.15f;
     private const float DEFLECT_REGENERATION = 0.15f;
     private const float DEFLECT_HIT_DECREASE = 0.15f;
 
-	private float dodgeCooldownTick       = 0;
-    private float invincibiltyTick        = 0;
+	private float dodgeCooldownTick = 0;
+    private float deflectCooldownTick = 0;
+    private float invincibilityTick = 0;
     //--- added by kalle
-    private float timeToRess              = 0;
+    private float timeRessTick      = 0;
     //--- added by kalle
-    public float currentVisualCatchAlpha = VISUAL_CATCH_ALPHA_MIN;
+    public float currentVisualCatchAlpha = VISUAL_CATCH_ALPHA_MAX;
 
     private bool spawned      = true;
     private bool isDeflecting = false;
@@ -70,10 +73,12 @@ public partial class Player : CharacterBody3D, IDamagable {
         animationPlayer = GetChild(2).GetChild<AnimationPlayer>(1);
         //---added by kalle
         deathEffect = GetChild<Area3D>(7);
-        deathEffect.Visible = false;
         mageCharacter = GetChild<Node3D>(2);
+
         deathExplosion = GD.Load<PackedScene>("res://AnimationScenes/PlayerDeathExplosion.tscn");
         ressEffect = GD.Load<PackedScene>("res://AnimationScenes/PlayerRessEffect.tscn");
+
+        deathEffect.Visible = false;
         //---added by kalle
 
         GetChild<Area3D>(1).AreaEntered += ParryAreaEntered;
@@ -84,7 +89,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 
         parryOverrideMaterial = new StandardMaterial3D();
         parryOverrideMaterial.Transparency = BaseMaterial3D.TransparencyEnum.Alpha;
-        parryOverrideMaterial.AlbedoColor = new Color(0, 0, 1, VISUAL_CATCH_ALPHA_MIN);
+        parryOverrideMaterial.AlbedoColor = new Color(0, 0, 1, currentVisualCatchAlpha);
         deflectArea.MaterialOverride = parryOverrideMaterial;
         deflectArea.Scale = VISUAL_CATCH_SCALE;
         
@@ -100,11 +105,8 @@ public partial class Player : CharacterBody3D, IDamagable {
 			HandleInput();
             StateMachine();
             if(isDead){
-                ressTimer(delta);
+                UpdateRessurect(delta);
             }
-
-        
-            
 
             //Test Code/Debug
             if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight) && PlayerManager.Instance().debugBoolean) {
@@ -175,11 +177,11 @@ public partial class Player : CharacterBody3D, IDamagable {
                 break;
         }
     }
-    bool IDamagable.Hit(int damage) {
-        if (invincibiltyTick < 0) {
+    public bool Hit(int damage) {
+        if (invincibilityTick < 0) {
             stats.ModifyStat(Stat.StatType.CurrentHealth, -damage);
             state = State.Hit;
-            invincibiltyTick = INVINCIBILTY_DURATION;
+            invincibilityTick = INVINCIBILITY_DURATION;
             isHit = true;
             if (stats.GetStat(Stat.StatType.CurrentHealth) <= 0) {
                 //--added by kalle
@@ -255,19 +257,20 @@ public partial class Player : CharacterBody3D, IDamagable {
         (new_ressEffect as PlayerRessEffect).Position = Position;
         GetParent().AddChild(new_ressEffect);
     }
-    private void ressTimer(double delta){ 
-        timeToRess += (float)delta;
-            if(timeToRess >4.4f){
-                playerRessEffect();
-            }
-			if (timeToRess > 5) {
-                timeToRess = 0;
-                stats.setStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
-                mageCharacter.Visible = true;
-                deathEffect.Visible = false;
-                isDead = false;
-                state = State.Idle;	
-			}
+    private void UpdateRessurect(double delta){ 
+        timeRessTick += (float)delta;
+        if (timeRessTick > TIME_TO_RESSURECT - 0.4f) {
+            playerRessEffect();
+        }
+        if (timeRessTick > TIME_TO_RESSURECT) {
+            timeRessTick = 0;
+            stats.setStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
+            mageCharacter.Visible = true;
+            deathEffect.Visible = false;
+            isDead = false;
+            state = State.Idle;
+            stats.setStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth) / 2);
+        }
     }
     //--added by kalle
     private bool IsOkToPlayAnimation() {
@@ -289,10 +292,6 @@ public partial class Player : CharacterBody3D, IDamagable {
 		if (area as IDeflectable != null) {
             if (!isDeflecting) {
                 currentTouching.Add(area as IDeflectable);
-            } else {
-                area.QueueFree();
-                currentVisualCatchAlpha -= DEFLECT_HIT_DECREASE;
-                SetVisualCatchAlpha(currentVisualCatchAlpha);
             }
 		}
 	}
@@ -301,7 +300,7 @@ public partial class Player : CharacterBody3D, IDamagable {
     }
 
     private void HandleInput() {
-        if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder) && currentVisualCatchAlpha > VISUAL_CATCH_ALPHA_MIN) {
+        if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder) && currentVisualCatchAlpha > VISUAL_CATCH_ALPHA_MIN && deflectCooldownTick <= 0) {
             isDeflecting = true;
             deflectArea.Scale = VISUAL_CATCH_SCALE;
             deflectSphere.Visible = true;
@@ -311,13 +310,12 @@ public partial class Player : CharacterBody3D, IDamagable {
             doDeflect = true;
             deflectArea.Scale = VISUAL_CATCH_SCALE;
             deflectSphere.Visible = false;
-            invincibiltyTick = INVINCIBILTY_DURATION;
-            currentVisualCatchAlpha -= DEFLECT_COST;
-            SetVisualCatchAlpha(currentVisualCatchAlpha);
+            invincibilityTick = INVINCIBILITY_DURATION;
+            deflectCooldownTick = DEFLECT_COOLDOWN;
         }
         if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder) && dodgeCooldownTick >= DODGE_COOLDOWN) {
             doDodge = true;
-            invincibiltyTick = INVINCIBILTY_DURATION;
+            invincibilityTick = INVINCIBILITY_DURATION;
         }
     }
 
@@ -337,6 +335,8 @@ public partial class Player : CharacterBody3D, IDamagable {
             if (!deflectArea.Scale.IsEqualApprox(Vector3.One)) {
                 deflectArea.Scale = deflectArea.Scale.Lerp(Vector3.One, (float)(delta * 15));
             }
+            currentVisualCatchAlpha -= (float)(delta*DEFLECT_COST);
+            SetVisualCatchAlpha(currentVisualCatchAlpha);
         }
         if (doDeflect) {
             doDeflect = false;
@@ -371,12 +371,13 @@ public partial class Player : CharacterBody3D, IDamagable {
     }
     private void UpdateCooldownTicks(double delta) {
 		dodgeCooldownTick += (float)delta;
-        invincibiltyTick -= (float)delta;
+        invincibilityTick -= (float)delta;
+        deflectCooldownTick -= (float)delta;
         if (currentVisualCatchAlpha < VISUAL_CATCH_ALPHA_MAX && !isDeflecting) {
             currentVisualCatchAlpha += (float)(DEFLECT_REGENERATION*delta);
             SetVisualCatchAlpha(currentVisualCatchAlpha);
         }
-        if (invincibiltyTick < 0) {
+        if (invincibilityTick < 0) {
             isHit = false;
         }
     }
@@ -386,19 +387,15 @@ public partial class Player : CharacterBody3D, IDamagable {
         Godot.Quaternion quaternionTargetDirection = new Quaternion(-Transform.Basis.Y, angle);
         var quaternion = Transform.Basis.GetRotationQuaternion();
 
-
         quaternion = quaternion.Slerp(quaternionTargetDirection, (float)(stats.GetStat(Stat.StatType.RotationSpeed) * delta));
 
         // Sets the rotation to the transform
-        Transform3D transform = Transform;
-        transform.Basis = new Basis(quaternion);
-        Transform = transform;
+        Transform = new Transform3D(new Basis(quaternion), Transform.Origin);
     }
     private void RotateTo(Vector2 inputRotation) {
         // Calculates angle to create quaternion
         float angle = Vector2.Up.AngleTo(inputRotation);
         Godot.Quaternion quaternionTargetDirection = new Quaternion(-Transform.Basis.Y, angle);
-        var quaternion = Transform.Basis.GetRotationQuaternion();
 
         // Sets the rotation to the transform
         Transform3D transform = Transform;
