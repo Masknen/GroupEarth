@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 public partial class Player : CharacterBody3D, IDamagable {
     private enum State {
@@ -34,6 +35,9 @@ public partial class Player : CharacterBody3D, IDamagable {
 
 	private float dodgeCooldownTick       = 0;
     private float invincibiltyTick        = 0;
+    //--- added by kalle
+    private float timeToRess              = 0;
+    //--- added by kalle
     public float currentVisualCatchAlpha = VISUAL_CATCH_ALPHA_MIN;
 
     private bool spawned      = true;
@@ -41,6 +45,9 @@ public partial class Player : CharacterBody3D, IDamagable {
     private bool doDeflect    = false;
 	private bool doDodge      = false;
     private bool isHit        = false;
+    //---added by kalle 
+    private bool isDead       = false;
+    //--added by kalle
 
     private AnimationPlayer animationPlayer;
     private MeshInstance3D playerMarker;
@@ -88,6 +95,11 @@ public partial class Player : CharacterBody3D, IDamagable {
             UpdateCooldownTicks(delta); //Important be infront
 			HandleInput();
             StateMachine();
+            if(isDead){
+                ressTimer(delta);
+            }
+
+        
             
 
             //Test Code/Debug
@@ -169,7 +181,8 @@ public partial class Player : CharacterBody3D, IDamagable {
                 //--added by kalle
                 mageCharacter.Visible = false;
                 deathEffect.Visible = true;
-                state = State.Dead;
+                isDead = true;
+                //state = State.Dead;
                 //--added by kalle
                 //Position = Vector3.Up;
                 //stats.setStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
@@ -228,12 +241,12 @@ public partial class Player : CharacterBody3D, IDamagable {
     }
     //--added by kalle
     private void ressTimer(double delta){ 
-        float ressTimer = 0;
-        float timeToRess = 5;
-        ressTimer += (float)delta;
-			if (ressTimer > timeToRess) {
+        timeToRess += (float)delta;
+			if (timeToRess > 5) {
+                timeToRess = 0;
                 mageCharacter.Visible = true;
                 deathEffect.Visible = false;
+                isDead = false;
                 state = State.Idle;	
 			}
     }
