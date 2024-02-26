@@ -2,16 +2,19 @@
 
 [ext_resource type="Script" path="res://Scripts/InteractableBox.cs" id="1_m64lm"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_22b7w"]
-
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0vtcv"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
 
-[node name="Interactable Box" type="RigidBody3D"]
-script = ExtResource("1_m64lm")
+[sub_resource type="BoxMesh" id="BoxMesh_22b7w"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_22b7w")
+[node name="Interactable Box" type="RigidBody3D"]
+collision_layer = 5
+collision_mask = 11
+contact_monitor = true
+script = ExtResource("1_m64lm")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_0vtcv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_22b7w")

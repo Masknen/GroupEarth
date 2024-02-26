@@ -58,7 +58,9 @@ public partial class Player : CharacterBody3D, IDamagable {
         animationPlayer = GetChild(2).GetChild<AnimationPlayer>(1);
 
         GetChild<Area3D>(1).AreaEntered += ParryAreaEntered;
+        GetChild<Area3D>(1).BodyEntered += ParryAreaEnteredBody;
 		GetChild<Area3D>(1).AreaExited += ParryAreaExited;
+        GetChild<Area3D>(1).BodyExited += ParryAreaExitedBody;
         animationPlayer.AnimationFinished += AnimationFinished;
 
         parryOverrideMaterial = new StandardMaterial3D();
@@ -207,10 +209,17 @@ public partial class Player : CharacterBody3D, IDamagable {
         return animationPlayer.CurrentAnimation != "Spellcast_Shoot" && animationPlayer.CurrentAnimation != "Dodge_Forward"
             && animationPlayer.CurrentAnimation != "Hit_B";
     }
-
+    private void ParryAreaExitedBody(Node body){
+        currentTouching.Remove(body as IDeflectable);
+    }
 	private void ParryAreaExited(Area3D area) {
 		currentTouching.Remove(area as IDeflectable);
 	}
+    private void ParryAreaEnteredBody(Node body){
+        if (body as IDeflectable != null) {
+            currentTouching.Add(body as IDeflectable);
+        }
+    }
 	private void ParryAreaEntered(Area3D area) {
 		if (area as IDeflectable != null) {
             if (!isDeflecting) {
