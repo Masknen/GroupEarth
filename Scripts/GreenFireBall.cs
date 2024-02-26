@@ -32,6 +32,8 @@ public partial class GreenFireBall : Area3D, IDeflectable
     private float fireBallDuration = 20;
     private float timeTick = 0;
 
+    private float timeToSize = 0;
+
     private bool fireAnimation = false;
     // Called when the node enters the scene tree for the first time.
 
@@ -173,11 +175,10 @@ public partial class GreenFireBall : Area3D, IDeflectable
 
 
     private void continuousSizeUp(double delta){
-        float timeTick2 = 0;
-        float MaxTime = 1f;
-        timeTick2 += (float)delta;
-			if (timeTick > MaxTime && maxSize <= 5) {
-				timeTick -= MaxTime;
+        timeToSize += (float)delta;
+        float sizeUpTime = 0.5f;
+			if (timeToSize > sizeUpTime && maxSize <= 5) {
+				timeToSize =0;
 				sizeUp();
                 maxSize += 1;
                 damage += 1; 
@@ -192,7 +193,7 @@ public partial class GreenFireBall : Area3D, IDeflectable
         if(speed < speedLimit){
         speed = baseSpeed + (3 * damage);
         }
-        fireBallDuration = 20;
+        //timeTick = 20;
         
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
         Transform = transform;
