@@ -7,7 +7,7 @@
 emission_shape = 1
 emission_sphere_radius = 2.0
 gravity = Vector3(0, 0, 0)
-color = Color(1, 1, 5, 1)
+color = Color(3, 1, 5, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_k3fjo"]
 
@@ -29,7 +29,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 5.0
 scale_max = 5.0
 scale_curve = SubResource("CurveTexture_8nlc2")
-color = Color(1, 1, 5, 0.023)
+color = Color(0.7615, 0.0682897, 0.76246, 0.202)
 
 [sub_resource type="QuadMesh" id="QuadMesh_3y1qj"]
 
@@ -51,7 +51,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 3.0
 scale_max = 4.0
 scale_curve = SubResource("CurveTexture_ocjir")
-color = Color(1, 1, 5, 1)
+color = Color(5, 2, 4, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_qkc2i"]
 
