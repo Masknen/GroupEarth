@@ -48,7 +48,10 @@ public partial class Player : CharacterBody3D, IDamagable {
     private MeshInstance3D deflectSphere;
     private StandardMaterial3D parryOverrideMaterial;
     private RayCast3D raycast;
-
+    //---added by kalle
+    private Area3D deathEffect;
+    private Node3D mageCharacter;
+    //---added by kalle
     public override void _Ready() {
 		currentTouching = new List<IDeflectable>();
 
@@ -56,6 +59,11 @@ public partial class Player : CharacterBody3D, IDamagable {
         deflectSphere = GetChild<MeshInstance3D>(3).GetChild<MeshInstance3D>(0);
         raycast = GetChild<RayCast3D>(5);
         animationPlayer = GetChild(2).GetChild<AnimationPlayer>(1);
+        //---added by kalle
+        deathEffect = GetChild<Area3D>(7);
+        deathEffect.Visible = false;
+        mageCharacter = GetChild<Node3D>(2);
+        //---added by kalle
 
         GetChild<Area3D>(1).AreaEntered += ParryAreaEntered;
         GetChild<Area3D>(1).BodyEntered += ParryAreaEnteredBody;
@@ -79,7 +87,8 @@ public partial class Player : CharacterBody3D, IDamagable {
 		if (ID != -1 && !spawned) {
             UpdateCooldownTicks(delta); //Important be infront
 			HandleInput();
-            StateMachine();
+            StateMachine(delta);
+            
 
             //Test Code/Debug
             if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight) && PlayerManager.Instance().debugBoolean) {
@@ -157,15 +166,22 @@ public partial class Player : CharacterBody3D, IDamagable {
             invincibiltyTick = INVINCIBILTY_DURATION;
             isHit = true;
             if (stats.GetStat(Stat.StatType.CurrentHealth) <= 0) {
-                Position = Vector3.Up;
-                stats.setStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
+                //--added by kalle
+                mageCharacter.Visible = false;
+                deathEffect.Visible = true;
+                state = State.Dead;
+                //--added by kalle
+                //Position = Vector3.Up;
+                //stats.setStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
             }
+           
+            
             return true;
         }
         return false;
     }
 
-    private void StateMachine() {
+    private void StateMachine(double delta) {
         switch (state) {
             case State.Idle:
                 if (IsOkToPlayAnimation())
@@ -189,6 +205,11 @@ public partial class Player : CharacterBody3D, IDamagable {
             case State.Hit:
                 animationPlayer.Play("Hit_B", -1, 1.7f);
                 break;
+            //--added by kalle
+            case State.Dead:
+                ressTimer(delta);
+                break;
+            //--added by kalle
         }
         if (InputManager.GetInputVector(ID, JoyAxis.LeftX, JoyAxis.LeftY, DEAD_ZONE).IsZeroApprox()) {
             state = State.Idle;
@@ -205,6 +226,18 @@ public partial class Player : CharacterBody3D, IDamagable {
             state = State.Dodge;
         }
     }
+    //--added by kalle
+    private void ressTimer(double delta){ 
+        float ressTimer = 0;
+        float timeToRess = 5;
+        ressTimer += (float)delta;
+			if (ressTimer > timeToRess) {
+                mageCharacter.Visible = true;
+                deathEffect.Visible = false;
+                state = State.Idle;	
+			}
+    }
+    //--added by kalle
     private bool IsOkToPlayAnimation() {
         return animationPlayer.CurrentAnimation != "Spellcast_Shoot" && animationPlayer.CurrentAnimation != "Dodge_Forward"
             && animationPlayer.CurrentAnimation != "Hit_B";
