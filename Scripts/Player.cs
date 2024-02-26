@@ -87,7 +87,7 @@ public partial class Player : CharacterBody3D, IDamagable {
 		if (ID != -1 && !spawned) {
             UpdateCooldownTicks(delta); //Important be infront
 			HandleInput();
-            StateMachine(delta);
+            StateMachine();
             
 
             //Test Code/Debug
@@ -181,7 +181,7 @@ public partial class Player : CharacterBody3D, IDamagable {
         return false;
     }
 
-    private void StateMachine(double delta) {
+    private void StateMachine() {
         switch (state) {
             case State.Idle:
                 if (IsOkToPlayAnimation())
@@ -207,7 +207,7 @@ public partial class Player : CharacterBody3D, IDamagable {
                 break;
             //--added by kalle
             case State.Dead:
-                ressTimer(delta);
+                
                 break;
             //--added by kalle
         }
