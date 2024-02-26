@@ -146,7 +146,7 @@ public partial class GreenFireBall : Area3D, IDeflectable
             if (timeTick > fireBallDuration) {
                 QueueFree();
             }
-            LookAt(target.GlobalPosition);
+            //LookAt(target.GlobalPosition);
             Position -= Transform.Basis.Z * (float)(speed * delta);
             rotateFireball.RotateZ(0.2f);
             
@@ -156,10 +156,10 @@ public partial class GreenFireBall : Area3D, IDeflectable
                 try {
                     directionV3 = GlobalPosition.DirectionTo(target.GlobalPosition);
                     direction = new Vector2(directionV3.X, directionV3.Z);
-                } catch (Exception) { closestEnemyErrorFix(); }
-                {
-                RotateToSlerp(direction, delta);
+                } catch (Exception) {
+                    closestEnemyErrorFix(); 
                 }
+                RotateToSlerp(direction, delta);
             
             }
             
