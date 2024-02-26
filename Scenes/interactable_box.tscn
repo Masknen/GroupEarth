@@ -1,11 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://cessooc3uepv8"]
+[gd_scene load_steps=5 format=3 uid="uid://cessooc3uepv8"]
 
 [ext_resource type="Script" path="res://Scripts/InteractableBox.cs" id="1_m64lm"]
+[ext_resource type="PackedScene" uid="uid://dewo5xcsb1ljl" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/crate.gltf.glb" id="2_cvn2k"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0vtcv"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
 
-[sub_resource type="BoxMesh" id="BoxMesh_22b7w"]
+[sub_resource type="Skin" id="Skin_a53km"]
 
 [node name="Interactable Box" type="RigidBody3D"]
 collision_layer = 5
@@ -17,4 +18,8 @@ script = ExtResource("1_m64lm")
 shape = SubResource("ConvexPolygonShape3D_0vtcv")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_22b7w")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00635099, 0)
+skin = SubResource("Skin_a53km")
+
+[node name="crate_gltf" parent="." instance=ExtResource("2_cvn2k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
