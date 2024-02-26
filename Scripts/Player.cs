@@ -58,6 +58,8 @@ public partial class Player : CharacterBody3D, IDamagable {
     //---added by kalle
     private Area3D deathEffect;
     private Node3D mageCharacter;
+    private PackedScene deathExplosion;
+    private PackedScene ressEffect;
     //---added by kalle
     public override void _Ready() {
 		currentTouching = new List<IDeflectable>();
@@ -70,6 +72,8 @@ public partial class Player : CharacterBody3D, IDamagable {
         deathEffect = GetChild<Area3D>(7);
         deathEffect.Visible = false;
         mageCharacter = GetChild<Node3D>(2);
+        deathExplosion = GD.Load<PackedScene>("res://AnimationScenes/PlayerDeathExplosion.tscn");
+        ressEffect = GD.Load<PackedScene>("res://AnimationScenes/PlayerRessEffect.tscn");
         //---added by kalle
 
         GetChild<Area3D>(1).AreaEntered += ParryAreaEntered;
@@ -179,6 +183,7 @@ public partial class Player : CharacterBody3D, IDamagable {
             isHit = true;
             if (stats.GetStat(Stat.StatType.CurrentHealth) <= 0) {
                 //--added by kalle
+                playerDeathExplosion();
                 mageCharacter.Visible = false;
                 deathEffect.Visible = true;
                 isDead = true;
@@ -240,10 +245,24 @@ public partial class Player : CharacterBody3D, IDamagable {
         }
     }
     //--added by kalle
+    private void playerDeathExplosion() {
+        var new_deathExploation = deathExplosion.Instantiate();
+        (new_deathExploation as PlayerDeathExplosion).Position = Position;
+        GetParent().AddChild(new_deathExploation);
+    }
+    private void playerRessEffect() {
+        var new_ressEffect = ressEffect.Instantiate();
+        (new_ressEffect as PlayerRessEffect).Position = Position;
+        GetParent().AddChild(new_ressEffect);
+    }
     private void ressTimer(double delta){ 
         timeToRess += (float)delta;
+            if(timeToRess >4.4f){
+                playerRessEffect();
+            }
 			if (timeToRess > 5) {
                 timeToRess = 0;
+                stats.setStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
                 mageCharacter.Visible = true;
                 deathEffect.Visible = false;
                 isDead = false;
