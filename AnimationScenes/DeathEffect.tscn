@@ -1,0 +1,102 @@
+[gd_scene load_steps=15 format=3 uid="uid://ce5x6c2an6obk"]
+
+[ext_resource type="Material" uid="uid://dw183qcnwjiyn" path="res://Assets/fireball assets/Flare_00.tres" id="1_v2qks"]
+[ext_resource type="PackedScene" uid="uid://cj36dpxngsuwa" path="res://Assets/playerchars/mage.tscn" id="2_si0j2"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8pusi"]
+emission_shape = 1
+emission_sphere_radius = 2.0
+gravity = Vector3(0, 0, 0)
+color = Color(1, 1, 5, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_k3fjo"]
+
+[sub_resource type="Curve" id="Curve_lnnxh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8nlc2"]
+curve = SubResource("Curve_lnnxh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nf1so"]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 0.4
+spread = 180.0
+angular_velocity_min = 0.5
+angular_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_8nlc2")
+color = Color(1, 1, 5, 0.023)
+
+[sub_resource type="QuadMesh" id="QuadMesh_3y1qj"]
+
+[sub_resource type="Curve" id="Curve_0iibt"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ocjir"]
+curve = SubResource("Curve_0iibt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sqeyb"]
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 0.4
+spread = 180.0
+angular_velocity_min = 0.5
+angular_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_ocjir")
+color = Color(1, 1, 5, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_qkc2i"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f58ek"]
+gravity = Vector3(1, 1, 1)
+turbulence_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_vaw1o"]
+
+[node name="Area3D" type="Area3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = ExtResource("1_v2qks")
+amount = 20
+lifetime = 2.43
+process_material = SubResource("ParticleProcessMaterial_8pusi")
+draw_pass_1 = SubResource("QuadMesh_k3fjo")
+
+[node name="Mage" parent="." instance=ExtResource("2_si0j2")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, -1, 0)
+visible = false
+
+[node name="smoke" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+visible = false
+material_override = ExtResource("1_v2qks")
+amount = 10
+lifetime = 0.8
+explosiveness = 0.22
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_nf1so")
+draw_pass_1 = SubResource("QuadMesh_3y1qj")
+
+[node name="smoke2" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+material_override = ExtResource("1_v2qks")
+amount = 10
+lifetime = 0.8
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_sqeyb")
+draw_pass_1 = SubResource("QuadMesh_qkc2i")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+material_override = ExtResource("1_v2qks")
+lifetime = 0.89
+explosiveness = 0.1
+process_material = SubResource("ParticleProcessMaterial_f58ek")
+draw_pass_1 = SubResource("SphereMesh_vaw1o")
