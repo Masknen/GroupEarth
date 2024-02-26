@@ -13,7 +13,6 @@ public partial class GreenFireBall : Area3D, IDeflectable
     public float speed = 5;
     public int baseSpeed = 5;
     public int damage = 1;
-    public int sizeOfBall = 0;
     private int speedLimit = 20;
 
     private Vector3 startPos;
@@ -106,14 +105,12 @@ public partial class GreenFireBall : Area3D, IDeflectable
                 NumberPopup.Create(damage, body.GlobalPosition, body);
                 damage -= 1;
                 sizeDown();
-                sizeOfBall -= 1;
-                if (sizeOfBall <= 0) {
+                maxSize -= 1;
+                if (damage <= 0) {
                     QueueFree();
                 }
                 
-                closestEnemy(body);
-                
-                
+                closestEnemy(body);  
                 
             }
             
@@ -131,12 +128,16 @@ public partial class GreenFireBall : Area3D, IDeflectable
             runOnce = false;
         }
         if(!isNotDeflected){
-            
+            /*
             if(isFullyCharged){
             LookAt(target.GlobalPosition);}
-            if (!ArcadeSpawner.Instance.enemyArray.Contains(target) && target != null) {
+            */
+            
+            if (!ArcadeSpawner.Instance.enemyArray.Contains(target) && target != null){
                 closestEnemyErrorFix();
             }
+            
+            
         }
         if (fireAnimation) {
             StartAnimation(delta);
@@ -148,7 +149,7 @@ public partial class GreenFireBall : Area3D, IDeflectable
             LookAt(target.GlobalPosition);
             Position -= Transform.Basis.Z * (float)(speed * delta);
             rotateFireball.RotateZ(0.2f);
-
+            
             Vector3 directionV3 = Vector3.Zero;
             Vector2 direction = Vector2.Zero;
             if (target != null) {
@@ -159,7 +160,9 @@ public partial class GreenFireBall : Area3D, IDeflectable
                 {
                 RotateToSlerp(direction, delta);
                 }
+            
             }
+            
             
         }
         if(isHolding){
@@ -173,12 +176,11 @@ public partial class GreenFireBall : Area3D, IDeflectable
         float timeTick2 = 0;
         float MaxTime = 1f;
         timeTick2 += (float)delta;
-			if (timeTick > MaxTime && maxSize < 6) {
+			if (timeTick > MaxTime && maxSize <= 5) {
 				timeTick -= MaxTime;
 				sizeUp();
                 maxSize += 1;
                 damage += 1; 
-                sizeOfBall += 1;
                 if(maxSize == 5){
                     isFullyCharged = true;
                 }
@@ -212,7 +214,7 @@ public partial class GreenFireBall : Area3D, IDeflectable
     }
      
      public void sizeUp(){
-        float newScale = 1 + (0.3f * maxSize);
+        float newScale = 1 + (0.3f * damage);
         Vector3 newSize = new Vector3(newScale,newScale,newScale);
         rotateFireball.Scale = newSize;
   
