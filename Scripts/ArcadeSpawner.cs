@@ -1,92 +1,135 @@
 using Godot;
 using System;
-using System.Diagnostics;
+using Godot.Collections;
 
 public partial class ArcadeSpawner : Node3D {
 
     public static ArcadeSpawner Instance { get; private set; }
-    public Godot.Collections.Array<CharacterBody3D> enemyArray = new Godot.Collections.Array<CharacterBody3D>();
+    public Array<CharacterBody3D> enemies = new Array<CharacterBody3D>();
+    private Array<Marker3D> spawnMarkers;
+    private Array<int> enemiesToSpawn = new Array<int>();
 
-    Stopwatch timer = new Stopwatch();
-    int spawnDelay = 20;
-    PackedScene enemy1;
-    PackedScene enemy2;
-    PackedScene enemy3;
-    int enemyCost = 1;
-    int currentTokens = 0;
-    int maxTokens = 7;
+    private const int BASE_TOKENS = 10;
+    private const int TIME_BETWEEN_WAVES = 30;
+    private uint NUMBER_OF_AVAILABLE_MONSTERS = 2;
 
-    private bool noMobsOnMap = true;
-    private bool mobsShouldSpawn = true;
+    private PackedScene enemy1;
+    private PackedScene enemy2;
+    private PackedScene enemy3;
+
+    private int currentTokens = BASE_TOKENS;
+    private float timeSinceLastWave = TIME_BETWEEN_WAVES;
+    private float timeBetweenSpawns = 0;
+    private float timeBetweenSpawnsTick = 0;
+    private int currentWave = 0;
+
+    public bool mobsShouldSpawn = false;
 
     // Max vill ha en stat class for varje enemy sa att man inte behover skapa nya baseStats for varje ny instans det enda som behover vara privat i
     // en fiende ar deras egna nuvarande liv
     public override void _Ready() {
         Instance = this;
+
         enemy1 = GD.Load<PackedScene>("res://Scenes/enemy_1.tscn");
         enemy2 = GD.Load<PackedScene>("res://Scenes/enemy_2.tscn");
         enemy3 = GD.Load<PackedScene>("res://Scenes/enemy_3.tscn");
-        timer.Start();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta) {
-        uint chosenEnemy = GD.Randi() % 3;
-        //GD.Print(chosenEnemy);
-
+        timeSinceLastWave += (float)delta;
         //debug option F4----
-        var enemies = GetTree().GetNodesInGroup("enemies");
         if (Input.IsActionJustPressed("DespawnMobs") && PlayerManager.Instance().debugBoolean) {
+            var enemies = GetTree().GetNodesInGroup("enemies");
             foreach (var enemy in enemies) {
                 ((CharacterBody3D)enemy).QueueFree();
             }
-            enemyArray.Clear();
+            this.enemies.Clear();
         }
         //debug option F2
         if (Input.IsActionJustPressed("SpawnMobs") && PlayerManager.Instance().debugBoolean) {
             mobsShouldSpawn = !mobsShouldSpawn;
         }
-        
-        if (enemyArray.Count == 0) {
-            noMobsOnMap = true;
-        }
 
-        if (mobsShouldSpawn && noMobsOnMap) {
-            if (timer.Elapsed.Seconds >= spawnDelay) {
-                var spawnedEnemy = enemy1.Instantiate(); //It needs a default
-                //if(chosenEnemy == 0) {
-                //    GD.Print("Enemy1 Spawned (Bald)");
-                //}
-
-                currentTokens += 1;
-
-
-                if (chosenEnemy == 1) {
-                    spawnedEnemy = enemy2.Instantiate();
-                    //currentTokens += 2;
-                    //GD.Print("Enemy2 Spawned (Hood)");
-                }
-                if (chosenEnemy == 2) {
-                    spawnedEnemy = enemy3.Instantiate();
-                    //currentTokens += 4;
-                    //GD.Print("Enemy1 Spawned (Bald)");
-                }
-
-                GetTree().Root.AddChild(spawnedEnemy);
-                float dirAngle = GD.Randf() * (2 * MathF.PI);
-                Transform3D lookTransfrom = new Transform3D(new Basis(Transform.Basis.Y, dirAngle), new Vector3(0, 2, 0));
-
-                (spawnedEnemy as CharacterBody3D).Transform = GetParentNode3D().Transform;
-                (spawnedEnemy as CharacterBody3D).Position += lookTransfrom.Basis.Y;
-                (spawnedEnemy as CharacterBody3D).Position += -lookTransfrom.Basis.Z * 17;
-
-
-                if (currentTokens >= maxTokens) {
-                    noMobsOnMap = false;
-                    timer.Restart();
-                    currentTokens = 0;
-                }
+        if (mobsShouldSpawn) {
+            if (timeSinceLastWave >= TIME_BETWEEN_WAVES) {
+                CreateWave();
+                timeSinceLastWave = 0;
             }
+            SpawnEnemies(delta);
+        }
+    }
+
+    private void CreateWave() {
+        currentWave++;
+        while (currentTokens > 0) {
+            uint chosenEnemyNumber = GD.Randi() % NUMBER_OF_AVAILABLE_MONSTERS;
+
+            switch (chosenEnemyNumber) {
+                case 0:
+                    if (currentTokens - 1 >= 0) {
+                        currentTokens -= 1;
+                        enemiesToSpawn.Add(1);
+                    }
+                    break;
+                case 1:
+                    if (currentTokens - 2 >= 0) {
+                        currentTokens -= 2;
+                        enemiesToSpawn.Add(2);
+                    }
+                    break;
+                case 2:
+                    if (currentTokens - 5 >= 0) {
+                        currentTokens -= 5;
+                        enemiesToSpawn.Add(3);
+                    }
+                    break;
+                default:
+                    GD.PushWarning("chosenEnemyNumber does not exist");
+                    break;
+            }
+        }
+        timeBetweenSpawns = (TIME_BETWEEN_WAVES / 2) / (float)enemiesToSpawn.Count;
+        if (currentWave == 5) {
+            NUMBER_OF_AVAILABLE_MONSTERS = 3;
+        }
+        currentTokens = (int)(BASE_TOKENS * (float)(Math.Pow(1.1f, currentWave) + currentWave/5f));
+        GD.Print(currentWave + " Wave | " + currentTokens + " Tokens");
+    }
+
+    private void SpawnEnemies(double delta) {
+        timeBetweenSpawnsTick += (float)delta;
+        while (timeBetweenSpawnsTick > timeBetweenSpawns || enemies.Count < 5) {
+            timeBetweenSpawnsTick -= timeBetweenSpawns;
+            if (enemiesToSpawn.Count == 0) return;
+
+            Array<Node> enemySpawnPoints = GetTree().GetNodesInGroup("EnemySpawnPoints");
+            uint chosenSpawnPoint = GD.Randi() % (uint)enemySpawnPoints.Count;
+
+            Node enemy = null;
+            switch (enemiesToSpawn[enemiesToSpawn.Count - 1]) {
+                case 1:
+                    enemy = enemy1.Instantiate();
+                    break;
+                case 2:
+                    enemy = enemy2.Instantiate();
+                    break;
+                case 3:
+                    enemy = enemy3.Instantiate();
+                    break;
+            }
+            GameManager.Instance.AddChild(enemy);
+
+            //float dirAngle = GD.Randf() * (2 * MathF.PI);
+            //Transform3D lookTransfrom = new Transform3D(new Basis(Transform.Basis.Y, dirAngle), new Vector3(0, 2, 0));
+
+            //(enemy as CharacterBody3D).Transform = GetParentNode3D().Transform;
+            //(enemy as CharacterBody3D).Position += lookTransfrom.Basis.Y;
+            //(enemy as CharacterBody3D).Position += -lookTransfrom.Basis.Z * 17;
+
+            (enemy as CharacterBody3D).GlobalPosition = (enemySpawnPoints[(int)chosenSpawnPoint] as Marker3D).GlobalPosition;
+
+            enemiesToSpawn.RemoveAt(enemiesToSpawn.Count - 1);
         }
     }
 }

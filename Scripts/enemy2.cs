@@ -39,7 +39,7 @@ public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
         targetOffset = GD.Randi();
 
         animationPlayer.Play("Spawn_Ground_Skeletons");
-        ArcadeSpawner.Instance.enemyArray.Add(this);
+        ArcadeSpawner.Instance.enemies.Add(this);
         //GD.Print(ArcadeSpawner.Instance.enemyArray.Count); 
     }
 
@@ -100,7 +100,7 @@ public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
         currentHealth -= damage;
         if (currentHealth <= 0) {
             ChangeState(State.Die);
-            ArcadeSpawner.Instance.enemyArray.Remove(this);
+            ArcadeSpawner.Instance.enemies.Remove(this);
             //GD.Print(ArcadeSpawner.Instance.enemyArray.Count);
             //(GetNode("CollisionShape3D") as CollisionShape3D).QueueFree();
             return true;
