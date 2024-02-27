@@ -71,7 +71,6 @@ public partial class GreenFireBall : Area3D, IDeflectable
             }
         }
         target = newTarget;
-        GD.Print(target + " | normal");
     }
     private void closestEnemyErrorFix() {
         CharacterBody3D newTarget = null;
@@ -82,7 +81,6 @@ public partial class GreenFireBall : Area3D, IDeflectable
             }
         }
         target = newTarget;
-        GD.Print(target + " | error");
     }
 
     private void hitExplosion() {
