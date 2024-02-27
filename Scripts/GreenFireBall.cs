@@ -64,7 +64,7 @@ public partial class GreenFireBall : Area3D, IDeflectable
     }
     private void closestEnemy(Node3D hitBody) {
         CharacterBody3D newTarget = null;
-        foreach (var enemy in ArcadeSpawner.Instance.enemyArray) {
+        foreach (var enemy in ArcadeSpawner.Instance.enemies) {
             newTarget ??= enemy;
             if (enemy.GlobalPosition.DistanceTo(GlobalPosition) < newTarget.GlobalPosition.DistanceTo(GlobalPosition) && !enemy.GlobalPosition.IsEqualApprox(hitBody.GlobalPosition)) {
                 newTarget = enemy;
@@ -75,7 +75,7 @@ public partial class GreenFireBall : Area3D, IDeflectable
     }
     private void closestEnemyErrorFix() {
         CharacterBody3D newTarget = null;
-        foreach (var enemy in ArcadeSpawner.Instance.enemyArray) {
+        foreach (var enemy in ArcadeSpawner.Instance.enemies) {
             newTarget ??= enemy;
             if (enemy.GlobalPosition.DistanceTo(GlobalPosition) < newTarget.GlobalPosition.DistanceTo(GlobalPosition)) {
                 newTarget = enemy;
@@ -135,7 +135,7 @@ public partial class GreenFireBall : Area3D, IDeflectable
             LookAt(target.GlobalPosition);}
             */
             
-            if (!ArcadeSpawner.Instance.enemyArray.Contains(target) && target != null){
+            if (!ArcadeSpawner.Instance.enemies.Contains(target) && target != null){
                 closestEnemyErrorFix();
             }
             
