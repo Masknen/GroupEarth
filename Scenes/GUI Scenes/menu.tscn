@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://n2unjss7lt2k"]
+[gd_scene load_steps=8 format=3 uid="uid://n2unjss7lt2k"]
 
 [ext_resource type="Script" path="res://Scripts/GUI/StartMenu.cs" id="1_tiu2q"]
 [ext_resource type="Texture2D" uid="uid://c6e5hnvpqikwe" path="res://Scenes/GUI Scenes/wp2312558-scary-castle-wallpapers.jpg" id="2_cnwgc"]
@@ -7,6 +7,17 @@
 [ext_resource type="FontFile" uid="uid://r4wbxl1m5a4f" path="res://Scenes/GUI Scenes/DeathMohawk_PERSONAL_USE_ONLY.otf" id="5_ho1pq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_igjgh"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qr6d3"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(3, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(100, 1, 1)
+direction = Vector3(-1, 1, 0)
+spread = 20.0
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 0, 0)
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -32,7 +43,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="WeatheredPlanksDiff4k" type="Sprite2D" parent="MarginContainer"]
-position = Vector2(175.534, -16.0048)
+position = Vector2(171, -14)
 scale = Vector2(0.937955, 0.725575)
 texture = ExtResource("2_cnwgc")
 
@@ -124,3 +135,10 @@ theme_override_constants/shadow_offset_y = 3
 theme_override_fonts/normal_font = ExtResource("5_ho1pq")
 theme_override_font_sizes/normal_font_size = 300
 text = "B A C K F I R E"
+
+[node name="rain" type="GPUParticles2D" parent="."]
+position = Vector2(1179, 30)
+scale = Vector2(3, 3)
+amount = 800
+process_material = SubResource("ParticleProcessMaterial_qr6d3")
+lifetime = 20.0
