@@ -1,0 +1,33 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://h16x4s0wduq4"
+path="res://.godot/imported/Angel wish.ttf-f5605b2650cbc79d21401d055f2b88eb.fontdata"
+
+[deps]
+
+source_file="res://Scenes/GUI Scenes/Angel wish.ttf"
+dest_files=["res://.godot/imported/Angel wish.ttf-f5605b2650cbc79d21401d055f2b88eb.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}
