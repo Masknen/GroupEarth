@@ -59,7 +59,7 @@ public partial class Player : CharacterBody3D, IDamagable {
     private StandardMaterial3D parryOverrideMaterial;
     private RayCast3D raycast;
     //---added by kalle
-    private Area3D deathEffect;
+    private Node3D deathEffect;
     private Node3D mageCharacter;
     private PackedScene deathExplosion;
     private PackedScene ressEffect;
@@ -72,7 +72,7 @@ public partial class Player : CharacterBody3D, IDamagable {
         raycast = GetChild<RayCast3D>(5);
         animationPlayer = GetChild(2).GetChild<AnimationPlayer>(1);
         //---added by kalle
-        deathEffect = GetChild<Area3D>(7);
+        deathEffect = GetChild<Node3D>(7);
         mageCharacter = GetChild<Node3D>(2);
 
         deathExplosion = GD.Load<PackedScene>("res://AnimationScenes/PlayerDeathExplosion.tscn");
