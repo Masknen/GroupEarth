@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://ce5x6c2an6obk"]
+[gd_scene load_steps=14 format=3 uid="uid://ce5x6c2an6obk"]
 
 [ext_resource type="Material" uid="uid://dw183qcnwjiyn" path="res://Assets/fireball assets/Flare_00.tres" id="1_v2qks"]
-[ext_resource type="PackedScene" uid="uid://cj36dpxngsuwa" path="res://Assets/playerchars/mage.tscn" id="2_si0j2"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8pusi"]
 emission_shape = 1
@@ -61,23 +60,20 @@ turbulence_enabled = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_vaw1o"]
 
-[node name="Area3D" type="Area3D"]
+[node name="DeathEffect" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 material_override = ExtResource("1_v2qks")
+emitting = false
 amount = 20
 lifetime = 2.43
 process_material = SubResource("ParticleProcessMaterial_8pusi")
 draw_pass_1 = SubResource("QuadMesh_k3fjo")
 
-[node name="Mage" parent="." instance=ExtResource("2_si0j2")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, -1, 0)
-visible = false
-
 [node name="smoke" type="GPUParticles3D" parent="."]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
-visible = false
 material_override = ExtResource("1_v2qks")
+emitting = false
 amount = 10
 lifetime = 0.8
 explosiveness = 0.22
@@ -96,6 +92,7 @@ draw_pass_1 = SubResource("QuadMesh_qkc2i")
 
 [node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
 material_override = ExtResource("1_v2qks")
+emitting = false
 lifetime = 0.89
 explosiveness = 0.1
 process_material = SubResource("ParticleProcessMaterial_f58ek")
