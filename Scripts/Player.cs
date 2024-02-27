@@ -178,7 +178,7 @@ public partial class Player : CharacterBody3D, IDamagable {
         }
     }
     public bool Hit(int damage) {
-        if (invincibilityTick < 0) {
+        if (invincibilityTick < 0 && !isDead) {
             stats.ModifyStat(Stat.StatType.CurrentHealth, -damage);
             state = State.Hit;
             invincibilityTick = INVINCIBILITY_DURATION;
@@ -300,7 +300,7 @@ public partial class Player : CharacterBody3D, IDamagable {
     }
 
     private void HandleInput() {
-        if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder) && currentVisualCatchAlpha > VISUAL_CATCH_ALPHA_MIN && deflectCooldownTick <= 0) {
+        if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.RightShoulder) && currentVisualCatchAlpha > VISUAL_CATCH_ALPHA_MIN && deflectCooldownTick <= 0 && !isDead) {
             isDeflecting = true;
             deflectArea.Scale = VISUAL_CATCH_SCALE;
             deflectSphere.Visible = true;
@@ -313,7 +313,7 @@ public partial class Player : CharacterBody3D, IDamagable {
             invincibilityTick = INVINCIBILITY_DURATION;
             deflectCooldownTick = DEFLECT_COOLDOWN;
         }
-        if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder) && dodgeCooldownTick >= DODGE_COOLDOWN) {
+        if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder) && dodgeCooldownTick >= DODGE_COOLDOWN && !isDead) {
             doDodge = true;
             invincibilityTick = INVINCIBILITY_DURATION;
         }
