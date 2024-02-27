@@ -81,3 +81,7 @@ shadow_enabled = true
 omni_range = 10.2602
 
 [node name="DeathEffect" parent="." instance=ExtResource("3_hg1xp")]
+visible = false
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+aabb = AABB(-0.5, -1, -0.5, 1, 2, 1)

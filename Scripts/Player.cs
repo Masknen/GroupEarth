@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-public partial class Player : CharacterBody3D, IDamagable {
+public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
     private enum State {
         Idle,
         Walking,
@@ -30,6 +30,7 @@ public partial class Player : CharacterBody3D, IDamagable {
     private Vector3 VISUAL_CATCH_SCALE          = Vector3.One * VISUAL_CATCH_SCALE_MULT;
     private const float AIM_HELP_ANGLE          = (float)(Math.PI / 6);
     private const float TIME_TO_RESSURECT       = 30.0f;
+    private const float CAST_COST = VISUAL_CATCH_ALPHA_MAX * 0.75f;
 
     private const float DEFLECT_COST = 0.15f;
     private const float DEFLECT_REGENERATION = 0.15f;
@@ -48,6 +49,7 @@ public partial class Player : CharacterBody3D, IDamagable {
     private bool doDeflect    = false;
 	private bool doDodge      = false;
     private bool isHit        = false;
+    private bool onScreen = true;
     //---added by kalle 
     private bool isDead       = false;
     //--added by kalle
@@ -85,6 +87,8 @@ public partial class Player : CharacterBody3D, IDamagable {
         GetChild<Area3D>(1).BodyEntered += ParryAreaEnteredBody;
 		GetChild<Area3D>(1).AreaExited += ParryAreaExited;
         GetChild<Area3D>(1).BodyExited += ParryAreaExitedBody;
+        GetChild<VisibleOnScreenNotifier3D>(8).ScreenEntered += ScreenEntered;
+        GetChild<VisibleOnScreenNotifier3D>(8).ScreenExited += ScreenExited; ;
         animationPlayer.AnimationFinished += AnimationFinished;
 
         parryOverrideMaterial = new StandardMaterial3D();
@@ -98,6 +102,8 @@ public partial class Player : CharacterBody3D, IDamagable {
 
         animationPlayer.Play("Spawn_Air");
 	}
+
+
 
     public override void _Process(double delta) {
 		if (ID != -1 && !spawned) {
@@ -117,6 +123,10 @@ public partial class Player : CharacterBody3D, IDamagable {
         }
 	}
     public override void _PhysicsProcess(double delta) {
+        if (!onScreen) {
+            Velocity += GlobalPosition.DirectionTo(MiddleNode.Instance.GlobalPosition) * GlobalPosition.DistanceSquaredTo(MiddleNode.Instance.GlobalPosition)/100;
+        }
+
 		if (ID != -1 && !spawned) {
             UpdateDeflect(delta);
 
@@ -264,7 +274,6 @@ public partial class Player : CharacterBody3D, IDamagable {
         }
         if (timeRessTick > TIME_TO_RESSURECT) {
             timeRessTick = 0;
-            stats.setStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
             mageCharacter.Visible = true;
             deathEffect.Visible = false;
             isDead = false;
@@ -295,6 +304,12 @@ public partial class Player : CharacterBody3D, IDamagable {
             }
 		}
 	}
+    private void ScreenEntered() {
+        onScreen = true;
+    }
+    private void ScreenExited() {
+        onScreen = false;
+    }
     private void AnimationFinished(StringName animName) {
         if (animName == "Spawn_Air") spawned = false;
     }
@@ -315,6 +330,12 @@ public partial class Player : CharacterBody3D, IDamagable {
         }
         if (InputManager.Instance().IsJustPressedButton(ID, JoyButton.LeftShoulder) && dodgeCooldownTick >= DODGE_COOLDOWN && !isDead) {
             doDodge = true;
+            invincibilityTick = INVINCIBILITY_DURATION;
+        }
+        if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight) && currentVisualCatchAlpha > CAST_COST) {
+            currentVisualCatchAlpha -= CAST_COST;
+            SetVisualCatchAlpha(currentVisualCatchAlpha);
+            FireBall.Fire(Position, Transform);
             invincibilityTick = INVINCIBILITY_DURATION;
         }
     }
@@ -407,5 +428,23 @@ public partial class Player : CharacterBody3D, IDamagable {
         currentVisualCatchAlpha = visualCatchAlpha;
         deflectArea.MaterialOverride = parryOverrideMaterial;
         deflectSphere.MaterialOverride = parryOverrideMaterial;
+    }
+
+    public void Deflect(float yRotation, Node3D target) {
+        Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
+        Transform = transform;
+        Velocity = (-Transform.Basis.Z * 10);
+    }
+
+    public void FriendDeflect(float yRotation) {
+        throw new NotImplementedException();
+    }
+
+    public void ArcDeflect(float yRotation) {
+        throw new NotImplementedException();
+    }
+
+    public void Hold() {
+        throw new NotImplementedException();
     }
 }
