@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://brdasfmxxrpcg"]
+
+[ext_resource type="Script" path="res://Scripts/SFX scripts/SoundManager.cs" id="1_ywarf"]
+[ext_resource type="PackedScene" uid="uid://cbx2eel3iy2hi" path="res://Scenes/SFX Scenes/sound_que.tscn" id="2_crq0m"]
+[ext_resource type="AudioStream" uid="uid://cbj0udauisa4f" path="res://Assets/SFX/Spell sounds/fire2.wav" id="4_p0amr"]
+
+[node name="SoundManager" type="Node"]
+script = ExtResource("1_ywarf")
+
+[node name="FireSound" parent="." instance=ExtResource("2_crq0m")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FireSound"]
+stream = ExtResource("4_p0amr")
+volume_db = -18.572

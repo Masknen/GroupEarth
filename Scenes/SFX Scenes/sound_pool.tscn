@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bplglimfmw4bl"]
+
+[ext_resource type="Script" path="res://Scripts/SFX scripts/SoundPool.cs" id="1_q3qb1"]
+
+[node name="SoundPool" type="Node"]
+script = ExtResource("1_q3qb1")

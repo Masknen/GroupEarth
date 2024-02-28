@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbx2eel3iy2hi"]
+
+[ext_resource type="Script" path="res://Scripts/SFX scripts/SoundQue.cs" id="1_pscfv"]
+
+[node name="SoundQue" type="Node"]
+script = ExtResource("1_pscfv")
+count = 5
