@@ -9,6 +9,9 @@ public partial class GameManager : Node {
 
     //Preload scenes(player,fireball,etc)
     public PackedScene player { get; private set; }
+    public PackedScene skeleton { get; private set; }
+    public PackedScene rogue { get; private set; }
+    public PackedScene mage { get; private set; }
 
     // Scenes
     private PackedScene startMenu;
@@ -30,6 +33,9 @@ public partial class GameManager : Node {
     public override void _Ready() {
         Instance = this;
         player = GD.Load<PackedScene>("res://Scenes/player.tscn");
+        skeleton = GD.Load<PackedScene>("res://Scenes/enemy_1.tscn");
+        rogue = GD.Load<PackedScene>("res://Scenes/enemy_2.tscn");
+        mage = GD.Load<PackedScene>("res://Scenes/enemy_3.tscn");
 
         startMenu = GD.Load<PackedScene>("res://Scenes/GUI Scenes/menu.tscn");
         world = GD.Load<PackedScene>("res://Scenes/full_session_map.tscn");

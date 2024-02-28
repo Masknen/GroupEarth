@@ -13,10 +13,6 @@ public partial class ArcadeSpawner : Node3D {
     private const int TIME_BETWEEN_WAVES = 30;
     private uint NUMBER_OF_AVAILABLE_MONSTERS = 2;
 
-    private PackedScene enemy1;
-    private PackedScene enemy2;
-    private PackedScene enemy3;
-
     private int currentTokens = BASE_TOKENS;
     private float timeSinceLastWave = TIME_BETWEEN_WAVES;
     private float timeBetweenSpawns = 0;
@@ -30,9 +26,6 @@ public partial class ArcadeSpawner : Node3D {
     public override void _Ready() {
         Instance = this;
 
-        enemy1 = GD.Load<PackedScene>("res://Scenes/enemy_1.tscn");
-        enemy2 = GD.Load<PackedScene>("res://Scenes/enemy_2.tscn");
-        enemy3 = GD.Load<PackedScene>("res://Scenes/enemy_3.tscn");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -109,13 +102,13 @@ public partial class ArcadeSpawner : Node3D {
             Node enemy = null;
             switch (enemiesToSpawn[enemiesToSpawn.Count - 1]) {
                 case 1:
-                    enemy = enemy1.Instantiate();
+                    enemy = GameManager.Instance.skeleton.Instantiate();
                     break;
                 case 2:
-                    enemy = enemy2.Instantiate();
+                    enemy = GameManager.Instance.rogue.Instantiate();
                     break;
                 case 3:
-                    enemy = enemy3.Instantiate();
+                    enemy = GameManager.Instance.mage.Instantiate();
                     break;
             }
             GameManager.Instance.AddChild(enemy);
