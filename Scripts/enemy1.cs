@@ -76,6 +76,7 @@ public partial class enemy1 : CharacterBody3D, IDamagable
                         animationTiming = 0;
                         shootCooldownTick = SHOOT_COOLDOWN;
                         FireBall.Fire(Position, Transform);
+                        SoundManager.Instance.PlayFireBallSound();
                         state = State.Idle;
                     }
                 }
