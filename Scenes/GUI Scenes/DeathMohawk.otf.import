@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://r4wbxl1m5a4f"
-path="res://.godot/imported/DeathMohawk_PERSONAL_USE_ONLY.otf-0d947e8d281b3c9232ef05a0f3f03cf1.fontdata"
+path="res://.godot/imported/DeathMohawk.otf-f3537eafcb44b58e9bf4146b0be54d35.fontdata"
 
 [deps]
 
-source_file="res://Scenes/GUI Scenes/DeathMohawk_PERSONAL_USE_ONLY.otf"
-dest_files=["res://.godot/imported/DeathMohawk_PERSONAL_USE_ONLY.otf-0d947e8d281b3c9232ef05a0f3f03cf1.fontdata"]
+source_file="res://Scenes/GUI Scenes/DeathMohawk.otf"
+dest_files=["res://.godot/imported/DeathMohawk.otf-f3537eafcb44b58e9bf4146b0be54d35.fontdata"]
 
 [params]
 
