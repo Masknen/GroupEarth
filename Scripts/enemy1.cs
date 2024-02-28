@@ -144,8 +144,13 @@ public partial class enemy1 : CharacterBody3D, IDamagable
         
         foreach (var player in PlayerManager.Instance().players) {
             
-            if (GlobalPosition.DistanceSquaredTo(target.GlobalPosition) > GlobalPosition.DistanceSquaredTo(player.GlobalPosition) && !target.isDead) {
+            if (GlobalPosition.DistanceSquaredTo(target.GlobalPosition) > GlobalPosition.DistanceSquaredTo(player.GlobalPosition)) {
+                var nextTarget = target;
                 target = player;
+                if(target.isDead){
+                    target = nextTarget;
+                }
+                
                 break;
             }
             

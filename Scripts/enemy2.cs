@@ -141,7 +141,7 @@ public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
     }
     private void MoveToTarget() {
         foreach (var player in PlayerManager.Instance().players) {
-            if (GlobalPosition.DistanceSquaredTo(target.GlobalPosition) > GlobalPosition.DistanceSquaredTo(player.GlobalPosition) && !target.isDead) {
+            if (GlobalPosition.DistanceSquaredTo(target.GlobalPosition) > GlobalPosition.DistanceSquaredTo(player.GlobalPosition)) {
                 target = player;
                 break;
             }
