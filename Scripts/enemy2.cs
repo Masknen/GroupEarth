@@ -88,11 +88,7 @@ public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
         if (!IsOnFloor()) {
             Velocity += Vector3.Down;
         }
-        if (Velocity.IsZeroApprox()) {
-            ChangeState(State.Idle);
-        } else {
-            ChangeState(State.Walking);
-        }
+        ChangeState(State.Walking);
     }
 
     public bool Hit(int damage) {
