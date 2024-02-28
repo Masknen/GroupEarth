@@ -22,12 +22,16 @@ public partial class GameManager : Node {
     private PackedScene gameGUI;
     private PackedScene inputManager;
 
+    private PackedScene soundManager;
+
     private Node startMenuInstance;
     private Node worldInstance;
     private Node middleNodeInstance;
     private Node playerManagerInstance;
     private Node gameGUIInstance;
     private Node inputManagerInstance;
+
+    private Node soundManagerInstace;
 
     Stopwatch sw = new Stopwatch();
 
@@ -45,6 +49,7 @@ public partial class GameManager : Node {
         gameGUI = GD.Load<PackedScene>("res://Scenes/GUI Scenes/game_gui.tscn");
         playerManager = GD.Load<PackedScene>("res://Scenes/player_manager.tscn");
         inputManager = GD.Load<PackedScene>("res://Scenes/input_manager.tscn");
+        soundManager = GD.Load<PackedScene>("res://Scenes/SFX Scenes/sound_manager.tscn");
 
 
         //Instantiate Start Menu
@@ -80,6 +85,10 @@ public partial class GameManager : Node {
         CreateMiddleNode();
         GD.Print(sw.ElapsedMilliseconds + " | MiddleNode");
         sw.Stop();
+
+        CreateSoundManager();
+        GD.Print(sw.ElapsedMilliseconds + " | SoundManager");
+        sw.Stop();
     }
     public void CreatePlayerManager() {
         playerManagerInstance = playerManager.Instantiate();
@@ -88,6 +97,11 @@ public partial class GameManager : Node {
     public void CreateGameGUI() {
         gameGUIInstance = gameGUI.Instantiate();
         AddChild(gameGUIInstance);
+    }
+
+    public void CreateSoundManager(){
+        soundManagerInstace = soundManager.Instantiate();
+        AddChild(soundManagerInstace);
     }
     public void CreateMiddleNode() {
         middleNodeInstance = middleNode.Instantiate();
