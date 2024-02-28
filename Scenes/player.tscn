@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dmrr1n86pkwm5"]
+[gd_scene load_steps=10 format=3 uid="uid://dmrr1n86pkwm5"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_4ejrt"]
 [ext_resource type="PackedScene" uid="uid://cj36dpxngsuwa" path="res://Assets/playerchars/mage.tscn" id="2_qxqm4"]
@@ -36,8 +36,6 @@ top_radius = 1.0
 bottom_radius = 1.0
 height = 0.01
 cap_bottom = false
-
-[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_4eqnb"]
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -87,6 +85,3 @@ visible = false
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 aabb = AABB(-0.5, -1, -0.5, 1, 2, 1)
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = SubResource("AudioStreamMP3_4eqnb")
