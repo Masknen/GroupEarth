@@ -69,7 +69,7 @@ public partial class enemy1 : CharacterBody3D, IDamagable
                 RotateToSlerp(new Vector2(direction.X, direction.Z), delta);
 
                 shootCooldownTick -= (float)delta;
-                if (shootCooldownTick <= 0) {
+                if (shootCooldownTick <= 0 && !target.isDead) {
                     ChangeState(State.SpellCasting);
                     animationTiming -= (float)delta;
                     if (animationTiming <= -SHOOT_OFFSET_SECONDS) {
@@ -141,11 +141,19 @@ public partial class enemy1 : CharacterBody3D, IDamagable
         }
     }
     private void MoveToTarget() {
+        
         foreach (var player in PlayerManager.Instance().players) {
+            
             if (GlobalPosition.DistanceSquaredTo(target.GlobalPosition) > GlobalPosition.DistanceSquaredTo(player.GlobalPosition)) {
+                var nextTarget = target;
                 target = player;
+                if(target.isDead){
+                    target = nextTarget;
+                }
+                
                 break;
             }
+            
         }
         if (GameManager.Instance.LastPositionUpdate == 0 && target != null) {
             var targetTimeOffset = (GameManager.Instance.TimeSinceStart + targetOffset) * 0.2f;

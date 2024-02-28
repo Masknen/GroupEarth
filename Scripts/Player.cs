@@ -51,7 +51,7 @@ public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
     private bool isHit        = false;
     private bool onScreen = true;
     //---added by kalle 
-    private bool isDead       = false;
+    public bool isDead       = false;
     //--added by kalle
 
     private AnimationPlayer animationPlayer;
