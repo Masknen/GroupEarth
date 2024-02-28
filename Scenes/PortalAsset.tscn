@@ -1,0 +1,85 @@
+[gd_scene load_steps=10 format=3 uid="uid://crsek7m38q6gn"]
+
+[ext_resource type="PackedScene" uid="uid://bptodqkdhtige" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potionLarge_blue.gltf.glb" id="1_hfir3"]
+[ext_resource type="Script" path="res://Scripts/PortalAsset.cs" id="1_orvga"]
+[ext_resource type="PackedScene" uid="uid://c0cxebl25wrr1" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/pillar.gltf.glb" id="2_ydtxl"]
+[ext_resource type="Material" uid="uid://dw183qcnwjiyn" path="res://Assets/fireball assets/Flare_00.tres" id="3_g8842"]
+
+[sub_resource type="Gradient" id="Gradient_qon68"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xh68g"]
+gradient = SubResource("Gradient_qon68")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_eooeo"]
+emission_shape_scale = Vector3(100, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(0.02, 1, 1)
+direction = Vector3(100, 0, 0)
+color = Color(1, 5, 1, 1)
+color_ramp = SubResource("GradientTexture1D_xh68g")
+
+[sub_resource type="QuadMesh" id="QuadMesh_rjb25"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nhtbl"]
+size = Vector3(5.09265, 11.3167, 1)
+
+[node name="Portal" type="Node3D"]
+script = ExtResource("1_orvga")
+
+[node name="potionLarge_blue_gltf" parent="." instance=ExtResource("1_hfir3")]
+transform = Transform3D(3, 0, 0, 0, -3, 2.62268e-07, 0, -2.62268e-07, -3, 3.21677, 15.4562, 0)
+
+[node name="LeftPillarLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.10438, 16.4492, 1.09538)
+light_color = Color(1, 5, 1, 1)
+light_energy = 17.195
+omni_range = 0.972855
+
+[node name="pillar_gltf" parent="." instance=ExtResource("2_ydtxl")]
+
+[node name="pillar_gltf3" parent="." instance=ExtResource("2_ydtxl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.70829, 0)
+
+[node name="pillar_gltf4" parent="." instance=ExtResource("2_ydtxl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.53313, 0)
+
+[node name="pillar_gltf5" parent="." instance=ExtResource("2_ydtxl")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 3.22483, 12.0811, 0)
+
+[node name="pillar_gltf6" parent="." instance=ExtResource("2_ydtxl")]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 7.30997, 12.0811, 0)
+
+[node name="potionLarge_blue_gltf2" parent="." instance=ExtResource("1_hfir3")]
+transform = Transform3D(3, 0, 0, 0, -3, 2.62268e-07, 0, -2.62268e-07, -3, 8, 6.5, 0)
+visible = false
+
+[node name="RightPillarLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.93429, 8.17137, 1.09538)
+light_color = Color(1, 5, 1, 1)
+light_energy = 17.195
+omni_range = 1.13609
+
+[node name="pillar_gltf2" parent="." instance=ExtResource("2_ydtxl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.58265, 0, 0)
+
+[node name="pillar_gltf7" parent="." instance=ExtResource("2_ydtxl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.58265, 3.70299, 0)
+
+[node name="pillar_gltf8" parent="." instance=ExtResource("2_ydtxl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.58265, 7.30095, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.10859, 10.5546, 0)
+material_override = ExtResource("3_g8842")
+amount = 1500
+lifetime = 1.3
+visibility_aabb = AABB(-3, -4, -4, 6, 8, 8)
+process_material = SubResource("ParticleProcessMaterial_eooeo")
+draw_pass_1 = SubResource("QuadMesh_rjb25")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 8, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66416, -2.09478, 0)
+shape = SubResource("BoxShape3D_nhtbl")
