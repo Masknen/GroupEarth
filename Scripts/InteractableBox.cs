@@ -1,11 +1,12 @@
 using Godot;
 using System;
 
-public partial class InteractableBox : RigidBody3D, IDeflectable, IDamagable
+public partial class InteractableBox : RigidBody3D, IDeflectable
 
 {
-	private float deflectForce = 30;
+	private float deflectForce = 20;
     private PackedScene  fireBallExplotion;
+    public bool destroy = false; 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -28,11 +29,11 @@ public partial class InteractableBox : RigidBody3D, IDeflectable, IDamagable
     private void BoxBodyEntered(Node body)
     {
         GD.Print(LinearVelocity.Length());
-        if(LinearVelocity.Length()>3f)
+        if(LinearVelocity.Length()>3f && !body.IsInGroup("floor"))
         {
             if (body as GridMap != null) 
             { 
-                QueueFree(); 
+                destroy = true; 
                 hitExplosion(); 
             }
 
@@ -42,7 +43,7 @@ public partial class InteractableBox : RigidBody3D, IDeflectable, IDamagable
                 {
                     hitExplosion();
                     NumberPopup.Create((int)LinearVelocity.Length(), (body as Node3D).GlobalPosition, body as Node3D);
-                    QueueFree();
+                    destroy = true; 
                 }
             }
         }
@@ -55,11 +56,7 @@ public partial class InteractableBox : RigidBody3D, IDeflectable, IDamagable
 		ApplyImpulse(-Transform.Basis.Z*deflectForce + Vector3.Up*deflectForce/4);
     }
 
-    
-    public bool Hit(int damage)
-    {
-        throw new NotImplementedException();
-    }
+
     private void hitExplosion() {
         var new_fireBallExploation = fireBallExplotion.Instantiate();
         (new_fireBallExploation as ImpactExplotion).Position = Position;

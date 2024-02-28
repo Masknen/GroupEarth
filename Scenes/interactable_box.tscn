@@ -22,4 +22,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00635099, 0)
 skin = SubResource("Skin_a53km")
 
 [node name="crate_gltf" parent="." instance=ExtResource("2_cvn2k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

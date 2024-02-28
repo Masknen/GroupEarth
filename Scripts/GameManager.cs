@@ -11,6 +11,7 @@ public partial class GameManager : Node {
     public PackedScene player { get; private set; }
     public PackedScene skeleton { get; private set; }
     public PackedScene rogue { get; private set; }
+    public PackedScene interactableBox { get; private set; }
     public PackedScene mage { get; private set; }
 
     // Scenes
@@ -36,6 +37,7 @@ public partial class GameManager : Node {
         skeleton = GD.Load<PackedScene>("res://Scenes/enemy_1.tscn");
         rogue = GD.Load<PackedScene>("res://Scenes/enemy_2.tscn");
         mage = GD.Load<PackedScene>("res://Scenes/enemy_3.tscn");
+        interactableBox = GD.Load<PackedScene>("res://Scenes/interactable_box.tscn");
 
         startMenu = GD.Load<PackedScene>("res://Scenes/GUI Scenes/menu.tscn");
         world = GD.Load<PackedScene>("res://Scenes/full_session_map.tscn");
