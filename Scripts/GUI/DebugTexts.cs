@@ -12,7 +12,7 @@ public partial class DebugTexts : Control
 	public override void _Process(double delta)
 	{
         Visible = false;
-        if (PlayerManager.Instance().debugBoolean) {
+        if (PlayerManager.Instance.debugBoolean) {
 			Visible = true;
 		}
 	}

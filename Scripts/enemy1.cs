@@ -60,8 +60,8 @@ public partial class enemy1 : CharacterBody3D, IDamagable
 
     public override void _Process(double delta) {
         StateMachine();
-        if (target == null && PlayerManager.Instance().players.Count >= 1) {
-            target = PlayerManager.Instance().players[0];
+        if (target == null && PlayerManager.Instance.players.Count >= 1) {
+            target = PlayerManager.Instance.players[0];
         }
         if (target != null && state == State.Walking || state == State.SpellCasting) {
             if (GlobalPosition.DistanceTo(target.GlobalPosition) <= DISTANCE_TO_TARGET * 1.5f || state == State.SpellCasting) {
@@ -143,7 +143,7 @@ public partial class enemy1 : CharacterBody3D, IDamagable
     }
     private void MoveToTarget() {
         
-        foreach (var player in PlayerManager.Instance().players) {
+        foreach (var player in PlayerManager.Instance.players) {
             
             if (GlobalPosition.DistanceSquaredTo(target.GlobalPosition) > GlobalPosition.DistanceSquaredTo(player.GlobalPosition)) {
                 var nextTarget = target;

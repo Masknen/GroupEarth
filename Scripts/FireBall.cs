@@ -28,7 +28,7 @@ public partial class FireBall : Area3D, IDeflectable
         var new_fireBall = fireBall.Instantiate();
 
         // TODO Change to projectile manager
-        PlayerManager.Instance().AddChild(new_fireBall);
+        PlayerManager.Instance.AddChild(new_fireBall);
         //
 
         float yRotation = shooterTransform.Basis.GetEuler().Y;

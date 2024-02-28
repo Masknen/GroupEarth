@@ -32,7 +32,7 @@ public partial class ArcadeSpawner : Node3D {
     public override void _Process(double delta) {
         timeSinceLastWave += (float)delta;
         //debug option F4----
-        if (Input.IsActionJustPressed("DespawnMobs") && PlayerManager.Instance().debugBoolean) {
+        if (Input.IsActionJustPressed("DespawnMobs") && PlayerManager.Instance.debugBoolean) {
             var enemies = GetTree().GetNodesInGroup("enemies");
             foreach (var enemy in enemies) {
                 ((CharacterBody3D)enemy).QueueFree();
@@ -40,7 +40,7 @@ public partial class ArcadeSpawner : Node3D {
             this.enemies.Clear();
         }
         //debug option F2
-        if (Input.IsActionJustPressed("SpawnMobs") && PlayerManager.Instance().debugBoolean) {
+        if (Input.IsActionJustPressed("SpawnMobs") && PlayerManager.Instance.debugBoolean) {
             mobsShouldSpawn = !mobsShouldSpawn;
         }
 
@@ -111,7 +111,7 @@ public partial class ArcadeSpawner : Node3D {
                     enemy = GameManager.Instance.mage.Instantiate();
                     break;
             }
-            GameManager.Instance.AddChild(enemy);
+            PlayerManager.Instance.AddChild(enemy);
 
             //float dirAngle = GD.Randf() * (2 * MathF.PI);
             //Transform3D lookTransfrom = new Transform3D(new Basis(Transform.Basis.Y, dirAngle), new Vector3(0, 2, 0));

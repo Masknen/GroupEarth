@@ -115,7 +115,7 @@ public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
             }
 
             //Test Code/Debug
-            if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight) && PlayerManager.Instance().debugBoolean) {
+            if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight) && PlayerManager.Instance.debugBoolean) {
                 for (int i = 0; i < 10; i++) {
                     FireBall.Fire(Position, Transform.Rotated(Vector3.Up, (float)(Math.PI/5 * i)));
                 }

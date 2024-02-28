@@ -42,7 +42,7 @@ public partial class GreenFireBall : Area3D, IDeflectable
         var new_fireBall = fireBall.Instantiate();
         var greenball = (new_fireBall as GreenFireBall);
 
-        PlayerManager.Instance().AddChild(new_fireBall);
+        PlayerManager.Instance.AddChild(new_fireBall);
         //greenball.startPos = shooterPos;
 
         float yRotation = shooterTransform.Basis.GetEuler().Y;
@@ -55,8 +55,8 @@ public partial class GreenFireBall : Area3D, IDeflectable
         
     }
     private void closestPlayer(){
-        target = PlayerManager.Instance().players[0];
-        foreach (var player in PlayerManager.Instance().players) {
+        target = PlayerManager.Instance.players[0];
+        foreach (var player in PlayerManager.Instance.players) {
             if (player.GlobalPosition.DistanceTo(GlobalPosition) < target.GlobalPosition.DistanceTo(GlobalPosition)) {
                 target = player;
             }

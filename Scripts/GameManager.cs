@@ -5,6 +5,7 @@ using System.Diagnostics;
 public partial class GameManager : Node {
     public double TimeSinceStart {  get; private set; }
     public float LastPositionUpdate { get; private set; }
+    public float playersDeadTime = 0;
     public static GameManager Instance { get; private set; }
 
     //Preload scenes(player,fireball,etc)
@@ -63,6 +64,24 @@ public partial class GameManager : Node {
             LastPositionUpdate = 0;
         }
         TimeSinceStart += delta;
+
+        try {
+            int i = 0;
+            if (PlayerManager.Instance.players.Count == 2) {
+                i = 1;
+            }
+            if (PlayerManager.Instance.players[0].isDead && PlayerManager.Instance.players[i].isDead) {
+                playersDeadTime += (float)delta;
+            } else {
+                playersDeadTime = 0;
+            }
+            if (playersDeadTime >= 5) {
+                playersDeadTime = 0;
+                (startMenuInstance as Control).Visible = true;
+                DestroyGame();
+            }
+        } catch (Exception e) { }
+        
     }
 
     public void StartGame() {
@@ -84,11 +103,22 @@ public partial class GameManager : Node {
 
         CreateMiddleNode();
         GD.Print(sw.ElapsedMilliseconds + " | MiddleNode");
-        sw.Stop();
+        sw.Restart();
 
         CreateSoundManager();
         GD.Print(sw.ElapsedMilliseconds + " | SoundManager");
         sw.Stop();
+
+        GD.Print(GetTreeStringPretty());
+    }
+    public void DestroyGame() {
+        GD.Print(GetTreeStringPretty());
+        playerManagerInstance.QueueFree();
+        worldInstance.QueueFree();
+        gameGUIInstance.QueueFree();
+        middleNodeInstance.QueueFree();
+        soundManagerInstace.QueueFree();
+        GD.Print(GetTreeStringPretty());
     }
     public void CreatePlayerManager() {
         playerManagerInstance = playerManager.Instantiate();

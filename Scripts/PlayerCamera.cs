@@ -14,7 +14,7 @@ public partial class PlayerCamera : Camera3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		playerList = PlayerManager.Instance().players;
+		playerList = PlayerManager.Instance.players;
 		// if (playerList.Count < 3){
 		//GD.Print(playerList);
 		// }

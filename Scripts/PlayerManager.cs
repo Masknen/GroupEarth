@@ -9,13 +9,7 @@ using System;
  */
 public partial class PlayerManager : Node3D
 {
-    static private PlayerManager _instance;
-    static public PlayerManager Instance() {
-        if (_instance == null) {
-            _instance = new PlayerManager();
-        }
-        return _instance;
-    }
+    static public PlayerManager Instance { get; private set; }
 
     public Godot.Collections.Array<Player> players = new Godot.Collections.Array<Player>();
     private Godot.Collections.Array<int> playersToCreateID = new Godot.Collections.Array<int>();
@@ -26,7 +20,7 @@ public partial class PlayerManager : Node3D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-        _instance = this;
+        Instance = this;
         Input.JoyConnectionChanged += Input_JoyConnectionChanged;
 
 

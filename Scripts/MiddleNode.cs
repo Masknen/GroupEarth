@@ -21,7 +21,7 @@ public partial class MiddleNode : Node3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		playerList = PlayerManager.Instance().players;
+		playerList = PlayerManager.Instance.players;
 		float nodePosX = 0;
 		float nodePosZ = 0;
 		for (int i = 0; i < playerList.Count; i++) {
