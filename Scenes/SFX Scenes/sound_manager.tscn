@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://brdasfmxxrpcg"]
+[gd_scene load_steps=22 format=3 uid="uid://brdasfmxxrpcg"]
 
 [ext_resource type="Script" path="res://Scripts/SFX scripts/SoundManager.cs" id="1_ywarf"]
 [ext_resource type="PackedScene" uid="uid://cbx2eel3iy2hi" path="res://Scenes/SFX Scenes/sound_que.tscn" id="2_crq0m"]
@@ -9,15 +9,21 @@
 [ext_resource type="PackedScene" uid="uid://bplglimfmw4bl" path="res://Scenes/SFX Scenes/sound_pool.tscn" id="7_5rabv"]
 [ext_resource type="AudioStream" uid="uid://c0uxm7blfatu3" path="res://Assets/SFX/movement/footstep01.ogg" id="8_08fcp"]
 [ext_resource type="AudioStream" uid="uid://debea6g1weybn" path="res://Assets/SFX/movement/footstep02.ogg" id="9_e0lal"]
+[ext_resource type="AudioStream" uid="uid://3btfppaalf06" path="res://Assets/SFX/Spell sounds/fire1.wav" id="10_b7dsa"]
+[ext_resource type="AudioStream" uid="uid://e7kojh4r2j1m" path="res://Assets/SFX/Spell sounds/fire3.wav" id="11_be7nl"]
+[ext_resource type="AudioStream" uid="uid://gkynlncxxlbx" path="res://Assets/SFX/Spell sounds/S_Fire_Throwing_Hit_1.wav" id="12_bmr76"]
+[ext_resource type="AudioStream" uid="uid://niyygcklwnwn" path="res://Assets/SFX/Spell sounds/S_Fire_Throwing_Hit_2.wav" id="13_2k2y7"]
+[ext_resource type="AudioStream" uid="uid://vdmnlkhv3bm8" path="res://Assets/SFX/Spell sounds/S_Fire_Throwing_Hit_3.wav" id="14_5m1s0"]
+[ext_resource type="AudioStream" uid="uid://cgh7qcvhwgbme" path="res://Assets/SFX/music/The Ashbringer  Epic ChoralOrchestral Music.mp3" id="15_esxgl"]
+[ext_resource type="AudioStream" uid="uid://dxd5fvf6px68a" path="res://Assets/SFX/Spell sounds/DeflectSFX.wav" id="16_gjuwc"]
+[ext_resource type="AudioStream" uid="uid://cwwq4esssyrgf" path="res://Assets/SFX/Spell sounds/S_Earth_Hit_3.wav" id="17_xdhjv"]
+[ext_resource type="AudioStream" uid="uid://c61qnjcsgabex" path="res://Assets/SFX/Spell sounds/S_Electric_Cast_3.wav" id="18_7oxnp"]
+[ext_resource type="AudioStream" uid="uid://ff8cn2eloppa" path="res://Assets/SFX/dialog/tutorial/dialog - tutorial -1.wav" id="19_oqmf5"]
+[ext_resource type="AudioStream" uid="uid://v3y82pmrx8oo" path="res://Assets/SFX/dialog/tutorial/dialog- tutorial - 2.wav" id="20_vjfdl"]
+[ext_resource type="AudioStream" uid="uid://do03oodh0kd8o" path="res://Assets/SFX/dialog/tutorial/dialog - tutorial -3.wav" id="21_4ov0c"]
 
 [node name="SoundManager" type="Node"]
 script = ExtResource("1_ywarf")
-
-[node name="FireSound" parent="." instance=ExtResource("2_crq0m")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FireSound"]
-stream = ExtResource("4_p0amr")
-volume_db = -25.0
 
 [node name="MenuMusic" parent="." instance=ExtResource("2_crq0m")]
 count = 1
@@ -55,3 +61,87 @@ count = 1
 stream = ExtResource("9_e0lal")
 volume_db = -50.0
 pitch_scale = 0.7
+
+[node name="FireSoundPool" parent="." instance=ExtResource("7_5rabv")]
+
+[node name="SoundQue" parent="FireSoundPool" instance=ExtResource("2_crq0m")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FireSoundPool/SoundQue"]
+stream = ExtResource("10_b7dsa")
+volume_db = -30.0
+
+[node name="SoundQue2" parent="FireSoundPool" instance=ExtResource("2_crq0m")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FireSoundPool/SoundQue2"]
+stream = ExtResource("4_p0amr")
+volume_db = -30.0
+
+[node name="SoundQue3" parent="FireSoundPool" instance=ExtResource("2_crq0m")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FireSoundPool/SoundQue3"]
+stream = ExtResource("11_be7nl")
+volume_db = -30.0
+
+[node name="FireHitSoundPool" parent="." instance=ExtResource("7_5rabv")]
+
+[node name="SoundQue" parent="FireHitSoundPool" instance=ExtResource("2_crq0m")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FireHitSoundPool/SoundQue"]
+stream = ExtResource("12_bmr76")
+volume_db = -30.0
+
+[node name="SoundQue2" parent="FireHitSoundPool" instance=ExtResource("2_crq0m")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FireHitSoundPool/SoundQue2"]
+stream = ExtResource("13_2k2y7")
+volume_db = -30.0
+
+[node name="SoundQue3" parent="FireHitSoundPool" instance=ExtResource("2_crq0m")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FireHitSoundPool/SoundQue3"]
+stream = ExtResource("14_5m1s0")
+volume_db = -30.0
+
+[node name="DangerAreaMusic" parent="." instance=ExtResource("2_crq0m")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DangerAreaMusic"]
+stream = ExtResource("15_esxgl")
+volume_db = -30.0
+
+[node name="DeflectSound" parent="." instance=ExtResource("2_crq0m")]
+count = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DeflectSound"]
+stream = ExtResource("16_gjuwc")
+volume_db = -7.0
+
+[node name="BigObjectHit" parent="." instance=ExtResource("2_crq0m")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BigObjectHit"]
+stream = ExtResource("17_xdhjv")
+volume_db = -20.0
+
+[node name="PortalOpenSound" parent="." instance=ExtResource("2_crq0m")]
+count = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="PortalOpenSound"]
+stream = ExtResource("18_7oxnp")
+volume_db = -25.0
+
+[node name="Dialog1" parent="." instance=ExtResource("2_crq0m")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Dialog1"]
+stream = ExtResource("19_oqmf5")
+volume_db = -10.0
+
+[node name="Dialog2" parent="." instance=ExtResource("2_crq0m")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Dialog2"]
+stream = ExtResource("20_vjfdl")
+volume_db = -10.0
+
+[node name="Dialog3" parent="." instance=ExtResource("2_crq0m")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Dialog3"]
+stream = ExtResource("21_4ov0c")
+volume_db = -10.0

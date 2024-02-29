@@ -11,7 +11,7 @@ public partial class PortalDoor : Area3D
 
     public override void _Process(double delta)
     {
-        nextScene();
+        //nextScene();
     }
 
     private void playerEntersPortal(Node3D body) {
@@ -21,6 +21,7 @@ public partial class PortalDoor : Area3D
         if (body.IsInGroup("player") ) {
             GD.Print("should be invis");
             body.Visible = false;
+            nextScene();
             //playersEnteredPortal += 1;
 
         }

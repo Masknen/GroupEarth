@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://do03oodh0kd8o"
+path="res://.godot/imported/dialog - tutorial -3.wav-98503a194e8e013fed4be865b820b478.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/dialog/tutorial/dialog - tutorial -3.wav"
+dest_files=["res://.godot/imported/dialog - tutorial -3.wav-98503a194e8e013fed4be865b820b478.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

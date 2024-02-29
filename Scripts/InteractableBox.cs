@@ -33,7 +33,8 @@ public partial class InteractableBox : RigidBody3D, IDeflectable
         {
             if (body as GridMap != null) 
             { 
-                destroy = true; 
+                destroy = true;
+                SoundManager.Instance.PlayFireBallHitSound();
                 hitExplosion(); 
             }
 
@@ -41,6 +42,7 @@ public partial class InteractableBox : RigidBody3D, IDeflectable
             {
                 if ((body as IDamagable).Hit((int)LinearVelocity.Length()))
                 {
+                    SoundManager.Instance.PlayFireBallHitSound();
                     hitExplosion();
                     NumberPopup.Create((int)LinearVelocity.Length(), (body as Node3D).GlobalPosition, body as Node3D);
                     destroy = true; 

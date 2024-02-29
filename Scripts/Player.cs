@@ -340,6 +340,7 @@ public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
         if (InputManager.Instance().IsJustPressedAxis(ID, JoyAxis.TriggerRight) && currentVisualCatchAlpha > CAST_COST) {
             currentVisualCatchAlpha -= CAST_COST;
             SetVisualCatchAlpha(currentVisualCatchAlpha);
+            SoundManager.Instance.PlayFireBallSound();
             FireBall.Fire(Position, Transform);
             invincibilityTick = INVINCIBILITY_DURATION;
         }
@@ -365,6 +366,7 @@ public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
             SetVisualCatchAlpha(currentVisualCatchAlpha);
         }
         if (doDeflect) {
+            SoundManager.Instance.PlayDeflectSound();
             doDeflect = false;
             Node3D target = null;
 

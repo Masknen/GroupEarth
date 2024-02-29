@@ -13,7 +13,7 @@ public partial class PortalAsset : Node3D
 
     private Area3D portalDoor;
 
-    public float chargeAmount = 0;
+    public float chargeAmount = -1;
 
     public bool portalOpen = false;
 
@@ -52,13 +52,16 @@ public partial class PortalAsset : Node3D
     private void openPortal(){
         chargeAmount = ArcadeSpawner.Instance.currentWave;
         portalChargeLight.OmniRange = chargeAmount;
-        if(chargeAmount >= 2){
+        if(chargeAmount >= 7){
             if(!portalOpen){
+                SoundManager.Instance.PlayPortalOpeningSound();
+                SoundManager.Instance.PlayDialogThree();
             greenPortalExplosion();
            portalOpen = true;
             } 
             portal.Visible = true;
             portalChargeLight.Visible = false;
+
         }
         
 

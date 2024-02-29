@@ -9,7 +9,7 @@ public partial class ArcadeSpawner : Node3D {
     private Array<Marker3D> spawnMarkers;
     private Array<int> enemiesToSpawn = new Array<int>();
 
-    private const int BASE_TOKENS = 10;
+    private const int BASE_TOKENS = 20;
     private const int TIME_BETWEEN_WAVES = 30;
     private uint NUMBER_OF_AVAILABLE_MONSTERS = 2;
 

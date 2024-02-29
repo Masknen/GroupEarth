@@ -101,6 +101,7 @@ public partial class GreenFireBall : Area3D, IDeflectable
         if (body as IDamagable != null) {
 
             if ((body as IDamagable).Hit(damage)) {
+                SoundManager.Instance.PlayFireBallHitSound();
                 hitExplosion();
                 NumberPopup.Create(damage, body.GlobalPosition, body);
                 damage -= 1;

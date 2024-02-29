@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cwwq4esssyrgf"
+path="res://.godot/imported/S_Earth_Hit_3.wav-ef2c4e7625dc9e5dd554a2e40a9011d9.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Spell sounds/S_Earth_Hit_3.wav"
+dest_files=["res://.godot/imported/S_Earth_Hit_3.wav-ef2c4e7625dc9e5dd554a2e40a9011d9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

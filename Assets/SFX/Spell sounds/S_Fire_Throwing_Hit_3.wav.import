@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://vdmnlkhv3bm8"
+path="res://.godot/imported/S_Fire_Throwing_Hit_3.wav-a68ce9bc95d256c24c50d0697e3bb5eb.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Spell sounds/S_Fire_Throwing_Hit_3.wav"
+dest_files=["res://.godot/imported/S_Fire_Throwing_Hit_3.wav-a68ce9bc95d256c24c50d0697e3bb5eb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

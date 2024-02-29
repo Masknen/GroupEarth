@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://8vj4dloiqwdh"]
+[gd_scene load_steps=16 format=3 uid="uid://8vj4dloiqwdh"]
 
 [ext_resource type="MeshLibrary" uid="uid://b1xm1agrvtm02" path="res://tiles2.tres" id="1_6m2cb"]
 [ext_resource type="Script" path="res://Scripts/SpawnerActivater.cs" id="1_g7jnd"]
+[ext_resource type="Script" path="res://Scripts/DialogArea.cs" id="3_6uhou"]
 [ext_resource type="PackedScene" uid="uid://dkaxdt4mtllui" path="res://Scenes/box_spawner.tscn" id="3_u3ukg"]
 [ext_resource type="PackedScene" uid="uid://crsek7m38q6gn" path="res://Scenes/PortalAsset.tscn" id="4_7bo3d"]
+[ext_resource type="Script" path="res://Scripts/DialogArea2.cs" id="4_8lwe3"]
 [ext_resource type="PackedScene" uid="uid://bo0w3tjqn5ooa" path="res://Scenes/tutorial_wall.tscn" id="4_8xi6k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i77rs"]
@@ -29,6 +31,12 @@ polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 5), PackedInt32Arr
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b1jjd"]
 size = Vector3(14.9121, 4.91437, 6.6377)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_et72r"]
+size = Vector3(17, 1, 5.1731)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_viynk"]
+size = Vector3(33, 1, 19)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_x7fcs"]
 
@@ -57,6 +65,25 @@ script = ExtResource("1_g7jnd")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/GridMap/SpawnerActivater"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.95718, -1.67188)
 shape = SubResource("BoxShape3D_b1jjd")
+
+[node name="DialogArea" type="Area3D" parent="NavigationRegion3D/GridMap"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_6uhou")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/GridMap/DialogArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.637792, -6.703)
+shape = SubResource("BoxShape3D_et72r")
+
+[node name="DialogArea2" type="Area3D" parent="NavigationRegion3D/GridMap"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -77.8212)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_8lwe3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/GridMap/DialogArea2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 2)
+shape = SubResource("BoxShape3D_viynk")
 
 [node name="BoxSpawner" parent="NavigationRegion3D/GridMap" instance=ExtResource("3_u3ukg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5747, 1.00134, -0.941391)

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dxd5fvf6px68a"
+path="res://.godot/imported/DeflectSFX.wav-6d71455fad7865c4a0ca986213a30164.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Spell sounds/DeflectSFX.wav"
+dest_files=["res://.godot/imported/DeflectSFX.wav-6d71455fad7865c4a0ca986213a30164.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c61qnjcsgabex"
+path="res://.godot/imported/S_Electric_Cast_3.wav-e22d9a154ffbe1e8ec2bae498769dec4.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Spell sounds/S_Electric_Cast_3.wav"
+dest_files=["res://.godot/imported/S_Electric_Cast_3.wav-e22d9a154ffbe1e8ec2bae498769dec4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

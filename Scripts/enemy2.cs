@@ -69,6 +69,7 @@ public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
                     if(animationTiming <= -SHOOT_OFFSET_SECONDS) {
                         animationTiming = 0;
                         shootCooldownTick = SHOOT_COOLDOWN;
+                        SoundManager.Instance.PlayFireBallSound();
                         FireBall.Fire(Position, Transform.Rotated(Vector3.Up, (float)(Math.PI / 12f)));
                         FireBall.Fire(GlobalPosition, Transform.Rotated(Vector3.Up, -(float)(Math.PI / 12f)));
                         state = State.Idle;

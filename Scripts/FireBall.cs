@@ -55,11 +55,15 @@ public partial class FireBall : Area3D, IDeflectable
         //change color of the ball based on damage
     }
     private void FireBall_BodyEntered(Node3D body) {
-        if (body as GridMap != null) { QueueFree(); hitExplosion(); }
+        if (body as GridMap != null) { 
+            SoundManager.Instance.PlayFireBallHitSound();
+            QueueFree(); hitExplosion(); 
+        }
 
         if (body as IDamagable != null) {
             if ((body as IDamagable).Hit(damage)) {
                 hitExplosion();
+                SoundManager.Instance.PlayFireBallHitSound();
                 NumberPopup.Create(damage, body.GlobalPosition, body);
                 sizeDown();
                 sizeOfBall -= 1;
