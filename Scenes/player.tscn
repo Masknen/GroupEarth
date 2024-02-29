@@ -37,7 +37,7 @@ bottom_radius = 1.0
 height = 0.01
 cap_bottom = false
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_4ejrt")

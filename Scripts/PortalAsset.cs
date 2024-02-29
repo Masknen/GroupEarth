@@ -11,9 +11,11 @@ public partial class PortalAsset : Node3D
 
     private PackedScene portalOpeningExplosion;
 
+    private Area3D portalDoor;
+
     public float chargeAmount = 0;
 
-    private bool runOnce = true;
+    public bool portalOpen = false;
 
     
 
@@ -22,17 +24,19 @@ public partial class PortalAsset : Node3D
         
         Instance = this;
 
-        portal = GetNode<GpuParticles3D>("PortalVFX");
+        portal                 = GetNode<GpuParticles3D>("PortalVFX");
         portal.Visible = false;
 
-        portalChargeLight = GetNode<OmniLight3D>("PortalChargeLight");
-        _ExplosionPos = GetNode<Node3D>("ExplosionPos");
+        portalChargeLight      = GetNode<OmniLight3D>("PortalChargeLight");
+        _ExplosionPos          = GetNode<Node3D>("ExplosionPos");
         portalOpeningExplosion = GD.Load<PackedScene>("res://AnimationScenes/greenExplosion.tscn"); 
+        portalDoor             = GetNode<Area3D>("PortalDoor");
     }
 
     public override void _Process(double delta)
     {
         openPortal(); 
+        
     }
 
     private void greenPortalExplosion() {
@@ -49,15 +53,18 @@ public partial class PortalAsset : Node3D
         chargeAmount = ArcadeSpawner.Instance.currentWave;
         portalChargeLight.OmniRange = chargeAmount;
         if(chargeAmount >= 2){
-            if(runOnce){
+            if(!portalOpen){
             greenPortalExplosion();
-            runOnce = false;
+           portalOpen = true;
             } 
-            
             portal.Visible = true;
             portalChargeLight.Visible = false;
         }
         
+
+    }
+    private void playerEnterPortal(Node3D body){
+
 
     }
 }

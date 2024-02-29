@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://crsek7m38q6gn"]
+[gd_scene load_steps=11 format=3 uid="uid://crsek7m38q6gn"]
 
 [ext_resource type="PackedScene" uid="uid://bptodqkdhtige" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/potionLarge_blue.gltf.glb" id="1_hfir3"]
 [ext_resource type="Script" path="res://Scripts/PortalAsset.cs" id="1_orvga"]
 [ext_resource type="PackedScene" uid="uid://c0cxebl25wrr1" path="res://Assets/kaykit_dungeon_pack_1.0/Models/gltf/pillar.gltf.glb" id="2_ydtxl"]
 [ext_resource type="Material" uid="uid://dw183qcnwjiyn" path="res://Assets/fireball assets/Flare_00.tres" id="3_g8842"]
+[ext_resource type="Script" path="res://Scripts/PortalDoor.cs" id="5_5lgyg"]
 
 [sub_resource type="Gradient" id="Gradient_qon68"]
 
@@ -72,9 +73,12 @@ visibility_aabb = AABB(-3, -4, -4, 6, 8, 8)
 process_material = SubResource("ParticleProcessMaterial_eooeo")
 draw_pass_1 = SubResource("QuadMesh_rjb25")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="PortalDoor" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 8, 0)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5_5lgyg")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PortalDoor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66416, -2.09478, 0)
 shape = SubResource("BoxShape3D_nhtbl")
