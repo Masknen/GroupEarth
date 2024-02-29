@@ -94,7 +94,7 @@ public partial class enemy_3 : CharacterBody3D, IDamagable, IDeflectable
         if (currentHealth <= 0) {
             ChangeState(State.Die);
             //charge portal
-            PortalAsset.Instance.chargePortal();
+            //PortalAsset.Instance.chargePortal();
             //------
             ArcadeSpawner.Instance.enemies.Remove(this);
             //GD.Print(ArcadeSpawner.Instance.enemyArray.Count);

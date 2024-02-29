@@ -17,7 +17,7 @@ public partial class ArcadeSpawner : Node3D {
     private float timeSinceLastWave = TIME_BETWEEN_WAVES;
     private float timeBetweenSpawns = 0;
     private float timeBetweenSpawnsTick = 0;
-    private int currentWave = 0;
+    public int currentWave = 0;
 
     public bool mobsShouldSpawn = false;
 

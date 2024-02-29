@@ -18,18 +18,22 @@ public partial class PortalAsset : Node3D
     public override void _Process(double delta)
     {
         Instance = this;
+        portal.Visible = false;
 
         openPortal();
         
     }
 
     public void chargePortal(){
-        chargeAmount += 0.1f;
+        chargeAmount += 1;
     }
 
     private void openPortal(){
-
+        chargeAmount = ArcadeSpawner.Instance.currentWave;
         portalChargeLight.OmniRange = chargeAmount;
+        if(chargeAmount >= 5){
+            portal.Visible = true;
+        }
         
 
     }
