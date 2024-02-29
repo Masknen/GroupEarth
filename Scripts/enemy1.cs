@@ -102,6 +102,9 @@ public partial class enemy1 : CharacterBody3D, IDamagable
         currentHealth -= damage;
         if (currentHealth <= 0) {
             ChangeState(State.Die);
+            //charge portal
+            PortalAsset.Instance.chargePortal();
+            //------
             ArcadeSpawner.Instance.enemies.Remove(this);
             //GD.Print(ArcadeSpawner.Instance.enemyArray.Count);
             //(GetNode("CollisionShape3D") as CollisionShape3D).QueueFree();

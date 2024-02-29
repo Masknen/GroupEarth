@@ -16,6 +16,7 @@ public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
 	private AnimationPlayer animationPlayer;
     private NavigationAgent3D navAgent;
     private Player target;
+
     private uint targetOffset;
 
 
@@ -96,6 +97,9 @@ public partial class enemy2 : CharacterBody3D, IDamagable, IDeflectable {
         currentHealth -= damage;
         if (currentHealth <= 0) {
             ChangeState(State.Die);
+            //charge portal
+            PortalAsset.Instance.chargePortal();
+            //------
             ArcadeSpawner.Instance.enemies.Remove(this);
             //GD.Print(ArcadeSpawner.Instance.enemyArray.Count);
             //(GetNode("CollisionShape3D") as CollisionShape3D).QueueFree();
