@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bo0w3tjqn5ooa"]
+
+[ext_resource type="Script" path="res://Scripts/TutorialWall.cs" id="1_t4iqf"]
+[ext_resource type="PackedScene" uid="uid://dmyxwpevn4y4a" path="res://Assets/kaykit remastered dungeon/KayKit_DungeonRemastered_1.0_FREE/Assets/gltf/rubble_large.gltf.glb" id="2_3370y"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sajk8"]
+points = PackedVector3Array(-3.96319, 0.0096174, 0.150392, 0.694593, 3.37391, -0.322211, 0.685088, 3.35171, -0.547169, 4.12411, 0.0649225, -0.101477, 1.28591, 0.193656, 1.70473, -1.42294, 0.45183, -1.65022, -2.84245, 3.03216, 0.671909, 2.83395, 3.03216, 0.414113, 3.86624, 0.0649225, -1.00491, -2.29805, 2.94941, -0.938714, -3.61687, -0.0645182, 1.05942, 1.15657, 0.967824, -1.65022, 2.96248, 2.77398, -0.617396, -2.84245, -0.0645182, -1.13397, 0.640023, 3.16089, 0.93036, 3.3505, -0.0641645, 0.80097, -1.81016, 1.226, 1.44661, 3.3505, 1.99981, 0.80097, -3.10032, 2.64454, -0.617396, -1.55228, 3.5485, -0.230539, -1.42294, 3.16089, -1.00491, 1.28591, -0.0645182, -1.39209, -4.13261, 0.323097, 0.671909, 1.02723, -0.0645182, 1.70473, 4.12411, 0.322743, -0.617724, -4.13261, 0.193656, 0.155661, -3.21389, 1.98838, -0.713484, -2.27662, 3.29718, -0.570417, 0.672927, 2.75833, -0.989217, 2.05953, 1.226, -1.39209, -0.391461, 3.28998, 0.801299, -1.46863, 0.0331077, -1.55957)
+
+[node name="TutorialWall" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.99488, 0, -12.9058)
+collision_layer = 9
+script = ExtResource("1_t4iqf")
+
+[node name="rubble_large_gltf" parent="." instance=ExtResource("2_3370y")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_sajk8")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.79217, 0.216711)
+pixel_size = 0.01
+billboard = 1
+modulate = Color(0.760784, 0, 0.760784, 1)
+outline_modulate = Color(0.156863, 0.00392157, 0.14902, 1)
+text = "Strong Magic Might Be Enough"
+font_size = 60
+outline_size = 1
