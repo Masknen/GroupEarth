@@ -24,6 +24,7 @@ public partial class SoundManager : Node
         _soundQueuesByName.Add("MenuBackGroundSound", GetNode<SoundQue>("MenuMusic"));
         _soundQueuesByName.Add("MenuButtonPressedSound", GetNode<SoundQue>("MenuButtonPressed"));
         _soundQueuesByName.Add("DungeonAmbient", GetNode<SoundQue>("DungeonAmbient"));
+        _soundPoolsByName.Add("WalkingSound",GetNode<SoundPool>("WalkingPool"));
         
     }
     //-- UI SFX - menu Music
@@ -42,6 +43,12 @@ public partial class SoundManager : Node
         _soundQueuesByName["DungeonAmbient"].PlaySound();
     }
     //-- MOVEMENT SFX
+    public void PlayWalkingSound(){
+        _soundPoolsByName["WalkingSound"].PlayRandomSound();
+    }
+     public void StopWalkingSound(){
+        _soundPoolsByName["WalkingSound"].QueueFree();
+    }
 
     //-- SPELL SFX
     public void PlayFireBallSound(){

@@ -65,6 +65,8 @@ public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
     private Node3D mageCharacter;
     private PackedScene deathExplosion;
     private PackedScene ressEffect;
+
+    private bool isWalking = false;
     //---added by kalle
     public override void _Ready() {
 		currentTouching = new List<IDeflectable>();
@@ -145,6 +147,9 @@ public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
 			Vector3 inputdirectionV3 = new Vector3(inputDirection.X, 0, inputDirection.Y);
 
             if (!isDeflecting && !isHit) {
+                if(inputDirection.X > 0 || inputDirection.Y > 0){   
+                      SoundManager.Instance.PlayWalkingSound();       
+                }
                 Velocity += inputdirectionV3 * (float)(stats.GetStat(Stat.StatType.MovementSpeed));
             } else {
                 Velocity = Vector3.Zero;

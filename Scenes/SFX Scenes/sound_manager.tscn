@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://brdasfmxxrpcg"]
+[gd_scene load_steps=10 format=3 uid="uid://brdasfmxxrpcg"]
 
 [ext_resource type="Script" path="res://Scripts/SFX scripts/SoundManager.cs" id="1_ywarf"]
 [ext_resource type="PackedScene" uid="uid://cbx2eel3iy2hi" path="res://Scenes/SFX Scenes/sound_que.tscn" id="2_crq0m"]
 [ext_resource type="AudioStream" uid="uid://cbj0udauisa4f" path="res://Assets/SFX/Spell sounds/fire2.wav" id="4_p0amr"]
 [ext_resource type="AudioStream" uid="uid://ci4mwdqabq47t" path="res://Assets/SFX/music/Horsemen Approach (menu music).mp3" id="4_ty4jv"]
 [ext_resource type="AudioStream" uid="uid://xn2ye52s45g3" path="res://Assets/SFX/S_Door_Closed_Mono_1.wav" id="5_4w4nt"]
-[ext_resource type="AudioStream" uid="uid://bpv1am85vage1" path="res://Assets/SFX/Ambient/Cave #2  Ambience  Sound Effect.mp3" id="6_hba30"]
+[ext_resource type="AudioStream" uid="uid://bpv1am85vage1" path="res://Assets/SFX/ambient/Cave #2  Ambience  Sound Effect.mp3" id="6_hba30"]
+[ext_resource type="PackedScene" uid="uid://bplglimfmw4bl" path="res://Scenes/SFX Scenes/sound_pool.tscn" id="7_5rabv"]
+[ext_resource type="AudioStream" uid="uid://c0uxm7blfatu3" path="res://Assets/SFX/movement/footstep01.ogg" id="8_08fcp"]
+[ext_resource type="AudioStream" uid="uid://debea6g1weybn" path="res://Assets/SFX/movement/footstep02.ogg" id="9_e0lal"]
 
 [node name="SoundManager" type="Node"]
 script = ExtResource("1_ywarf")
@@ -14,7 +17,7 @@ script = ExtResource("1_ywarf")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FireSound"]
 stream = ExtResource("4_p0amr")
-volume_db = -18.572
+volume_db = -25.0
 
 [node name="MenuMusic" parent="." instance=ExtResource("2_crq0m")]
 count = 1
@@ -35,3 +38,20 @@ volume_db = -18.0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DungeonAmbient"]
 stream = ExtResource("6_hba30")
 volume_db = -28.369
+
+[node name="WalkingPool" parent="." instance=ExtResource("7_5rabv")]
+
+[node name="SoundQue" parent="WalkingPool" instance=ExtResource("2_crq0m")]
+count = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WalkingPool/SoundQue"]
+stream = ExtResource("8_08fcp")
+volume_db = -50.0
+
+[node name="SoundQue2" parent="WalkingPool" instance=ExtResource("2_crq0m")]
+count = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="WalkingPool/SoundQue2"]
+stream = ExtResource("9_e0lal")
+volume_db = -50.0
+pitch_scale = 0.7
