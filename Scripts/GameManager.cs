@@ -77,7 +77,6 @@ public partial class GameManager : Node {
             }
             if (playersDeadTime >= 5) {
                 playersDeadTime = 0;
-                (startMenuInstance as Control).Visible = true;
                 DestroyGame();
             }
         } catch (Exception e) { }
@@ -113,11 +112,11 @@ public partial class GameManager : Node {
     }
     public void DestroyGame() {
         GD.Print(GetTreeStringPretty());
-        playerManagerInstance.QueueFree();
-        worldInstance.QueueFree();
-        gameGUIInstance.QueueFree();
-        middleNodeInstance.QueueFree();
-        soundManagerInstace.QueueFree();
+        foreach (var child in GetChildren()) {
+            child.QueueFree();
+        }
+        CreateInputManager();
+        CreateStartMenu();
         GD.Print(GetTreeStringPretty());
     }
     public void CreatePlayerManager() {
