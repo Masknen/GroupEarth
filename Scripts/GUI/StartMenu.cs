@@ -19,13 +19,20 @@ public partial class StartMenu : Control
 		startButton.Pressed += StartPressed; 
 		quitButton.Pressed += QuitPressed; 
 
-		
+		startButton.GrabFocus();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-
+		if (InputManager.Instance().IsJustReleasedButton(0, JoyButton.A)) {
+			if(startButton.HasFocus()) {
+				StartPressed();
+			}
+            if (quitButton.HasFocus()) {
+                QuitPressed();
+            }
+        }
 	}
 	public void StartPressed()
 	{
@@ -34,7 +41,8 @@ public partial class StartMenu : Control
 	}
 	public void QuitPressed()
 	{
-		QuitPressedEvent?.Invoke(this,EventArgs.Empty); 
+		QuitPressedEvent?.Invoke(this,EventArgs.Empty);
+		GetTree().Quit();
 
 	}
 	
