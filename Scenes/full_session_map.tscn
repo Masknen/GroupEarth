@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://8vj4dloiqwdh"]
+[gd_scene load_steps=11 format=3 uid="uid://8vj4dloiqwdh"]
 
 [ext_resource type="MeshLibrary" uid="uid://b1xm1agrvtm02" path="res://tiles2.tres" id="1_6m2cb"]
 [ext_resource type="Script" path="res://Scripts/SpawnerActivater.cs" id="1_g7jnd"]
 [ext_resource type="PackedScene" uid="uid://dkaxdt4mtllui" path="res://Scenes/box_spawner.tscn" id="3_u3ukg"]
+[ext_resource type="PackedScene" uid="uid://crsek7m38q6gn" path="res://Scenes/PortalAsset.tscn" id="4_7bo3d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i77rs"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -617,3 +618,6 @@ omni_range = 0.707702
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11, 0)
 shape = SubResource("WorldBoundaryShape3D_x7fcs")
+
+[node name="Portal" parent="." instance=ExtResource("4_7bo3d")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -2.41823, 0, -80.4127)
