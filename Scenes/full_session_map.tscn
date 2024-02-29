@@ -324,7 +324,7 @@ shadow_enabled = true
 omni_range = 6.16818
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Torch-try/OmniLight3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.912071)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.036829, -0.912071)
 light_color = Color(0.721569, 0.223529, 0.0235294, 1)
 light_energy = 16.0
 shadow_enabled = true
@@ -350,6 +350,32 @@ shadow_enabled = true
 omni_range = 6.16818
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Torch-try/OmniLight3D8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.912071)
+light_color = Color(0.721569, 0.223529, 0.0235294, 1)
+light_energy = 16.0
+shadow_enabled = true
+omni_range = 0.707702
+
+[node name="OmniLight3D24" type="OmniLight3D" parent="Torch-try"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23042, 2.79255, -16.2516)
+light_color = Color(0.998729, 0.763895, 0.692559, 1)
+shadow_enabled = true
+omni_range = 6.16818
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Torch-try/OmniLight3D24"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.912071)
+light_color = Color(0.721569, 0.223529, 0.0235294, 1)
+light_energy = 16.0
+shadow_enabled = true
+omni_range = 0.707702
+
+[node name="OmniLight3D25" type="OmniLight3D" parent="Torch-try"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.30853, 3.74596, -14.8733)
+light_color = Color(0.998729, 0.763895, 0.692559, 1)
+shadow_enabled = true
+omni_range = 6.16818
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Torch-try/OmniLight3D25"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.912071)
 light_color = Color(0.721569, 0.223529, 0.0235294, 1)
 light_energy = 16.0
