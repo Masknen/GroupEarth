@@ -83,7 +83,7 @@ public partial class ArcadeSpawner : Node3D {
             }
         }
         timeBetweenSpawns = (TIME_BETWEEN_WAVES / 2) / (float)enemiesToSpawn.Count;
-        if (currentWave == 5) {
+        if (currentWave == 4) {
             NUMBER_OF_AVAILABLE_MONSTERS = 3;
         }
         currentTokens = (int)(BASE_TOKENS * (float)(Math.Pow(1.1f, currentWave) + currentWave/5f));
