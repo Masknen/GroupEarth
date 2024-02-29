@@ -21,10 +21,30 @@ public partial class SoundManager : Node
         Instance = this;
         
         _soundQueuesByName.Add("FireBallSound", GetNode<SoundQue>("FireSound"));
+        _soundQueuesByName.Add("MenuBackGroundSound", GetNode<SoundQue>("MenuMusic"));
+        _soundQueuesByName.Add("MenuButtonPressedSound", GetNode<SoundQue>("MenuButtonPressed"));
+        _soundQueuesByName.Add("DungeonAmbient", GetNode<SoundQue>("DungeonAmbient"));
+        
     }
+    //-- UI SFX - menu Music
+    public void PlayMenuMusic(){
+        _soundQueuesByName["MenuBackGroundSound"].PlaySound();
+    }
+    public void StopMenuMusic(){
+        _soundQueuesByName["MenuBackGroundSound"].QueueFree();
+    }
+    
+    public void MenuButtonSound(){
+        _soundQueuesByName["MenuButtonPressedSound"].PlaySound();
+    }
+    //-- in-Game music/ambient
+    public void DungeonAmbientSound(){
+        _soundQueuesByName["DungeonAmbient"].PlaySound();
+    }
+    //-- MOVEMENT SFX
 
+    //-- SPELL SFX
     public void PlayFireBallSound(){
-        //fireBallSound.PlaySound();
         _soundQueuesByName["FireBallSound"].PlaySound();
     }
 }

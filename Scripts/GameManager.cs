@@ -84,9 +84,11 @@ public partial class GameManager : Node {
     }
 
     public void StartGame() {
+        
         GD.Print(GetTreeStringPretty());
         (startMenuInstance as Control).Visible = false;
-
+        SoundManager.Instance.StopMenuMusic();
+        SoundManager.Instance.DungeonAmbientSound();
         sw.Start();
         CreateWorld();
         GD.Print(sw.ElapsedMilliseconds + " | World");
@@ -103,10 +105,6 @@ public partial class GameManager : Node {
         CreateMiddleNode();
         GD.Print(sw.ElapsedMilliseconds + " | MiddleNode");
         sw.Restart();
-
-        CreateSoundManager();
-        GD.Print(sw.ElapsedMilliseconds + " | SoundManager");
-        sw.Stop();
 
         GD.Print(GetTreeStringPretty());
     }
@@ -145,12 +143,17 @@ public partial class GameManager : Node {
         AddChild(inputManagerInstance);
     }
     public void CreateStartMenu() {
+        CreateSoundManager();
+        GD.Print(sw.ElapsedMilliseconds + " | SoundManager");
+        sw.Stop();
         startMenuInstance = startMenu.Instantiate();
         AddChild(startMenuInstance);
         (startMenuInstance as StartMenu).StartPressedEvent += StartButtonPressed;
+        SoundManager.Instance.PlayMenuMusic();
     }
 
     private void StartButtonPressed(object sender, EventArgs e) {
+        SoundManager.Instance.MenuButtonSound();
         StartGame();
     }
 }

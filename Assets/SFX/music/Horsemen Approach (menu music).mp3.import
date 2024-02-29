@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ci4mwdqabq47t"
+path="res://.godot/imported/Horsemen Approach (menu music).mp3-50a787c3df0a899df90c4c9b6a9e79c8.mp3str"
+
+[deps]
+
+source_file="res://Assets/SFX/music/Horsemen Approach (menu music).mp3"
+dest_files=["res://.godot/imported/Horsemen Approach (menu music).mp3-50a787c3df0a899df90c4c9b6a9e79c8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
