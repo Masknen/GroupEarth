@@ -344,7 +344,7 @@ shadow_enabled = true
 omni_range = 0.707702
 
 [node name="OmniLight3D8" type="OmniLight3D" parent="Torch-try"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95911, 2.79255, -56.0604)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.95911, 2.79255, -55.1622)
 light_color = Color(0.998729, 0.763895, 0.692559, 1)
 shadow_enabled = true
 omni_range = 6.16818
