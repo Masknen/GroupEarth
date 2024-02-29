@@ -17,7 +17,6 @@ public partial class DialogArea : Area3D
                 runOnce = false;
             }
             
-            ArcadeSpawner.Instance.mobsShouldSpawn = true;
         }
     }
 }
