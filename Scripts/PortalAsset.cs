@@ -50,7 +50,7 @@ public partial class PortalAsset : Node3D
     }
 
     private void openPortal(){
-        chargeAmount = ArcadeSpawner.Instance.currentWave;
+        chargeAmount = ArcadeSpawner.Instance.currentWave -1;
         portalChargeLight.OmniRange = chargeAmount;
         if(chargeAmount >= 7){
             if(!portalOpen){
