@@ -7,6 +7,6 @@ public partial class TutorialWall : StaticBody3D, IDamagable {
             QueueFree(); 
             return true;
         }
-        return false;
+        return true;
     }
 }

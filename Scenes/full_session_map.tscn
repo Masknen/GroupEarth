@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://8vj4dloiqwdh"]
+[gd_scene load_steps=12 format=3 uid="uid://8vj4dloiqwdh"]
 
 [ext_resource type="MeshLibrary" uid="uid://b1xm1agrvtm02" path="res://tiles2.tres" id="1_6m2cb"]
 [ext_resource type="Script" path="res://Scripts/SpawnerActivater.cs" id="1_g7jnd"]
-[ext_resource type="PackedScene" uid="uid://dkaxdt4mtllui" path="res://Scenes/box_spawner.tscn" id="3_u3ukg"]
+[ext_resource type="PackedScene" path="res://Scenes/box_spawner.tscn" id="3_u3ukg"]
 [ext_resource type="PackedScene" uid="uid://crsek7m38q6gn" path="res://Scenes/PortalAsset.tscn" id="4_7bo3d"]
+[ext_resource type="PackedScene" uid="uid://bo0w3tjqn5ooa" path="res://Scenes/tutorial_wall.tscn" id="4_8xi6k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i77rs"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -130,12 +131,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.54188, 0.999996, -84.2137)
 gizmo_extents = 1.55
 
 [node name="BoxSpawner4" parent="NavigationRegion3D/GridMap" instance=ExtResource("3_u3ukg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5324, 1, -10.6049)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3124, 1, -3.9752)
 gizmo_extents = 1.55
 
 [node name="BoxSpawner5" parent="NavigationRegion3D/GridMap" instance=ExtResource("3_u3ukg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5324, 1, -10.6049)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6187, 1, -6.77088)
 gizmo_extents = 1.55
+
+[node name="TutorialWall" parent="NavigationRegion3D/GridMap" instance=ExtResource("4_8xi6k")]
 
 [node name="EnemySpawnMarkers" type="Node3D" parent="NavigationRegion3D"]
 visible = false
