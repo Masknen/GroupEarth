@@ -88,7 +88,7 @@ public partial class enemy_3 : CharacterBody3D, IDamagable, IDeflectable
         ChangeState(State.Walking);
     }
 
-    public bool Hit(int damage) {
+    public bool Hit(Node hitter, int damage) {
         if (state == State.Die) return false;
         currentHealth -= damage;
         if (currentHealth <= 0) {

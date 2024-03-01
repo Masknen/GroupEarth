@@ -195,7 +195,7 @@ public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
                 break;
         }
     }
-    public bool Hit(int damage) {
+    public bool Hit(Node hitter, int damage) {
         if (invincibilityTick < 0 && !isDead) {
             stats.ModifyStat(Stat.StatType.CurrentHealth, -damage);
             state = State.Hit;
