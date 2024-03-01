@@ -32,6 +32,9 @@ public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
     private const float TIME_TO_RESSURECT       = 30.0f;
     private const float CAST_COST = VISUAL_CATCH_ALPHA_MAX * 0.75f;
 
+    private const float FIREBALL_DAMGAGE_MULTIPLIER = 2.0f;
+    private const float FIREBALL_SPEED_MULTIPLIER = 1.5f;
+
     private const float DEFLECT_COST = 0.15f;
     private const float DEFLECT_REGENERATION = 0.15f;
     private const float DEFLECT_HIT_DECREASE = 0.15f;
