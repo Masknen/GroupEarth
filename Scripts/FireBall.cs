@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 
 public partial class FireBall : Area3D, IDeflectable
 {
+    public int shooterID = -1;
 
     private MeshInstance3D rotateFireball;
     private PackedScene fireBallExplotion;

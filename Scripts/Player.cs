@@ -196,6 +196,7 @@ public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
         }
     }
     public bool Hit(Node hitter, int damage) {
+        if ((hitter as FireBall) != null) { if ((hitter as FireBall).shooterID == ID) { return false; } }
         if (invincibilityTick < 0 && !isDead) {
             stats.ModifyStat(Stat.StatType.CurrentHealth, -damage);
             state = State.Hit;
@@ -390,6 +391,7 @@ public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
             foreach (var _item in currentTouching) {
                 var item = (_item as Node3D);
                 if (item == null) continue;
+                if (_item as FireBall != null) { (_item as FireBall).shooterID = ID; }
                 if (target != null) {
                     var direction = item.GlobalPosition.DirectionTo(target.GlobalPosition);
                     float yRotation = -direction.SignedAngleTo(Vector3.Forward, Vector3.Up);
