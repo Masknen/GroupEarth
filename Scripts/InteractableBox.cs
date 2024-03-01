@@ -40,7 +40,7 @@ public partial class InteractableBox : RigidBody3D, IDeflectable
 
             if (body as IDamagable != null) 
             {
-                if ((body as IDamagable).Hit((int)LinearVelocity.Length()))
+                if ((body as IDamagable).Hit(this, (int)LinearVelocity.Length()))
                 {
                     SoundManager.Instance.PlayFireBallHitSound();
                     hitExplosion();

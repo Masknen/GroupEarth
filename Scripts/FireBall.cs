@@ -61,7 +61,7 @@ public partial class FireBall : Area3D, IDeflectable
         }
 
         if (body as IDamagable != null) {
-            if ((body as IDamagable).Hit(damage)) {
+            if ((body as IDamagable).Hit(this, damage)) {
                 hitExplosion();
                 SoundManager.Instance.PlayFireBallHitSound();
                 NumberPopup.Create(damage, body.GlobalPosition, body);
