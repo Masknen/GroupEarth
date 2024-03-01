@@ -43,6 +43,6 @@ public partial class PortalDoor : Area3D
                
             } 
         
-        } catch (Exception e) { }
+        } catch (Exception) { }
     }
 }

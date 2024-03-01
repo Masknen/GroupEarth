@@ -79,7 +79,7 @@ public partial class GameManager : Node {
                 playersDeadTime = 0;
                 DestroyGame();
             }
-        } catch (Exception e) { }
+        } catch (Exception) { }
         
     }
 
