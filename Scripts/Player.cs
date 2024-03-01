@@ -22,7 +22,7 @@ public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
 
 	private const float DEAD_ZONE               = 0.3f;
 	private const float DODGE_COOLDOWN          = 0.3f;
-    private const float DEFLECT_COOLDOWN        = 0.8f;
+    private const float DEFLECT_COOLDOWN        = 0.25f;
     private const float INVINCIBILITY_DURATION  = 0.3f;
     private const float VISUAL_CATCH_SCALE_MULT = 1.35f;
     private const float VISUAL_CATCH_ALPHA_MIN  = 0.05f;
