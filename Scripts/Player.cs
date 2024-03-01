@@ -132,7 +132,7 @@ public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
             Velocity += GlobalPosition.DirectionTo(MiddleNode.Instance.GlobalPosition) * GlobalPosition.DistanceSquaredTo(MiddleNode.Instance.GlobalPosition)/100;
         }
 
-		if (ID != -1 && !spawned) {
+		if (ID != -1 && spawned is not true) {
             UpdateDeflect(delta);
 
             if (!IsOnFloor()) {
