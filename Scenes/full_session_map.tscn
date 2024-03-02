@@ -36,7 +36,7 @@ size = Vector3(14.9121, 4.91437, 6.6377)
 size = Vector3(17, 1, 5.1731)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_viynk"]
-size = Vector3(33, 1, 19)
+size = Vector3(26.8232, 1, 16.1422)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_x7fcs"]
 
@@ -71,9 +71,39 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("3_6uhou")
 
+[node name="Label1" type="Label" parent="NavigationRegion3D/GridMap/DialogArea"]
+visible = false
+offset_left = 650.0
+offset_top = 940.0
+offset_right = 1460.0
+offset_bottom = 1096.0
+theme_override_font_sizes/font_size = 36
+text = "Maybe stronger magic will help us destroy it.
+
+
+"
+
+[node name="Label2" type="Label" parent="NavigationRegion3D/GridMap/DialogArea"]
+visible = false
+offset_left = 650.0
+offset_top = 56.0
+offset_right = 1460.0
+offset_bottom = 186.0
+theme_override_font_sizes/font_size = 36
+text = "hint: Use RB to hold and deflect projectiles, 
+incresing their size and power"
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/GridMap/DialogArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.637792, -6.703)
 shape = SubResource("BoxShape3D_et72r")
+
+[node name="DialogTimer" type="Timer" parent="NavigationRegion3D/GridMap/DialogArea"]
+wait_time = 5.0
+one_shot = true
+
+[node name="HintTimer" type="Timer" parent="NavigationRegion3D/GridMap/DialogArea"]
+wait_time = 10.0
+one_shot = true
 
 [node name="DialogArea2" type="Area3D" parent="NavigationRegion3D/GridMap"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -77.8212)
@@ -82,7 +112,7 @@ collision_mask = 2
 script = ExtResource("4_8lwe3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/GridMap/DialogArea2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02304, 1, 0.571091)
 shape = SubResource("BoxShape3D_viynk")
 
 [node name="BoxSpawner" parent="NavigationRegion3D/GridMap" instance=ExtResource("3_u3ukg")]
