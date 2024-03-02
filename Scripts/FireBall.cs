@@ -15,7 +15,13 @@ public partial class FireBall : Area3D, IDeflectable
     public int sizeOfBall = 0;
     private int speedLimit = 20;
 
+    private float timeToSize = 0;
+
+    private int maxSize = 0;
+
     private bool isFirstHit = true;
+
+    private bool isHolding = false;
     
 
     private float fireBallDuration = 20;
@@ -89,6 +95,20 @@ public partial class FireBall : Area3D, IDeflectable
             Position -= Transform.Basis.Z * (float)(speed * delta);
             rotateFireball.RotateZ(0.2f);
         }
+        if(isHolding){
+            continuousSizeUp(delta);
+        }
+    }
+    private void continuousSizeUp(double delta){
+        timeToSize += (float)delta;
+        float sizeUpTime = 0.5f;
+			if (timeToSize > sizeUpTime) {
+				timeToSize =0;
+				sizeUp();
+                maxSize += 1;
+                damage += 1; 
+			}
+
     }
 
 
@@ -106,12 +126,15 @@ public partial class FireBall : Area3D, IDeflectable
         material.AlbedoColor = new Color(1,0.2f * damage, 0);
         rotateFireball.MaterialOverride = material;
         //color changed
+        /*
         if(!isFirstHit){
             sizeUp();
         }
+        */
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
         Transform = transform;
         isFirstHit = false;
+        isHolding = false;
     }
 
     public void FriendDeflect(float yRotation) {
@@ -135,6 +158,7 @@ public partial class FireBall : Area3D, IDeflectable
 
     public void Hold() {
         speed = 0;
+        isHolding = true;
     }
      public void sizeUp(){
         float newScale = 1 + (0.3f * damage);
