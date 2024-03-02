@@ -13,6 +13,10 @@ public partial class PortalAsset : Node3D
 
     private Area3D portalDoor;
 
+    private Label dialog;
+
+    private Timer timer;
+
     public float chargeAmount = -1;
 
     public bool portalOpen = false;
@@ -31,12 +35,21 @@ public partial class PortalAsset : Node3D
         _ExplosionPos          = GetNode<Node3D>("ExplosionPos");
         portalOpeningExplosion = GD.Load<PackedScene>("res://AnimationScenes/greenExplosion.tscn"); 
         portalDoor             = GetNode<Area3D>("PortalDoor");
+        dialog                 = GetNode<Label>("Label");
+        timer                  = GetNode<Timer>("Timer");
+
+        timer.Timeout += dialogVisibleSwitch;
     }
 
     public override void _Process(double delta)
     {
         openPortal(); 
         
+    }
+    private void dialogVisibleSwitch(){
+        if(dialog.Visible){
+            dialog.Visible = false;
+        }   
     }
 
     private void greenPortalExplosion() {
@@ -54,6 +67,8 @@ public partial class PortalAsset : Node3D
         portalChargeLight.OmniRange = chargeAmount;
         if(chargeAmount >= 7){
             if(!portalOpen){
+                dialog.Visible = true;
+                timer.Start();
                 SoundManager.Instance.PlayPortalOpeningSound();
                 SoundManager.Instance.PlayDialogThree();
             greenPortalExplosion();

@@ -91,7 +91,7 @@ offset_right = 1460.0
 offset_bottom = 186.0
 theme_override_font_sizes/font_size = 36
 text = "hint: Use RB to hold and deflect projectiles, 
-incresing their size and power"
+increasing their size and power."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/GridMap/DialogArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.637792, -6.703)
@@ -114,6 +114,20 @@ script = ExtResource("4_8lwe3")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/GridMap/DialogArea2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02304, 1, 0.571091)
 shape = SubResource("BoxShape3D_viynk")
+
+[node name="Label1" type="Label" parent="NavigationRegion3D/GridMap/DialogArea2"]
+visible = false
+offset_left = 651.0
+offset_top = 941.0
+offset_right = 1765.0
+offset_bottom = 1114.0
+theme_override_font_sizes/font_size = 36
+text = "It looks like the portal is charging. 
+Fight off these fiends, it's our only way out."
+
+[node name="DialogTimer" type="Timer" parent="NavigationRegion3D/GridMap/DialogArea2"]
+wait_time = 8.0
+one_shot = true
 
 [node name="BoxSpawner" parent="NavigationRegion3D/GridMap" instance=ExtResource("3_u3ukg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5747, 1.00134, -0.941391)

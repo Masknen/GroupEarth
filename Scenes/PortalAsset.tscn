@@ -82,3 +82,16 @@ script = ExtResource("5_5lgyg")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PortalDoor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66416, -2.09478, 0)
 shape = SubResource("BoxShape3D_nhtbl")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 617.0
+offset_top = 985.0
+offset_right = 1543.0
+offset_bottom = 1081.0
+theme_override_font_sizes/font_size = 36
+text = "Hurry, the portal is open. Go through it!"
