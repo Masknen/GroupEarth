@@ -24,6 +24,8 @@ spread = 20.0
 initial_velocity_min = 100.0
 initial_velocity_max = 150.0
 gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 3.0
 
 [sub_resource type="Gradient" id="Gradient_86fll"]
 colors = PackedColorArray(1, 1, 1, 1, 0.666697, 0.115877, 0.0246343, 1)
