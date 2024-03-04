@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://n2unjss7lt2k"]
+[gd_scene load_steps=15 format=3 uid="uid://n2unjss7lt2k"]
 
 [ext_resource type="Script" path="res://Scripts/GUI/StartMenu.cs" id="1_tiu2q"]
-[ext_resource type="Texture2D" uid="uid://c6e5hnvpqikwe" path="res://Scenes/GUI Scenes/wp2312558-scary-castle-wallpapers.jpg" id="2_cnwgc"]
+[ext_resource type="Texture2D" uid="uid://5v13vkwy2gbo" path="res://Scenes/GUI Scenes/40Z_2105.w026.n002.447B.p0.447.jpg" id="2_6v1gx"]
 [ext_resource type="FontFile" uid="uid://h16x4s0wduq4" path="res://Scenes/GUI Scenes/Angel wish.ttf" id="3_64eis"]
 [ext_resource type="FontFile" uid="uid://chqtn41m84ukq" path="res://Scenes/GUI Scenes/The Centurion .ttf" id="4_0ied5"]
-[ext_resource type="FontFile" uid="uid://r4wbxl1m5a4f" path="res://Scenes/GUI Scenes/DeathMohawk.otf" id="5_ho1pq"]
+[ext_resource type="FontFile" uid="uid://cqpr6jql12j1j" path="res://Scenes/GUI Scenes/Alice_in_Wonderland_3.ttf" id="5_qgtsk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pi2x6"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -24,6 +24,33 @@ spread = 20.0
 initial_velocity_min = 100.0
 initial_velocity_max = 150.0
 gravity = Vector3(0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_86fll"]
+colors = PackedColorArray(1, 1, 1, 1, 0.666697, 0.115877, 0.0246343, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tna52"]
+gradient = SubResource("Gradient_86fll")
+
+[sub_resource type="Curve" id="Curve_oqt8k"]
+max_value = 3.0
+_data = [Vector2(0, 1.15385), 0.0, 0.0, 0, 0, Vector2(0.926667, 1.64835), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_egnc6"]
+curve = SubResource("Curve_oqt8k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_peyjn"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(2, 1, 1)
+emission_shape = 1
+emission_sphere_radius = 21.14
+spread = 26.798
+gravity = Vector3(0, -98, 0)
+scale_min = 5.0
+scale_max = 8.0
+scale_over_velocity_curve = SubResource("CurveTexture_egnc6")
+color = Color(0.997547, 0.607651, 0.490031, 1)
+color_ramp = SubResource("GradientTexture1D_tna52")
 
 [node name="StartMenu" type="Control"]
 layout_mode = 3
@@ -49,9 +76,9 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="WeatheredPlanksDiff4k" type="Sprite2D" parent="MarginContainer"]
-position = Vector2(171, -14)
-scale = Vector2(0.937955, 0.725575)
-texture = ExtResource("2_cnwgc")
+position = Vector2(176, 8.99998)
+scale = Vector2(0.304686, 0.380445)
+texture = ExtResource("2_6v1gx")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -135,21 +162,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -481.0
-offset_top = -347.0
-offset_right = 482.0
-offset_bottom = -131.0
+offset_left = -661.0
+offset_top = -479.0
+offset_right = 1064.0
+offset_bottom = -29.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/default_color = Color(1, 0.00392157, 0.00392157, 1)
+theme_override_colors/default_color = Color(1, 0.004, 1, 1)
 theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 3
-theme_override_fonts/normal_font = ExtResource("5_ho1pq")
+theme_override_fonts/normal_font = ExtResource("5_qgtsk")
 theme_override_font_sizes/normal_font_size = 300
-text = "B A C K F I R E"
+text = "BACKFIRE"
 
 [node name="rain" type="GPUParticles2D" parent="."]
 position = Vector2(1179, 30)
@@ -157,3 +184,17 @@ scale = Vector2(3, 3)
 amount = 800
 process_material = SubResource("ParticleProcessMaterial_qr6d3")
 lifetime = 20.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(499, 487)
+amount = 500
+process_material = SubResource("ParticleProcessMaterial_peyjn")
+lifetime = 1.7
+speed_scale = 0.6
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+position = Vector2(1435, 486)
+amount = 500
+process_material = SubResource("ParticleProcessMaterial_peyjn")
+lifetime = 1.7
+speed_scale = 0.6
