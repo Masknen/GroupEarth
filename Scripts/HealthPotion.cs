@@ -36,7 +36,7 @@ public partial class HealthPotion : RigidBody3D, IDeflectable
             
             (body as Player).stats.ModifyStat(Stat.StatType.CurrentHealth ,health);
             NumberPopupHealth.Create(health, Position, body as Node3D);
-            if ((body as Player).stats.GetStat(Stat.StatType.CurrentHealth) > (body as Player).stats.GetStat(Stat.StatType.MaxHealth))
+            if ((body as Player).stats.GetStat(Stat.StatType.CurrentHealth) >= (body as Player).stats.GetStat(Stat.StatType.MaxHealth))
             {
                 (body as Player).stats.setStat(Stat.StatType.CurrentHealth, (body as Player).stats.GetStat(Stat.StatType.MaxHealth));
 
