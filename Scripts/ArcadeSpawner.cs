@@ -4,6 +4,7 @@ using Godot.Collections;
 
 public partial class ArcadeSpawner : Node3D {
 
+    private PackedScene healthpotion;
     public static ArcadeSpawner Instance { get; private set; }
     public Array<CharacterBody3D> enemies = new Array<CharacterBody3D>();
     private Array<Marker3D> spawnMarkers;
@@ -11,6 +12,7 @@ public partial class ArcadeSpawner : Node3D {
 
     private const int BASE_TOKENS = 20;
     private const int TIME_BETWEEN_WAVES = 30;
+    private const int DEATH_PER_POTION = 10; 
     private uint NUMBER_OF_AVAILABLE_MONSTERS = 2;
 
     private int currentTokens = BASE_TOKENS;
@@ -18,6 +20,7 @@ public partial class ArcadeSpawner : Node3D {
     private float timeBetweenSpawns = 0;
     private float timeBetweenSpawnsTick = 0;
     public int currentWave = 0;
+    private int currentDeaths = 0; 
 
     public bool mobsShouldSpawn = false;
 
@@ -25,7 +28,7 @@ public partial class ArcadeSpawner : Node3D {
     // en fiende ar deras egna nuvarande liv
     public override void _Ready() {
         Instance = this;
-
+        healthpotion = GD.Load<PackedScene>("res://Scenes/health_potion.tscn"); 
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -124,5 +127,19 @@ public partial class ArcadeSpawner : Node3D {
 
             enemiesToSpawn.RemoveAt(enemiesToSpawn.Count - 1);
         }
+    }
+    public void TrySpawnPotion(Vector3 position)
+    {
+        currentDeaths++;
+        if(currentDeaths>=DEATH_PER_POTION)
+        {
+            var instance = healthpotion.Instantiate();
+            GetParent().GetParent().AddChild(instance); 
+            (instance as Node3D).GlobalPosition = position; 
+            currentDeaths = 0; 
+
+
+        }
+
     }
 }

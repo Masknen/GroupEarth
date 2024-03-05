@@ -47,7 +47,7 @@ public partial class enemy_3 : CharacterBody3D, IDamagable, IDeflectable
         if (animName == "Spawn_Ground_Skeletons") state = State.Walking;
         if (animName == "Spellcast_Long") state = State.Walking;
         if (animName == "Hit_A") state = State.Walking;
-        if (animName == "Death_C_Skeletons") QueueFree();
+        if (animName == "Death_C_Skeletons") { QueueFree(); ArcadeSpawner.Instance.TrySpawnPotion(GlobalPosition);}
     }
 
     public override void _Process(double delta) {
