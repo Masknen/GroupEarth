@@ -119,5 +119,6 @@ script = ExtResource("1_5bveb")
 shape = SubResource("ConvexPolygonShape3D_6aj0l")
 
 [node name="potionLarge_red" type="MeshInstance3D" parent="."]
+transparency = 0.06
 mesh = SubResource("ArrayMesh_e3vb8")
 skeleton = NodePath("")

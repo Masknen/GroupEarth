@@ -52,7 +52,7 @@ public class Stat
 
     public void setStat(StatType statType, int newValue) {
         if (myStats.TryGetValue(statType, out int value)) {
-            myStats[statType] += newValue;
+            myStats[statType] = newValue;
         }
         else {
             GD.PushWarning("Stat not present");

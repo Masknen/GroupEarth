@@ -7,7 +7,7 @@ public partial class HealthPotion : RigidBody3D, IDeflectable
 	private float deflectForce = 20;
     private PackedScene  fireBallExplotion;
     public bool destroy = false; 
-    private int health = 2; 
+    private int health = 2; // how meny health shoul be every potion. 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -23,17 +23,15 @@ public partial class HealthPotion : RigidBody3D, IDeflectable
 	}
     public override void _PhysicsProcess(double delta)
     {
-        
-		
-
+      
     }
+
     private void HealthPotionEntered(Node body)
     {
-        GD.Print( " we are here");
-    
+        
         if (body as Player != null) 
         {
-            
+             // to controll att palyer not have more then normal health with taking potion. 
             (body as Player).stats.ModifyStat(Stat.StatType.CurrentHealth ,health);
             NumberPopupHealth.Create(health, Position, body as Node3D);
             if ((body as Player).stats.GetStat(Stat.StatType.CurrentHealth) >= (body as Player).stats.GetStat(Stat.StatType.MaxHealth))
@@ -42,7 +40,7 @@ public partial class HealthPotion : RigidBody3D, IDeflectable
 
             }
             this.QueueFree();
-
+            
         }
         
         
@@ -50,13 +48,10 @@ public partial class HealthPotion : RigidBody3D, IDeflectable
 
     public void Deflect(float yRotation, Node3D target)
     {
-        GD.Print("health"); 
         Transform3D transform = new Transform3D(new Basis(Vector3.Up, yRotation), Position);
         Transform = transform;
 		ApplyImpulse(-Transform.Basis.Z*deflectForce + Vector3.Up*deflectForce/4);
         health++; 
-
-    
     }
 
 
