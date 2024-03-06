@@ -24,6 +24,7 @@ public partial class ArcadeSpawner : Node3D {
 
     public bool mobsShouldSpawn = false;
 
+    public bool bossSpawned = false;
     // Max vill ha en stat class for varje enemy sa att man inte behover skapa nya baseStats for varje ny instans det enda som behover vara privat i
     // en fiende ar deras egna nuvarande liv
     public override void _Ready() {
@@ -33,6 +34,12 @@ public partial class ArcadeSpawner : Node3D {
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta) {
+
+        if (!bossSpawned) {
+            bossSpawned = true;
+            SpawnBoss();
+        }
+
         timeSinceLastWave += (float)delta;
         //debug option F4----
         if (Input.IsActionJustPressed("DespawnMobs") && PlayerManager.Instance.debugBoolean) {
@@ -89,6 +96,7 @@ public partial class ArcadeSpawner : Node3D {
         if (currentWave == 4) {
             NUMBER_OF_AVAILABLE_MONSTERS = 3;
         }
+
         currentTokens = (int)(BASE_TOKENS * (float)(Math.Pow(1.1f, currentWave) + currentWave/5f));
         GD.Print(currentWave + " Wave | " + currentTokens + " Tokens");
     }
@@ -116,7 +124,7 @@ public partial class ArcadeSpawner : Node3D {
             }
             PlayerManager.Instance.AddChild(enemy);
 
-            //float dirAngle = GD.Randf() * (2 * MathF.PI);
+            //float dirAngle = GD.Randi() * (2 * MathF.PI);
             //Transform3D lookTransfrom = new Transform3D(new Basis(Transform.Basis.Y, dirAngle), new Vector3(0, 2, 0));
 
             //(enemy as CharacterBody3D).Transform = GetParentNode3D().Transform;
@@ -141,5 +149,12 @@ public partial class ArcadeSpawner : Node3D {
 
         }
 
+    }
+
+    private void SpawnBoss() {
+        Node bossEnemy;
+        bossEnemy = GameManager.Instance.bossGuy.Instantiate();
+        GameManager.Instance.AddChild(bossEnemy);
+        (bossEnemy as CharacterBody3D).GlobalPosition = new Vector3(0, 0, -10);
     }
 }
