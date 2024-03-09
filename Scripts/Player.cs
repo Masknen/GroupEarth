@@ -96,17 +96,17 @@ public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
         GetChild<VisibleOnScreenNotifier3D>(8).ScreenExited += ScreenExited; ;
         animationPlayer.AnimationFinished += AnimationFinished;
 
-        parryOverrideMaterial = new StandardMaterial3D();
-        parryOverrideMaterial.Transparency = BaseMaterial3D.TransparencyEnum.Alpha;
-        parryOverrideMaterial.AlbedoColor = new Color(0, 0, 1, currentVisualCatchAlpha);
-        deflectArea.MaterialOverride = parryOverrideMaterial;
-        deflectArea.Scale = VISUAL_CATCH_SCALE;
-        
         stats.AddStat(Stat.StatType.MaxHealth, 10).AddStat(Stat.StatType.MovementSpeed, 4).AddStat(Stat.StatType.DodgeStrength, 35).AddStat(Stat.StatType.RotationSpeed, 15);
         stats.AddStat(Stat.StatType.CurrentHealth, stats.GetStat(Stat.StatType.MaxHealth));
 
         animationPlayer.Play("Spawn_Air");
-	}
+
+        parryOverrideMaterial = deflectArea.GetSurfaceOverrideMaterial(0) as StandardMaterial3D;
+        parryOverrideMaterial.Transparency = BaseMaterial3D.TransparencyEnum.Alpha;
+        parryOverrideMaterial.AlbedoColor = new Color(0, 0, 1, currentVisualCatchAlpha);
+        deflectArea.MaterialOverride = parryOverrideMaterial;
+        deflectArea.Scale = VISUAL_CATCH_SCALE;
+    }
 
 
 
@@ -125,6 +125,10 @@ public partial class Player : CharacterBody3D, IDamagable, IDeflectable {
                     FireBall.Fire(Position, Transform.Rotated(Vector3.Up, (float)(Math.PI/5 * i)));
                 }
             }
+
+
+            ((parryOverrideMaterial.RimTexture as NoiseTexture2D).Noise as FastNoiseLite).FractalPingPongStrength = 4f + 2.0f*(float)Mathf.Sin(GameManager.Instance.TimeSinceStart*0.1f);
+            deflectArea.GlobalPosition = GlobalPosition + Vector3.Down;
         }
 	}
     public override void _PhysicsProcess(double delta) {
