@@ -55,7 +55,7 @@ public partial class ArcadeSpawner : Node3D {
         }
 
         if (mobsShouldSpawn) {
-            if (timeSinceLastWave >= TIME_BETWEEN_WAVES) {
+            if (enemies.Count <= 0) {
                 CreateWave();
                 timeSinceLastWave = 0;
             }
