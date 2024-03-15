@@ -9,7 +9,6 @@ public partial class SpawnerActivater : Area3D
     }
 
     private void SpawnerActivater_BodyEntered(Node3D body) {
-        GD.Print(body);
         if ((body as Player) != null) {
             if(runOnce){
                 SoundManager.Instance.PlayDangerAreaMusic();

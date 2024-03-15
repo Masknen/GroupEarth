@@ -19,7 +19,6 @@ public partial class DialogArea2 : Area3D
     }
 
     private void SpawnerActivater_BodyEntered(Node3D body) {
-        GD.Print(body);
         if ((body as Player) != null) {
             if(runOnce){
                 dialog.Visible = true;

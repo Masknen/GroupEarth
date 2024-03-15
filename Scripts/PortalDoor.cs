@@ -37,7 +37,9 @@ public partial class PortalDoor : Area3D
             if (!PlayerManager.Instance.players[0].Visible && !PlayerManager.Instance.players[i].Visible) {
                 
                 if(!playNextScene){
-                    GameManager.Instance.DestroyGame();
+                    GameManager.Instance.deathScreenInstance ??= GameManager.Instance.deathScreen.Instantiate();
+                    GameManager.Instance.AddChild(GameManager.Instance.deathScreenInstance);
+                    GameManager.Instance.deathScreenInstance.GetChild<Label>(1).Text = "Your time:\n" + Math.Truncate(GameManager.Instance.TimeSinceStart / 60) + " min | " + Math.Truncate(GameManager.Instance.TimeSinceStart % 60) + " sec";
                     playNextScene = true;
                 }
                

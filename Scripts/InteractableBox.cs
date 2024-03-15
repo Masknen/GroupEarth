@@ -28,7 +28,6 @@ public partial class InteractableBox : RigidBody3D, IDeflectable
     }
     private void BoxBodyEntered(Node body)
     {
-        GD.Print(LinearVelocity.Length());
         if(LinearVelocity.Length()>3f && !body.IsInGroup("floor"))
         {
             if (body as GridMap != null) 

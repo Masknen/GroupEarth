@@ -24,6 +24,7 @@ public partial class GameManager : Node {
     private PackedScene playerManager;
     private PackedScene gameGUI;
     private PackedScene inputManager;
+    public PackedScene deathScreen;
 
     private PackedScene soundManager;
 
@@ -33,6 +34,7 @@ public partial class GameManager : Node {
     private Node playerManagerInstance;
     private Node gameGUIInstance;
     private Node inputManagerInstance;
+    public Node deathScreenInstance;
 
     private Node soundManagerInstace;
 
@@ -45,7 +47,7 @@ public partial class GameManager : Node {
         rogue = GD.Load<PackedScene>("res://Scenes/enemy_2.tscn");
         mage = GD.Load<PackedScene>("res://Scenes/enemy_3.tscn");
         interactableBox = GD.Load<PackedScene>("res://Scenes/interactable_box.tscn");
-        bossGuy = GD.Load<PackedScene>("res://Scenes/boss.tscn");
+        //bossGuy = GD.Load<PackedScene>("res://Scenes/boss.tscn");
 
         startMenu = GD.Load<PackedScene>("res://Scenes/GUI Scenes/menu.tscn");
         world = GD.Load<PackedScene>("res://Scenes/full_session_map.tscn");
@@ -54,6 +56,7 @@ public partial class GameManager : Node {
         playerManager = GD.Load<PackedScene>("res://Scenes/player_manager.tscn");
         inputManager = GD.Load<PackedScene>("res://Scenes/input_manager.tscn");
         soundManager = GD.Load<PackedScene>("res://Scenes/SFX Scenes/sound_manager.tscn");
+        deathScreen = GD.Load<PackedScene>("res://Scenes/GUI Scenes/DeathScreen.tscn");
 
 
         //Instantiate Start Menu
@@ -80,6 +83,13 @@ public partial class GameManager : Node {
             }
             if (playersDeadTime >= 5) {
                 playersDeadTime = 0;
+                if (deathScreenInstance == null) {
+                    deathScreenInstance ??= deathScreen.Instantiate();
+                    AddChild(deathScreenInstance);
+                    deathScreenInstance.GetChild<Label>(1).Text = "Your time:\n" + Math.Truncate(TimeSinceStart / 60) + " min | " + Math.Truncate(TimeSinceStart % 60) + " sec";
+                }
+            }
+            if (InputManager.Instance().IsJustReleasedButton(0, JoyButton.A) && deathScreenInstance != null) {
                 DestroyGame();
             }
         } catch (Exception) { }
@@ -87,8 +97,6 @@ public partial class GameManager : Node {
     }
 
     public void StartGame() {
-        
-        GD.Print(GetTreeStringPretty());
         (startMenuInstance as Control).Visible = false;
         SoundManager.Instance.StopMenuMusic();
         SoundManager.Instance.DungeonAmbientSound();
@@ -109,16 +117,15 @@ public partial class GameManager : Node {
         GD.Print(sw.ElapsedMilliseconds + " | MiddleNode");
         sw.Restart();
 
-        GD.Print(GetTreeStringPretty());
+        TimeSinceStart = 0;
     }
     public void DestroyGame() {
-        GD.Print(GetTreeStringPretty());
         foreach (var child in GetChildren()) {
             child.QueueFree();
         }
+        deathScreenInstance = null;
         CreateInputManager();
         CreateStartMenu();
-        GD.Print(GetTreeStringPretty());
     }
     public void CreatePlayerManager() {
         playerManagerInstance = playerManager.Instantiate();
